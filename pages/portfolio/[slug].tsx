@@ -11,8 +11,16 @@ const Detail = ({
     <>
       <Head>
         <title>{portfolioPost.title}</title>
-        <meta name='description' title='description' content={portfolioPost.description} />
-        <meta name='og:description' title='og:description' content={portfolioPost.description} />
+        <meta
+          name='description'
+          title='description'
+          content={portfolioPost.description}
+        />
+        <meta
+          name='og:description'
+          title='og:description'
+          content={portfolioPost.description}
+        />
         <meta name='og:image' title='og:title' content={portfolioPost.img} />
       </Head>
 

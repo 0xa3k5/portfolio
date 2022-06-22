@@ -3,11 +3,7 @@ import Seperator from './components/Seperator';
 import PortfolioCard from './components/PortfolioCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from './api/notion';
 import { PortfolioPost, WorkExperience } from './api/schema';
 
@@ -47,14 +43,14 @@ export default function Home({
         <h2 className='font-playfair text-5xl'>Career Highlights</h2>
         <div className='max-w-2xl flex flex-col space-y-16'>
           {data.portfolioPosts.map((p: PortfolioPost) => {
-            return <PortfolioCard key={p.id} post={p} />;
+            return <PortfolioCard key={p.id} portfolioPost={p} />;
           })}
         </div>
       </section>
       <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
         <h2 className='font-playfair text-5xl'>Side Projects</h2>
         <div className='container flex space-x-16'>
-          {/* {data.portfolioPosts.map((p) => {
+         {/* {data.portfolioPosts.map((p) => {
             return (
               <PortfolioCard
                 key={p.id}
@@ -65,7 +61,7 @@ export default function Home({
                 period='2022'
               />
             );
-          })} */}
+          })}  */}
         </div>
       </section>
       <Footer />
@@ -73,9 +69,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
   const portfolioPosts = await notionService.getPortfolioPosts();

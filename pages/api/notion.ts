@@ -54,14 +54,16 @@ export default class NotionService {
       throw 'no results';
     }
 
-    const detailPage = response.results[0];
-    const mdBlocks = await this.n2m.pageToMarkdown(detailPage.id);
+    const detail = response.results[0];
+
+    const mdBlocks = await this.n2m.pageToMarkdown(detail.id);
     const markdown = this.n2m.toMarkdownString(mdBlocks);
-    const portfolioPost = NotionService.portfolioPostTransformer(detailPage);
+
+    const portfolioPost = NotionService.portfolioPostTransformer(detail);
 
     return {
-      portfolioPost,
       markdown,
+      portfolioPost,
     };
   }
 
