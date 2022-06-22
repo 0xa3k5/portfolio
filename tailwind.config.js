@@ -11,7 +11,7 @@ module.exports = {
       },
       backgroundImage: {},
       fontFamily: {
-        montserrat: ['Montserrat, sans-serif'],
+        playfair: ['Playfair Display, sans-serif'],
         inter: ['Inter, sans-serif'],
       },
       letterSpacing: {
