@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import { WorkExperience } from '../api/schema';
+import Image from 'next/image';
 
 interface JobHighlightProps {
   classname?: string;
@@ -11,8 +12,22 @@ export default function JobHighlight({
   job,
 }: JobHighlightProps): JSX.Element {
   return (
-    <div className={cx('flex space-x-8 px-2 py-16', classname)}>
-      <img src={job.img} className='rounded-xl w-16 h-16' alt={job.company} />
+    <div className={cx('flex space-x-8 px-2 py-16 items-start', classname)}>
+      <a
+        href={job.website}
+        target='_blank'
+        rel='noreferrer'
+        className='relative rounded-xl w-16 h-16 min-w-16 min-h-16 overflow-hidden hover:-translate-y-1 duration-200'
+      >
+        <Image
+          src={job.logo}
+          alt={job.company}
+          layout='fill'
+          objectFit='fill'
+        />
+      </a>
+
+      {/* <img src={job.logo} className='rounded-xl w-16 h-16' alt={job.company} /> */}
       <div className='flex flex-col space-y-4'>
         <p className='text-polar text-md tracking-wide uppercase'>
           {job.period}
@@ -20,7 +35,10 @@ export default function JobHighlight({
         <h6 className='text-2xl text-polar'>
           {job.company} – {job.role}
         </h6>
-        <p className='text-lg text-casper leading-relaxed'>{job.description}</p>
+        <p className='text-lg text-casper leading-relaxed'>
+          Elrond acquired Utrust early 2022
+        </p>
+        {/* <p className='text-lg text-casper leading-relaxed'>{job.description}</p> */}
       </div>
     </div>
   );

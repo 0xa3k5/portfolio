@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import { PortfolioPost } from '../api/schema';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface PortfolioCardProps {
   className?: string;
@@ -14,10 +15,12 @@ export default function PortfolioCard({
   return (
     <div className='flex space-x-8 items-start'>
       <a href='' target='_blank'>
-        <img
+        <Image
           src={portfolioPost.logo}
-          className='rounded-xl w-16 h-16 mt-2'
           alt={portfolioPost.title}
+          width={64}
+          height={64}
+          className='rounded-xl'
         />
       </a>
       <Link href={`/portfolio/${portfolioPost.slug}`} passHref>
@@ -28,11 +31,15 @@ export default function PortfolioCard({
               className
             )}
           >
-            <img
-              src={portfolioPost.img}
-              alt={portfolioPost.title}
-              className='w-full max-h-96'
-            />
+            <div className='w-full h-96 relative'>
+              <Image
+                src={portfolioPost.img}
+                alt={portfolioPost.title}
+                layout='fill'
+                objectFit='fill'
+                priority
+              />
+            </div>
             <div className='flex p-12 flex-col space-y-4'>
               <h6 className='text-lg tracking-wide'>{portfolioPost.period}</h6>
               <h4 className='text-3xl font-semibold hover:text-daisy duration-200'>
