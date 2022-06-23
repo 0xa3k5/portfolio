@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from './api/notion';
-import { PortfolioPost, WorkExperience } from './api/schema';
+import { PortfolioPost, WorkExperience } from '../@types/schema';
 import Head from 'next/head';
 
 export default function Home({
@@ -31,7 +31,6 @@ export default function Home({
         />
         <meta name='og:image' title='og:title' content='/akpfp.png' />
       </Head>
-
       <section className='flex flex-col items-center h-screen justify-between border-b border-polar border-opacity-5 container'>
         <Header />
         <div className='h-full w-full pb-24 justify-center items-center flex'>
@@ -46,7 +45,7 @@ export default function Home({
           </div>
         </div>
       </section>
-      <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
+      <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center px-24 py-48 font-inter'>
         <h2 className='font-playfair text-5xl'>Work Experience</h2>
         <div className='flex flex-col'>
           {data.workExperiences.map((w: WorkExperience, i) => {
