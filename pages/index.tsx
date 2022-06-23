@@ -6,12 +6,32 @@ import Footer from './components/Footer';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from './api/notion';
 import { PortfolioPost, WorkExperience } from './api/schema';
+import Head from 'next/head';
 
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+
+  const pageTitle = 'Ali Kemal Akcay – Product Design Portfolio'
+  const pageDesc = 'Ali Kemal Akcay – Product Design Portfolio'
+
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta
+          name='description'
+          title='description'
+          content={pageDesc}
+        />
+        <meta
+          name='og:description'
+          title='og:description'
+          content={pageDesc}
+        />
+        <meta name='og:image' title='og:title' content='/akpfp.png' />
+      </Head>
+
       <section className='flex flex-col items-center h-screen justify-between border-b border-polar border-opacity-5 container'>
         <Header />
         <div className='h-full w-full pb-24 justify-center items-center flex'>
