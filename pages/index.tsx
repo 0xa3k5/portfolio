@@ -28,20 +28,26 @@ export default function Home({
       </section>
       <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
         <h2 className='font-playfair text-5xl'>Work Experience</h2>
-        <div className='flex flex-col space-y-12'>
-          {data.workExperiences.map((w: WorkExperience) => {
+        <div className='flex flex-col max-w-2xl'>
+          {data.workExperiences.map((w: WorkExperience, i) => {
             return (
               <>
-                <JobHighlight key={w.id} job={w} />
-                <Seperator key={w.id + 1} />
+                <JobHighlight
+                  key={w.id}
+                  job={w}
+                  classname={
+                    data.workExperiences.length > i + 1 &&
+                    'border-b border-woodBlue'
+                  }
+                />
               </>
             );
           })}
         </div>
       </section>
-      <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
+      <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center py-24 font-inter'>
         <h2 className='font-playfair text-5xl'>Career Highlights</h2>
-        <div className='max-w-2xl flex flex-col space-y-16'>
+        <div className='container items-center flex flex-col space-y-12'>
           {data.portfolioPosts.map((p: PortfolioPost) => {
             return <PortfolioCard key={p.id} portfolioPost={p} />;
           })}
@@ -50,7 +56,7 @@ export default function Home({
       <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
         <h2 className='font-playfair text-5xl'>Side Projects</h2>
         <div className='container flex space-x-16'>
-         {/* {data.portfolioPosts.map((p) => {
+          {/* {data.portfolioPosts.map((p) => {
             return (
               <PortfolioCard
                 key={p.id}

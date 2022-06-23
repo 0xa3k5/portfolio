@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        playfair: ['Playfair Display, sans-serif'],
+        playfair: ['Playfair Display, serif'],
         inter: ['Inter, sans-serif'],
       },
       fontSize: {
@@ -31,6 +31,7 @@ module.exports = {
       woodBlue: '#172634',
       polar: '#EEF6FD',
       casper: '#8BA2B2',
+      daisy: '#FFEF60',
     },
     borderRadius: {
       none: '0',
