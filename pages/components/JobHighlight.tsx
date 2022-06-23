@@ -26,8 +26,6 @@ export default function JobHighlight({
           objectFit='fill'
         />
       </a>
-
-      {/* <img src={job.logo} className='rounded-xl w-16 h-16' alt={job.company} /> */}
       <div className='flex flex-col space-y-4'>
         <p className='text-polar text-md tracking-wide uppercase'>
           {job.period}
@@ -35,10 +33,7 @@ export default function JobHighlight({
         <h6 className='text-2xl text-polar'>
           {job.company} – {job.role}
         </h6>
-        <p className='text-lg text-casper leading-relaxed'>
-          Elrond acquired Utrust early 2022
-        </p>
-        {/* <p className='text-lg text-casper leading-relaxed'>{job.description}</p> */}
+        <p className='text-lg text-casper leading-relaxed'>{job.description}</p>
       </div>
     </div>
   );

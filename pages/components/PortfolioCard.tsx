@@ -14,15 +14,17 @@ export default function PortfolioCard({
 }: PortfolioCardProps): JSX.Element {
   return (
     <div className='flex space-x-8 items-start'>
-      <a href='' target='_blank'>
-        <Image
-          src={portfolioPost.logo}
-          alt={portfolioPost.title}
-          width={64}
-          height={64}
-          className='rounded-xl'
-        />
-      </a>
+      <div className='hover:-translate-y-1 duration-200'>
+        <a href={portfolioPost.website} target='_blank' rel='noreferrer'>
+          <Image
+            src={portfolioPost.logo}
+            alt={portfolioPost.title}
+            width={64}
+            height={64}
+            className='rounded-xl'
+          />
+        </a>
+      </div>
       <Link href={`/portfolio/${portfolioPost.slug}`} passHref>
         <a className='hover:-translate-y-3 hover:bg-darkPearl duration-200'>
           <div

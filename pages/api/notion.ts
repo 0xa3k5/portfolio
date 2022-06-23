@@ -68,11 +68,12 @@ export default class NotionService {
   }
 
   private static portfolioPostTransformer(page: any): PortfolioPost {
+    console.log(page)
     let cover = page.cover;
 
     switch (cover.type) {
       case 'file':
-        cover = page.cover.file;
+        cover = page.cover.file.url;
         break;
       case 'external':
         cover = page.cover.external.url;
@@ -90,6 +91,7 @@ export default class NotionService {
       period: page.properties.Period.rich_text[0].plain_text,
       slug: page.properties.Slug.formula.string,
       logo: page.properties.Logo.files[0].file.url,
+      website: page.properties.Website.rich_text[0].plain_text,
     };
   }
 

@@ -6,6 +6,7 @@ export type PortfolioPost = {
   description: string;
   period: string;
   logo: string;
+  website: string;
 };
 
 export type WorkExperience = {

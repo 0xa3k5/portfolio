@@ -28,7 +28,7 @@ export default function Home({
       </section>
       <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center p-24 font-inter'>
         <h2 className='font-playfair text-5xl'>Work Experience</h2>
-        <div className='flex flex-col max-w-2xl'>
+        <div className='flex flex-col'>
           {data.workExperiences.map((w: WorkExperience, i) => {
             return (
               <>
