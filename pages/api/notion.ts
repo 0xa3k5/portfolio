@@ -1,6 +1,10 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
-import { PortfolioPost, WorkExperience, PortfolioDetail } from './schema';
+import {
+  PortfolioPost,
+  WorkExperience,
+  PortfolioDetail,
+} from '../../@types/schema';
 
 export default class NotionService {
   client: Client;
@@ -68,7 +72,6 @@ export default class NotionService {
   }
 
   private static portfolioPostTransformer(page: any): PortfolioPost {
-    console.log(page)
     let cover = page.cover;
 
     switch (cover.type) {

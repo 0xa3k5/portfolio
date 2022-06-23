@@ -1,5 +1,4 @@
 import JobHighlight from './components/JobHighlight';
-import Seperator from './components/Seperator';
 import PortfolioCard from './components/PortfolioCard';
 import Header from './components/Header';
 import Footer from './components/Footer';

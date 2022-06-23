@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { WorkExperience } from '../api/schema';
+import { WorkExperience } from '../../@types/schema';
 import Image from 'next/image';
 
 interface JobHighlightProps {

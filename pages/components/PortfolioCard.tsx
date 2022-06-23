@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { PortfolioPost } from '../api/schema';
+import { PortfolioPost } from '../../@types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 
