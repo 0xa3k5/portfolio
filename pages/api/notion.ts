@@ -99,7 +99,8 @@ export default class NotionService {
       company: page.properties.Company.title[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,
       role: page.properties.Role.rich_text[0].plain_text,
-      img: page.properties.Logo.files[0].file.url,
+      logo: page.properties.Logo.files[0].file.url,
+      website: page.properties.Website.rich_text[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
     };
   }

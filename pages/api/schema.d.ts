@@ -10,7 +10,8 @@ export type PortfolioPost = {
 
 export type WorkExperience = {
   id: string;
-  img: string;
+  logo: string;
+  website: string;
   role: string;
   company: string;
   description: string;
