@@ -89,6 +89,7 @@ export default class NotionService {
       description: page.properties.Description.rich_text[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,
       slug: page.properties.Slug.formula.string,
+      logo: page.properties.Logo.files[0].file.url,
     };
   }
 
