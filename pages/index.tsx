@@ -21,6 +21,7 @@ export default function Home({
         <meta name='description' title='description' content={pageDesc} />
         <meta name='og:description' title='og:description' content={pageDesc} />
         <meta name='og:image' title='og:title' content='/akpfp.png' />
+        <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
       <section className='flex flex-col items-center h-screen justify-between border-b border-polar border-opacity-5 container'>
         <Header />
