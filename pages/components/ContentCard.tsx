@@ -1,31 +1,33 @@
 import cx from 'classnames';
-import { PortfolioPost } from '../../@types/schema';
+import { Post } from '../../@types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface PortfolioCardProps {
+interface ContentCardProps {
   className?: string;
-  portfolioPost: PortfolioPost;
+  post: Post;
+  type: 'career' | 'side-projects'
 }
 
-export default function PortfolioCard({
-  portfolioPost,
+export default function ContentCard({
+  post,
   className,
-}: PortfolioCardProps): JSX.Element {
+  type
+}: ContentCardProps): JSX.Element {
   return (
     <div className='flex space-x-8 items-start'>
       <div className='hover:-translate-y-1 duration-200'>
-        <a href={portfolioPost.website} target='_blank' rel='noreferrer'>
+        <a href={post.website} target='_blank' rel='noreferrer'>
           <Image
-            src={portfolioPost.logo}
-            alt={portfolioPost.title}
+            src={post.logo}
+            alt={post.title}
             width={64}
             height={64}
             className='rounded-xl'
           />
         </a>
       </div>
-      <Link href={`/portfolio/${portfolioPost.slug}`} passHref>
+      <Link href={`/${type}/${post.slug}`} passHref>
         <a className='hover:-translate-y-3 hover:bg-darkPearl duration-200'>
           <div
             className={cx(
@@ -35,19 +37,19 @@ export default function PortfolioCard({
           >
             <div className='w-full h-96 relative'>
               <Image
-                src={portfolioPost.img}
-                alt={portfolioPost.title}
+                src={post.img}
+                alt={post.title}
                 layout='fill'
                 objectFit='fill'
                 priority
               />
             </div>
             <div className='flex p-12 flex-col space-y-4'>
-              <h6 className='text-lg tracking-wide'>{portfolioPost.period}</h6>
+              <h6 className='text-lg tracking-wide'>{post.period}</h6>
               <h4 className='text-3xl font-semibold hover:text-daisy duration-200'>
-                {portfolioPost.title}
+                {post.title}
               </h4>
-              <p className='text-lg text-casper'>{portfolioPost.description}</p>
+              <p className='text-lg text-casper'>{post.description}</p>
             </div>
           </div>
         </a>

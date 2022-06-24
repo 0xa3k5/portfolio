@@ -1,4 +1,4 @@
-export type PortfolioPost = {
+export type Post = {
   id: string;
   slug: string;
   img: string;
@@ -9,7 +9,7 @@ export type PortfolioPost = {
   website: string;
 };
 
-export type WorkExperience = {
+export type WorkExp = {
   id: string;
   logo: string;
   website: string;
@@ -19,7 +19,7 @@ export type WorkExperience = {
   period: string;
 };
 
-export type PortfolioDetail = {
-  portfolioPost: PortfolioPost;
+export type PostDetail = {
+  post: Post;
   markdown: string;
 };

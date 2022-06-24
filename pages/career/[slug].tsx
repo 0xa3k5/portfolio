@@ -4,26 +4,27 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { config } from '../../config';
 
 const Detail = ({
   markdown,
-  portfolioPost,
+  post,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
-        <title>{portfolioPost.title}</title>
+        <title>{post.title}</title>
         <meta
           name='description'
           title='description'
-          content={portfolioPost.description}
+          content={post.description}
         />
         <meta
           name='og:description'
           title='og:description'
-          content={portfolioPost.description}
+          content={post.description}
         />
-        <meta name='og:image' title='og:title' content={portfolioPost.img} />
+        <meta name='og:image' title='og:title' content={post.img} />
       </Head>
       <Header />
       <div className='min-h-screen py-24'>
@@ -45,7 +46,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const p = await notionService.getPortfolioDetail(context.params?.slug);
+  const p = await notionService.getPostDetail(context.params?.slug, config.notion.careerHighlights);
 
   if (!p) {
     throw '';
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       markdown: p.markdown,
-      portfolioPost: p.portfolioPost,
+      post: p.post,
     },
   };
 };
@@ -62,10 +63,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export async function getStaticPaths() {
   const notionService = new NotionService();
 
-  const portfolioPosts = await notionService.getPortfolioPosts();
+  const posts = await notionService.getCareerHighlights();
 
-  const paths = portfolioPosts.map((p) => {
-    return `/portfolio/${p.slug}`;
+  const paths = posts.map((p) => {
+    return `/career/${p.slug}`;
   });
 
   return {

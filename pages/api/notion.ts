@@ -1,49 +1,54 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import {
-  PortfolioPost,
-  WorkExperience,
-  PortfolioDetail,
+  Post,
+  WorkExp,
+  PostDetail,
 } from '../../@types/schema';
+import { config } from '../../config';
 
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
 
   constructor() {
-    this.client = new Client({ auth: process.env.NOTION_API_KEY as string });
+    this.client = new Client({ auth: config.notion.apiKey });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
   }
 
-  async getPortfolioPosts(): Promise<PortfolioPost[]> {
+  async getWorkExp(): Promise<WorkExp[]> {
     const response = await this.client.databases.query({
-      database_id: process.env.NOTION_PORTFOLIO_DATABASE_ID as string,
+      database_id: config.notion.workExp,
     });
 
     return response.results.map((res) => {
-      return NotionService.portfolioPostTransformer(res);
+      return NotionService.workExpTransformer(res);
     });
   }
 
-  async getWorkExperiences(): Promise<WorkExperience[]> {
+  async getCareerHighlights(): Promise<Post[]> {
     const response = await this.client.databases.query({
-      database_id: process.env.NOTION_WORK_DATABASE_ID as string,
-      // sorts: [
-      //   {
-      //     property: 'created_time',
-      //     direction: 'descending',
-      //   },
-      // ],
+      database_id: config.notion.careerHighlights,
     });
 
     return response.results.map((res) => {
-      return NotionService.workExperienceTransformer(res);
+      return NotionService.postTransformer(res);
     });
   }
 
-  async getPortfolioDetail(slug: string): Promise<PortfolioDetail> {
+  async getSideProjects(): Promise<Post[]> {
     const response = await this.client.databases.query({
-      database_id: process.env.NOTION_PORTFOLIO_DATABASE_ID as string,
+      database_id: config.notion.sideProjects,
+    });
+
+    return response.results.map((res) => {
+      return NotionService.postTransformer(res);
+    });
+  }
+
+  async getPostDetail(slug: string, db: string): Promise<PostDetail> {
+    const response = await this.client.databases.query({
+      database_id: db,
       filter: {
         property: 'Slug',
         formula: {
@@ -63,15 +68,15 @@ export default class NotionService {
     const mdBlocks = await this.n2m.pageToMarkdown(detail.id);
     const markdown = this.n2m.toMarkdownString(mdBlocks);
 
-    const portfolioPost = NotionService.portfolioPostTransformer(detail);
+    const post = NotionService.postTransformer(detail);
 
     return {
       markdown,
-      portfolioPost,
+      post,
     };
   }
 
-  private static portfolioPostTransformer(page: any): PortfolioPost {
+  private static postTransformer(page: any): Post {
     let cover = page.cover;
 
     switch (cover.type) {
@@ -98,7 +103,7 @@ export default class NotionService {
     };
   }
 
-  private static workExperienceTransformer(page: any): WorkExperience {
+  private static workExpTransformer(page: any): WorkExp {
     return {
       id: page.id,
       company: page.properties.Company.title[0].plain_text,

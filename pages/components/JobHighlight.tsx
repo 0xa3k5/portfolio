@@ -1,10 +1,10 @@
 import cx from 'classnames';
-import { WorkExperience } from '../../@types/schema';
+import { WorkExp } from '../../@types/schema';
 import Image from 'next/image';
 
 interface JobHighlightProps {
   classname?: string;
-  job: WorkExperience;
+  job: WorkExp;
 }
 
 export default function JobHighlight({
