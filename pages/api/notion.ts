@@ -2,7 +2,6 @@ import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import { Post, WorkExp, PostDetail } from '../../@types/schema';
 import { config } from '../../config';
-import util from 'util';
 
 export default class NotionService {
   client: Client;
@@ -117,6 +116,7 @@ export default class NotionService {
   private static workExpTransformer(page: any): WorkExp {
     return {
       id: page.id,
+      num: page.properties.Num.number,
       published: page.properties.Published.checkbox === true,
       company: page.properties.Company.title[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,

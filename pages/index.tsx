@@ -39,19 +39,21 @@ export default function Home({
       <section className='border-b border-woodBlue container flex flex-col space-y-24 items-center justify-center py-48'>
         <h2 className='font-playfair text-6xl font-bold'>Work Experience</h2>
         <div className='flex flex-col space-y-16 w-full px-96'>
-          {data.workExp.map((w: WorkExp, i) => {
-            return (
-              <>
-                <WorkExperience
-                  key={w.id}
-                  job={w}
-                  classname={
-                    data.workExp.length > i + 1 && 'border-b border-woodBlue'
-                  }
-                />
-              </>
-            );
-          })}
+          {data.workExp
+            .sort((a, b) => b.num - a.num, 0)
+            .map((w: WorkExp, i) => {
+              return (
+                <>
+                  <WorkExperience
+                    key={w.id}
+                    job={w}
+                    classname={
+                      data.workExp.length > i + 1 && 'border-b border-woodBlue'
+                    }
+                  />
+                </>
+              );
+            })}
         </div>
       </section>
       <section className='container border-b border-woodBlue w-full flex flex-col space-y-40 items-center py-64'>

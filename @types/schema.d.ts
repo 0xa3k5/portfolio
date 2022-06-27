@@ -13,6 +13,7 @@ export type Post = {
 
 export type WorkExp = {
   id: string;
+  num: number;
   published: boolean;
   logo: string;
   website: string;
