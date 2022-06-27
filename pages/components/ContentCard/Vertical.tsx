@@ -1,19 +1,19 @@
 import cx from 'classnames';
-import { Post } from '../../@types/schema';
+import { Post } from '../../../@types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface ContentCardProps {
+interface VerticalProps {
   className?: string;
   post: Post;
   type: 'career' | 'side-projects'
 }
 
-export default function ContentCard({
+export default function Vertical({
   post,
   className,
   type
-}: ContentCardProps): JSX.Element {
+}: VerticalProps): JSX.Element {
   return (
     <div className='flex space-x-8 items-start'>
       <div className='hover:-translate-y-1 duration-200'>

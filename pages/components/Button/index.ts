@@ -1,5 +1,7 @@
-import Ghost from './GhostButton';
+import Ghost from './Ghost';
+import Primary from './Primary';
+import Text from './Text';
 
-const variants = { Ghost };
+const variants = { Primary, Ghost, Text };
 
 export default variants;

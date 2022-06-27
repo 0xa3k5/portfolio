@@ -1,12 +1,12 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { WorkExp, Post } from '../@types/schema';
 import Head from 'next/head';
-import JobHighlight from './components/JobHighlight';
+import WorkExperience from './components/WorkExperience';
 import ContentCard from './components/ContentCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NotionService from './api/notion';
-
+import Full from './components/ContentCard/Full';
 
 export default function Home({
   data,
@@ -20,17 +20,17 @@ export default function Home({
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
         <meta name='og:description' title='og:description' content={pageDesc} />
-        <meta name='og:image' title='og:title' content='/akpfp.png' />
+        <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='flex flex-col items-center h-screen justify-between border-b border-polar border-opacity-5 container'>
+      <section className='container flex flex-col justify-between '>
         <Header />
-        <div className='h-full w-full pb-24 justify-center items-center flex'>
-          <div className='flex flex-col items-center space-y-8'>
+        <div className='h-full w-full py-64 pl-8'>
+          <div className='flex flex-col space-y-8'>
             <h1 className='font-playfair text-6xl'>
               I design digital products
             </h1>
-            <p className='text-xl max-w-2xl text-center'>
+            <p className='text-xl max-w-2xl'>
               A small river named Duden flows by their place and supplies it
               with the necessary regelialia. It is a paradisematic country
             </p>
@@ -43,12 +43,11 @@ export default function Home({
           {data.workExp.map((w: WorkExp, i) => {
             return (
               <>
-                <JobHighlight
+                <WorkExperience
                   key={w.id}
                   job={w}
                   classname={
-                    data.workExp.length > i + 1 &&
-                    'border-b border-woodBlue'
+                    data.workExp.length > i + 1 && 'border-b border-woodBlue'
                   }
                 />
               </>
@@ -56,11 +55,11 @@ export default function Home({
           })}
         </div>
       </section>
-      <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center py-24 font-inter'>
+      <section className='container border-b border-polar border-opacity-5 h-full w-full flex flex-col space-y-40 items-center py-64'>
         <h2 className='font-playfair text-5xl'>Career Highlights</h2>
-        <div className='container items-center flex flex-col space-y-12'>
+        <div className='flex flex-col space-y-64 w-full'>
           {data.careerHighlights.map((p: Post) => {
-            return <ContentCard key={p.id} post={p} type='career' />
+            return <ContentCard.Full key={p.id} post={p} type='career' />;
           })}
         </div>
       </section>
@@ -68,7 +67,9 @@ export default function Home({
         <h2 className='font-playfair text-5xl'>Side Projects</h2>
         <div className='container flex space-x-16'>
           {data.sideProjects.map((p: Post) => {
-            return <ContentCard key={p.id} post={p} type='side-projects' />;
+            return (
+              <ContentCard.Vertical key={p.id} post={p} type='side-projects' />
+            );
           })}
         </div>
       </section>

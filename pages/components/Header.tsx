@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import NewTabIcon from '../../public/icons/new-tab.svg';
 import TwitterIcon from '../../public/socials/twitter.svg';
 import LinkedinIcon from '../../public/socials/linkedin.svg';
+import AKLogo from '../../public/ak-logo.svg';
 
 interface HeaderProps {
   className?: string;
@@ -15,11 +16,7 @@ export default function Header({ className }: HeaderProps): JSX.Element {
     <div className={cx('container flex justify-between py-12', className)}>
       <Link href='/' passHref>
         <a className='hover:-translate-y-2 duration-300'>
-          <img
-            src='/akpfp.png'
-            alt='Ali Kemal Akcay'
-            className='w-16 h-16 rounded-full'
-          />
+          <AKLogo className='w-16 h-16 rounded-full' />
         </a>
       </Link>
       <div className='flex space-x-1'>

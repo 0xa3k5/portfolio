@@ -2,17 +2,17 @@ import cx from 'classnames';
 import { WorkExp } from '../../@types/schema';
 import Image from 'next/image';
 
-interface JobHighlightProps {
+interface WorkExperienceProps {
   classname?: string;
   job: WorkExp;
 }
 
-export default function JobHighlight({
+export default function WorkExperience({
   classname,
   job,
-}: JobHighlightProps): JSX.Element {
+}: WorkExperienceProps): JSX.Element {
   return (
-    <div className={cx('flex space-x-8 px-2 py-16 items-start', classname)}>
+    <div className={cx('flex space-x-8 w-full', classname)}>
       <a
         href={job.website}
         target='_blank'

@@ -7,6 +7,7 @@ export type Post = {
   period: string;
   logo: string;
   website: string;
+  client: string;
 };
 
 export type WorkExp = {

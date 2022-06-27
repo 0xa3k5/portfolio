@@ -100,6 +100,7 @@ export default class NotionService {
       slug: page.properties.Slug.formula.string,
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
+      client: page.properties.Client?.rich_text[0]?.plain_text || ''
     };
   }
 
