@@ -24,7 +24,7 @@ export default function Footer({ className, post }: FooterProps): JSX.Element {
         </Link>
       </div>
       <div className='flex flex-col space-y-4'>
-        <p className='text-casper text-xs'>Period</p>
+        <p className='text-casper text-xs'>Year</p>
         <span className='text-sm'>{post.period}</span>
       </div>
     </div>

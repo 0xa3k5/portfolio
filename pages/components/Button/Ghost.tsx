@@ -19,12 +19,12 @@ export default function Ghost({
   return (
     <a
       href={href}
-      target={targetBlank && '_blank'}
-      rel={targetBlank && 'noreferrer'}
+      target={targetBlank ? '_blank' : undefined}
+      rel={'noreferrer'}
     >
       <button
         className={cx(
-          'flex gap-2 rounded-xl text-lg text-polar border border-opacity-0 border-woodBlue hover:border-opacity-100 hover:bg-stoneBlue duration-200 items-center',
+          'flex gap-2 rounded-xl text-casper hover:text-polar uppercase  tracking-widest text-sm border border-opacity-0 border-woodBlue hover:border-opacity-100 hover:bg-stoneBlue duration-200 items-center',
           text ? 'py-4 px-8' : 'p-4',
           className
         )}

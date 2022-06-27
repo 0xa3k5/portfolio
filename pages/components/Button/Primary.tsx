@@ -19,8 +19,8 @@ export default function Primary({
   return (
     <a
       href={href}
-      target={targetBlank && '_blank'}
-      rel={targetBlank && 'noreferrer'}
+      target={targetBlank ? '_blank' : undefined}
+      rel={'noreferrer'}
     >
       <button
         className={cx(
