@@ -10,7 +10,9 @@ module.exports = {
         inter: ['Inter, sans-serif'],
       },
       fontSize: {
-        '6xl': ['60px', '80px'],
+        '6xl': ['64px', '80px'],
+        '7xl': ['72px', '96px'],
+        '8xl': ['96px', '128px'],
       },
     },
     container: {

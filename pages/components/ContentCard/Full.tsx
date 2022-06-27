@@ -21,7 +21,7 @@ export default function Full({
     <div
       className={cx(
         className,
-        'flex space-x-8 min-h-[800px] bg-stoneBlue rounded-xl w-full justify-end'
+        'flex space-x-8 min-h-[800px] bg-darkPearl rounded-xl w-full'
       )}
     >
       <div className='flex flex-1 flex-col pt-24 pb-16 px-24 justify-between'>
@@ -30,7 +30,6 @@ export default function Full({
           <p className='text-lg text-casper leading-loose'>{post.description}</p>
           <Button.Primary
             href={`/${type}/${post.slug}`}
-            targetBlank
             text='Read More'
             className='group hover:bg-woodBlue duration-200'
             icon={
@@ -41,7 +40,7 @@ export default function Full({
         <Footer post={post} />
       </div>
       <div className='w-1/2'>
-        <div className='relative rounded-xl overflow-hidden w-full h-full'>
+        <div className='relative rounded-xl overflow-hidden w-full h-full mt-16'>
           <Image
             src={post.img}
             alt={post.title}

@@ -18,9 +18,11 @@ export default class NotionService {
       database_id: config.notion.workExp,
     });
 
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.workExpTransformer(res);
-    }).filter((p) => p.published);
+    const transformedPosts = response.results
+      .map((res) => {
+        return NotionService.workExpTransformer(res);
+      })
+      .filter((p) => p.published);
 
     return transformedPosts;
   }
@@ -30,9 +32,11 @@ export default class NotionService {
       database_id: config.notion.careerHighlights,
     });
 
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.postTransformer(res);
-    }).filter((p) => p.published);
+    const transformedPosts = response.results
+      .map((res) => {
+        return NotionService.postTransformer(res);
+      })
+      .filter((p) => p.published);
 
     return transformedPosts;
   }
@@ -42,9 +46,11 @@ export default class NotionService {
       database_id: config.notion.sideProjects,
     });
 
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.postTransformer(res);
-    }).filter((p) => p.published);
+    const transformedPosts = response.results
+      .map((res) => {
+        return NotionService.postTransformer(res);
+      })
+      .filter((p) => p.published);
 
     return transformedPosts;
   }
@@ -104,7 +110,7 @@ export default class NotionService {
       slug: page.properties.Slug.formula.string,
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
-      client: page.properties.Client?.rich_text[0]?.plain_text || '',
+      client: page.properties.Client?.rich_text[0]?.plain_text || null,
     };
   }
 
@@ -118,6 +124,8 @@ export default class NotionService {
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
+      responsibilities:
+        page.properties.Responsibilities?.rich_text[0]?.plain_text || null,
     };
   }
 }

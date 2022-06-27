@@ -40,7 +40,7 @@ export default function Horizontal({
         <div className='flex flex-col space-y-6'>
           <h4 className='text-3xl font-semibold'>{post.title}</h4>
           <p className='text-lg text-casper'>{post.description}</p>
-          <Button.Text
+          <Button.Ghost
             href={`/${type}/${post.slug}`}
             targetBlank
             text='Read More'

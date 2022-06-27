@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface PrimaryProps {
   className?: string;
-  href: string;
+  href?: string;
   text?: string;
   icon?: ReactNode;
   targetBlank?: boolean;

@@ -24,7 +24,7 @@ export default function Ghost({
     >
       <button
         className={cx(
-          'flex gap-2 rounded-xl text-casper hover:text-polar uppercase  tracking-widest text-sm border border-opacity-0 border-woodBlue hover:border-opacity-100 hover:bg-stoneBlue duration-200 items-center',
+          'flex gap-2 rounded-xl text-casper hover:text-polar uppercase tracking-widest text-sm border border-opacity-0 border-woodBlue hover:border-opacity-100 hover:bg-stoneBlue duration-200 items-center',
           text ? 'py-4 px-8' : 'p-4',
           className
         )}

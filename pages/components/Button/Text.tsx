@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 interface TextProps {
   className?: string;
@@ -7,30 +7,25 @@ interface TextProps {
   text: string;
   icon?: ReactNode;
   targetBlank?: boolean;
+  onClick?: any;
 }
 
 export default function Text({
   className,
   text,
-  href,
+  onClick,
   icon,
-  targetBlank = false,
 }: TextProps): JSX.Element {
   return (
-    <a
-      href={href}
-      target={targetBlank && '_blank'}
-      rel={targetBlank && 'noreferrer'}
+    <button
+      onClick={onClick}
+      className={cx(
+        'flex gap-2 rounded-full text-lg text-polar duration-200 items-center',
+        className
+      )}
     >
-      <button
-        className={cx(
-          'flex gap-2 rounded-full text-lg text-polar duration-200 items-center',
-          className
-        )}
-      >
-        {text}
-        {icon}
-      </button>
-    </a>
+      {text}
+      {icon}
+    </button>
   );
 }

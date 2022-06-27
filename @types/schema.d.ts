@@ -20,6 +20,7 @@ export type WorkExp = {
   company: string;
   description: string;
   period: string;
+  responsibilities?: string;
 };
 
 export type PostDetail = {
