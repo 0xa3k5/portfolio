@@ -24,7 +24,7 @@ export default function Primary({
     >
       <button
         className={cx(
-          'flex gap-2 rounded-full text-lg text-polar border border-opacity-0 border-woodBlue hover:border-opacity-100 bg-stoneBlue duration-200 items-center',
+          'flex gap-2 rounded-full text-sm uppercase tracking-widest text-polar border border-woodBlue duration-200 items-center',
           text ? 'py-4 px-8' : 'p-4',
           className
         )}

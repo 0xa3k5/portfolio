@@ -39,7 +39,7 @@ export default function Home({
       </section>
       <section className='border-b border-polar border-opacity-5 container h-full flex flex-col space-y-24 items-center justify-center px-24 py-48 font-inter'>
         <h2 className='font-playfair text-5xl'>Work Experience</h2>
-        <div className='flex flex-col'>
+        <div className='flex flex-col space-y-16'>
           {data.workExp.map((w: WorkExp, i) => {
             return (
               <>
@@ -57,7 +57,7 @@ export default function Home({
       </section>
       <section className='container border-b border-polar border-opacity-5 h-full w-full flex flex-col space-y-40 items-center py-64'>
         <h2 className='font-playfair text-5xl'>Career Highlights</h2>
-        <div className='flex flex-col space-y-64 w-full'>
+        <div className='flex flex-col space-y-40 w-full'>
           {data.careerHighlights.map((p: Post) => {
             return <ContentCard.Full key={p.id} post={p} type='career' />;
           })}

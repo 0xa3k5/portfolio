@@ -1,11 +1,8 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
-import {
-  Post,
-  WorkExp,
-  PostDetail,
-} from '../../@types/schema';
+import { Post, WorkExp, PostDetail } from '../../@types/schema';
 import { config } from '../../config';
+import util from 'util';
 
 export default class NotionService {
   client: Client;
@@ -21,9 +18,11 @@ export default class NotionService {
       database_id: config.notion.workExp,
     });
 
-    return response.results.map((res) => {
+    const transformedPosts = response.results.map((res) => {
       return NotionService.workExpTransformer(res);
-    });
+    }).filter((p) => p.published);
+
+    return transformedPosts;
   }
 
   async getCareerHighlights(): Promise<Post[]> {
@@ -31,9 +30,11 @@ export default class NotionService {
       database_id: config.notion.careerHighlights,
     });
 
-    return response.results.map((res) => {
+    const transformedPosts = response.results.map((res) => {
       return NotionService.postTransformer(res);
-    });
+    }).filter((p) => p.published);
+
+    return transformedPosts;
   }
 
   async getSideProjects(): Promise<Post[]> {
@@ -41,9 +42,11 @@ export default class NotionService {
       database_id: config.notion.sideProjects,
     });
 
-    return response.results.map((res) => {
+    const transformedPosts = response.results.map((res) => {
       return NotionService.postTransformer(res);
-    });
+    }).filter((p) => p.published);
+
+    return transformedPosts;
   }
 
   async getPostDetail(slug: string, db: string): Promise<PostDetail> {
@@ -93,6 +96,7 @@ export default class NotionService {
 
     return {
       id: page.id,
+      published: page.properties.Published.checkbox === true,
       img: cover,
       title: page.properties.Name.title[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
@@ -100,13 +104,14 @@ export default class NotionService {
       slug: page.properties.Slug.formula.string,
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
-      client: page.properties.Client?.rich_text[0]?.plain_text || ''
+      client: page.properties.Client?.rich_text[0]?.plain_text || '',
     };
   }
 
   private static workExpTransformer(page: any): WorkExp {
     return {
       id: page.id,
+      published: page.properties.Published.checkbox === true,
       company: page.properties.Company.title[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,
       role: page.properties.Role.rich_text[0].plain_text,

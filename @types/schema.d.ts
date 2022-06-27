@@ -1,5 +1,6 @@
 export type Post = {
   id: string;
+  published: boolean;
   slug: string;
   img: string;
   title: string;
@@ -12,6 +13,7 @@ export type Post = {
 
 export type WorkExp = {
   id: string;
+  published: boolean;
   logo: string;
   website: string;
   role: string;

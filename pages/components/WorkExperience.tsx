@@ -12,7 +12,7 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div className={cx('flex space-x-8 w-full', classname)}>
+    <div className={cx('flex space-x-8 w-full pb-16', classname)}>
       <a
         href={job.website}
         target='_blank'
