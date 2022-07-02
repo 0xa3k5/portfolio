@@ -11,5 +11,5 @@ html {
 }
 
 body {
-  @apply font-inter bg-carbonBlue text-polar;
+  @apply font-inter bg-carbonBlue text-polar container;
 }

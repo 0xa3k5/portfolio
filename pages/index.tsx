@@ -22,9 +22,9 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container flex flex-col justify-between '>
+      <section className='flex flex-col justify-between '>
         <Header />
-        <div className='h-full w-full py-64 pl-8'>
+        <div className='h-full w-full p-48'>
           <div className='flex flex-col space-y-8'>
             <h1 className='font-playfair text-6xl font-bold'>
               👋 My Name is Ali Kemal
@@ -36,9 +36,9 @@ export default function Home({
           </div>
         </div>
       </section>
-      <section className='border-b border-woodBlue container flex flex-col space-y-24 items-center justify-center py-48'>
-        <h2 className='font-playfair text-6xl font-bold'>Work Experience</h2>
-        <div className='flex flex-col space-y-16 w-full px-96'>
+      <section className='border-b border-woodBlue  flex flex-col space-y-16 p-48'>
+        <h2 className='font-playfair text-5xl font-bold'>Work Experience</h2>
+        <div className=''>
           {data.workExp
             .sort((a, b) => b.num - a.num, 0)
             .map((w: WorkExp, i) => {
@@ -48,7 +48,8 @@ export default function Home({
                     key={w.id}
                     job={w}
                     classname={
-                      data.workExp.length > i + 1 && 'border-b border-woodBlue'
+                      data.workExp.length > i + 1 &&
+                      'border-b border-woodBlue border-opacity-40'
                     }
                   />
                 </>
@@ -56,17 +57,17 @@ export default function Home({
             })}
         </div>
       </section>
-      <section className='container border-b border-woodBlue w-full flex flex-col space-y-40 items-center py-64'>
-        <h2 className='font-playfair text-6xl font-bold'>Career Highlights</h2>
+      <section className=' border-b border-woodBlue w-full flex flex-col space-y-40 py-64'>
+        <h2 className='font-playfair text-5xl font-bold'>Career Highlights</h2>
         <div className='flex flex-col space-y-40 w-full'>
           {data.careerHighlights.map((p: Post) => {
             return <ContentCard.Full key={p.id} post={p} type='career' />;
           })}
         </div>
       </section>
-      <section className='border-b border-woodBlue container h-full flex flex-col space-y-24 items-center justify-center py-48'>
+      <section className='border-b border-woodBlue  h-full flex flex-col space-y-24 items-center justify-center py-48'>
         <h2 className='font-playfair text-6xl font-bold'>Side Projects</h2>
-        <div className='container grid grid-cols-2 gap-16'>
+        <div className=' grid grid-cols-2 gap-16'>
           {data.sideProjects.map((p: Post) => {
             return (
               <ContentCard.Vertical

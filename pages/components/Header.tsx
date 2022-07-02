@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps): JSX.Element {
   return (
-    <div className={cx('container flex justify-between py-12', className)}>
+    <div className={cx('flex justify-between py-12', className)}>
       <Link href='/' passHref>
         <a className='hover:-translate-y-2 duration-300'>
           <AKLogo className='w-16 h-16 rounded-full' />
