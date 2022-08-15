@@ -11,20 +11,20 @@ export default function Footer({ className, post }: FooterProps): JSX.Element {
   return (
     <div
       className={cx(
-        'flex space-x-24 w-full uppercase tracking-widest',
+        'flex w-full space-x-24 uppercase tracking-widest',
         className
       )}
     >
       <div className='flex flex-col space-y-4'>
-        <p className='text-casper text-xs'>Client</p>
+        <p className='text-xs opacity-60'>Client</p>
         <Link href={post.website} passHref>
-          <a className='hover:text-daisy duration-200'>
+          <a className='duration-200 hover:text-daisy'>
             <span className='text-sm'>{post.client}</span>
           </a>
         </Link>
       </div>
       <div className='flex flex-col space-y-4'>
-        <p className='text-casper text-xs'>Year</p>
+        <p className='text-xs opacity-60'>Year</p>
         <span className='text-sm'>{post.period}</span>
       </div>
     </div>

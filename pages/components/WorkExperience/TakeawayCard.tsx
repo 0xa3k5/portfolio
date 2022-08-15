@@ -14,14 +14,14 @@ export const TakeawayCard = ({
     <div
       className={cx(
         className,
-        'flex flex-col space-y-8 px-8 py-6 rounded-xl bg-darkPearl'
+        'flex flex-col space-y-8 rounded-xl bg-darkPearl px-8 py-6'
       )}
     >
       <div className='flex flex-col space-y-4'>
         <h6 className='text-sm uppercase tracking-widest text-casper'>
           Takeaway
         </h6>
-        <p className='leading-loose text-lg opacity-90'>{job.description}</p>
+        <p className='text-lg leading-loose opacity-90'>{job.description}</p>
       </div>
       {job.responsibilities && (
         <div className='flex flex-col space-y-4'>

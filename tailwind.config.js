@@ -6,8 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        playfair: ['Playfair Display, serif'],
-        inter: ['Inter, sans-serif'],
+        Khand: ['Khand, sans-serif'],
+        heebo: ['Heebo, sans-serif'],
+        bogart: ['Bogart', 'sans-serif'],
       },
       fontSize: {
         '6xl': ['64px', '80px'],
@@ -43,10 +44,6 @@ module.exports = {
       xl: '1rem',
       '2xl': '2rem',
       full: '9999px',
-    },
-    fontFamily: {
-      sans: ["'Montserrat'"],
-      mono: ["'Inconsolata'"],
     },
   },
   plugins: [require('@tailwindcss/typography')],

@@ -11,27 +11,23 @@ export default function Header({ className }: HeaderProps): JSX.Element {
   return (
     <div className={cx('flex justify-between py-12', className)}>
       <Link href='/' passHref>
-        <a className='hover:-translate-y-2 duration-300'>
-          <AKLogo className='w-16 h-16 rounded-full' />
+        <a className='duration-300 hover:-translate-y-2'>
+          <AKLogo className='h-16 w-16 rounded-full' />
         </a>
       </Link>
       <div className='flex space-x-1'>
-        <Button.Ghost
+        <Button.Text
           href='https://twitter.com/akemalakcay'
           text='Twitter'
           targetBlank
         />
-        <Button.Ghost
+        <Button.Text
           href='https://linkedin.com/in/alikemalakcay/'
           text='Linkedin'
           targetBlank
         />
-        <Button.Ghost
-          text='Resume'
-          href='/akresume.pdf'
-          targetBlank
-        />
-        <Button.Ghost
+        <Button.Text text='Resume' href='/akresume.pdf' targetBlank />
+        <Button.Text
           text='Email Me'
           href='mailto:a.kemalakcay@gmail.com'
           targetBlank

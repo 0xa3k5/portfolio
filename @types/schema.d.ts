@@ -9,6 +9,9 @@ export type Post = {
   logo: string;
   website: string;
   client: string;
+  bgColor: string;
+  color: string;
+  vertical?: boolean;
 };
 
 export type WorkExp = {

@@ -1,7 +1,6 @@
 import Horizontal from './Horizontal';
 import Vertical from './Vertical';
-import Full from './Full';
 
-const variants = { Horizontal, Vertical, Full }
+const variants = { Horizontal, Vertical }
 
 export default variants;

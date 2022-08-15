@@ -30,16 +30,16 @@ let resolvedNotionEnv: ReturnType<typeof notionEnv>;
 
 export const config = {
   env: env.APP_ENV as 'dev' | 'prod',
-//   notion: () => {
-//     if (!resolvedNotionEnv) {
-//       resolvedNotionEnv = notionEnv();
-//     }
-//     return notionEnv;
-//   },
+  //   notion: () => {
+  //     if (!resolvedNotionEnv) {
+  //       resolvedNotionEnv = notionEnv();
+  //     }
+  //     return notionEnv;
+  //   },
   notion: {
     apiKey: env.N_API_KEY,
     workExp: env.N_DB_WORK,
-    careerHighlights: env.N_DB_CAREER_HIGHLIGHTS,
+    portfolioPosts: env.N_DB_CAREER_HIGHLIGHTS,
     sideProjects: env.N_DB_SIDE_PROJECTS,
   },
 };

@@ -1,59 +1,64 @@
 import cx from 'classnames';
 import { Post } from '../../../@types/schema';
-import Link from 'next/link';
 import Image from 'next/image';
+import Button from '../Button';
+
+import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
 
 interface VerticalProps {
   className?: string;
   post: Post;
-  type: 'career' | 'side-projects'
 }
 
 export default function Vertical({
   post,
   className,
-  type
 }: VerticalProps): JSX.Element {
   return (
-    <div className='flex space-x-8 items-start'>
-      <div className='hover:-translate-y-1 duration-200'>
-        <a href={post.website} target='_blank' rel='noreferrer'>
+    <div
+      className={cx(className, 'flex h-screen w-screen flex-col items-center')}
+      style={{ color: `#${post.color}` }}
+    >
+      <div className='flex max-w-xl flex-col items-center space-y-4 py-12 px-16'>
+        <h6 className='text-md mb-2 text-center uppercase tracking-widest opacity-60'>
+          {post.period}
+        </h6>
+        <div className='relative mb-8 h-8 w-32'>
           <Image
             src={post.logo}
-            alt={post.title}
-            width={64}
-            height={64}
-            className='rounded-xl'
+            alt={`${post.client} logo`}
+            layout='fill'
+            objectFit='contain'
+            objectPosition='bottom'
+            priority
           />
-        </a>
+        </div>
+        <div className='mb-8 flex flex-col space-y-4 text-center'>
+          <h4 className='font-bogart text-4xl font-semibold'>{post.title}</h4>
+          <p className='text-lg font-normal leading-loose opacity-80'>
+            {post.description}
+          </p>
+        </div>
+        <Button.Ghost
+          href={`/side-projects/${post.slug}`}
+          color={post.color}
+          text='Read More'
+          className='group duration-200 hover:bg-woodBlue'
+          icon={
+            <RightArrowCircleIcon className='w-6 duration-200 group-hover:translate-x-1' />
+          }
+        />
       </div>
-      <Link href={`/${type}/${post.slug}`} passHref>
-        <a className='hover:-translate-y-3 hover:bg-darkPearl duration-200'>
-          <div
-            className={cx(
-              'max-w-4xl rounded-xl border border-woodBlue overflow-hidden h-full',
-              className
-            )}
-          >
-            <div className='w-full h-96 relative'>
-              <Image
-                src={post.img}
-                alt={post.title}
-                layout='fill'
-                objectFit='fill'
-                priority
-              />
-            </div>
-            <div className='flex p-12 flex-col space-y-4'>
-              <h6 className='text-lg tracking-wide'>{post.period}</h6>
-              <h4 className='text-3xl font-semibold hover:text-daisy duration-200'>
-                {post.title}
-              </h4>
-              <p className='text-lg text-casper'>{post.description}</p>
-            </div>
-          </div>
-        </a>
-      </Link>
+      <div className='relative w-full flex-1 rounded-xl'>
+        <Image
+          src={post.img}
+          alt={post.title}
+          layout='fill'
+          objectFit='contain'
+          objectPosition='center'
+          priority
+        />
+      </div>
     </div>
   );
 }

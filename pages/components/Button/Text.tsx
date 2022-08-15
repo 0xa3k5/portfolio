@@ -20,7 +20,7 @@ export default function Text({
     <button
       onClick={onClick}
       className={cx(
-        'flex gap-2 rounded-full text-lg text-polar duration-200 items-center',
+        'flex items-center gap-2 rounded-full text-lg text-polar duration-200',
         className
       )}
     >

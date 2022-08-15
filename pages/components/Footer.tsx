@@ -6,7 +6,7 @@ interface FooterProps {
 
 export default function Footer({ className }: FooterProps): JSX.Element {
   return (
-    <div className={cx('container py-12 flex justify-center', className)}>
+    <div className={cx('container flex justify-center py-12', className)}>
       <span className='text-2xl'>❤️</span>
     </div>
   );

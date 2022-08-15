@@ -1,71 +1,66 @@
 import cx from 'classnames';
 import { Post } from '../../../@types/schema';
-import Link from 'next/link';
 import Image from 'next/image';
-import Footer from './Footer';
 import Button from '../Button';
 
-import NewTabIcon from '../../../public/icons/new-tab.svg';
+import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
 
 interface HorizontalProps {
   className?: string;
   post: Post;
-  type: 'career' | 'side-projects';
 }
 
 export default function Horizontal({
   post,
   className,
-  type,
 }: HorizontalProps): JSX.Element {
   return (
     <div
       className={cx(
         className,
-        'flex space-x-8 min-h-[800px] rounded-xl p-24 w-full'
+        'flex h-screen w-screen items-center space-x-32 pl-32'
       )}
+      style={{ color: `#${post.color}` }}
     >
-      <div className='relative mt-5 w-10 h-10 hover:-translate-y-1 duration-200'>
-        <a href={post.website} target='_blank' rel='noreferrer'>
+      <div className='flex max-w-md flex-col'>
+        <h6 className='text-md mb-8 uppercase tracking-widest opacity-60'>
+          {post.period}
+        </h6>
+        <div className='relative mb-12 h-8 w-32'>
           <Image
             src={post.logo}
-            alt={post.title}
+            alt={`${post.client} logo`}
             layout='fill'
-            className='rounded-md'
+            objectFit='contain'
+            objectPosition='bottom'
             priority
           />
-        </a>
-      </div>
-      <div className='flex flex-1 flex-col pt-4 pr-16 justify-between'>
-        <div className='flex flex-col space-y-6'>
-          <h4 className='text-3xl font-semibold'>{post.title}</h4>
-          <p className='text-lg text-casper'>{post.description}</p>
-          <Button.Ghost
-            href={`/${type}/${post.slug}`}
-            targetBlank
-            text='Read More'
-            className='group'
-            icon={
-              <NewTabIcon className='w-5 group-hover:translate-x-1 group-hover:-translate-y-1 duration-200' />
-            }
-          />
         </div>
-        <Footer post={post} />
+        <div className='mb-8 flex flex-col space-y-4'>
+          <h4 className='font-bogart text-4xl font-semibold'>{post.title}</h4>
+          <p className='text-lg font-normal leading-loose opacity-80'>
+            {post.description}
+          </p>
+        </div>
+        <Button.Ghost
+          href={`/career/${post.slug}`}
+          color={post.color}
+          text='Read More'
+          className={`group hover:bg-[#${post.color}] duration-200`}
+          icon={
+            <RightArrowCircleIcon className='w-6 duration-200 group-hover:translate-x-1' />
+          }
+        />
       </div>
-      <div className='flex-1'>
-        <Link href={`/${type}/${post.slug}`} passHref>
-          <a className='hover:-translate-y-3 duration-200'>
-            <div className='relative h-full rounded-xl overflow-hidden w-full'>
-              <Image
-                src={post.img}
-                alt={post.title}
-                layout='fill'
-                objectFit='contain'
-                priority
-              />
-            </div>
-          </a>
-        </Link>
+      <div className='relative h-4/6 flex-1 rounded-xl'>
+        <Image
+          src={post.img}
+          alt={post.title}
+          layout='fill'
+          objectFit='contain'
+          objectPosition='right center'
+          priority
+        />
       </div>
     </div>
   );

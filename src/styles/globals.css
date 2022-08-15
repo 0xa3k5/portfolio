@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
-@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap');
+@import url('/fonts/bogart.css');
+@import url('/fonts/heebo.css');
 
 html {
   scroll-behavior: smooth;
@@ -11,5 +12,5 @@ html {
 }
 
 body {
-  @apply font-inter bg-carbonBlue text-polar container;
+  @apply bg-black font-heebo text-polar;
 }

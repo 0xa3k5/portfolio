@@ -3,6 +3,8 @@ import { NotionToMarkdown } from 'notion-to-md';
 import { Post, WorkExp, PostDetail } from '../../@types/schema';
 import { config } from '../../config';
 
+import Util from 'util';
+
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -26,9 +28,9 @@ export default class NotionService {
     return transformedPosts;
   }
 
-  async getCareerHighlights(): Promise<Post[]> {
+  async getPortfolioPosts(): Promise<Post[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.careerHighlights,
+      database_id: config.notion.portfolioPosts,
     });
 
     const transformedPosts = response.results
@@ -98,11 +100,14 @@ export default class NotionService {
         // placeholder
         cover = '';
     }
-
+    console.log(Util.inspect(page, { depth: 5 }));
     return {
       id: page.id,
       published: page.properties.Published.checkbox === true,
+      vertical: page.properties.Vertical?.checkbox === true,
       img: cover,
+      bgColor: page.properties.BgColor?.rich_text[0]?.plain_text || '000',
+      color: page.properties.TextColor?.rich_text[0]?.plain_text || 'fff',
       title: page.properties.Name.title[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,

@@ -28,9 +28,9 @@ const Detail = ({
       </Head>
       <Header />
       <div className='min-h-screen py-24'>
-        <div className='max-w-4xl mx-auto'>
+        <div className='mx-auto max-w-4xl'>
           <div className='flex items-center justify-center'>
-            <article className='prose prose-xl xl:prose-2xl prose-invert'>
+            <article className='prose prose-xl prose-invert xl:prose-2xl'>
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </article>
           </div>
@@ -46,7 +46,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const p = await notionService.getPostDetail(context.params?.slug, config.notion.careerHighlights);
+  const p = await notionService.getPostDetail(
+    context.params?.slug[0],
+    config.notion.portfolioPosts
+  );
 
   if (!p) {
     throw '';
@@ -63,7 +66,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export async function getStaticPaths() {
   const notionService = new NotionService();
 
-  const posts = await notionService.getCareerHighlights();
+  const posts = await notionService.getPortfolioPosts();
 
   const paths = posts.map((p) => {
     return `/career/${p.slug}`;
