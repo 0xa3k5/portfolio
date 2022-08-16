@@ -15,6 +15,9 @@ export default function Header({ className }: HeaderProps): JSX.Element {
           <AKLogo className='h-16 w-16 rounded-full' />
         </a>
       </Link>
+      <Link href='/about' passHref>
+        <a className='duration-300 hover:-translate-y-2'>About</a>
+      </Link>
       <div className='flex space-x-1'>
         <Button.Text
           href='https://twitter.com/akemalakcay'

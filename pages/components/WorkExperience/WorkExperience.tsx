@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import cx from 'classnames';
 import { WorkExp } from '../../../@types/schema';
-import Image from 'next/image';
 
 interface WorkExperienceProps {
   classname?: string;
@@ -12,31 +12,32 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div className={cx(classname, 'flex')}>
-      <div className='flex flex-shrink-0 flex-col items-start space-y-4'>
-        <p className='text-sm uppercase tracking-widest text-casper'>
-          {job.period}
-        </p>
-        <div className='mt-12 flex space-x-6'>
+    <div className={cx(classname, 'flex flex-col flex-wrap py-8 lg:flex-row')}>
+      <div className='w-full overflow-visible md:w-2/6'>
+        <p className='block font-bogart text-xl opacity-40'>{job.period}</p>
+      </div>
+
+      <div className='w-full md:w-4/6'>
+        <div className='flex flex-col space-y-8'>
           <a
             href={job.website}
             target='_blank'
             rel='noreferrer'
-            className='relative h-14 w-14 overflow-hidden rounded-lg duration-200 hover:-translate-y-1'
+            className='group'
           >
-            <Image
-              src={job.logo}
-              alt={job.company}
-              layout='fill'
-              objectFit='fill'
-            />
+            <div className='flex items-start space-x-4 duration-200 group-hover:text-daisy'>
+              <div className='h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1'>
+                <img src={job.logo} alt={`${job.logo} logo`} />
+              </div>
+              <div className='flex flex-col space-y-1'>
+                <h6 className='text-xl'>{job.company}</h6>
+                <p className='opacity-60'>{job.tagline}</p>
+              </div>
+            </div>
           </a>
-          <div className='flex-col space-y-2'>
-            <h6 className='text-lg text-polar'>{job.company}</h6>
-            <p className='font-heebo text-sm uppercase tracking-widest text-casper'>
-              Company Tagline
-            </p>
-          </div>
+          <p className='text-xl leading-relaxed opacity-70'>
+            {job.description}
+          </p>
         </div>
       </div>
     </div>

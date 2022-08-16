@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { Post } from '../../../@types/schema';
+import { NotionPost } from '../../../@types/schema';
 import Image from 'next/image';
 import Button from '../Button';
 
@@ -7,7 +7,7 @@ import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
 
 interface HorizontalProps {
   className?: string;
-  post: Post;
+  post: NotionPost;
 }
 
 export default function Horizontal({

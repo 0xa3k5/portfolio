@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { Post } from '../@types/schema';
+import { NotionPost } from '../@types/schema';
 import Head from 'next/head';
 import ContentCard from './components/ContentCard';
 import Header from './components/Header';
@@ -9,11 +9,11 @@ import NotionService from './api/notion';
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const pageTitle = 'Ali Kemal Akcay – Product Design Portfolio';
-  const pageDesc = 'Ali Kemal Akcay – Product Design Portfolio';
+  const pageTitle = data.homePage.title;
+  const pageDesc = data.homePage.description;
 
   return (
-    <div className='snap-y snap-mandatory overflow-scroll h-screen w-screen'>
+    <div className='h-screen w-screen snap-y snap-mandatory overflow-scroll'>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -21,22 +21,19 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container snap-center flex h-screen flex-col justify-between'>
+      <section className='container flex h-screen snap-center flex-col justify-between'>
         <Header />
         <div className='h-full w-full p-48'>
           <div className='flex flex-col space-y-8'>
             <h1 className='font-bogart text-6xl font-bold'>
-              👋 My Name is Ali Kemal
+              {data.homePage.heroTitle}
             </h1>
-            <p className='max-w-2xl text-xl'>
-              People call me AK, I&apos;m a product designer and passionate
-              about crypto.
-            </p>
+            <p className='max-w-2xl text-xl'>{data.homePage.heroText}</p>
           </div>
         </div>
       </section>
       <div className='flex flex-col -space-y-4'>
-        {data.portfolioPosts.map((p: Post, i) => {
+        {data.portfolioPosts.map((p: NotionPost, i: number) => {
           return (
             <div
               key={i}
@@ -53,11 +50,11 @@ export default function Home({
         })}
       </div>
       <div className='flex flex-col -space-y-4'>
-        {data.sideProjects.map((p: Post, i) => {
+        {data.sideProjects.map((p: NotionPost, i: number) => {
           return (
             <div
-              key={i}
-              className='py-32 snap-center'
+              key={`side-${i}`}
+              className='snap-center py-32'
               style={{ backgroundColor: `#${p.bgColor}` }}
             >
               {p.vertical ? (
@@ -77,14 +74,15 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
-  const workExp = await notionService.getWorkExp();
   const portfolioPosts = await notionService.getPortfolioPosts();
   const sideProjects = await notionService.getSideProjects();
+
+  const homePage = (await notionService.getStaticPages())[0];
 
   return {
     props: {
       data: {
-        workExp,
+        homePage,
         portfolioPosts,
         sideProjects,
       },

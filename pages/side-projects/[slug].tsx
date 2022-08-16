@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const p = await notionService.getPostDetail(
+  const p = await notionService.getNotionPageDetail(
     context.params?.slug[0],
     config.notion.sideProjects
   );
