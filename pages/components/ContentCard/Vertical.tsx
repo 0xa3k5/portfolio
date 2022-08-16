@@ -16,7 +16,7 @@ export default function Vertical({
 }: VerticalProps): JSX.Element {
   return (
     <div
-      className={cx(className, 'flex h-screen w-screen flex-col items-center')}
+      className={cx(className, 'flex h-screen flex-col items-center container')}
       style={{ color: `#${post.color}` }}
     >
       <div className='flex max-w-xl flex-col items-center space-y-4 py-12 px-16'>

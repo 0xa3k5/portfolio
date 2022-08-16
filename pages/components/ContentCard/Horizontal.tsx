@@ -18,7 +18,7 @@ export default function Horizontal({
     <div
       className={cx(
         className,
-        'flex h-screen w-screen items-center space-x-32 pl-32'
+        'container flex h-screen items-center space-x-32 pl-32'
       )}
       style={{ color: `#${post.color}` }}
     >

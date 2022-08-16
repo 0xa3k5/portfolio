@@ -13,7 +13,7 @@ export default function Home({
   const pageDesc = 'Ali Kemal Akcay – Product Design Portfolio';
 
   return (
-    <>
+    <div className='snap-y snap-mandatory overflow-scroll h-screen w-screen'>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -21,7 +21,7 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container flex h-screen flex-col justify-between'>
+      <section className='container snap-center flex h-screen flex-col justify-between'>
         <Header />
         <div className='h-full w-full p-48'>
           <div className='flex flex-col space-y-8'>
@@ -40,7 +40,7 @@ export default function Home({
           return (
             <div
               key={i}
-              className='py-32'
+              className='snap-center py-16'
               style={{ backgroundColor: `#${p.bgColor}` }}
             >
               {p.vertical ? (
@@ -57,7 +57,7 @@ export default function Home({
           return (
             <div
               key={i}
-              className='py-32'
+              className='py-32 snap-center'
               style={{ backgroundColor: `#${p.bgColor}` }}
             >
               {p.vertical ? (
@@ -70,7 +70,7 @@ export default function Home({
         })}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
