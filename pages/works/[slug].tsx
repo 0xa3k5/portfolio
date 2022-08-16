@@ -44,16 +44,12 @@ const Detail = ({
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  console.log(context)
+
   const p = await notionService.getNotionPageDetail(
-    context.params?.slug[0],
+    context.params?.slug as string,
     config.notion.portfolioPosts
   );
-
-  if (!p) {
-    throw '';
-  }
 
   return {
     props: {
@@ -69,7 +65,7 @@ export async function getStaticPaths() {
   const posts = await notionService.getPortfolioPosts();
 
   const paths = posts.map((p) => {
-    return `/career/${p.slug}`;
+    return `/works/${p.slug}`;
   });
 
   return {

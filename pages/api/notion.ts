@@ -85,6 +85,9 @@ export default class NotionService {
       },
     });
 
+    console.log(slug, db)
+    console.log(response);
+
     if (!response.results[0]) {
       throw 'no results';
     }

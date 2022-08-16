@@ -43,7 +43,7 @@ export default function Horizontal({
           </p>
         </div>
         <Button.Ghost
-          href={`/career/${post.slug}`}
+          href={`/works/${post.slug}`}
           color={post.color}
           text='Read More'
           className={`group hover:bg-[#${post.color}] duration-200`}

@@ -16,7 +16,7 @@ export default function Vertical({
 }: VerticalProps): JSX.Element {
   return (
     <div
-      className={cx(className, 'flex h-screen flex-col items-center container')}
+      className={cx(className, 'container flex h-screen flex-col items-center')}
       style={{ color: `#${post.color}` }}
     >
       <div className='flex max-w-xl flex-col items-center space-y-4 py-12 px-16'>
@@ -40,7 +40,7 @@ export default function Vertical({
           </p>
         </div>
         <Button.Ghost
-          href={`/side-projects/${post.slug}`}
+          href={`/works/${post.slug}`}
           color={post.color}
           text='Read More'
           className='group duration-200 hover:bg-woodBlue'
