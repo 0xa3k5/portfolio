@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
 interface GhostProps {
@@ -6,7 +7,7 @@ interface GhostProps {
   text?: string;
   href: string;
   icon?: ReactNode;
-  targetBlank?: boolean;
+  color: string;
 }
 
 export default function Ghost({
@@ -14,24 +15,21 @@ export default function Ghost({
   text,
   href,
   icon,
-  targetBlank = false,
+  color,
 }: GhostProps): JSX.Element {
   return (
-    <a
-      href={href}
-      target={targetBlank ? '_blank' : undefined}
-      rel={'noreferrer'}
-    >
+    <Link href={href}>
       <button
         className={cx(
-          'flex gap-2 rounded-xl text-casper hover:text-polar uppercase tracking-widest text-sm border border-opacity-0 border-woodBlue hover:border-opacity-100 hover:bg-stoneBlue duration-200 items-center',
+          'flex items-center space-x-2 rounded-xl text-sm uppercase tracking-widest duration-200 hover:text-polar',
           text ? 'py-4 px-8' : 'p-4',
+          `text-[#${color}] bg-[#${color}] bg-opacity-0 hover:bg-opacity-60`,
           className
         )}
       >
         {text && text}
         {icon && icon}
       </button>
-    </a>
+    </Link>
   );
 }

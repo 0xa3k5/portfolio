@@ -1,4 +1,4 @@
-export type Post = {
+export type NotionPost = {
   id: string;
   published: boolean;
   slug: string;
@@ -9,6 +9,9 @@ export type Post = {
   logo: string;
   website: string;
   client: string;
+  bgColor: string;
+  color: string;
+  vertical?: boolean;
 };
 
 export type WorkExp = {
@@ -19,12 +22,19 @@ export type WorkExp = {
   website: string;
   role: string;
   company: string;
+  tagline: string;
   description: string;
   period: string;
-  responsibilities?: string;
 };
 
-export type PostDetail = {
+export type NotionPageDetail = {
   post: Post;
   markdown: string;
+};
+
+export type StaticPages = {
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroText: string;
 };

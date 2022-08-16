@@ -1,7 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { WorkExp, Post } from '../@types/schema';
+import { NotionPost } from '../@types/schema';
 import Head from 'next/head';
-import WorkExperience from './components/WorkExperience/WorkExperience';
 import ContentCard from './components/ContentCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,11 +9,11 @@ import NotionService from './api/notion';
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const pageTitle = 'Ali Kemal Akcay – Product Design Portfolio';
-  const pageDesc = 'Ali Kemal Akcay – Product Design Portfolio';
+  const pageTitle = data.homePage.title;
+  const pageDesc = data.homePage.description;
 
   return (
-    <>
+    <div className='h-screen w-screen snap-y snap-mandatory overflow-scroll'>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -22,81 +21,69 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='flex flex-col justify-between '>
+      <section className='container flex h-screen snap-center flex-col justify-between'>
         <Header />
         <div className='h-full w-full p-48'>
           <div className='flex flex-col space-y-8'>
-            <h1 className='font-playfair text-6xl font-bold'>
-              👋 My Name is Ali Kemal
+            <h1 className='font-bogart text-6xl font-bold'>
+              {data.homePage.heroTitle}
             </h1>
-            <p className='text-xl max-w-2xl'>
-              People call me AK, I&apos;m a product designer and passionate
-              about crypto.
-            </p>
+            <p className='max-w-2xl text-xl'>{data.homePage.heroText}</p>
           </div>
         </div>
       </section>
-      <section className='border-b border-woodBlue  flex flex-col space-y-16 p-48'>
-        <h2 className='font-playfair text-5xl font-bold'>Work Experience</h2>
-        <div className=''>
-          {data.workExp
-            .sort((a, b) => b.num - a.num, 0)
-            .map((w: WorkExp, i) => {
-              return (
-                <>
-                  <WorkExperience
-                    key={w.id}
-                    job={w}
-                    classname={
-                      data.workExp.length > i + 1 &&
-                      'border-b border-woodBlue border-opacity-40'
-                    }
-                  />
-                </>
-              );
-            })}
-        </div>
-      </section>
-      <section className=' border-b border-woodBlue w-full flex flex-col space-y-40 py-64'>
-        <h2 className='font-playfair text-5xl font-bold'>Career Highlights</h2>
-        <div className='flex flex-col space-y-40 w-full'>
-          {data.careerHighlights.map((p: Post) => {
-            return <ContentCard.Full key={p.id} post={p} type='career' />;
-          })}
-        </div>
-      </section>
-      <section className='border-b border-woodBlue  h-full flex flex-col space-y-24 items-center justify-center py-48'>
-        <h2 className='font-playfair text-6xl font-bold'>Side Projects</h2>
-        <div className=' grid grid-cols-2 gap-16'>
-          {data.sideProjects.map((p: Post) => {
-            return (
-              <ContentCard.Vertical
-                key={p.id}
-                post={p}
-                type='side-projects'
-                className='h-full'
-              />
-            );
-          })}
-        </div>
-      </section>
+      <div className='flex flex-col -space-y-4'>
+        {data.portfolioPosts.map((p: NotionPost, i: number) => {
+          return (
+            <div
+              key={i}
+              className='snap-center py-16'
+              style={{ backgroundColor: `#${p.bgColor}` }}
+            >
+              {p.vertical ? (
+                <ContentCard.Vertical key={p.id} post={p} />
+              ) : (
+                <ContentCard.Horizontal key={p.id} post={p} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className='flex flex-col -space-y-4'>
+        {data.sideProjects.map((p: NotionPost, i: number) => {
+          return (
+            <div
+              key={`side-${i}`}
+              className='snap-center py-32'
+              style={{ backgroundColor: `#${p.bgColor}` }}
+            >
+              {p.vertical ? (
+                <ContentCard.Vertical key={p.id} post={p} />
+              ) : (
+                <ContentCard.Horizontal key={p.id} post={p} />
+              )}
+            </div>
+          );
+        })}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
-  const workExp = await notionService.getWorkExp();
-  const careerHighlights = await notionService.getCareerHighlights();
+  const portfolioPosts = await notionService.getPortfolioPosts();
   const sideProjects = await notionService.getSideProjects();
+
+  const homePage = (await notionService.getStaticPages())[0];
 
   return {
     props: {
       data: {
-        workExp,
-        careerHighlights,
+        homePage,
+        portfolioPosts,
         sideProjects,
       },
     },
