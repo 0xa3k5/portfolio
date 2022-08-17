@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import Link from 'next/link';
-import Button from '../components/Button';
+import Button from './Button';
 import AKLogo from '../../public/ak-logo.svg';
 
 interface HeaderProps {

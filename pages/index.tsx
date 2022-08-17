@@ -1,9 +1,9 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { NotionPost } from '../@types/schema';
 import Head from 'next/head';
-import ContentCard from './components/ContentCard';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import ContentCard from '../src/components/ContentCard';
+import Header from '../src/components/Header';
+import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
 
 export default function Home({
@@ -13,7 +13,7 @@ export default function Home({
   const pageDesc = data.homePage.description;
 
   return (
-    <div className='h-screen w-screen snap-y snap-mandatory overflow-scroll'>
+    <main className='h-screen w-screen snap-y snap-mandatory overflow-scroll'>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -67,7 +67,7 @@ export default function Home({
         })}
       </div>
       <Footer />
-    </div>
+    </main>
   );
 }
 

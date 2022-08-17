@@ -28,7 +28,7 @@ export type WorkExp = {
 };
 
 export type NotionPageDetail = {
-  post: Post;
+  post: NotionPost;
   markdown: string;
 };
 

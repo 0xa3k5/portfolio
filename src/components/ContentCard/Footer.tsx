@@ -1,10 +1,10 @@
 import cx from 'classnames';
-import { Post } from '../../../@types/schema';
+import { NotionPost } from '../../../@types/schema';
 import Link from 'next/link';
 
 interface FooterProps {
   className?: string;
-  post: Post;
+  post: NotionPost;
 }
 
 export default function Footer({ className, post }: FooterProps): JSX.Element {

@@ -3,7 +3,6 @@ import { NotionToMarkdown } from 'notion-to-md';
 import { NotionPost, WorkExp, NotionPageDetail } from '../../@types/schema';
 import { config } from '../../config';
 
-import Util from 'util';
 import { StaticPages } from '../../@types/schema';
 
 export default class NotionService {
@@ -84,13 +83,6 @@ export default class NotionService {
         },
       },
     });
-
-    console.log(slug, db)
-    console.log(response);
-
-    if (!response.results[0]) {
-      throw 'no results';
-    }
 
     const detail = response.results[0];
 

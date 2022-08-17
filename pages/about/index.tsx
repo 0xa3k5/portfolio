@@ -1,10 +1,10 @@
 import NotionService from '../api/notion';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { WorkExp } from '../../@types/schema';
-import { WorkExperience } from '../components/WorkExperience';
+import WorkExperience from '../../src/components/WorkExperience';
 import Head from 'next/head';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../src/components/Header';
+import Footer from '../../src/components/Footer';
 
 export default function Home({
   data,
@@ -51,7 +51,7 @@ export default function Home({
             })}
         </div>
       </main>
-      <Footer />
+    <Footer />
     </div>
   );
 }

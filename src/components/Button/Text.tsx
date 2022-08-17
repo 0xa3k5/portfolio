@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface TextProps {
   className?: string;

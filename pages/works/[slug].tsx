@@ -2,8 +2,8 @@ import Head from 'next/head';
 import NotionService from '../api/notion';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import ReactMarkdown from 'react-markdown';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../src/components/Header';
+import Footer from '../../src/components/Footer';
 import { config } from '../../config';
 
 const Detail = ({
@@ -11,7 +11,7 @@ const Detail = ({
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <>
+    <main className='container'>
       <Head>
         <title>{post.title}</title>
         <meta
@@ -27,24 +27,22 @@ const Detail = ({
         <meta name='og:image' title='og:title' content={post.img} />
       </Head>
       <Header />
-      <div className='min-h-screen py-24'>
+      <div className='py-24'>
         <div className='mx-auto max-w-4xl'>
           <div className='flex items-center justify-center'>
-            <article className='prose prose-xl prose-invert xl:prose-2xl'>
+            <article className='prose prose-xl prose-invert prose-headings:font-bogart prose-headings:font-semibold prose-h4:font-normal prose-li:opacity-80 prose-img:rounded-xl lg:prose-2xl'>
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </article>
           </div>
         </div>
       </div>
       <Footer />
-    </>
+    </main>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
-
-  console.log(context)
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
