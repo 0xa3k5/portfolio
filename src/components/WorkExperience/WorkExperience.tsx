@@ -1,6 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import cx from 'classnames';
 import { WorkExp } from '../../../@types/schema';
+
+import Image from 'next/image';
 
 interface WorkExperienceProps {
   classname?: string;
@@ -12,8 +13,13 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div className={cx(classname, 'flex flex-col flex-wrap py-8 lg:flex-row')}>
-      <div className='w-full overflow-visible md:w-2/6'>
+    <div
+      className={cx(
+        classname,
+        'flex flex-col flex-wrap py-2 lg:flex-row lg:py-8'
+      )}
+    >
+      <div className='mb-8 w-full overflow-visible md:w-2/6 lg:mb-0'>
         <p className='block font-bogart text-xl opacity-40'>{job.period}</p>
       </div>
 
@@ -26,8 +32,14 @@ export default function WorkExperience({
             className='group'
           >
             <div className='flex items-start space-x-4 duration-200 group-hover:text-daisy'>
-              <div className='h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1'>
-                <img src={job.logo} alt={`${job.logo} logo`} />
+              <div className='relative h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1'>
+                <Image
+                  src={job.logo}
+                  alt={`${job.logo} logo`}
+                  layout='fill'
+                  objectFit='fill'
+                />
+                {/* <img src={job.logo} alt={`${job.logo} logo`} /> */}
               </div>
               <div className='flex flex-col'>
                 <h6 className='text-xl'>{job.company}</h6>

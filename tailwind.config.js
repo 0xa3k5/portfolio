@@ -5,11 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      bogart: ['Bogart', 'serif', '!important'],
+      heebo: ['Heebo', 'sans-serif', '!important'],
+    },
     extend: {
-      fontFamily: {
-        bogart: ['Bogart', 'sans-serif', '!important'],
-        heebo: ['Heebo', 'sans-serif', '!important'],
-      },
       fontSize: {
         '6xl': ['64px', '80px'],
         '7xl': ['72px', '96px'],

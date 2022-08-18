@@ -24,8 +24,6 @@ export default function About({
       <Header />
       <main className='mx-auto flex max-w-4xl flex-col space-y-32 px-6 py-32'>
         <div className='flex flex-col flex-wrap py-8 lg:flex-row'>
-          <div className='w-full overflow-visible md:w-2/6'></div>
-
           <div className='w-full md:w-4/6'>
             <div className='flex flex-col space-y-8'>
               <h1 className='font-bogart text-4xl font-bold'>
@@ -44,14 +42,14 @@ export default function About({
             .map((w: WorkExp, i: number) => {
               return (
                 <>
-                  <WorkExperience job={w} key={i} />
+                  <WorkExperience job={w} key={`about-${i}`} />
                   <hr className='border-dashed opacity-20' key={i} />
                 </>
               );
             })}
         </div>
       </main>
-    <Footer />
+      <Footer />
     </div>
   );
 }

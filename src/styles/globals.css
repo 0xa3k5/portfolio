@@ -5,11 +5,10 @@
 @import url('/fonts/bogart.css');
 @import url('/fonts/heebo.css');
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+html { 
+  @apply scroll-smooth overflow-x-hidden font-heebo
 }
 
 body {
-  @apply bg-black font-heebo text-polar overflow-x-hidden;
+  @apply overflow-x-hidden bg-black text-polar;
 }
