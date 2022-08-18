@@ -1,5 +1,7 @@
 import cx from 'classnames';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import { a11yColorPicker } from '../../utils/a11yColorPicker';
+import { hexToRGB } from '../../utils/hexToRGB';
 
 interface PrimaryProps {
   className?: string;
@@ -7,6 +9,8 @@ interface PrimaryProps {
   text?: string;
   icon?: ReactNode;
   targetBlank?: boolean;
+  color: string;
+  bgColor: string;
 }
 
 export default function Primary({
@@ -15,7 +19,14 @@ export default function Primary({
   href,
   icon,
   targetBlank = false,
+  color,
+  bgColor,
 }: PrimaryProps): JSX.Element {
+  const [hover, setHover] = useState(false);
+
+  const textRgb = hexToRGB(color);
+  const bgRgb = hexToRGB(bgColor);
+
   return (
     <a
       href={href}
@@ -23,11 +34,17 @@ export default function Primary({
       rel={'noreferrer'}
     >
       <button
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         className={cx(
-          'flex items-center gap-2 rounded-full border border-woodBlue text-sm uppercase tracking-widest text-polar duration-200',
+          'flex items-center space-x-4 rounded-xl text-sm uppercase tracking-widest duration-200 hover:text-polar',
           text ? 'py-4 px-8' : 'p-4',
           className
         )}
+        style={{
+          color: hover ? `rgb(${bgRgb})` : `rgba(${textRgb})`,
+          backgroundColor: hover ? `rgba(${textRgb})` : `rgba(${textRgb},0.2)`,
+        }}
       >
         {text && text}
         {icon && icon}
