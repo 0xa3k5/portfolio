@@ -29,7 +29,7 @@ export default function WorkExperience({
               <div className='h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1'>
                 <img src={job.logo} alt={`${job.logo} logo`} />
               </div>
-              <div className='flex flex-col space-y-1'>
+              <div className='flex flex-col'>
                 <h6 className='text-xl'>{job.company}</h6>
                 <p className='opacity-60'>{job.tagline}</p>
               </div>

@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 interface TextProps {
   className?: string;
@@ -7,7 +7,7 @@ interface TextProps {
   text: string;
   icon?: ReactNode;
   targetBlank?: boolean;
-  onClick?: any;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Text({
@@ -20,12 +20,12 @@ export default function Text({
     <button
       onClick={onClick}
       className={cx(
-        'flex items-center gap-2 rounded-full text-lg text-polar duration-200',
+        'flex items-center space-x-2 hover:text-daisy rounded-full text-lg duration-200',
         className
       )}
     >
-      {text}
-      {icon}
+      {text && text}
+      {icon && icon}
     </button>
   );
 }

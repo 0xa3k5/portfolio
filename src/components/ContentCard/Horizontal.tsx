@@ -52,9 +52,7 @@ export default function Horizontal({
           }
         />
       </div>
-      <div
-        className='relative h-full w-full flex-1 rounded-xl'
-      >
+      <div className='relative h-full w-full flex-1 rounded-xl'>
         <Image
           src={post.img}
           alt={post.title}

@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Header from '../../src/components/Header';
 import Footer from '../../src/components/Footer';
 
-export default function Home({
+export default function About({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const pageTitle = data.aboutMe.title;
@@ -45,7 +45,7 @@ export default function Home({
               return (
                 <>
                   <WorkExperience job={w} key={i} />
-                  <hr className='border-dashed opacity-20' />
+                  <hr className='border-dashed opacity-20' key={i} />
                 </>
               );
             })}

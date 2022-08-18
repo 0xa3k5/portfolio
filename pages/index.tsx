@@ -5,6 +5,7 @@ import ContentCard from '../src/components/ContentCard';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
+import CTA from '../src/components/CTA';
 
 export default function Home({
   data,
@@ -28,7 +29,7 @@ export default function Home({
             <h1 className='font-bogart text-6xl font-bold'>
               {data.homePage.heroTitle}
             </h1>
-            <p className='max-w-2xl text-xl'>{data.homePage.heroText}</p>
+            <p className='max-w-2xl pr-24 text-xl'>{data.homePage.heroText}</p>
           </div>
         </div>
       </section>
@@ -66,6 +67,11 @@ export default function Home({
           );
         })}
       </div>
+      <CTA
+        className='snap-center'
+        title='I occasionally take freelance work'
+        desc='I help startups with product design, design critics, QA testing and design advisory.'
+      />
       <Footer />
     </main>
   );
