@@ -22,25 +22,23 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container flex h-screen snap-center flex-col justify-between'>
+      <section className='container flex h-screen w-screen snap-center flex-col justify-between'>
         <Header />
-        <div className='h-full w-full p-48'>
+        <div className='h-full w-full p-4 md:p-48'>
           <div className='flex flex-col space-y-8'>
-            <h1 className='font-bogart text-6xl font-bold'>
+            <h1 className='font-bogart text-4xl font-bold md:text-6xl'>
               {data.homePage.heroTitle}
             </h1>
-            <p className='max-w-2xl pr-24 text-xl'>{data.homePage.heroText}</p>
+            <p className='max-w-2xl text-lg md:text-xl'>
+              {data.homePage.heroText}
+            </p>
           </div>
         </div>
       </section>
       <div className='flex flex-col -space-y-4'>
         {data.portfolioPosts.map((p: NotionPost, i: number) => {
           return (
-            <div
-              key={i}
-              className='snap-center py-16'
-              style={{ backgroundColor: `#${p.bgColor}` }}
-            >
+            <div key={i} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (
                 <ContentCard.Vertical key={p.id} post={p} />
               ) : (
@@ -53,11 +51,7 @@ export default function Home({
       <div className='flex flex-col -space-y-4'>
         {data.sideProjects.map((p: NotionPost, i: number) => {
           return (
-            <div
-              key={`side-${i}`}
-              className='snap-center py-32'
-              style={{ backgroundColor: `#${p.bgColor}` }}
-            >
+            <div key={`side-${i}`} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (
                 <ContentCard.Vertical key={p.id} post={p} />
               ) : (

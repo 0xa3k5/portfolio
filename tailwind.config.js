@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heebo: ['Heebo, sans-serif'],
-        bogart: ['Bogart', 'sans-serif'],
+        bogart: ['Bogart', 'sans-serif', '!important'],
+        heebo: ['Heebo', 'sans-serif', '!important'],
       },
       fontSize: {
         '6xl': ['64px', '80px'],

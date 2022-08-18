@@ -16,14 +16,17 @@ export default function Vertical({
 }: VerticalProps): JSX.Element {
   return (
     <div
-      className={cx(className, 'container flex h-screen flex-col items-center')}
+      className={cx(
+        className,
+        'container flex h-screen snap-center flex-col items-center py-8 px-8 md:py-16 md:px-0'
+      )}
       style={{ color: `#${post.color}` }}
     >
-      <div className='flex max-w-xl flex-col items-center space-y-4 py-12 px-16'>
-        <h6 className='text-md mb-2 text-center uppercase tracking-widest opacity-60'>
+      <div className='flex max-w-md flex-col md:items-center'>
+        <h6 className='text-md mb-4 uppercase tracking-widest opacity-60 md:mb-8'>
           {post.period}
         </h6>
-        <div className='relative mb-8 h-8 w-32'>
+        <div className='relative mb-6 h-8 w-32 md:mb-12'>
           <Image
             src={post.logo}
             alt={`${post.client} logo`}
@@ -33,29 +36,32 @@ export default function Vertical({
             priority
           />
         </div>
-        <div className='mb-8 flex flex-col space-y-4 text-center'>
-          <h4 className='font-bogart text-4xl font-semibold'>{post.title}</h4>
-          <p className='text-lg font-normal leading-loose opacity-80'>
+        <div className='mb-4 flex flex-col space-y-2 md:mb-8 md:space-y-4 md:text-center'>
+          <h4 className='font-bogart text-3xl font-semibold md:text-4xl'>
+            {post.title}
+          </h4>
+          <p className='font-normal opacity-80 md:text-lg md:leading-loose'>
             {post.description}
           </p>
         </div>
-        <Button.Ghost
+        <Button.Primary
           href={`/works/${post.slug}`}
           color={post.color}
+          bgColor={post.bgColor}
           text='Read More'
-          className='group duration-200 hover:bg-woodBlue'
+          className='mb-4 md:mb-0'
           icon={
-            <RightArrowCircleIcon className='w-6 duration-200 group-hover:translate-x-1' />
+            <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
           }
         />
       </div>
-      <div className='relative w-full flex-1 rounded-xl'>
+      <div className='relative h-full w-full rounded-xl lg:w-full lg:max-w-full lg:flex-1'>
         <Image
           src={post.img}
           alt={post.title}
           layout='fill'
           objectFit='contain'
-          objectPosition='center'
+          objectPosition='center center'
           priority
         />
       </div>

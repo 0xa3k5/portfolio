@@ -1,13 +1,12 @@
 import cx from 'classnames';
 import { ReactNode, useState } from 'react';
-import { a11yColorPicker } from '../../utils/a11yColorPicker';
 import { hexToRGB } from '../../utils/hexToRGB';
 
 interface PrimaryProps {
   className?: string;
-  href?: string;
-  text?: string;
-  icon?: ReactNode;
+  href: string;
+  text: string;
+  icon: ReactNode;
   targetBlank?: boolean;
   color: string;
   bgColor: string;
@@ -37,8 +36,7 @@ export default function Primary({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className={cx(
-          'flex items-center space-x-4 rounded-xl text-sm uppercase tracking-widest duration-200 hover:text-polar',
-          text ? 'py-4 px-8' : 'p-4',
+          'group flex w-full items-center justify-center space-x-12 rounded-xl py-4 px-0 text-sm uppercase tracking-widest duration-200 hover:text-polar lg:w-fit md:py-4 md:px-8',
           className
         )}
         style={{
@@ -46,8 +44,8 @@ export default function Primary({
           backgroundColor: hover ? `rgba(${textRgb})` : `rgba(${textRgb},0.2)`,
         }}
       >
-        {text && text}
-        {icon && icon}
+        {text}
+        {icon}
       </button>
     </a>
   );

@@ -30,7 +30,7 @@ const Detail = ({
       <div className='py-24'>
         <div className='mx-auto max-w-4xl'>
           <div className='flex items-center justify-center'>
-            <article className='prose prose-xl prose-invert prose-headings:font-bogart prose-headings:font-semibold prose-h4:font-normal prose-li:opacity-80 prose-img:rounded-xl lg:prose-2xl'>
+            <article className='prose prose-base prose-invert prose-headings:font-bogart prose-headings:font-semibold prose-h4:font-normal prose-li:opacity-80 prose-img:rounded-xl md:prose-xl lg:prose-2xl'>
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </article>
           </div>
