@@ -135,6 +135,10 @@ export default class NotionService {
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
       client: page.properties.Client?.rich_text[0]?.plain_text || null,
+      contributions:
+        page.properties.Contributions?.rich_text[0]?.plain_text || null,
+      position: page.properties.Position?.rich_text[0]?.plain_text || null,
+      type: page.properties.Type?.multi_select[0]?.name || null,
     };
   }
 
