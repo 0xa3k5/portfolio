@@ -18,6 +18,7 @@ export type NotionPost = {
   type: string;
   position: string;
   contributions: string;
+  overviewImg: string;
 };
 
 export type WorkExp = {

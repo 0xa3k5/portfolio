@@ -5,6 +5,7 @@ import { config } from '../../config';
 
 import { StaticPages } from '../../@types/schema';
 
+import Util from 'util'
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -120,6 +121,7 @@ export default class NotionService {
         // placeholder
         cover = '';
     }
+    console.log(Util.inspect(page, {depth: 5}))
     return {
       id: page.id,
       published: page.properties.Published.checkbox === true,
@@ -139,6 +141,7 @@ export default class NotionService {
         page.properties.Contributions?.rich_text[0]?.plain_text || null,
       position: page.properties.Position?.rich_text[0]?.plain_text || null,
       type: page.properties.Type?.multi_select[0]?.name || null,
+      overviewImg: page.properties.OverviewImg?.files[0]?.file?.url || null,
     };
   }
 

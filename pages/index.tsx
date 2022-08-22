@@ -37,7 +37,7 @@ export default function Home({
       <div className='flex flex-col'>
         {data.portfolioPosts.map((p: NotionPost, i: number) => {
           return (
-            <div key={i} style={{ backgroundColor: `#${p.bgColor}` }}>
+            <div key={p.id} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (
                 <ContentCard.Vertical key={p.id} post={p} />
               ) : (

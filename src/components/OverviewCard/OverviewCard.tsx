@@ -14,40 +14,53 @@ export default function OverviewCard({
   return (
     <div
       className={cx(
-        'flex w-10/12 justify-between rounded-2xl bg-white bg-opacity-10 py-16 px-24',
+        'flex w-10/12 rounded-2xl bg-white bg-opacity-5',
         className
       )}
     >
-      <div className='flex-col space-y-2'>
-        <p className='text-xs uppercase tracking-widest opacity-60'>ORG</p>
-        <p className=''>{post.client}</p>
+      <div className='flex space-x-48 p-24'>
+        <div className=''>
+          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+            ORG
+          </p>
+          <p className='mb-8'>{post.client}</p>
+          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+            Type
+          </p>
+          <p className='mb-8'>{post.type}</p>
+          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+            Year
+          </p>
+          <p className='mb-8'>{post.period}</p>
+        </div>
+        <div className=''>
+          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+            Position
+          </p>
+          <p className='mb-8'>{post.position}</p>
+          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+            Contributions
+          </p>
+          <ul className='space-y-2'>
+            {post.contributions.split('-').map((c, i) => {
+              return (
+                <li className='' key={i}>
+                  {c}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-      <div className='flex-col space-y-2'>
-        <p className='text-xs uppercase tracking-widest opacity-60'>Position</p>
-        <p className=''>{post.position}</p>
-      </div>
-      <div className='flex-col space-y-2'>
-        <p className='text-xs uppercase tracking-widest opacity-60'>
-          Contributions
-        </p>
-        <ul className='space-y-2'>
-          {post.contributions.split('-').map((c, i) => {
-            return (
-              <li className='' key={i}>
-                {c}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className='flex-col space-y-2'>
-        <p className='text-xs uppercase tracking-widest opacity-60'>Type</p>
-        <p className=''>{post.type}</p>
-      </div>
-
-      <div className='flex-col space-y-2'>
-        <p className='text-xs uppercase tracking-widest opacity-60'>Year</p>
-        <p className=''>{post.period}</p>
+      <div className='relative w-full flex-1 translate-y-8'>
+        <Image
+          src={post.overviewImg}
+          alt={post.title}
+          layout='fill'
+          objectFit='contain'
+          objectPosition='right right'
+          priority
+        />
       </div>
     </div>
   );
