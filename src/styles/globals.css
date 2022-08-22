@@ -5,21 +5,23 @@
 @import url('/fonts/bogart.css');
 @import url('/fonts/heebo.css');
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  font-family: Heebo, sans-serif, system-ui;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: Heebo, sans-serif, system-ui;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Bogart, serif, system-display !important;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Bogart, serif, system-display !important;
+  }
 }
 
 body {
-  @apply overflow-x-hidden bg-black text-polar;
+  @apply overflow-x-hidden bg-black text-white;
 }

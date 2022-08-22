@@ -20,7 +20,7 @@ export default function WorkExperience({
       )}
     >
       <div className='mb-8 w-full overflow-visible md:w-2/6 lg:mb-0'>
-        <p className='block font-bogart text-xl opacity-40'>{job.period}</p>
+        <p className='font-bogart block text-xl opacity-40'>{job.period}</p>
       </div>
 
       <div className='w-full md:w-4/6'>

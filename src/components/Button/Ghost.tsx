@@ -21,7 +21,7 @@ export default function Ghost({
     <Link href={href}>
       <button
         className={cx(
-          'flex items-center space-x-2 rounded-xl text-sm uppercase tracking-widest duration-200 hover:text-polar',
+          'flex items-center space-x-2 rounded-xl text-sm uppercase tracking-widest duration-200 hover:text-white',
           text ? 'py-4 px-8' : 'p-4',
           `text-[#${color}] bg-[#${color}] bg-opacity-0 hover:bg-opacity-60`,
           className

@@ -22,9 +22,9 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container flex h-screen snap-start flex-col'>
+      <section className='container flex h-screen snap-start flex-col justify-between'>
         <Header />
-        <div className='mx-24 max-w-2xl translate-y-1/2'>
+        <div className='max-w-2xl'>
           <div className='flex flex-col space-y-8'>
             <h1 className='font-bogart text-4xl font-bold md:text-5xl lg:text-6xl'>
               {data.homePage.heroTitle}
@@ -32,6 +32,7 @@ export default function Home({
             <p className='text-lg md:text-xl'>{data.homePage.heroText}</p>
           </div>
         </div>
+        <div className='h-10'></div>
       </section>
       <div className='flex flex-col'>
         {data.portfolioPosts.map((p: NotionPost, i: number) => {
@@ -59,12 +60,8 @@ export default function Home({
           );
         })}
       </div>
-      <CTA
-        className='snap-center'
-        title='I occasionally take freelance work'
-        desc='I help startups with product design, design critics, QA testing and design advisory.'
-      />
-      <Footer />
+      <CTA className='snap-center' />
+      <Footer className='snap-center' />
     </main>
   );
 }

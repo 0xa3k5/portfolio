@@ -124,6 +124,7 @@ export default class NotionService {
       id: page.id,
       published: page.properties.Published.checkbox === true,
       vertical: page.properties.Vertical?.checkbox === true,
+      password: page.properties.Password?.checkbox === true || false,
       img: cover,
       bgColor: page.properties.BgColor?.rich_text[0]?.plain_text || '000000',
       color: page.properties.TextColor?.rich_text[0]?.plain_text || 'ffffff',

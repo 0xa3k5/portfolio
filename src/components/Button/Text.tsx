@@ -1,31 +1,32 @@
 import cx from 'classnames';
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import Link from 'next/link';
 
 interface TextProps {
   className?: string;
   href: string;
   text: string;
   icon?: ReactNode;
-  targetBlank?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Text({
   className,
   text,
-  onClick,
   icon,
+  href,
 }: TextProps): JSX.Element {
   return (
-    <button
-      onClick={onClick}
+    <a
+      href={href}
+      target='_blank'
+      rel='noreferrer'
       className={cx(
-        'flex items-center space-x-2 hover:text-daisy rounded-full text-lg duration-200',
+        'flex items-center space-x-2 rounded-full text-lg duration-200 hover:text-daisy',
         className
       )}
     >
       {text && text}
       {icon && icon}
-    </button>
+    </a>
   );
 }

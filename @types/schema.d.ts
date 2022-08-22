@@ -1,6 +1,8 @@
 export type NotionPost = {
   id: string;
   published: boolean;
+  vertical?: boolean;
+  password: boolean;
   slug: string;
   img: string;
   title: string;
@@ -11,7 +13,6 @@ export type NotionPost = {
   client: string;
   bgColor: string;
   color: string;
-  vertical?: boolean;
 };
 
 export type WorkExp = {

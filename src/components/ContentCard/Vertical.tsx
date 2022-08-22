@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Button from '../Button';
 
 import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
+import LockIcon from '../../../public/icons/lock.svg';
 
 interface VerticalProps {
   className?: string;
@@ -36,7 +37,7 @@ export default function Vertical({
             priority
           />
         </div>
-        <div className='mb-4 flex flex-col space-y-2 md:mb-8 md:space-y-4 md:text-center'>
+        <div className='mb-4 flex flex-col space-y-2 md:space-y-4 md:text-center'>
           <h4 className='font-bogart text-3xl font-semibold md:text-4xl'>
             {post.title}
           </h4>
@@ -48,10 +49,14 @@ export default function Vertical({
           href={`/works/${post.slug}`}
           color={post.color}
           bgColor={post.bgColor}
-          text='Read More'
-          className='mb-4 md:mb-0'
+          text='View Case Study'
+          className='mb-8'
           icon={
-            <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
+            post.password ? (
+              <LockIcon className='ml-1 w-6' />
+            ) : (
+              <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
+            )
           }
         />
       </div>
