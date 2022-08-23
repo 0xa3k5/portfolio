@@ -14,7 +14,7 @@ export default function Home({
   const pageDesc = data.homePage.description;
 
   return (
-    <main className='h-screen w-screen snap-y snap-mandatory overflow-scroll'>
+    <>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -22,58 +22,48 @@ export default function Home({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <section className='container flex h-screen snap-start flex-col'>
-        <Header />
-        <div className='mx-24 max-w-2xl translate-y-1/2'>
-          <div className='flex flex-col space-y-8'>
-            <h1 className='font-bogart text-4xl font-bold md:text-5xl lg:text-6xl'>
-              {data.homePage.heroTitle}
-            </h1>
-            <p className='text-lg md:text-xl'>{data.homePage.heroText}</p>
+      <main className='h-screen snap-y snap-mandatory overflow-scroll'>
+        <section className='container flex h-screen snap-start flex-col justify-between'>
+          <Header />
+          <div className='max-w-2xl'>
+            <div className='flex flex-col space-y-8'>
+              <h1 className='font-bogart text-4xl font-bold md:text-5xl lg:text-6xl'>
+                {data.homePage.heroTitle}
+              </h1>
+              <p className='text-lg md:text-xl'>{data.homePage.heroText}</p>
+            </div>
           </div>
+          <div className='h-10'></div>
+        </section>
+        <div className='flex flex-col'>
+          {data.works
+            .sort((a: NotionPost, b: NotionPost) => a.number - b.number)
+            .map((p: NotionPost) => {
+              return (
+                <div
+                  key={`works-${p.id}`}
+                  style={{ backgroundColor: `#${p.bgColor}` }}
+                >
+                  {p.vertical ? (
+                    <ContentCard.Vertical key={p.id} post={p} />
+                  ) : (
+                    <ContentCard.Horizontal key={p.id} post={p} />
+                  )}
+                </div>
+              );
+            })}
         </div>
-      </section>
-      <div className='flex flex-col'>
-        {data.portfolioPosts.map((p: NotionPost, i: number) => {
-          return (
-            <div key={i} style={{ backgroundColor: `#${p.bgColor}` }}>
-              {p.vertical ? (
-                <ContentCard.Vertical key={p.id} post={p} />
-              ) : (
-                <ContentCard.Horizontal key={p.id} post={p} />
-              )}
-            </div>
-          );
-        })}
-      </div>
-      <div className='flex flex-col'>
-        {data.sideProjects.map((p: NotionPost, i: number) => {
-          return (
-            <div key={`side-${i}`} style={{ backgroundColor: `#${p.bgColor}` }}>
-              {p.vertical ? (
-                <ContentCard.Vertical key={p.id} post={p} />
-              ) : (
-                <ContentCard.Horizontal key={p.id} post={p} />
-              )}
-            </div>
-          );
-        })}
-      </div>
-      <CTA
-        className='snap-center'
-        title='I occasionally take freelance work'
-        desc='I help startups with product design, design critics, QA testing and design advisory.'
-      />
-      <Footer />
-    </main>
+        <CTA className='snap-center' />
+        <Footer className='snap-center' />
+      </main>
+    </>
   );
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
-  const portfolioPosts = await notionService.getPortfolioPosts();
-  const sideProjects = await notionService.getSideProjects();
+  const works = await notionService.getPortfolioPosts();
 
   const homePage = (await notionService.getStaticPages())[0];
 
@@ -81,8 +71,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       data: {
         homePage,
-        portfolioPosts,
-        sideProjects,
+        works,
       },
     },
   };

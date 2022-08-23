@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Button from '../Button';
 
 import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
+import LockIcon from '../../../public/icons/lock.svg';
 
 interface HorizontalProps {
   className?: string;
@@ -48,14 +49,18 @@ export default function Horizontal({
           href={`/works/${post.slug}`}
           color={post.color}
           bgColor={post.bgColor}
-          text='Read More'
+          text='View Case Study'
           className='mb-4 md:mb-0'
           icon={
-            <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
+            post.password ? (
+              <LockIcon className='ml-1 w-6' />
+            ) : (
+              <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
+            )
           }
         />
       </div>
-      <div className='relative h-full w-full rounded-xl lg:w-full lg:max-w-full lg:flex-1'>
+      <div className='relative h-full w-full rounded-xl lg:w-1/2 lg:max-w-full'>
         <Image
           src={post.img}
           alt={post.title}

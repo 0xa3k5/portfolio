@@ -5,13 +5,19 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../../src/components/Header';
 import Footer from '../../src/components/Footer';
 import { config } from '../../config';
+import PostHero from '../../src/components/PostHero';
+import OverviewCard from '../../src/components/OverviewCard';
+import CTA from '../../src/components/CTA';
+import { getMorePosts } from '../../src/utils/getMorePosts';
+import MorePosts from '../../src/components/MorePosts';
 
 const Detail = ({
   markdown,
   post,
+  morePosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <main className='container'>
+    <>
       <Head>
         <title>{post.title}</title>
         <meta
@@ -26,22 +32,41 @@ const Detail = ({
         />
         <meta name='og:image' title='og:title' content={post.img} />
       </Head>
-      <Header />
-      <div className='py-24'>
-        <div className='mx-auto max-w-4xl'>
-          <div className='flex items-center justify-center'>
-            <article className='prose prose-base prose-invert prose-headings:font-bogart prose-headings:font-semibold prose-h4:font-normal prose-li:opacity-80 prose-img:rounded-xl md:prose-xl lg:prose-2xl'>
-              <ReactMarkdown>{markdown}</ReactMarkdown>
-            </article>
+      <main className='bg-midnight'>
+        <div
+          className=''
+          style={{
+            backgroundColor: `#${post.bgColor}`,
+            color: `#${post.color}`,
+          }}
+        >
+          <div className='container flex h-screen flex-col justify-between'>
+            <Header />
+            <PostHero post={post} />
+            <div className='h-32'></div>
           </div>
         </div>
-      </div>
-      <Footer />
-    </main>
+        <div className='container flex flex-col items-center space-y-24 py-24 px-8 md:px-24'>
+          <OverviewCard post={post} />
+          <div className='mx-auto'>
+            <div className='flex items-center justify-center'>
+              <article className='with-prose'>
+                <ReactMarkdown>{markdown}</ReactMarkdown>
+              </article>
+            </div>
+          </div>
+          <MorePosts posts={morePosts} />
+        </div>
+        <CTA />
+        <Footer />
+      </main>
+    </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  const pages = await getMorePosts(context.params?.slug as string);
+
   const notionService = new NotionService();
 
   const p = await notionService.getNotionPageDetail(
@@ -53,6 +78,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       markdown: p.markdown,
       post: p.post,
+      morePosts: pages.morePosts,
     },
   };
 };

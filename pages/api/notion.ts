@@ -4,7 +4,6 @@ import { NotionPost, WorkExp, NotionPageDetail } from '../../@types/schema';
 import { config } from '../../config';
 
 import { StaticPages } from '../../@types/schema';
-
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -31,20 +30,6 @@ export default class NotionService {
   async getPortfolioPosts(): Promise<NotionPost[]> {
     const response = await this.client.databases.query({
       database_id: config.notion.portfolioPosts,
-    });
-
-    const transformedPosts = response.results
-      .map((res) => {
-        return NotionService.postTransformer(res);
-      })
-      .filter((p) => p.published);
-
-    return transformedPosts;
-  }
-
-  async getSideProjects(): Promise<NotionPost[]> {
-    const response = await this.client.databases.query({
-      database_id: config.notion.sideProjects,
     });
 
     const transformedPosts = response.results
@@ -122,18 +107,25 @@ export default class NotionService {
     }
     return {
       id: page.id,
+      number: page.properties.Sort.number,
       published: page.properties.Published.checkbox === true,
-      vertical: page.properties.Vertical?.checkbox === true,
+      vertical: page.properties.Vertical.checkbox === true,
+      password: page.properties.Password.checkbox === true || false,
       img: cover,
-      bgColor: page.properties.BgColor?.rich_text[0]?.plain_text || '000000',
-      color: page.properties.TextColor?.rich_text[0]?.plain_text || 'ffffff',
+      bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
+      color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
       title: page.properties.Name.title[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,
       slug: page.properties.Slug.formula.string,
       logo: page.properties.Logo.files[0].file.url,
       website: page.properties.Website.rich_text[0].plain_text,
-      client: page.properties.Client?.rich_text[0]?.plain_text || null,
+      client: page.properties.Client.rich_text[0]?.plain_text || null,
+      contributions:
+        page.properties.Contributions.rich_text[0]?.plain_text || null,
+      position: page.properties.Position.rich_text[0]?.plain_text || null,
+      type: page.properties.Type.multi_select[0]?.name || null,
+      overviewImg: page.properties.OverviewImg.files[0]?.file.url || null,
     };
   }
 

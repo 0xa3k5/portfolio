@@ -5,15 +5,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    fontFamily: {
-      bogart: ['Bogart', 'serif', '!important'],
-      heebo: ['Heebo', 'sans-serif', '!important'],
-    },
     extend: {
       fontSize: {
         '6xl': ['64px', '80px'],
         '7xl': ['72px', '96px'],
         '8xl': ['96px', '128px'],
+      },
+      fontFamily: {
+        bogart: ['Bogart', 'serif'],
+        heebo: ['Heebo', 'sans-serif'],
       },
     },
     container: {
@@ -28,13 +28,9 @@ module.exports = {
 
     colors: {
       black: '#000',
-      carbonBlue: '#000F1D',
-      darkPearl: '#051422',
-      stoneBlue: '#0A1826',
-      woodBlue: '#172634',
-      polar: '#EEF6FD',
-      casper: '#8BA2B2',
+      white: '#ffffff',
       daisy: '#FFEF60',
+      midnight: '#06060B',
     },
     borderRadius: {
       none: '0',
