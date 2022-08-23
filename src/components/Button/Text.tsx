@@ -21,7 +21,7 @@ export default function Text({
       target='_blank'
       rel='noreferrer'
       className={cx(
-        'flex items-center space-x-2 rounded-full text-lg duration-200 hover:text-daisy',
+        'flex items-center space-x-2 rounded-full duration-200 hover:text-daisy',
         className
       )}
     >

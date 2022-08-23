@@ -11,9 +11,9 @@ export default function Header({ className }: HeaderProps): JSX.Element {
   return (
     <div className={cx('flex justify-between py-12', className)}>
       <Logo />
-      <div className='flex space-x-12'>
+      <div className='flex space-x-12 text-sm uppercase tracking-widest'>
         <Link href='/about' passHref>
-          <a className='flex items-center space-x-2 rounded-full text-lg duration-200 hover:text-daisy'>
+          <a className='flex items-center space-x-2 rounded-full duration-200 hover:text-daisy'>
             About
           </a>
         </Link>
