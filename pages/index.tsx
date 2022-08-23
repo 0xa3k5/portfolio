@@ -35,7 +35,9 @@ export default function Home({
         <div className='h-10'></div>
       </section>
       <div className='flex flex-col'>
-        {data.works.map((p: NotionPost) => {
+        {data.works
+        .sort((a:NotionPost, b: NotionPost) => a.number - b.number)
+        .map((p: NotionPost) => {
           return (
             <div key={p.id} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (

@@ -1,4 +1,5 @@
 export type NotionPost = {
+  number: number;
   client: string;
   website: string;
   id: string;
