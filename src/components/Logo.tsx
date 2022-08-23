@@ -15,12 +15,12 @@ export default function Logo(): JSX.Element {
           <span className='duration-200'>a</span>
           <span
             className={`${
-              hover ? 'opacity-100' : '-ml-8 opacity-0'
+              hover ? 'opacity-100' : '-ml-2 opacity-0'
             } duration-200`}
           >
             li
           </span>
-          <span className={`${hover ? 'ml-2' : 'ml-2'} duration-200`}>k</span>
+          <span className={`${hover ? '' : '-ml-4'} duration-200`}>k</span>
           <span
             className={`${
               hover ? 'ml-0 opacity-100' : '-ml-8 opacity-0'
