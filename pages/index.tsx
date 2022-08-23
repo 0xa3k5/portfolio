@@ -35,22 +35,9 @@ export default function Home({
         <div className='h-10'></div>
       </section>
       <div className='flex flex-col'>
-        {data.portfolioPosts.map((p: NotionPost, i: number) => {
+        {data.works.map((p: NotionPost) => {
           return (
             <div key={p.id} style={{ backgroundColor: `#${p.bgColor}` }}>
-              {p.vertical ? (
-                <ContentCard.Vertical key={p.id} post={p} />
-              ) : (
-                <ContentCard.Horizontal key={p.id} post={p} />
-              )}
-            </div>
-          );
-        })}
-      </div>
-      <div className='flex flex-col'>
-        {data.sideProjects.map((p: NotionPost, i: number) => {
-          return (
-            <div key={`side-${i}`} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (
                 <ContentCard.Vertical key={p.id} post={p} />
               ) : (
@@ -69,8 +56,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
-  const portfolioPosts = await notionService.getPortfolioPosts();
-  const sideProjects = await notionService.getSideProjects();
+  const works = await notionService.getPortfolioPosts();
 
   const homePage = (await notionService.getStaticPages())[0];
 
@@ -78,8 +64,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       data: {
         homePage,
-        portfolioPosts,
-        sideProjects,
+        works,
       },
     },
   };

@@ -4,8 +4,6 @@ import { NotionPost, WorkExp, NotionPageDetail } from '../../@types/schema';
 import { config } from '../../config';
 
 import { StaticPages } from '../../@types/schema';
-
-import Util from 'util'
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -32,20 +30,6 @@ export default class NotionService {
   async getPortfolioPosts(): Promise<NotionPost[]> {
     const response = await this.client.databases.query({
       database_id: config.notion.portfolioPosts,
-    });
-
-    const transformedPosts = response.results
-      .map((res) => {
-        return NotionService.postTransformer(res);
-      })
-      .filter((p) => p.published);
-
-    return transformedPosts;
-  }
-
-  async getSideProjects(): Promise<NotionPost[]> {
-    const response = await this.client.databases.query({
-      database_id: config.notion.sideProjects,
     });
 
     const transformedPosts = response.results
@@ -121,7 +105,6 @@ export default class NotionService {
         // placeholder
         cover = '';
     }
-    console.log(Util.inspect(page, {depth: 5}))
     return {
       id: page.id,
       published: page.properties.Published.checkbox === true,
