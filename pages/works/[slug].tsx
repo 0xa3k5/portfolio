@@ -8,7 +8,7 @@ import { config } from '../../config';
 import PostHero from '../../src/components/PostHero';
 import OverviewCard from '../../src/components/OverviewCard';
 import CTA from '../../src/components/CTA';
-import { getPosts } from '../../src/utils/getPosts';
+import { getMorePosts } from '../../src/utils/getMorePosts';
 import MorePosts from '../../src/components/MorePosts';
 
 const Detail = ({
@@ -46,7 +46,7 @@ const Detail = ({
             <div className='h-32'></div>
           </div>
         </div>
-        <div className='container flex flex-col items-center space-y-24 py-24'>
+        <div className='container flex flex-col items-center space-y-24 py-24 px-8 md:px-24'>
           <OverviewCard post={post} />
           <div className='mx-auto'>
             <div className='flex items-center justify-center'>
@@ -65,7 +65,7 @@ const Detail = ({
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const pages = await getPosts(context.params?.slug as string);
+  const pages = await getMorePosts(context.params?.slug as string);
 
   const notionService = new NotionService();
 

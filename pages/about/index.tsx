@@ -5,6 +5,7 @@ import WorkExperience from '../../src/components/WorkExperience';
 import Head from 'next/head';
 import Header from '../../src/components/Header';
 import Footer from '../../src/components/Footer';
+import CTA from '../../src/components/CTA';
 
 export default function About({
   data,
@@ -13,7 +14,7 @@ export default function About({
   const pageDesc = data.aboutMe.description;
 
   return (
-    <div className='container'>
+    <>
       <Head>
         <title>{pageTitle}</title>
         <meta name='description' title='description' content={pageDesc} />
@@ -21,8 +22,8 @@ export default function About({
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
-      <Header />
       <main className='mx-auto flex max-w-4xl flex-col space-y-32 px-6 py-32'>
+        <Header />
         <div className='flex flex-col flex-wrap py-8 lg:flex-row'>
           <div className='w-full md:w-4/6'>
             <div className='flex flex-col space-y-8'>
@@ -49,9 +50,10 @@ export default function About({
               );
             })}
         </div>
+        <CTA className='snap-center' />
+        <Footer className='snap-center' />
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }
 

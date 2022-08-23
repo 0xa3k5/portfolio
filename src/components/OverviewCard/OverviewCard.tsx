@@ -14,37 +14,37 @@ export default function OverviewCard({
   return (
     <div
       className={cx(
-        'flex w-10/12 rounded-2xl bg-white bg-opacity-5',
+        'flex w-11/12 flex-col rounded-2xl bg-white bg-opacity-5 md:w-10/12 md:flex-row',
         className
       )}
     >
-      <div className='flex space-x-48 p-24'>
+      <div className='flex flex-col p-16 md:flex-row md:space-x-48 md:p-24'>
         <div className=''>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             ORG
           </p>
-          <p className='mb-8'>{post.client}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.client}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Type
           </p>
-          <p className='mb-8'>{post.type}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.type}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Year
           </p>
-          <p className='mb-8'>{post.period}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.period}</p>
         </div>
         <div className=''>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Position
           </p>
-          <p className='mb-8'>{post.position}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.position}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Contributions
           </p>
           <ul className='space-y-2'>
             {post.contributions.split('-').map((c, i) => {
               return (
-                <li className='' key={i}>
+                <li className='text-lg md:text-base' key={i}>
                   {c}
                 </li>
               );
