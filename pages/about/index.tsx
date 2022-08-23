@@ -35,16 +35,17 @@ export default function About({
             </div>
           </div>
         </div>
-        <hr className='border-dashed opacity-20' />
-        <div className='flex flex-col space-y-24'>
+        <hr className='opacity-20' />
+        <div className='flex flex-col'>
           {data.workExp
             .sort((a: WorkExp, b: WorkExp) => b.num - a.num, 0)
-            .map((w: WorkExp, i: number) => {
+            .map((w: WorkExp) => {
               return (
-                <>
-                  <WorkExperience job={w} key={`about-${i}`} />
-                  <hr className='border-dashed opacity-20' key={i} />
-                </>
+                <WorkExperience
+                  job={w}
+                  key={`about-${w.id}`}
+                  classname='border-b border-opacity-20 border-white'
+                />
               );
             })}
         </div>

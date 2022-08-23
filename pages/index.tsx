@@ -39,7 +39,7 @@ export default function Home({
         .sort((a:NotionPost, b: NotionPost) => a.number - b.number)
         .map((p: NotionPost) => {
           return (
-            <div key={p.id} style={{ backgroundColor: `#${p.bgColor}` }}>
+            <div key={`works-${p.id}`} style={{ backgroundColor: `#${p.bgColor}` }}>
               {p.vertical ? (
                 <ContentCard.Vertical key={p.id} post={p} />
               ) : (

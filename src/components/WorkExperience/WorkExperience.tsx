@@ -16,7 +16,7 @@ export default function WorkExperience({
     <div
       className={cx(
         classname,
-        'flex flex-col flex-wrap py-2 lg:flex-row lg:py-8'
+        'flex flex-col flex-wrap py-16 lg:flex-row lg:py-24'
       )}
     >
       <div className='mb-8 w-full overflow-visible md:w-2/6 lg:mb-0'>
@@ -39,10 +39,9 @@ export default function WorkExperience({
                   layout='fill'
                   objectFit='fill'
                 />
-                {/* <img src={job.logo} alt={`${job.logo} logo`} /> */}
               </div>
               <div className='flex flex-col'>
-                <h6 className='text-xl'>{job.company}</h6>
+                <h6 className='text-xl font-bogart font-semibold'>{job.company}</h6>
                 <p className='opacity-60'>{job.tagline}</p>
               </div>
             </div>
