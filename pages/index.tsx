@@ -37,17 +37,17 @@ export default function Home({
         </section>
         <div className='flex flex-col'>
           {data.works
-            .sort((a: NotionPost, b: NotionPost) => a.number - b.number)
+            .sort((a: NotionPost, b: NotionPost) => a.properties.number - b.properties.number)
             .map((p: NotionPost) => {
               return (
                 <div
-                  key={`works-${p.id}`}
-                  style={{ backgroundColor: `#${p.bgColor}` }}
+                  key={`works-${p.properties.id}`}
+                  style={{ backgroundColor: `#${p.properties.bgColor}` }}
                 >
-                  {p.vertical ? (
-                    <ContentCard.Vertical key={p.id} post={p} />
+                  {p.properties.vertical ? (
+                    <ContentCard.Vertical key={p.properties.id} post={p} />
                   ) : (
-                    <ContentCard.Horizontal key={p.id} post={p} />
+                    <ContentCard.Horizontal key={p.properties.id} post={p} />
                   )}
                 </div>
               );

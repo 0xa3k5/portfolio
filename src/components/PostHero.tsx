@@ -20,8 +20,8 @@ export default function PostHero({
     >
       <div className='relative h-8 w-48'>
         <Image
-          src={post.logo}
-          alt={`${post.client} logo`}
+          src={post.org.logo}
+          alt={`${post.org.orgName} logo`}
           layout='fill'
           objectFit='contain'
           objectPosition='bottom'
@@ -30,10 +30,10 @@ export default function PostHero({
       </div>
       <div className='mb-4 flex max-w-2xl flex-col space-y-2 md:mb-8 md:space-y-4 '>
         <h1 className='text-center font-bogart text-4xl font-bold md:text-5xl'>
-          {post.title}
+          {post.details.title}
         </h1>
         <p className='text-center font-normal opacity-80 md:text-xl md:leading-loose'>
-          {post.description}
+          {post.details.description}
         </p>
       </div>
     </div>
