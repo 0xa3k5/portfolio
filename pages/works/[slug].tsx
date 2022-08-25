@@ -67,7 +67,9 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
               </article>
             </div>
           </div>
-          <FeedbackCard classname='w-11/12' feedback={postFeedbacks} />
+          {postFeedbacks.length > 0 && (
+            <FeedbackCard classname='w-11/12' feedback={postFeedbacks} />
+          )}
           <MorePosts posts={morePosts} />
         </div>
         <CTA />
