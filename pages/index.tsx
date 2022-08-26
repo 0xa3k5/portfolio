@@ -37,7 +37,10 @@ export default function Home({
         </section>
         <div className='flex flex-col'>
           {data.works
-            .sort((a: NotionPost, b: NotionPost) => a.properties.number - b.properties.number)
+            .sort(
+              (a: NotionPost, b: NotionPost) =>
+                a.properties.number - b.properties.number
+            )
             .map((p: NotionPost) => {
               return (
                 <div
@@ -60,12 +63,14 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const works = await notionService.getPortfolioPosts();
 
-  const homePage = (await notionService.getStaticPages())[0];
+  const homePage = (await notionService.getStaticPages()).find(
+    (data) => data.name === 'Home'
+  );
 
   return {
     props: {

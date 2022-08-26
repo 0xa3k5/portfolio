@@ -101,6 +101,7 @@ export default class NotionService {
 
   private static staticPageTransformer(page: any): StaticPages {
     return {
+      name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,
       description: page.properties.Description.rich_text[0]?.plain_text || '',
       heroText: page.properties.HeroText.rich_text[0]?.plain_text || '',

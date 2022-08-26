@@ -60,6 +60,7 @@ export type NotionPageDetail = {
 };
 
 export type StaticPages = {
+  name: string;
   title: string;
   description: string;
   heroTitle: string;

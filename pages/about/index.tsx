@@ -57,13 +57,13 @@ export default function About({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const workExp = await notionService.getWorkExp();
-  // const aboutMe = await notionService.getAboutMe();
-
-  const aboutMe = (await notionService.getStaticPages())[1];
+  const aboutMe = (await notionService.getStaticPages()).find(
+    (data) => data.name === 'About'
+  );
 
   return {
     props: {

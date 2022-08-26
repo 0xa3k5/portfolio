@@ -66,7 +66,7 @@ export default function Horizontal({
           alt={post.details.title}
           layout='fill'
           objectFit='contain'
-          objectPosition='center center'
+          objectPosition='right right'
           priority
         />
       </div>

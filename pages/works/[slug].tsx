@@ -12,7 +12,6 @@ import { getMorePosts } from '../../src/utils/getMorePosts';
 import MorePosts from '../../src/components/MorePosts';
 import { NotionPost, Feedback } from '../../@types/schema';
 
-import Util from 'util';
 import FeedbackCard from '../../src/components/FeedbackCard';
 
 interface DetailProps {
