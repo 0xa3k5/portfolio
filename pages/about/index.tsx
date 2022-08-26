@@ -2,11 +2,11 @@ import NotionService from '../api/notion';
 import { GetStaticProps } from 'next';
 import { WorkExp, StaticPage } from '../../@types/schema';
 import WorkExperience from '../../src/components/WorkExperience';
-import Head from 'next/head';
 import Footer from '../../src/components/Footer';
 import CTA from '../../src/components/CTA';
 import PageHero from '../../src/components/PageHero';
 import Header from '../../src/components/Header';
+import PageHead from '../../src/components/PageHead';
 
 interface AboutProps {
   page: StaticPage;
@@ -16,21 +16,7 @@ interface AboutProps {
 export default function About({ page, workExp }: AboutProps): JSX.Element {
   return (
     <>
-      <Head>
-        <title>{page.title}</title>
-        <meta
-          name='description'
-          title='description'
-          content={page.description}
-        />
-        <meta
-          name='og:description'
-          title='og:description'
-          content={page.description}
-        />
-        <meta name='og:image' title='og:title' content='/ak-logo.svg' />
-        <link rel='shortcut icon' href='/favicon.ico' />
-      </Head>
+      <PageHead page={page} />
       <main className=''>
         <div className='flex h-screen flex-col justify-between'>
           <Header />

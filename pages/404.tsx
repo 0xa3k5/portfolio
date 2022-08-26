@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import { NotionPost, StaticPage } from '../@types/schema';
 import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
@@ -10,6 +9,7 @@ import { useState } from 'react';
 import RightArrowPlain from '../public/icons/right-arrow-plain.svg';
 import PageHero from '../src/components/PageHero';
 import Header from '../src/components/Header';
+import PageHead from '../src/components/PageHead';
 
 interface WorksProps {
   page: StaticPage;
@@ -24,20 +24,7 @@ export default function Works({
 
   return (
     <>
-      <Head>
-        <title>{page.title}</title>
-        <meta
-          name='description'
-          title='description'
-          content={page.description}
-        />
-        <meta
-          name='og:description'
-          title='og:description'
-          content={page.description}
-        />
-        <meta name='og:image' title='og:title' content={''} />
-      </Head>
+      <PageHead page={page} />
       <main className=''>
         <div className='flex h-screen flex-col justify-between'>
           <Header />
