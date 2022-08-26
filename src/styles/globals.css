@@ -23,7 +23,7 @@
 }
 
 body {
-  @apply overflow-x-hidden bg-black text-white;
+  @apply overflow-x-hidden bg-midnight text-white;
 }
 
 .with-prose {

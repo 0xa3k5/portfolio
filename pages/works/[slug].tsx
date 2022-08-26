@@ -42,19 +42,17 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
         />
         <meta name='og:image' title='og:title' content={post.details.img} />
       </Head>
-      <main className='bg-midnight'>
+      <main className=''>
         <div
-          className=''
+          className='flex h-screen flex-col justify-between'
           style={{
             backgroundColor: `#${post.properties.bgColor}`,
             color: `#${post.properties.color}`,
           }}
         >
-          <div className='container flex h-screen flex-col justify-between'>
-            <Header />
-            <PostHero post={post} />
-            <div className='h-32'></div>
-          </div>
+          <Header />
+          <PostHero post={post} className='' />
+          <div className='h-32'></div>
         </div>
         <div className='container flex flex-col items-center space-y-24 py-24 px-8 md:px-24'>
           <OverviewCard post={post} />

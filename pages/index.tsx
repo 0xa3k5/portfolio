@@ -1,42 +1,44 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { NotionPost } from '../@types/schema';
+import { NotionPost, StaticPage } from '../@types/schema';
 import Head from 'next/head';
 import ContentCard from '../src/components/ContentCard';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
 import CTA from '../src/components/CTA';
+import PageHero from '../src/components/PageHero';
 
-export default function Home({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const pageTitle = data.homePage.title;
-  const pageDesc = data.homePage.description;
+interface HomeProps {
+  page: StaticPage;
+  works: NotionPost[];
+}
 
+export default function Home({ page, works }: HomeProps) {
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
-        <meta name='description' title='description' content={pageDesc} />
-        <meta name='og:description' title='og:description' content={pageDesc} />
+        <title>{page.title}</title>
+        <meta
+          name='description'
+          title='description'
+          content={page.description}
+        />
+        <meta
+          name='og:description'
+          title='og:description'
+          content={page.description}
+        />
         <meta name='og:image' title='og:title' content='/ak-logo.svg' />
         <link rel='shortcut icon' href='/favicon.ico' />
       </Head>
       <main className='h-screen snap-y snap-mandatory overflow-scroll'>
-        <section className='container flex h-screen snap-start flex-col justify-between'>
+        <div className='flex h-screen snap-center flex-col justify-between'>
           <Header />
-          <div className='max-w-2xl'>
-            <div className='flex flex-col space-y-8'>
-              <h1 className='font-bogart text-4xl font-bold md:text-5xl lg:text-6xl'>
-                {data.homePage.heroTitle}
-              </h1>
-              <p className='text-lg md:text-xl'>{data.homePage.heroText}</p>
-            </div>
-          </div>
-          <div className='h-10'></div>
-        </section>
+          <PageHero page={page} />
+          <div className='h-32'></div>
+        </div>
         <div className='flex flex-col'>
-          {data.works
+          {works
             .sort(
               (a: NotionPost, b: NotionPost) =>
                 a.properties.number - b.properties.number
@@ -68,16 +70,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const works = await notionService.getPortfolioPosts();
 
-  const homePage = (await notionService.getStaticPages()).find(
+  const page = (await notionService.getStaticPage()).find(
     (data) => data.name === 'Home'
   );
 
   return {
     props: {
-      data: {
-        homePage,
-        works,
-      },
+      page,
+      works,
     },
   };
 };

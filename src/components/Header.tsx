@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps): JSX.Element {
   return (
-    <div className={cx('flex justify-between py-12', className)}>
+    <div className={cx('container flex justify-between py-12', className)}>
       <Logo />
       <div className='flex space-x-12 text-sm uppercase tracking-widest'>
         <Link href='/about' passHref>

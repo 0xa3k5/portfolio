@@ -1,17 +1,18 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { NotionPost, StaticPages } from '../@types/schema';
+import { NotionPost, StaticPage } from '../@types/schema';
 import Footer from '../src/components/Footer';
-import Header from '../src/components/Header';
 import NotionService from './api/notion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import RightArrowPlain from '../public/icons/right-arrow-plain.svg';
+import PageHero from '../src/components/PageHero';
+import Header from '../src/components/Header';
 
 interface WorksProps {
-  page: StaticPages;
+  page: StaticPage;
   portfolioPosts: NotionPost[];
 }
 
@@ -37,17 +38,13 @@ export default function Works({
         />
         <meta name='og:image' title='og:title' content={''} />
       </Head>
-      <main className='bg-midnight'>
-        <div className='container flex flex-col justify-between px-8 xl:px-0'>
+      <main className=''>
+        <div className='flex h-screen flex-col justify-between'>
           <Header />
-          <div className='max-w-2xl py-24 md:py-48 '>
-            <div className='flex flex-col space-y-8'>
-              <h1 className='font-bogart text-4xl font-bold md:text-6xl'>
-                {page.heroTitle}
-              </h1>
-              <p className='text-lg md:text-xl'>{page.heroText}</p>
-            </div>
-          </div>
+          <PageHero page={page} />
+          <div className='h32'></div>
+        </div>
+        <div className='container flex flex-col justify-between px-8 xl:px-0'>
           <div className='flex items-start space-x-16'>
             <ul className='flex flex-1 flex-col space-y-12 pb-48'>
               {portfolioPosts
@@ -100,7 +97,7 @@ export default function Works({
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
-  const page = (await notionService.getStaticPages()).find(
+  const page = (await notionService.getStaticPage()).find(
     (data) => data.name === '404'
   );
 

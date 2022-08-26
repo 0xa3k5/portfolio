@@ -59,7 +59,7 @@ export type NotionPageDetail = {
   markdown: string;
 };
 
-export type StaticPages = {
+export type StaticPage = {
   name: string;
   title: string;
   description: string;

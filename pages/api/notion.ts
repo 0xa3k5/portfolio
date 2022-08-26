@@ -5,7 +5,7 @@ import {
   WorkExp,
   NotionPageDetail,
   Feedback,
-  StaticPages,
+  StaticPage,
 } from '../../@types/schema';
 import { config } from '../../config';
 
@@ -18,7 +18,7 @@ export default class NotionService {
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
   }
 
-  async getStaticPages(): Promise<StaticPages[]> {
+  async getStaticPage(): Promise<StaticPage[]> {
     const response = await this.client.databases.query({
       database_id: config.notion.staticPages,
     });
@@ -99,7 +99,7 @@ export default class NotionService {
     };
   }
 
-  private static staticPageTransformer(page: any): StaticPages {
+  private static staticPageTransformer(page: any): StaticPage {
     return {
       name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,

@@ -15,7 +15,7 @@ export default function PostHero({
     <div
       className={cx(
         className,
-        'container flex flex-col items-center space-y-16 space-x-0 py-8 px-8 md:py-32 md:px-0'
+        'container mt-24 flex flex-col items-center space-y-16 space-x-0 py-8 px-8 md:py-32 md:px-0'
       )}
     >
       <div className='relative h-8 w-48'>
