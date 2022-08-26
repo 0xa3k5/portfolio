@@ -2,7 +2,6 @@ import Head from 'next/head';
 import NotionService from '../api/notion';
 import { GetStaticProps } from 'next';
 import ReactMarkdown from 'react-markdown';
-import Header from '../../src/components/Header';
 import Footer from '../../src/components/Footer';
 import { config } from '../../config';
 import PostHero from '../../src/components/PostHero';
@@ -13,6 +12,7 @@ import MorePosts from '../../src/components/MorePosts';
 import { NotionPost, Feedback } from '../../@types/schema';
 
 import FeedbackCard from '../../src/components/FeedbackCard';
+import { useState } from 'react';
 
 interface DetailProps {
   markdown: string;
@@ -22,6 +22,8 @@ interface DetailProps {
 }
 
 const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
@@ -43,20 +45,13 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
         <meta name='og:image' title='og:title' content={post.details.img} />
       </Head>
       <main className=''>
-        <div
-          className='flex h-screen flex-col justify-between'
-          style={{
-            backgroundColor: `#${post.properties.bgColor}`,
-            color: `#${post.properties.color}`,
-          }}
-        >
-          <Header />
-          <PostHero post={post} className='' />
-          <div className='h-32'></div>
-        </div>
+        <PostHero
+          post={post}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
+        />
         <div className='container flex flex-col items-center space-y-24 py-24 px-8 md:px-24'>
           <OverviewCard post={post} />
-
           <div className='mx-auto'>
             <div className='flex items-center justify-center'>
               <article className='with-prose'>

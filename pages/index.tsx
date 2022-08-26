@@ -1,12 +1,12 @@
 import { GetStaticProps } from 'next';
 import { NotionPost, StaticPage } from '../@types/schema';
 import ContentCard from '../src/components/ContentCard';
-import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
 import CTA from '../src/components/CTA';
 import PageHero from '../src/components/PageHero';
 import PageHead from '../src/components/PageHead';
+import { useState } from 'react';
 
 interface HomeProps {
   page: StaticPage;
@@ -14,15 +14,17 @@ interface HomeProps {
 }
 
 export default function Home({ page, works }: HomeProps) {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
   return (
     <>
       <PageHead page={page} />
       <main className='h-screen snap-y snap-mandatory overflow-scroll'>
-        <div className='flex h-screen snap-center flex-col justify-between'>
-          <Header />
-          <PageHero page={page} />
-          <div className='h-32'></div>
-        </div>
+        <PageHero
+          page={page}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
+        />
         <div className='flex flex-col'>
           {works
             .sort(

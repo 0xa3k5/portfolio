@@ -5,11 +5,10 @@ import NotionService from './api/notion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import PageHero from '../src/components/PageHero';
+import PageHead from '../src/components/PageHead';
 
 import RightArrowPlain from '../public/icons/right-arrow-plain.svg';
-import PageHero from '../src/components/PageHero';
-import Header from '../src/components/Header';
-import PageHead from '../src/components/PageHead';
 
 interface WorksProps {
   page: StaticPage;
@@ -21,16 +20,17 @@ export default function Works({
   portfolioPosts,
 }: WorksProps): JSX.Element {
   const [hovered, setHovered] = useState<NotionPost>(null);
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   return (
     <>
       <PageHead page={page} />
       <main className=''>
-        <div className='flex h-screen flex-col justify-between'>
-          <Header />
-          <PageHero page={page} />
-          <div className='h32'></div>
-        </div>
+        <PageHero
+          page={page}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
+        />
         <div className='container flex flex-col justify-between px-8 xl:px-0'>
           <div className='flex items-start space-x-16'>
             <ul className='flex flex-1 flex-col space-y-12 pb-48'>
