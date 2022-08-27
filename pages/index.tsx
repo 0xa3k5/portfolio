@@ -1,58 +1,49 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { NotionPost } from '../@types/schema';
-import Head from 'next/head';
+import { GetStaticProps } from 'next';
+import { NotionPost, StaticPage } from '../@types/schema';
 import ContentCard from '../src/components/ContentCard';
-import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
 import CTA from '../src/components/CTA';
+import PageHero from '../src/components/PageHero';
+import PageHead from '../src/components/PageHead';
+import { useState } from 'react';
 
-export default function Home({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const pageTitle = data.homePage.title;
-  const pageDesc = data.homePage.description;
+interface HomeProps {
+  page: StaticPage;
+  works: NotionPost[];
+}
+
+export default function Home({ page, works }: HomeProps) {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name='description' title='description' content={pageDesc} />
-        <meta name='og:description' title='og:description' content={pageDesc} />
-        <meta name='og:image' title='og:title' content='/ak-logo.svg' />
-        <link rel='shortcut icon' href='/favicon.ico' />
-      </Head>
+      <PageHead page={page} />
       <main className='h-screen snap-y snap-mandatory overflow-scroll'>
-        <section className='container flex h-screen snap-start flex-col justify-between'>
-          <Header />
-          <div className='max-w-2xl'>
-            <div className='flex flex-col space-y-8'>
-              <h1 className='font-bogart text-4xl font-bold md:text-5xl lg:text-6xl'>
-                {data.homePage.heroTitle}
-              </h1>
-              <p className='text-lg md:text-xl'>{data.homePage.heroText}</p>
-            </div>
-          </div>
-          <div className='h-10'></div>
-        </section>
-        <div className='flex flex-col'>
-          {data.works
-            .sort((a: NotionPost, b: NotionPost) => a.number - b.number)
-            .map((p: NotionPost) => {
-              return (
-                <div
-                  key={`works-${p.id}`}
-                  style={{ backgroundColor: `#${p.bgColor}` }}
-                >
-                  {p.vertical ? (
-                    <ContentCard.Vertical key={p.id} post={p} />
-                  ) : (
-                    <ContentCard.Horizontal key={p.id} post={p} />
-                  )}
-                </div>
-              );
-            })}
-        </div>
+        <PageHero
+          page={page}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
+        />
+        {works
+          .sort(
+            (a: NotionPost, b: NotionPost) =>
+              a.properties.number - b.properties.number
+          )
+          .map((p: NotionPost) => (
+            <section
+              key={`works-${p.properties.id}`}
+              style={{ backgroundColor: `#${p.properties.bgColor}` }}
+              className='py-8 px-16 md:py-16 xl:px-0'
+            >
+              {p.properties.vertical ? (
+                <ContentCard.Vertical key={p.properties.id} post={p} />
+              ) : (
+                <ContentCard.Horizontal key={p.properties.id} post={p} />
+              )}
+            </section>
+          ))}
+
         <CTA className='snap-center' />
         <Footer className='snap-center' />
       </main>
@@ -60,19 +51,19 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const works = await notionService.getPortfolioPosts();
 
-  const homePage = (await notionService.getStaticPages())[0];
+  const page = (await notionService.getStaticPage()).find(
+    (data) => data.name === 'Home'
+  );
 
   return {
     props: {
-      data: {
-        homePage,
-        works,
-      },
+      page,
+      works,
     },
   };
 };

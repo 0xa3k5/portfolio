@@ -23,26 +23,26 @@ export default function OverviewCard({
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             ORG
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.client}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.org.orgName}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Type
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.type}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.details.type}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Year
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.period}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.details.period}</p>
         </div>
         <div className=''>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Position
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.position}</p>
+          <p className='mb-8 text-lg md:text-base'>{post.details.position}</p>
           <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
             Contributions
           </p>
           <ul className='space-y-2'>
-            {post.contributions.split('-').map((c, i) => {
+            {post.details.contributions.split('-').map((c, i) => {
               return (
                 <li className='text-lg md:text-base' key={i}>
                   {c}
@@ -54,8 +54,8 @@ export default function OverviewCard({
       </div>
       <div className='relative w-full flex-1 translate-y-8'>
         <Image
-          src={post.overviewImg}
-          alt={post.title}
+          src={post.details.overviewImg}
+          alt={post.details.title}
           layout='fill'
           objectFit='contain'
           objectPosition='right right'

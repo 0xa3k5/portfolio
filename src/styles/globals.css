@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('/fonts/bogart.css');
 @import url('/fonts/heebo.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700;800;900&display=swap');
 
 @layer base {
   html {
@@ -18,19 +19,19 @@
   h4,
   h5,
   h6 {
-    font-family: Bogart, serif, system-display !important;
+    font-family: 'Alegreya', serif;
   }
 }
 
 body {
-  @apply overflow-x-hidden bg-black text-white;
+  @apply overflow-x-hidden bg-midnight text-white;
 }
 
 .with-prose {
   @apply prose
     prose-lg
     prose-invert
-    prose-headings:font-bogart
+    prose-headings:font-alegreya
     prose-headings:font-medium
     prose-headings:opacity-95
     prose-h4:font-normal

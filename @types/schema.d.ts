@@ -1,25 +1,44 @@
 export type NotionPost = {
-  number: number;
-  client: string;
-  website: string;
+  org: {
+    logo: string;
+    website: string;
+    orgName: string;
+  };
+  properties: {
+    id: string;
+    number: number;
+    slug: string;
+    published: boolean;
+    vertical?: boolean;
+    password: boolean;
+    bgColor: string;
+    color: string;
+  };
+  details: {
+    img: string;
+    title: string;
+    type: string;
+    description: string;
+    period: string;
+    position: string;
+    contributions: string;
+    overviewImg: string;
+  };
+  feedbacks: {
+    id: string;
+    relationIds: string[];
+  };
+};
+
+export type Feedback = {
   id: string;
-  published: boolean;
-  vertical?: boolean;
-  password: boolean;
-  slug: string;
-  img: string;
-  title: string;
-  description: string;
-  period: string;
-  logo: string;
-  website: string;
-  client: string;
-  bgColor: string;
-  color: string;
-  type: string;
-  position: string;
-  contributions: string;
-  overviewImg: string;
+  relationId: string;
+  name?: string;
+  img?: string;
+  role?: string;
+  orgName?: string;
+  project?: string;
+  feedback?: string;
 };
 
 export type WorkExp = {
@@ -40,7 +59,8 @@ export type NotionPageDetail = {
   markdown: string;
 };
 
-export type StaticPages = {
+export type StaticPage = {
+  name: string;
   title: string;
   description: string;
   heroTitle: string;

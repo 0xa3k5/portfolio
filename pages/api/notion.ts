@@ -1,9 +1,14 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
-import { NotionPost, WorkExp, NotionPageDetail } from '../../@types/schema';
+import {
+  NotionPost,
+  WorkExp,
+  NotionPageDetail,
+  Feedback,
+  StaticPage,
+} from '../../@types/schema';
 import { config } from '../../config';
 
-import { StaticPages } from '../../@types/schema';
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -11,6 +16,18 @@ export default class NotionService {
   constructor() {
     this.client = new Client({ auth: config.notion.apiKey });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
+  }
+
+  async getStaticPage(): Promise<StaticPage[]> {
+    const response = await this.client.databases.query({
+      database_id: config.notion.staticPages,
+    });
+
+    const transformedPages = response.results.map((res) => {
+      return NotionService.staticPageTransformer(res);
+    });
+
+    return transformedPages;
   }
 
   async getWorkExp(): Promise<WorkExp[]> {
@@ -36,21 +53,21 @@ export default class NotionService {
       .map((res) => {
         return NotionService.postTransformer(res);
       })
-      .filter((p) => p.published);
+      .filter((p) => p.properties.published);
 
     return transformedPosts;
   }
 
-  async getStaticPages(): Promise<StaticPages[]> {
+  async getFeedbacks(): Promise<Feedback[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.staticPages,
+      database_id: config.notion.feedbacks,
     });
 
-    const transformedPages = response.results.map((res) => {
-      return NotionService.staticPageTransformer(res);
+    const transformedPosts = response.results.map((res) => {
+      return NotionService.feedbackTransformer(res);
     });
 
-    return transformedPages;
+    return transformedPosts;
   }
 
   async getNotionPageDetail(
@@ -82,8 +99,9 @@ export default class NotionService {
     };
   }
 
-  private static staticPageTransformer(page: any): StaticPages {
+  private static staticPageTransformer(page: any): StaticPage {
     return {
+      name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,
       description: page.properties.Description.rich_text[0]?.plain_text || '',
       heroText: page.properties.HeroText.rich_text[0]?.plain_text || '',
@@ -105,27 +123,53 @@ export default class NotionService {
         // placeholder
         cover = '';
     }
+
+    const transformedPage = {
+      properties: {
+        id: page.id,
+        slug: page.properties.Slug.formula.string,
+        number: page.properties.Sort.number,
+        published: page.properties.Published.checkbox === true,
+        vertical: page.properties.Vertical.checkbox === true,
+        password: page.properties.Password.checkbox === true || false,
+        bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
+        color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
+      },
+      details: {
+        img: cover,
+        description: page.properties.Description.rich_text[0].plain_text,
+        type: page.properties.Type.multi_select[0]?.name || null,
+        title: page.properties.Name.title[0].plain_text,
+        period: page.properties.Period.rich_text[0].plain_text,
+        contributions:
+          page.properties.Contributions.rich_text[0]?.plain_text || null,
+        position: page.properties.Position.rich_text[0]?.plain_text || null,
+        overviewImg: page.properties.OverviewImg.files[0]?.file.url || null,
+      },
+      org: {
+        logo: page.properties.Logo.files[0].file.url,
+        website: page.properties.Website.rich_text[0].plain_text,
+        orgName: page.properties.Client.rich_text[0]?.plain_text || null,
+      },
+      feedbacks: {
+        id: page.properties.Feedbacks.id,
+        relationIds:
+          page.properties.Feedbacks.relation.map((obj) => obj.id) || null,
+      },
+    };
+    return transformedPage;
+  }
+
+  private static feedbackTransformer(page: any): Feedback {
     return {
       id: page.id,
-      number: page.properties.Sort.number,
-      published: page.properties.Published.checkbox === true,
-      vertical: page.properties.Vertical.checkbox === true,
-      password: page.properties.Password.checkbox === true || false,
-      img: cover,
-      bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
-      color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
-      title: page.properties.Name.title[0].plain_text,
-      description: page.properties.Description.rich_text[0].plain_text,
-      period: page.properties.Period.rich_text[0].plain_text,
-      slug: page.properties.Slug.formula.string,
-      logo: page.properties.Logo.files[0].file.url,
-      website: page.properties.Website.rich_text[0].plain_text,
-      client: page.properties.Client.rich_text[0]?.plain_text || null,
-      contributions:
-        page.properties.Contributions.rich_text[0]?.plain_text || null,
-      position: page.properties.Position.rich_text[0]?.plain_text || null,
-      type: page.properties.Type.multi_select[0]?.name || null,
-      overviewImg: page.properties.OverviewImg.files[0]?.file.url || null,
+      relationId: page.properties.Relation.relation[0].id,
+      name: page.properties.Name.title[0].plain_text,
+      img: page.properties.Photo.files[0].file.url,
+      orgName: page.properties.Company.multi_select[0].name,
+      project: page.properties.Project.rich_text[0].plain_text,
+      role: page.properties.Role.rich_text[0].plain_text,
+      feedback: page.properties.Feedback.rich_text[0].plain_text,
     };
   }
 

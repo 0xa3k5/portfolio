@@ -12,7 +12,7 @@ module.exports = {
         '8xl': ['96px', '128px'],
       },
       fontFamily: {
-        bogart: ['Bogart', 'serif'],
+        alegreya: ['Alegreya', 'serif'],
         heebo: ['Heebo', 'sans-serif'],
       },
     },

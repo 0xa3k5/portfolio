@@ -21,28 +21,28 @@ export default function MorePosts({
         className
       )}
     >
-      <Link href={`/works/${posts[0].slug}`}>
+      <Link href={`/works/${posts[0].properties.slug}`}>
         <div className='group flex-1 hover:cursor-pointer hover:text-daisy'>
           <div className='flex flex-col space-y-4'>
             <div className='flex space-x-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100'>
               <LeftArrowPlain className='w-6 duration-200 group-hover:-translate-x-1/2' />
               <p className='text-md uppercase tracking-widest'>Previous</p>
             </div>
-            <h6 className='max-w-sm font-bogart text-3xl font-medium leading-snug'>
-              {posts[0].title}
+            <h6 className='max-w-sm font-alegreya text-3xl font-medium leading-snug'>
+              {posts[0].details.title}
             </h6>
           </div>
         </div>
       </Link>
-      <Link href={`/works/${posts[1].slug}`}>
+      <Link href={`/works/${posts[1].properties.slug}`}>
         <div className='group flex-1 hover:cursor-pointer hover:text-daisy'>
           <div className='flex flex-col items-end space-y-4'>
             <div className='flex space-x-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100'>
               <p className='text-md uppercase tracking-widest'>Next</p>
               <RightArrowPlain className='w-6 duration-200 group-hover:translate-x-1/2' />
             </div>
-            <h6 className='max-w-sm text-right font-bogart text-3xl font-medium leading-snug'>
-              {posts[1].title}
+            <h6 className='max-w-sm text-right font-alegreya text-3xl font-medium leading-snug'>
+              {posts[1].details.title}
             </h6>
           </div>
         </div>

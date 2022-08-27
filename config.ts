@@ -10,6 +10,7 @@ const env = cleanEnv(process.env, {
   N_DB_CAREER_HIGHLIGHTS: str(),
   N_DB_SIDE_PROJECTS: str(),
   N_DB_PAGES: str(),
+  N_FEEDBACKS: str(),
 });
 
 const notionEnv = () => {
@@ -19,12 +20,14 @@ const notionEnv = () => {
     N_DB_CAREER_HIGHLIGHTS: notionCareer,
     N_DB_SIDE_PROJECTS: notionSideProjects,
     N_DB_PAGES: notionPages,
+    N_FEEDBACKS: notionFeedbacks,
   } = cleanEnv(process.env, {
     N_API_KEY: str(),
     N_DB_WORK: str(),
     N_DB_CAREER_HIGHLIGHTS: str(),
     N_DB_SIDE_PROJECTS: str(),
     N_DB_PAGES: str(),
+    N_FEEDBACKS: str(),
   });
   return {
     notionApiKey,
@@ -32,6 +35,7 @@ const notionEnv = () => {
     notionCareer,
     notionSideProjects,
     notionPages,
+    notionFeedbacks,
   };
 };
 
@@ -51,6 +55,7 @@ export const config = {
     portfolioPosts: env.N_DB_CAREER_HIGHLIGHTS,
     sideProjects: env.N_DB_SIDE_PROJECTS,
     staticPages: env.N_DB_PAGES,
+    feedbacks: env.N_FEEDBACKS,
   },
 };
 

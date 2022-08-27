@@ -1,17 +1,21 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Logo(): JSX.Element {
+interface LogoProps {
+  className?: string;
+}
+
+export default function Logo({ className }: LogoProps): JSX.Element {
   const [hover, setHover] = useState(false);
 
   return (
-    <Link href='/' passHref>
+    <Link href='/' passHref className={className}>
       <a
         className=''
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <h2 className='font-bogart text-4xl font-bold duration-200'>
+        <h2 className='font-alegreya text-4xl font-bold duration-200'>
           <span className='duration-200'>a</span>
           <span
             className={`${

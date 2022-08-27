@@ -1,45 +1,33 @@
 import NotionService from '../api/notion';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { WorkExp } from '../../@types/schema';
+import { GetStaticProps } from 'next';
+import { WorkExp, StaticPage } from '../../@types/schema';
 import WorkExperience from '../../src/components/WorkExperience';
-import Head from 'next/head';
-import Header from '../../src/components/Header';
 import Footer from '../../src/components/Footer';
 import CTA from '../../src/components/CTA';
+import PageHero from '../../src/components/PageHero';
+import PageHead from '../../src/components/PageHead';
+import { useState } from 'react';
 
-export default function About({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const pageTitle = data.aboutMe.title;
-  const pageDesc = data.aboutMe.description;
+interface AboutProps {
+  page: StaticPage;
+  workExp: WorkExp[];
+}
+
+export default function About({ page, workExp }: AboutProps): JSX.Element {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name='description' title='description' content={pageDesc} />
-        <meta name='og:description' title='og:description' content={pageDesc} />
-        <meta name='og:image' title='og:title' content='/ak-logo.svg' />
-        <link rel='shortcut icon' href='/favicon.ico' />
-      </Head>
-      <main className='mx-auto flex max-w-4xl flex-col space-y-32 px-6 py-32'>
-        <Header />
-        <div className='flex flex-col flex-wrap py-8 lg:flex-row'>
-          <div className='w-full md:w-4/6'>
-            <div className='flex flex-col space-y-8'>
-              <h1 className='font-bogart text-4xl font-bold'>
-                {data.aboutMe.heroTitle}
-              </h1>
-              <p className='text-xl leading-relaxed opacity-80'>
-                {data.aboutMe.heroText}
-              </p>
-            </div>
-          </div>
-        </div>
-        <hr className='opacity-20' />
-        <div className='flex flex-col'>
-          {data.workExp
-            .sort((a: WorkExp, b: WorkExp) => b.num - a.num, 0)
+      <PageHead page={page} />
+      <main className={`${isNavbarOpen ? 'scroll-none' : ''} h-screen`}>
+        <PageHero
+          page={page}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
+        />
+        <div className='container mx-auto flex max-w-4xl flex-col px-16 lg:px-0'>
+          {workExp
+            .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
             .map((w: WorkExp) => {
               return (
                 <WorkExperience
@@ -57,20 +45,18 @@ export default function About({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const workExp = await notionService.getWorkExp();
-  // const aboutMe = await notionService.getAboutMe();
-
-  const aboutMe = (await notionService.getStaticPages())[1];
+  const page = (await notionService.getStaticPage()).find(
+    (data) => data.name === 'About'
+  );
 
   return {
     props: {
-      data: {
-        aboutMe,
-        workExp,
-      },
+      page,
+      workExp,
     },
   };
 };
