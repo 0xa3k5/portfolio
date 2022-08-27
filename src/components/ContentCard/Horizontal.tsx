@@ -19,7 +19,7 @@ export default function Horizontal({
     <div
       className={cx(
         className,
-        'container flex h-screen snap-start flex-col items-center justify-center space-x-0 px-4 pt-8 pb-0 md:flex-row md:space-y-0 md:space-x-32 md:px-8 md:py-16 md:pt-0 xl:px-0'
+        'container flex h-screen snap-center flex-col items-center justify-center space-x-0 px-4 pt-8 pb-0 md:flex-row md:space-y-0 md:space-x-32 md:px-8 md:py-16 md:pt-0 xl:px-0'
       )}
       style={{ color: `#${post.properties.color}` }}
     >
