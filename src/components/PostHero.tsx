@@ -52,7 +52,7 @@ export default function PostHero({
           />
         </div>
         <div className='mb-4 flex max-w-2xl flex-col space-y-2 md:mb-8 md:space-y-4 '>
-          <h1 className='text-center font-bogart text-4xl font-bold md:text-5xl'>
+          <h1 className='text-center font-alegreya text-4xl font-bold md:text-5xl'>
             {post.details.title}
           </h1>
           <p className='text-center font-normal opacity-80 md:text-xl md:leading-loose'>

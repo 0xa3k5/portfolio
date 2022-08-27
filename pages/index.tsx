@@ -25,27 +25,25 @@ export default function Home({ page, works }: HomeProps) {
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className='flex flex-col'>
-          {works
-            .sort(
-              (a: NotionPost, b: NotionPost) =>
-                a.properties.number - b.properties.number
-            )
-            .map((p: NotionPost) => {
-              return (
-                <div
-                  key={`works-${p.properties.id}`}
-                  style={{ backgroundColor: `#${p.properties.bgColor}` }}
-                >
-                  {p.properties.vertical ? (
-                    <ContentCard.Vertical key={p.properties.id} post={p} />
-                  ) : (
-                    <ContentCard.Horizontal key={p.properties.id} post={p} />
-                  )}
-                </div>
-              );
-            })}
-        </div>
+        {works
+          .sort(
+            (a: NotionPost, b: NotionPost) =>
+              a.properties.number - b.properties.number
+          )
+          .map((p: NotionPost) => (
+            <section
+              key={`works-${p.properties.id}`}
+              style={{ backgroundColor: `#${p.properties.bgColor}` }}
+              className='py-8 px-16 md:py-16 xl:px-0'
+            >
+              {p.properties.vertical ? (
+                <ContentCard.Vertical key={p.properties.id} post={p} />
+              ) : (
+                <ContentCard.Horizontal key={p.properties.id} post={p} />
+              )}
+            </section>
+          ))}
+
         <CTA className='snap-center' />
         <Footer className='snap-center' />
       </main>

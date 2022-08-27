@@ -20,14 +20,12 @@ export default function PageHero({
   return (
     <div className={cx(className, 'flex h-screen items-center justify-center')}>
       <Header isNavbarOpen={isNavbarOpen} setIsNavbarOpen={setIsNavbarOpen} />
-
       <MobileMenu
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
       />
-
       <div className='container flex snap-center flex-col items-center place-self-center py-8 px-8 text-center md:py-32 md:px-0'>
-        <h1 className='mb-4 max-w-3xl font-bogart text-4xl font-bold lg:text-6xl'>
+        <h1 className='mb-4 max-w-3xl font-alegreya text-4xl font-bold lg:text-6xl'>
           {page.heroTitle}
         </h1>
         {page.heroText && (

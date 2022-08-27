@@ -48,7 +48,7 @@ export default function Header({
     <div
       className={cx(
         className,
-        'fixed top-0 z-20 w-full bg-midnight py-8 px-8 duration-200 lg:px-0',
+        'fixed top-0 z-20 w-full bg-midnight py-8 px-16 duration-200 xl:px-0',
         isNavbarOpen
           ? 'bg-opacity-0 backdrop-blur-none'
           : 'bg-opacity-10 backdrop-blur-lg'
@@ -56,9 +56,12 @@ export default function Header({
     >
       <nav className='container flex items-center justify-between'>
         <Logo />
-        <ul className='hidden items-center space-x-12 text-sm uppercase tracking-widest md:flex'>
+        <ul className='hidden items-center space-x-12 md:flex'>
           {navList.map((l, i) => (
-            <li className='' key={i}>
+            <li
+              className='text-sm uppercase tracking-widest text-white'
+              key={i}
+            >
               <Button.Text
                 text={l.text}
                 href={l.href}

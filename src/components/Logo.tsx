@@ -15,7 +15,7 @@ export default function Logo({ className }: LogoProps): JSX.Element {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <h2 className='font-bogart text-4xl font-bold duration-200'>
+        <h2 className='font-alegreya text-4xl font-bold duration-200'>
           <span className='duration-200'>a</span>
           <span
             className={`${
