@@ -43,7 +43,7 @@ export default function Works({
                   return (
                     <li
                       key={p.properties.id}
-                      className='max-w-lg border-b border-white border-opacity-10 font-alegreya text-2xl font-medium leading-snug last:border-none md:text-3xl'
+                      className='max-w-lg border-b border-white border-opacity-10 font-lora text-2xl font-medium leading-snug last:border-none md:text-3xl'
                       onMouseEnter={() => setHovered(p)}
                       onMouseLeave={() => setHovered(null)}
                     >

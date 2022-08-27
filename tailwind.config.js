@@ -12,8 +12,8 @@ module.exports = {
         '8xl': ['96px', '128px'],
       },
       fontFamily: {
-        alegreya: ['Alegreya', 'serif'],
-        heebo: ['Heebo', 'sans-serif'],
+        lora: ['Lora', 'serif'],
+        jost: ['Jost', 'sans-serif'],
       },
     },
     container: {

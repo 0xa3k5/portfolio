@@ -19,11 +19,11 @@ export default function Vertical({
     <div
       className={cx(
         className,
-        'container flex h-screen snap-center flex-col items-center'
+        'container flex h-screen snap-center flex-col items-center justify-center'
       )}
       style={{ color: `#${post.properties.color}` }}
     >
-      <div className='flex max-w-md flex-col md:items-center'>
+      <div className='flex max-w-md flex-col items-center text-center'>
         <h6 className='text-md mb-4 uppercase tracking-widest opacity-60 md:mb-8'>
           {post.details.period}
         </h6>
@@ -38,7 +38,7 @@ export default function Vertical({
           />
         </div>
         <div className='mb-4 flex flex-col space-y-2 md:space-y-4 md:text-center'>
-          <h4 className='font-alegreya text-3xl font-semibold md:text-4xl'>
+          <h4 className='font-lora text-3xl font-semibold md:text-4xl'>
             {post.details.title}
           </h4>
           <p className='font-normal opacity-80 md:text-lg md:leading-loose'>
@@ -60,7 +60,7 @@ export default function Vertical({
           }
         />
       </div>
-      <div className='relative h-full w-full rounded-xl lg:w-full lg:max-w-full lg:flex-1'>
+      <div className='relative h-1/3 w-full rounded-xl md:h-1/2 lg:w-full lg:max-w-full'>
         <Image
           src={post.details.img}
           alt={post.details.title}

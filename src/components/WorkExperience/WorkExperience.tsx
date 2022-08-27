@@ -15,7 +15,7 @@ export default function WorkExperience({
   return (
     <div className={cx(classname, 'flex flex-col py-16 lg:flex-row lg:py-24')}>
       <div className='mb-8 w-full overflow-visible md:w-2/6 lg:mb-0'>
-        <p className='block font-alegreya text-xl opacity-40'>{job.period}</p>
+        <p className='block font-lora text-xl opacity-40'>{job.period}</p>
       </div>
 
       <div className='w-full md:w-4/6'>
@@ -36,7 +36,7 @@ export default function WorkExperience({
                 />
               </div>
               <div className='flex flex-col'>
-                <h6 className='font-alegreya text-xl font-semibold'>
+                <h6 className='font-lora text-xl font-semibold'>
                   {job.company}
                 </h6>
                 <p className='opacity-60'>{job.tagline}</p>
