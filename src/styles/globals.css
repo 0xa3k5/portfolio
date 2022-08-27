@@ -19,7 +19,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Alegreya', serif;
+    @apply font-alegreya;
   }
 }
 
@@ -32,9 +32,9 @@ body {
     prose-lg
     prose-invert
     prose-headings:font-alegreya
-    prose-headings:font-medium
+    prose-headings:font-semibold
     prose-headings:opacity-95
-    prose-h4:font-normal
+    prose-h3:font-normal
     prose-p:text-xl
     prose-p:leading-relaxed
     prose-p:opacity-90

@@ -45,7 +45,7 @@ export default function MobileMenu({
     <motion.nav
       initial={false}
       animate={isNavbarOpen ? 'open' : 'closed'}
-      className={`fixed top-0 left-0 z-10 flex h-screen w-full items-center justify-center bg-midnight backdrop-blur-lg transition-all duration-200 md:hidden ${
+      className={`fixed top-0 left-0 z-10 flex h-screen w-full items-center justify-center bg-midnight backdrop-blur-lg transition-all duration-200 lg:hidden ${
         isNavbarOpen
           ? '-translate-x-0 bg-opacity-80'
           : 'translate-x-full bg-opacity-0'
@@ -58,7 +58,7 @@ export default function MobileMenu({
       >
         {navList.map((l, i) => (
           <motion.li
-            className='text-xl uppercase tracking-widest text-white'
+            className='text-lg uppercase tracking-widest text-white lg:text-xl'
             key={i}
             variants={motionVariants.navLi}
           >

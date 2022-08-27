@@ -15,7 +15,7 @@ export default function Logo({ className }: LogoProps): JSX.Element {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <h2 className='font-alegreya text-4xl font-bold duration-200'>
+        <h2 className='font-alegreya font-bold duration-200 text-3xl md:text-4xl'>
           <span className='duration-200'>a</span>
           <span
             className={`${
@@ -24,7 +24,9 @@ export default function Logo({ className }: LogoProps): JSX.Element {
           >
             li
           </span>
-          <span className={`${hover ? '' : '-ml-4'} duration-200`}>k</span>
+          <span className={`${hover ? '' : '-ml-3 md:-ml-4'} duration-200`}>
+            k
+          </span>
           <span
             className={`${
               hover ? 'ml-0 opacity-100' : '-ml-8 opacity-0'

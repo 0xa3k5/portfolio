@@ -19,7 +19,7 @@ export default function FeedbackCard({
     <div
       className={cx(
         classname,
-        'container flex flex-col items-center space-y-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 p-16'
+        'container flex flex-col items-center space-y-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16'
       )}
     >
       <div className='flex h-16 items-center space-x-8'>

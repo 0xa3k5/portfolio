@@ -48,7 +48,7 @@ export default function Header({
     <div
       className={cx(
         className,
-        'fixed top-0 z-20 w-full bg-midnight py-8 px-16 duration-200 xl:px-0',
+        'fixed top-0 z-20 w-full bg-midnight py-4 md:py-8 px-4 duration-200 md:px-16',
         isNavbarOpen
           ? 'bg-opacity-0 backdrop-blur-none'
           : 'bg-opacity-10 backdrop-blur-lg'
@@ -56,7 +56,7 @@ export default function Header({
     >
       <nav className='container flex items-center justify-between'>
         <Logo />
-        <ul className='hidden items-center space-x-12 md:flex'>
+        <ul className='hidden items-center space-x-12 lg:flex'>
           {navList.map((l, i) => (
             <li
               className='text-sm uppercase tracking-widest text-white'
@@ -71,13 +71,13 @@ export default function Header({
           ))}
         </ul>
         <button
-          className='block md:hidden'
+          className='block lg:hidden'
           onClick={() => setIsNavbarOpen(!isNavbarOpen)}
         >
           {isNavbarOpen ? (
-            <CloseIcon className='w-10' />
+            <CloseIcon className='w-8 md:w-10' />
           ) : (
-            <HamburgerIcon className='w-10' />
+            <HamburgerIcon className='w-8 md:w-10' />
           )}
         </button>
       </nav>

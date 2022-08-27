@@ -50,7 +50,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className='container flex flex-col items-center space-y-24 py-24 px-8 md:px-24'>
+        <div className='container flex flex-col items-center space-y-24 py-24 px-6 md:px-24'>
           <OverviewCard post={post} />
           <div className='mx-auto'>
             <div className='flex items-center justify-center'>
@@ -60,7 +60,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
             </div>
           </div>
           {postFeedbacks.length > 0 && (
-            <FeedbackCard classname='w-11/12' feedback={postFeedbacks} />
+            <FeedbackCard classname='w-full md:w-11/12' feedback={postFeedbacks} />
           )}
           <MorePosts posts={morePosts} />
         </div>

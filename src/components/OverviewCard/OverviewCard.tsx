@@ -14,7 +14,7 @@ export default function OverviewCard({
   return (
     <div
       className={cx(
-        'flex w-11/12 flex-col rounded-2xl bg-white bg-opacity-5 md:w-10/12 md:flex-row',
+        'flex w-full flex-col rounded-2xl bg-white bg-opacity-5 md:w-10/12 md:flex-row',
         className
       )}
     >

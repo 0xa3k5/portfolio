@@ -24,7 +24,7 @@ export default function PageHero({
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
       />
-      <div className='container flex snap-center flex-col items-center place-self-center py-8 px-8 text-center md:py-32 md:px-0'>
+      <div className='container flex snap-center flex-col items-center place-self-center py-8 px-4 text-center md:py-32 md:px-16 xl:px-0'>
         <h1 className='mb-4 max-w-3xl font-alegreya text-4xl font-bold lg:text-6xl'>
           {page.heroTitle}
         </h1>
