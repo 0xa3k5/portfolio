@@ -2,15 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('/fonts/heebo.css');
-
-@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap');
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    font-family: Heebo, sans-serif, system-ui;
+    @apply overflow-x-hidden scroll-smooth font-jost;
   }
 
   h1,
@@ -19,19 +16,19 @@
   h4,
   h5,
   h6 {
-    @apply font-alegreya;
+    @apply font-lora;
   }
-}
 
-body {
-  @apply overflow-x-hidden bg-midnight text-white;
+  body {
+    @apply bg-midnight text-white;
+  }
 }
 
 .with-prose {
   @apply prose
     prose-lg
     prose-invert
-    prose-headings:font-alegreya
+    prose-headings:font-lora
     prose-headings:font-semibold
     prose-headings:opacity-95
     prose-h3:font-normal

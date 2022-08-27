@@ -38,7 +38,7 @@ export default function Vertical({
           />
         </div>
         <div className='mb-4 flex flex-col space-y-2 md:space-y-4 md:text-center'>
-          <h4 className='font-alegreya text-3xl font-semibold md:text-4xl'>
+          <h4 className='font-lora text-3xl font-semibold md:text-4xl'>
             {post.details.title}
           </h4>
           <p className='font-normal opacity-80 md:text-lg md:leading-loose'>
@@ -60,7 +60,7 @@ export default function Vertical({
           }
         />
       </div>
-      <div className='relative h-1/3 w-full md:h-1/2 rounded-xl lg:w-full lg:max-w-full'>
+      <div className='relative h-1/3 w-full rounded-xl md:h-1/2 lg:w-full lg:max-w-full'>
         <Image
           src={post.details.img}
           alt={post.details.title}

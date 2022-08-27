@@ -50,7 +50,7 @@ export default function FeedbackCard({
               )}
               key={f.id}
             >
-              <span className='font-alegreya text-2xl font-normal'>
+              <span className='font-lora text-2xl font-normal'>
                 {f.feedback}
               </span>
               <div className='flex flex-col space-y-2 border-t border-t-white border-opacity-20 pt-8'>

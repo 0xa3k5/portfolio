@@ -38,7 +38,7 @@ export default function Horizontal({
           />
         </div>
         <div className='mb-4 flex flex-col space-y-2 text-center md:mb-8 md:space-y-4 md:text-left'>
-          <h4 className='font-alegreya text-3xl font-semibold md:text-4xl'>
+          <h4 className='font-lora text-3xl font-semibold md:text-4xl'>
             {post.details.title}
           </h4>
           <p className='text-sm font-normal opacity-80 md:text-lg md:leading-loose'>

@@ -20,7 +20,7 @@ export default function CTA({
       )}
     >
       <div className='flex flex-col items-center justify-center space-y-4 text-center md:space-y-8'>
-        <h4 className='max-w-xl text-center font-alegreya text-3xl font-semibold md:text-5xl'>
+        <h4 className='max-w-xl text-center font-lora text-3xl font-semibold md:text-5xl'>
           {title}
         </h4>
         <p className='max-w-md font-normal leading-loose opacity-80 md:text-lg'>

@@ -28,7 +28,7 @@ export default function MorePosts({
               <LeftArrowPlain className='w-6 duration-200 group-hover:-translate-x-1/2' />
               <p className='text-md uppercase tracking-widest'>Previous</p>
             </div>
-            <h6 className='max-w-sm font-alegreya text-3xl font-medium leading-snug'>
+            <h6 className='max-w-sm font-lora text-3xl font-medium leading-snug'>
               {posts[0].details.title}
             </h6>
           </div>
@@ -41,7 +41,7 @@ export default function MorePosts({
               <p className='text-md uppercase tracking-widest'>Next</p>
               <RightArrowPlain className='w-6 duration-200 group-hover:translate-x-1/2' />
             </div>
-            <h6 className='max-w-sm text-right font-alegreya text-3xl font-medium leading-snug'>
+            <h6 className='max-w-sm text-right font-lora text-3xl font-medium leading-snug'>
               {posts[1].details.title}
             </h6>
           </div>
