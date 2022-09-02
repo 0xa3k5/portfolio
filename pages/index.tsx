@@ -34,7 +34,6 @@ export default function Home({ page, works }: HomeProps) {
             <section
               key={`works-${p.properties.id}`}
               style={{ backgroundColor: `#${p.properties.bgColor}` }}
-              // className='h-[calc(100vh_+_10rem)] pt-32'
             >
               {p.properties.vertical ? (
                 <ContentCard.Vertical key={p.properties.id} post={p} />

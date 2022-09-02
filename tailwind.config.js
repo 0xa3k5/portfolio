@@ -12,8 +12,8 @@ module.exports = {
         '8xl': ['96px', '128px'],
       },
       fontFamily: {
-        lora: ['Lora', 'serif'],
-        jost: ['Jost', 'sans-serif'],
+        vollkorn: ['Vollkorn', 'serif'],
+        lato: ['Lato', 'sans-serif'],
       },
     },
     container: {

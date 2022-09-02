@@ -23,11 +23,11 @@ export default function Horizontal({
       )}
       style={{ color: `#${post.properties.color}` }}
     >
-      <div className='flex h-fit max-w-full flex-col items-center md:max-w-md md:items-start'>
-        <h6 className='text-md mb-2 text-center uppercase tracking-widest opacity-60 md:mb-8 md:text-left'>
+      <div className='flex w-full flex-col items-center md:max-w-md md:items-start'>
+        <h6 className='text-md mb-2 text-center font-lato uppercase tracking-widest opacity-80 md:mb-6 md:text-left'>
           {post.details.period}
         </h6>
-        <div className='relative mb-4 h-8 w-24 md:mb-12 md:h-8 md:w-32'>
+        <div className='relative mb-6 h-8 w-24 md:mb-8 md:h-8 md:w-32'>
           <Image
             src={post.org.logo}
             alt={`${post.org.orgName} logo`}
@@ -37,11 +37,11 @@ export default function Horizontal({
             priority
           />
         </div>
-        <div className='mb-4 flex flex-col space-y-2 text-center md:mb-8 md:space-y-4 md:text-left'>
-          <h4 className='font-lora text-3xl font-semibold md:text-4xl'>
+        <div className='mb-6 flex flex-col items-center space-y-4 text-center md:mb-8 md:items-start md:text-left'>
+          <h4 className='font-vollkorn text-3xl font-semibold md:text-4xl'>
             {post.details.title}
           </h4>
-          <p className='text-sm font-normal opacity-80 md:text-lg md:leading-loose'>
+          <p className='max-w-sm text-lg font-normal opacity-80 md:text-xl md:leading-snug'>
             {post.details.description}
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function Horizontal({
           color={post.properties.color}
           bgColor={post.properties.bgColor}
           text='View Case Study'
-          className='mb-4 md:mb-0'
+          className='mb-4 w-[80vw] sm:w-full md:mb-0'
           icon={
             post.properties.password ? (
               <LockIcon className='ml-1 w-6' />

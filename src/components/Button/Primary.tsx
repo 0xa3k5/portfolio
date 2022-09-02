@@ -36,7 +36,7 @@ export default function Primary({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className={cx(
-          'md:text-md group flex w-full items-center justify-center rounded-xl py-3 px-8 text-sm uppercase tracking-widest duration-200 md:py-4 md:px-8 lg:w-fit',
+          'group flex w-full items-center justify-center rounded-xl py-4 px-8 text-lg duration-200',
           className
         )}
         style={{

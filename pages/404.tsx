@@ -9,6 +9,7 @@ import PageHero from '../src/components/PageHero';
 import PageHead from '../src/components/PageHead';
 
 import RightArrowPlain from '../public/icons/right-arrow-plain.svg';
+import CTA from '../src/components/CTA/CTA';
 
 interface WorksProps {
   page: StaticPage;
@@ -31,50 +32,47 @@ export default function Works({
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className='container flex flex-col justify-between px-8 xl:px-0'>
-          <div className='flex items-start space-x-16'>
-            <ul className='flex flex-1 flex-col space-y-12 pb-48'>
-              {portfolioPosts
-                .sort(
-                  (a: NotionPost, b: NotionPost) =>
-                    a.properties.number - b.properties.number
-                )
-                .map((p) => {
-                  return (
-                    <li
-                      key={p.properties.id}
-                      className='max-w-lg border-b border-white border-opacity-10 font-lora text-2xl font-medium leading-snug last:border-none md:text-3xl'
-                      onMouseEnter={() => setHovered(p)}
-                      onMouseLeave={() => setHovered(null)}
-                    >
-                      <Link href={`/works/${p.properties.slug}`}>
-                        <div className='group flex items-start space-x-4 pb-12 duration-200 hover:cursor-pointer hover:space-x-0 hover:text-daisy'>
-                          <RightArrowPlain className='w-8 shrink-0 text-white opacity-40 duration-200 group-hover:translate-x-1/2 group-hover:opacity-100' />
-                          <span className='duration-200 group-hover:translate-x-5'>
-                            {p.details.title}
-                          </span>
-                        </div>
-                      </Link>
-                    </li>
-                  );
-                })}
-            </ul>
-            {hovered && (
-              <div className='relative hidden flex-1 md:block'>
-                <Image
-                  src={hovered.details.img}
-                  alt={hovered.details.title}
-                  layout='responsive'
-                  height='100%'
-                  width='100%'
-                  objectFit='contain'
-                  objectPosition='middle middle'
-                  priority
-                />
-              </div>
-            )}
+        <div className='container flex items-center space-x-16 px-8 py-8 md:py-16'>
+          <div className='flex h-fit flex-1 flex-col space-y-12'>
+            {portfolioPosts
+              .sort(
+                (a: NotionPost, b: NotionPost) =>
+                  a.properties.number - b.properties.number
+              )
+              .map((p) => {
+                return (
+                  <div
+                    key={p.properties.id}
+                    className='max-w-md border-b border-white border-opacity-10 last:border-none '
+                    onMouseEnter={() => setHovered(p)}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    <Link href={`/works/${p.properties.slug}`}>
+                      <div className='group flex items-start space-x-4 pb-12 duration-200 hover:cursor-pointer hover:text-daisy md:hover:space-x-3'>
+                        <RightArrowPlain className='w-8 shrink-0 text-white opacity-40 duration-200 group-hover:opacity-100 md:group-hover:translate-x-1/3' />
+                        <span className='duration-200 font-vollkorn text-2xl font-medium leading-snug md:text-3xl lg:max-w-lg'>{p.details.title}</span>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
           </div>
+          {hovered && (
+            <div className='relative hidden flex-1 md:block'>
+              <Image
+                src={hovered.details.img}
+                alt={hovered.details.title}
+                layout='responsive'
+                height='80%'
+                width='100%'
+                objectFit='contain'
+                objectPosition='top'
+                priority
+              />
+            </div>
+          )}
         </div>
+        <CTA />
         <Footer />
       </main>
     </>

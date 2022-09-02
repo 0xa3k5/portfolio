@@ -29,7 +29,7 @@ export default function FeedbackCard({
               className={cx(
                 'relative overflow-hidden rounded-full duration-200',
                 selected === f
-                  ? 'h-16 w-16 opacity-100'
+                  ? 'h-16 w-16 opacity-100 outline outline-2 outline-offset-4 outline-white'
                   : 'h-12 w-12 opacity-40'
               )}
               key={f.id}
@@ -50,7 +50,7 @@ export default function FeedbackCard({
               )}
               key={f.id}
             >
-              <span className='font-lora text-2xl font-normal'>
+              <span className='text-2xl leading-normal tracking-wide'>
                 {f.feedback}
               </span>
               <div className='flex flex-col space-y-2 border-t border-t-white border-opacity-20 pt-8'>

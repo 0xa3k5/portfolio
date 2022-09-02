@@ -34,7 +34,7 @@ export default function About({ page, workExp }: AboutProps): JSX.Element {
                 <WorkExperience
                   job={w}
                   key={`about-${w.id}`}
-                  classname='border-b border-opacity-20 border-white'
+                  classname='border-b border-opacity-20 border-white last-of-type:border-none'
                 />
               );
             })}

@@ -25,11 +25,18 @@ export default function PageHero({
         setIsNavbarOpen={setIsNavbarOpen}
       />
       <div className='container flex snap-center flex-col items-center place-self-center py-8 px-4 text-center md:py-32 md:px-16 xl:px-0'>
-        <h1 className='mb-4 max-w-3xl font-lora text-4xl font-bold md:text-6xl'>
-          {page.heroTitle}
+        <h1 className='mb-4 max-w-3xl font-vollkorn text-5xl font-bold md:text-6xl'>
+          {page.heroTitle.split('-').map((s, i) => {
+            return (
+              <>
+                <span key={i}>{s}</span>
+                <br key={`br-${i}`} />
+              </>
+            );
+          })}
         </h1>
         {page.heroText && (
-          <p className='max-w-2xl text-lg opacity-80 md:text-xl'>
+          <p className='max-w-md text-lg opacity-80 md:max-w-xl md:text-xl md:leading-relaxed'>
             {page.heroText}
           </p>
         )}
