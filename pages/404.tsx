@@ -78,7 +78,6 @@ export default function Works({
                 objectFit='contain'
                 objectPosition='top'
                 priority
-                unoptimized
               />
             </div>
           )}

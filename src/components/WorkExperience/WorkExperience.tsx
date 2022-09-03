@@ -34,7 +34,6 @@ export default function WorkExperience({
                   layout='fill'
                   objectFit='fill'
                   priority
-                  unoptimized
                 />
               </div>
               <div className='flex flex-col'>
