@@ -35,20 +35,23 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
 
   const [scrollPos, setScrollPos] = useState(0);
 
+  function updatePos() {
+    setScrollPos(window.scrollY);
+  }
+
   useEffect(() => {
-    function updatePos() {
-      setScrollPos(window.scrollY);
+    function watchScroll() {
+      window.addEventListener('scroll', updatePos, { passive: true });
     }
 
-    window.addEventListener('scroll', updatePos, { passive: true });
-    updatePos();
-    console.log(scrollPos);
+    watchScroll();
+
     scrollPos > ref.current.clientHeight
       ? setColor('ffffff')
       : setColor(post.properties.color);
 
     return () => window.removeEventListener('scroll', updatePos);
-  }, [window.scrollY]);
+  }, [scrollPos]);
 
   return (
     <>
