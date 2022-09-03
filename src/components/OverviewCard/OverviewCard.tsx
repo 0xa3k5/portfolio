@@ -60,6 +60,7 @@ export default function OverviewCard({
           objectFit='contain'
           objectPosition='right right'
           priority
+          unoptimized
         />
       </div>
     </div>

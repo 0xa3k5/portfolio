@@ -57,6 +57,8 @@ export default function PostHero({
             alt={post.details.title}
             layout='fill'
             objectFit='contain'
+            priority
+            unoptimized
           />
         </div>
       </div>

@@ -30,6 +30,7 @@ export default function Vertical({
           layout='fill'
           objectFit='contain'
           priority
+          unoptimized
         />
       </div>
       <div className='flex flex-col space-y-4 md:items-center md:space-y-6 md:text-center '>
@@ -44,6 +45,7 @@ export default function Vertical({
             objectFit='contain'
             objectPosition='bottom'
             priority
+            unoptimized
           />
         </div>
         <div className='flex flex-col space-y-2 md:max-w-lg md:space-y-4 md:text-center'>
