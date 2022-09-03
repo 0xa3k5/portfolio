@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import Link from 'next/link';
 import { MouseEventHandler } from 'react';
 
 interface TextProps {
@@ -17,18 +18,21 @@ export default function Text({
   onClick,
 }: TextProps): JSX.Element {
   return (
-    // eslint-disable-next-line react/jsx-no-target-blank
-    <a
-      href={href}
-      target={targetBlank ? '_blank' : ''}
-      rel={targetBlank ? 'noreferrer' : ''}
-      onClick={onClick}
+    <div
       className={cx(
         'flex items-center space-x-2 rounded-full duration-200 hover:text-daisy',
         className
       )}
     >
-      {text && text}
-    </a>
+      {targetBlank === false ? (
+        <Link href={href} passHref scroll={false}>
+          <a onClick={onClick}>{text}</a>
+        </Link>
+      ) : (
+        <a href={href} target={'_blank'} rel={'noreferrer'} onClick={onClick}>
+          {text}
+        </a>
+      )}
+    </div>
   );
 }

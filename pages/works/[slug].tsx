@@ -2,17 +2,18 @@ import Head from 'next/head';
 import NotionService from '../api/notion';
 import { GetStaticProps } from 'next';
 import ReactMarkdown from 'react-markdown';
-import Footer from '../../src/components/Footer';
 import { config } from '../../config';
 import PostHero from '../../src/components/PostHero';
 import OverviewCard from '../../src/components/OverviewCard';
-import CTA from '../../src/components/CTA';
 import { getMorePosts } from '../../src/utils/getMorePosts';
 import MorePosts from '../../src/components/MorePosts';
 import { NotionPost, Feedback } from '../../@types/schema';
 
 import FeedbackCard from '../../src/components/FeedbackCard';
-import { useState } from 'react';
+import { motion, useScroll } from 'framer-motion';
+import { motionVariants } from '../../src/utils/motionVariants';
+import { useState, useEffect, useRef } from 'react';
+import { InView } from 'react-intersection-observer';
 
 interface DetailProps {
   markdown: string;
@@ -23,10 +24,31 @@ interface DetailProps {
 
 const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [color, setColor] = useState<string>('fff');
+
+  const ref = useRef(null);
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
+  const { scrollYProgress } = useScroll();
+
+  const [scrollPos, setScrollPos] = useState(0);
+
+  useEffect(() => {
+    function updatePos() {
+      setScrollPos(window.scrollY);
+    }
+
+    window.addEventListener('scroll', updatePos, { passive: true });
+    updatePos();
+    console.log(scrollPos);
+    scrollPos > ref.current.clientHeight
+      ? setColor('ffffff')
+      : setColor(post.properties.color);
+
+    return () => window.removeEventListener('scroll', updatePos);
+  }, [window.scrollY]);
 
   return (
     <>
@@ -44,29 +66,43 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
         />
         <meta name='og:image' title='og:title' content={post.details.img} />
       </Head>
-      <main className=''>
-        <PostHero
-          post={post}
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
-        />
+      <motion.main
+        variants={motionVariants.pageVariants}
+        initial='hidden'
+        animate='enter'
+        exit='exit'
+        transition={{ type: 'linear' }}
+      >
+        <div className='' ref={ref}>
+          <PostHero
+            post={post}
+            isNavbarOpen={isNavbarOpen}
+            setIsNavbarOpen={setIsNavbarOpen}
+            color={color}
+          />
+        </div>
         <div className='container flex flex-col items-center space-y-24 py-24 px-6 md:px-24'>
           <OverviewCard post={post} />
           <div className='mx-auto'>
             <div className='flex items-center justify-center'>
+              <motion.div
+                className='fixed bottom-0 left-0 right-0 h-2 origin-[0%] bg-daisy'
+                style={{ scaleX: scrollYProgress }}
+              />
               <article className='with-prose'>
                 <ReactMarkdown>{markdown}</ReactMarkdown>
               </article>
             </div>
           </div>
           {postFeedbacks.length > 0 && (
-            <FeedbackCard classname='w-full md:w-11/12' feedback={postFeedbacks} />
+            <FeedbackCard
+              classname='w-full md:w-11/12'
+              feedback={postFeedbacks}
+            />
           )}
           <MorePosts posts={morePosts} />
         </div>
-        <CTA />
-        <Footer />
-      </main>
+      </motion.main>
     </>
   );
 };

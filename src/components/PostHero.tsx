@@ -10,6 +10,7 @@ interface PostHeroProps {
   post: NotionPost;
   isNavbarOpen: boolean;
   setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
+  color?: string;
 }
 
 export default function PostHero({
@@ -17,49 +18,48 @@ export default function PostHero({
   post,
   isNavbarOpen,
   setIsNavbarOpen,
+  color,
 }: PostHeroProps): JSX.Element {
   return (
-    <div
-      className={cx(className, 'flex h-screen items-center justify-center')}
-      style={{
-        backgroundColor: `#${post.properties.bgColor}`,
-        color: `#${post.properties.color}`,
-      }}
-    >
+    <>
       <Header
-        className='fixed top-0'
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
+        color={color ?? post.properties.color}
       />
       <MobileMenu
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
+        color={color ?? post.properties.color}
+        bgColor={post.properties.bgColor}
       />
       <div
         className={cx(
           className,
-          'container mt-24 flex flex-col items-center space-y-16 space-x-0 py-8 px-8 md:py-32 md:px-0'
+          'mb:pb-8 flex h-[80vh] flex-col items-center justify-end px-6 pb-4 md:gap-12 md:px-0'
         )}
+        style={{
+          backgroundColor: `#${post.properties.bgColor}`,
+          color: `#${post.properties.color}`,
+        }}
       >
-        <div className='relative h-8 w-48'>
-          <Image
-            src={post.org.logo}
-            alt={`${post.org.orgName} logo`}
-            layout='fill'
-            objectFit='contain'
-            objectPosition='bottom'
-            priority
-          />
-        </div>
-        <div className='mb-4 flex max-w-2xl flex-col space-y-2 md:mb-8 md:space-y-4 '>
-          <h1 className='text-center font-lora text-4xl font-bold md:text-5xl'>
+        <div className='flex max-w-lg flex-col items-center space-y-2 md:space-y-4 '>
+          <h1 className='text-center font-vollkorn text-4xl font-bold md:text-5xl md:leading-snug'>
             {post.details.title}
           </h1>
-          <p className='text-center font-normal opacity-80 md:text-xl md:leading-loose'>
+          <p className='max-w-md text-center font-normal opacity-80 md:text-xl md:leading-loose'>
             {post.details.description}
           </p>
         </div>
+        <div className='relative h-2/5 w-1/2'>
+          <Image
+            src={post.details.img}
+            alt={post.details.title}
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

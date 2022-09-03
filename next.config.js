@@ -11,6 +11,10 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['s3.us-west-2.amazonaws.com', 'www.notion.so'],
+    domains: [
+      's3.us-west-2.amazonaws.com',
+      'www.notion.so',
+      'www.dropbox.com',
+    ],
   },
 };
