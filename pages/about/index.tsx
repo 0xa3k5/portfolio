@@ -2,12 +2,11 @@ import NotionService from '../api/notion';
 import { GetStaticProps } from 'next';
 import { WorkExp, StaticPage } from '../../@types/schema';
 import WorkExperience from '../../src/components/WorkExperience';
-import CTA from '../../src/components/CTA';
-
 import PageHead from '../../src/components/PageHead';
-import { useState } from 'react';
 import PageHero from '../../src/components/PageHero';
-import Footer from '../../src/components/Footer';
+import { motion } from 'framer-motion';
+import { motionVariants } from '../../src/utils/motionVariants';
+import { useState } from 'react';
 
 interface AboutProps {
   page: StaticPage;
@@ -20,9 +19,16 @@ export default function About({ page, workExp }: AboutProps): JSX.Element {
   return (
     <>
       <PageHead page={page} />
-      <main className={`${isNavbarOpen && 'scroll-none'} h-screen`}>
+      <motion.main
+        variants={motionVariants.pageVariants}
+        initial='hidden'
+        animate='enter'
+        exit='exit'
+        transition={{ type: 'linear' }}
+      >
         <PageHero
           page={page}
+          className='snap-center'
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
@@ -39,9 +45,7 @@ export default function About({ page, workExp }: AboutProps): JSX.Element {
               );
             })}
         </div>
-        <CTA className='snap-center' />
-        <Footer className='snap-center' />
-      </main>
+      </motion.main>
     </>
   );
 }

@@ -7,25 +7,40 @@ import MobileMenu from './Header/MobileMenu';
 interface PageHeroProps {
   className?: string;
   page: StaticPage;
-  setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
+  color?: string;
+  bgColor?: string;
   isNavbarOpen: boolean;
+  setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function PageHero({
   className,
   page,
-  setIsNavbarOpen,
+  color = 'fff',
+  bgColor = '000',
   isNavbarOpen,
+  setIsNavbarOpen,
 }: PageHeroProps): JSX.Element {
   return (
-    <div className={cx(className, 'flex h-screen items-center justify-center')}>
-      <Header isNavbarOpen={isNavbarOpen} setIsNavbarOpen={setIsNavbarOpen} />
+    <div className='container flex h-[80vh] w-screen flex-col items-center justify-center'>
+      <Header
+        isNavbarOpen={isNavbarOpen}
+        setIsNavbarOpen={setIsNavbarOpen}
+        color={color}
+      />
       <MobileMenu
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
+        color={color}
+        bgColor={bgColor}
       />
-      <div className='container flex snap-center flex-col items-center place-self-center py-8 px-4 text-center md:py-32 md:px-16 xl:px-0'>
-        <h1 className='mb-4 max-w-3xl font-vollkorn text-5xl font-bold md:text-6xl'>
+      <div
+        className={cx(
+          className,
+          'flex flex-col items-center py-8 px-4 md:py-32 md:px-16 md:text-center xl:px-0'
+        )}
+      >
+        <h1 className='mb-4 max-w-3xl font-vollkorn text-4xl font-bold md:text-5xl lg:text-6xl'>
           {page.heroTitle.split('-').map((s, i) => {
             return (
               <>

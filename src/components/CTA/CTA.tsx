@@ -16,11 +16,11 @@ export default function CTA({
     <div
       className={cx(
         className,
-        'flex h-[60vh] items-center justify-center px-4 md:px-0'
+        'flex h-[70vh] items-center justify-center px-4 md:px-0'
       )}
     >
-      <div className='flex flex-col items-center justify-center space-y-6 text-center md:space-y-8'>
-        <h4 className='max-w-xl text-center font-vollkorn text-4xl font-semibold md:text-5xl'>
+      <div className='flex flex-col justify-center space-y-6 md:items-center md:space-y-8 md:text-center'>
+        <h4 className='max-w-xl font-vollkorn text-4xl font-semibold md:text-5xl'>
           {title}
         </h4>
         <p className='max-w-sm text-xl font-normal opacity-80'>{desc}</p>

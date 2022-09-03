@@ -10,12 +10,14 @@ interface HeaderProps {
   className?: string;
   setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
   isNavbarOpen: boolean;
+  color?: string;
 }
 
 export default function Header({
   className,
   setIsNavbarOpen,
   isNavbarOpen,
+  color = 'fff',
 }: HeaderProps): JSX.Element {
   const navList = [
     {
@@ -44,29 +46,26 @@ export default function Header({
       targetBlank: true,
     },
   ];
+
   return (
     <div
       className={cx(
         className,
-        'fixed top-0 z-20 w-full bg-midnight py-4 md:py-8 px-4 duration-200 md:px-16',
+        'fixed top-0 z-20 w-full bg-midnight py-4 px-4 duration-200 md:py-6 md:px-16',
         isNavbarOpen
           ? 'bg-opacity-0 backdrop-blur-none'
           : 'bg-opacity-10 backdrop-blur-lg'
       )}
     >
-      <nav className='container flex items-center justify-between'>
-        <Logo />
+      <nav
+        className='flex container items-center justify-between'
+        style={{ color: `#${color}` }}
+      >
+        <Logo onClick={() => setIsNavbarOpen(false)} />
         <ul className='hidden items-center space-x-12 lg:flex'>
-          {navList.map((l, i) => (
-            <li
-              className='text-sm uppercase tracking-widest text-white'
-              key={i}
-            >
-              <Button.Text
-                text={l.text}
-                href={l.href}
-                targetBlank={l.targetBlank}
-              />
+          {navList.map(({ text, href, targetBlank }) => (
+            <li className='text-sm uppercase tracking-widest' key={href}>
+              <Button.Text text={text} href={href} targetBlank={targetBlank} />
             </li>
           ))}
         </ul>

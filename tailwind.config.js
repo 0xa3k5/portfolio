@@ -13,7 +13,7 @@ module.exports = {
       },
       fontFamily: {
         vollkorn: ['Vollkorn', 'serif'],
-        lato: ['Lato', 'sans-serif'],
+        muli: ['Muli', 'sans-serif'],
       },
     },
     container: {

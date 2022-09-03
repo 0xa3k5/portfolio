@@ -1,12 +1,13 @@
 import { GetStaticProps } from 'next';
 import { NotionPost, StaticPage } from '../@types/schema';
 import ContentCard from '../src/components/ContentCard';
-import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
-import CTA from '../src/components/CTA';
 import PageHero from '../src/components/PageHero';
 import PageHead from '../src/components/PageHead';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { motionVariants } from '../src/utils/motionVariants';
+import { useState, useEffect } from 'react';
+import { InView } from 'react-intersection-observer';
 
 interface HomeProps {
   page: StaticPage;
@@ -15,37 +16,60 @@ interface HomeProps {
 
 export default function Home({ page, works }: HomeProps) {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [color, setColor] = useState<string>('fff');
+  const [bgColor, setBgColor] = useState<string>('000');
+  const [inViewPost, setInViewPost] = useState<NotionPost>(null);
+
+  useEffect(() => {
+    setColor(inViewPost?.properties?.color || 'fff');
+    setBgColor(inViewPost?.properties?.bgColor || '000');
+  }, [inViewPost]);
 
   return (
     <>
       <PageHead page={page} />
-      <main className='h-screen snap-y snap-mandatory overflow-scroll'>
+      <motion.main
+        variants={motionVariants.pageVariants}
+        initial='hidden'
+        animate='enter'
+        exit='exit'
+        transition={{ type: 'linear' }}
+        className='scroll-'
+      >
         <PageHero
           page={page}
+          color={color}
+          bgColor={bgColor}
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        {works
-          .sort(
-            (a: NotionPost, b: NotionPost) =>
-              a.properties.number - b.properties.number
-          )
-          .map((p: NotionPost) => (
-            <section
-              key={`works-${p.properties.id}`}
-              style={{ backgroundColor: `#${p.properties.bgColor}` }}
-            >
-              {p.properties.vertical ? (
-                <ContentCard.Vertical key={p.properties.id} post={p} />
-              ) : (
-                <ContentCard.Horizontal key={p.properties.id} post={p} />
-              )}
-            </section>
-          ))}
-
-        <CTA className='snap-center' />
-        <Footer className='snap-center' />
-      </main>
+        <section className='flex flex-col md:-space-y-16 md:first-of-type:-mt-16'>
+          {works
+            .sort(
+              (a: NotionPost, b: NotionPost) =>
+                a.properties.number - b.properties.number
+            )
+            .map((p: NotionPost, i) => (
+              <InView
+                as={'div'}
+                onChange={(inView) => {
+                  inView
+                    ? setInViewPost(works.find((w, s) => s === i - 1))
+                    : setInViewPost(works.find((w, s) => s === i - 2) || null);
+                }}
+                style={{ backgroundColor: `#${p.properties.bgColor}` }}
+                className='sticky top-0 h-screen rounded-none md:rounded-2xl'
+                key={`works-${p.properties.id}`}
+              >
+                {p.properties.vertical ? (
+                  <ContentCard.Vertical post={p} />
+                ) : (
+                  <ContentCard.Horizontal post={p} />
+                )}
+              </InView>
+            ))}
+        </section>
+      </motion.main>
     </>
   );
 }

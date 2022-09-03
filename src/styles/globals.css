@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap');
-
 @layer base {
   html {
-    @apply overflow-x-hidden scroll-smooth;
+    @apply scroll-smooth;
   }
 
   h1,
@@ -20,25 +17,26 @@
   }
 
   body {
-    @apply bg-midnight font-lato text-white;
+    @apply bg-midnight font-muli text-white;
   }
 }
 
 .with-prose {
   @apply prose
-    prose-xl
+    prose-lg
     prose-invert
     prose-headings:font-vollkorn
     prose-h3:font-normal
     prose-p:font-light
-    prose-p:tracking-wider
-    prose-p:opacity-100
-    prose-a:text-daisy 
+    prose-p:leading-snug
+    prose-p:tracking-wide
+    prose-a:text-daisy
+    prose-a:duration-200 
+    prose-a:hover:text-white
     prose-ul:font-light
-    prose-ul:leading-relaxed
     prose-ul:tracking-wider
     prose-img:rounded-xl
-    md:prose-2xl
+    md:prose-xl
     md:prose-img:rounded-2xl;
 }
 

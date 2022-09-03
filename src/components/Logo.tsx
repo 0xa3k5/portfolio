@@ -1,19 +1,20 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 interface LogoProps {
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
-export default function Logo({ className }: LogoProps): JSX.Element {
+export default function Logo({ className, onClick }: LogoProps): JSX.Element {
   const [hover, setHover] = useState(false);
 
   return (
-    <Link href='/' passHref className={className}>
+    <Link href='/' className={className} passHref scroll={false}>
       <a
-        className=''
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={onClick}
       >
         <h2 className='font-vollkorn text-3xl font-bold duration-200 md:text-4xl'>
           <span className='duration-200'>a</span>
