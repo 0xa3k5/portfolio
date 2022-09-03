@@ -66,6 +66,7 @@ export default function Horizontal({
           objectFit='contain'
           objectPosition='right right'
           priority
+          unoptimized
         />
       </div>
     </div>

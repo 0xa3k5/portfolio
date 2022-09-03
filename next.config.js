@@ -15,6 +15,7 @@ module.exports = {
       's3.us-west-2.amazonaws.com',
       'www.notion.so',
       'www.dropbox.com',
+      'https://www.dropbox.com',
     ],
   },
 };

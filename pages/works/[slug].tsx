@@ -13,7 +13,6 @@ import FeedbackCard from '../../src/components/FeedbackCard';
 import { motion, useScroll } from 'framer-motion';
 import { motionVariants } from '../../src/utils/motionVariants';
 import { useState, useEffect, useRef } from 'react';
-import { InView } from 'react-intersection-observer';
 
 interface DetailProps {
   markdown: string;
@@ -48,7 +47,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
       : setColor(post.properties.color);
 
     return () => window.removeEventListener('scroll', updatePos);
-  }, [window.scrollY]);
+  }, [post.properties.color, scrollPos]);
 
   return (
     <>
