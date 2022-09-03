@@ -33,6 +33,8 @@ export default function WorkExperience({
                   alt={`${job.logo} logo`}
                   layout='fill'
                   objectFit='fill'
+                  priority
+                  unoptimized
                 />
               </div>
               <div className='flex flex-col'>
