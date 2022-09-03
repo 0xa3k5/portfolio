@@ -58,6 +58,7 @@ export default function PostHero({
             layout='fill'
             objectFit='contain'
             priority
+            unoptimized
           />
         </div>
       </div>
