@@ -43,10 +43,10 @@ export default function PageHero({
         <h1 className='mb-4 max-w-3xl font-vollkorn text-4xl font-bold md:text-5xl lg:text-6xl'>
           {page.heroTitle.split('-').map((s, i) => {
             return (
-              <>
-                <span key={i}>{s}</span>
-                <br key={`br-${i}`} />
-              </>
+              <span key={i}>
+                {s}
+                <br />
+              </span>
             );
           })}
         </h1>

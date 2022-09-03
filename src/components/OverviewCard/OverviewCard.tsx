@@ -52,7 +52,7 @@ export default function OverviewCard({
           </ul>
         </div>
       </div>
-      <div className='relative w-full flex-1 translate-y-8 hidden xl:flex'>
+      <div className='relative hidden w-full flex-1 translate-y-8 xl:flex'>
         <Image
           src={post.details.overviewImg}
           alt={post.details.title}
@@ -60,7 +60,6 @@ export default function OverviewCard({
           objectFit='contain'
           objectPosition='right right'
           priority
-          unoptimized
         />
       </div>
     </div>

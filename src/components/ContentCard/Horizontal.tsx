@@ -34,7 +34,6 @@ export default function Horizontal({
             layout='fill'
             objectFit='contain'
             priority
-            unoptimized
           />
         </div>
         <div className='flex max-w-md flex-col items-center space-y-1 md:space-y-4 lg:items-start'>
@@ -67,7 +66,6 @@ export default function Horizontal({
           objectFit='contain'
           objectPosition='right right'
           priority
-          unoptimized
         />
       </div>
     </div>
