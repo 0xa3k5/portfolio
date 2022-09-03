@@ -35,13 +35,7 @@ export default function FeedbackCard({
               key={f.id}
               onClick={() => setSelected(f)}
             >
-              <Image
-                src={f.img}
-                alt={f.name}
-                layout='fill'
-                objectFit='cover'
-                priority
-              />
+              <Image src={f.img} alt={f.name} layout='fill' objectFit='cover' priority unoptimized />
             </div>
           );
         })}

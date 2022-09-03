@@ -41,6 +41,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
 
     window.addEventListener('scroll', updatePos, { passive: true });
     updatePos();
+    console.log(scrollPos);
     scrollPos > ref.current.clientHeight
       ? setColor('ffffff')
       : setColor(post.properties.color);
