@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import Image from 'next/image';
-import { NotionPost } from '../../../@types/schema';
+import { NotionPost } from '../../../../@types/schema';
 
 interface OverviewCardProps {
   className?: string;

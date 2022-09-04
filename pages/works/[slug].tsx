@@ -4,12 +4,12 @@ import { GetStaticProps } from 'next';
 import ReactMarkdown from 'react-markdown';
 import { config } from '../../config';
 import PostHero from '../../src/components/PostHero';
-import OverviewCard from '../../src/components/OverviewCard';
+import OverviewCard from '../../src/components/Cards/OverviewCard';
 import { getMorePosts } from '../../src/utils/getMorePosts';
 import MorePosts from '../../src/components/MorePosts';
 import { NotionPost, Feedback } from '../../@types/schema';
 
-import FeedbackCard from '../../src/components/FeedbackCard';
+import FeedbackCard from '../../src/components/Cards/FeedbackCard';
 import { motion, useScroll } from 'framer-motion';
 import { motionVariants } from '../../src/utils/motionVariants';
 import { useState, useEffect, useRef } from 'react';

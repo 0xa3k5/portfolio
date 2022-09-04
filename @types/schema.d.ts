@@ -13,6 +13,7 @@ export type NotionPost = {
     password: boolean;
     bgColor: string;
     color: string;
+    tag: string;
   };
   details: {
     img: string;

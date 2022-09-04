@@ -134,6 +134,7 @@ export default class NotionService {
         password: page.properties.Password.checkbox === true || false,
         bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
         color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
+        tag: page.properties.Tag.select?.name || null,
       },
       details: {
         img: cover,

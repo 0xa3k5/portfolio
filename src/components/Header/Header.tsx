@@ -4,7 +4,10 @@ import Logo from '../Logo';
 
 import HamburgerIcon from '../../../public/icons/hamburger.svg';
 import CloseIcon from '../../../public/icons/close.svg';
+import LinkedinIcon from '../../../public/socials/linkedin.svg';
+import TwitterIcon from '../../../public/socials/twitter.svg';
 import { Dispatch, SetStateAction } from 'react';
+import Link from 'next/link';
 
 interface HeaderProps {
   className?: string;
@@ -31,7 +34,7 @@ export default function Header({
       targetBlank: true,
     },
     {
-      text: 'Linkedin',
+      text: 'LinkedIn',
       href: 'https://linkedin.com/in/alikemalakcay/',
       targetBlank: true,
     },
@@ -58,7 +61,7 @@ export default function Header({
       )}
     >
       <nav
-        className='flex container items-center justify-between'
+        className='container flex items-center justify-between'
         style={{ color: `#${color}` }}
       >
         <Logo onClick={() => setIsNavbarOpen(false)} />

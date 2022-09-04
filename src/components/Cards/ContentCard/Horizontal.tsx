@@ -1,10 +1,10 @@
 import cx from 'classnames';
-import { NotionPost } from '../../../@types/schema';
+import { NotionPost } from '../../../../@types/schema';
 import Image from 'next/image';
-import Button from '../Button';
+import Button from '../../Button';
 
-import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
-import LockIcon from '../../../public/icons/lock.svg';
+import RightArrowCircleIcon from '../../../../public/icons/right-arrow-circle.svg';
+import LockIcon from '../../../../public/icons/lock.svg';
 
 interface HorizontalProps {
   className?: string;
@@ -19,7 +19,7 @@ export default function Horizontal({
     <div
       className={cx(
         className,
-        'container flex h-screen flex-col-reverse items-center justify-center gap-8 px-6 md:h-[95vh] md:flex-row md:gap-16'
+        'container flex h-screen flex-col-reverse items-center justify-center gap-8 px-6 md:h-[90vh] md:flex-row md:gap-16 md:px-12 xl:px-0 xl:justify-between'
       )}
       style={{ color: `#${post.properties.color}` }}
     >

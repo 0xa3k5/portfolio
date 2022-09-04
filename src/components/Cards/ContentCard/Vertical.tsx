@@ -1,10 +1,10 @@
 import cx from 'classnames';
-import { NotionPost } from '../../../@types/schema';
+import { NotionPost } from '../../../../@types/schema';
 import Image from 'next/image';
-import Button from '../Button';
+import Button from '../../Button';
 
-import RightArrowCircleIcon from '../../../public/icons/right-arrow-circle.svg';
-import LockIcon from '../../../public/icons/lock.svg';
+import RightArrowCircleIcon from '../../../../public/icons/right-arrow-circle.svg';
+import LockIcon from '../../../../public/icons/lock.svg';
 
 interface VerticalProps {
   className?: string;

@@ -27,6 +27,7 @@ export default function MorePosts({
             key={p.properties.id}
             href={`/works/${encodeURIComponent(p.properties.slug)}`}
             passHref
+            scroll={false}
           >
             <a className=''>
               <div
