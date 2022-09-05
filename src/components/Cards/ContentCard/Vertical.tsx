@@ -61,13 +61,7 @@ export default function Vertical({
           color={post.properties.color}
           bgColor={post.properties.bgColor}
           text='View Case Study'
-          icon={
-            post.properties.password ? (
-              <LockIcon className='ml-1 w-6' />
-            ) : (
-              <RightArrowCircleIcon className='ml-1 w-6 duration-200 group-hover:translate-x-1' />
-            )
-          }
+          icon={<RightArrowCircleIcon />}
         />
       </div>
     </div>

@@ -83,8 +83,6 @@ export default function Works({
             </div>
           )}
         </div>
-        <CTA />
-        <Footer />
       </motion.main>
     </>
   );

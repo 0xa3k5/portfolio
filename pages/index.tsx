@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import { NotionPost, StaticPage } from '../@types/schema';
 import ContentCard from '../src/components/ContentCard';
+import ContentCard from '../src/components/Cards/ContentCard';
 import NotionService from './api/notion';
 import PageHero from '../src/components/PageHero';
 import PageHead from '../src/components/PageHead';
@@ -12,13 +13,24 @@ import { InView } from 'react-intersection-observer';
 interface HomeProps {
   page: StaticPage;
   works: NotionPost[];
+  posts: NotionPost[];
 }
 
 export default function Home({ page, works }: HomeProps) {
+export default function Home({ page, posts }: HomeProps) {
+  const works = posts.filter((p) => p.properties.tag !== 'Side Project');
+  const sideProjecs = posts.filter((p) => p.properties.tag === 'Side Project');
+
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [color, setColor] = useState<string>('fff');
   const [bgColor, setBgColor] = useState<string>('000');
   const [inViewPost, setInViewPost] = useState<NotionPost>(null);
+
+  const handleInView = (postIndex: number, inView: boolean) => {
+    inView
+      ? setInViewPost(works.find((w, s) => s === postIndex))
+      : setInViewPost(works.find((w, s) => s === postIndex - 1));
+  };
 
   useEffect(() => {
     setColor(inViewPost?.properties?.color || 'fff');
@@ -52,14 +64,18 @@ export default function Home({ page, works }: HomeProps) {
             .map((p: NotionPost, i) => (
               <InView
                 as={'div'}
+                threshold={1}
                 onChange={(inView) => {
                   inView
                     ? setInViewPost(works.find((w, s) => s === i - 1))
                     : setInViewPost(works.find((w, s) => s === i - 2) || null);
+                  handleInView(i, inView);
                 }}
                 style={{ backgroundColor: `#${p.properties.bgColor}` }}
                 className='sticky top-0 h-screen rounded-none md:rounded-2xl'
+                className='sticky top-0'
                 key={`works-${p.properties.id}`}
+                style={{ backgroundColor: `#${p.properties.bgColor}` }}
               >
                 {p.properties.vertical ? (
                   <ContentCard.Vertical post={p} />
@@ -78,6 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const works = await notionService.getPortfolioPosts();
+  const posts = await notionService.getPortfolioPosts();
 
   const page = (await notionService.getStaticPage()).find(
     (data) => data.name === 'Home'
@@ -87,6 +104,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       page,
       works,
+      posts,
     },
   };
 };

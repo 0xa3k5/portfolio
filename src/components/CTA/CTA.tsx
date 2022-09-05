@@ -1,5 +1,4 @@
 import cx from 'classnames';
-import Button from '../Button';
 
 interface CTAProps {
   className?: string;
@@ -24,7 +23,6 @@ export default function CTA({
           {title}
         </h4>
         <p className='max-w-sm text-xl font-normal opacity-80'>{desc}</p>
-        <Button.Primary href='mailto:hey@akml.io' text='Shoot me an email' />
       </div>
     </div>
   );
