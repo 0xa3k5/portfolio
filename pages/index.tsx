@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
 import { NotionPost, StaticPage } from '../@types/schema';
-import ContentCard from '../src/components/ContentCard';
 import ContentCard from '../src/components/Cards/ContentCard';
 import NotionService from './api/notion';
 import PageHero from '../src/components/PageHero';
@@ -13,11 +12,9 @@ import { InView } from 'react-intersection-observer';
 
 interface HomeProps {
   page: StaticPage;
-  works: NotionPost[];
   posts: NotionPost[];
 }
 
-export default function Home({ page, works }: HomeProps) {
 export default function Home({ page, posts }: HomeProps) {
   const works = posts.filter((p) => p.properties.tag !== 'Side Project');
   const sideProjecs = posts.filter((p) => p.properties.tag === 'Side Project');
@@ -47,7 +44,6 @@ export default function Home({ page, posts }: HomeProps) {
         animate='enter'
         exit='exit'
         transition={{ type: 'linear' }}
-        className='scroll-'
       >
         <PageHero
           page={page}
@@ -64,17 +60,10 @@ export default function Home({ page, posts }: HomeProps) {
             )
             .map((p: NotionPost, i) => (
               <InView
-                as={'div'}
                 threshold={1}
                 onChange={(inView) => {
-                  inView
-                    ? setInViewPost(works.find((w, s) => s === i - 1))
-                    : setInViewPost(works.find((w, s) => s === i - 2) || null);
                   handleInView(i, inView);
                 }}
-                style={{ backgroundColor: `#${p.properties.bgColor}` }}
-                className='sticky top-0 h-screen rounded-none md:rounded-2xl'
-                className='sticky top-0'
                 className='work-content-card sticky top-0'
                 key={`works-${p.properties.id}`}
                 style={{ backgroundColor: `#${p.properties.bgColor}` }}
@@ -108,7 +97,6 @@ export default function Home({ page, posts }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
-  const works = await notionService.getPortfolioPosts();
   const posts = await notionService.getPortfolioPosts();
 
   const page = (await notionService.getStaticPage()).find(
@@ -118,7 +106,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       page,
-      works,
       posts,
     },
   };

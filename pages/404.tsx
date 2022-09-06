@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
 import { NotionPost, StaticPage } from '../@types/schema';
-import Footer from '../src/components/Footer';
 import NotionService from './api/notion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +8,6 @@ import PageHero from '../src/components/PageHero';
 import PageHead from '../src/components/PageHead';
 
 import RightArrowPlain from '../public/icons/right-arrow-plain.svg';
-import CTA from '../src/components/CTA/CTA';
 import { motion } from 'framer-motion';
 import { motionVariants } from '../src/utils/motionVariants';
 
