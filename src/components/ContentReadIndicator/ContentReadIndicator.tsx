@@ -1,8 +1,6 @@
 import { motion, MotionValue, Variants } from 'framer-motion';
 import { MutableRefObject, useState } from 'react';
 import { NotionPost } from '../../../@types/schema';
-import { hexToRGB } from '../../utils/hexToRGB';
-
 import TopArrowIcon from '../../../public/icons/right-arrow-plain.svg';
 
 const buttonIcon: Variants = {
@@ -41,7 +39,7 @@ export default function ContentReadIndicator({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className='w-1 rounded-full bg-white bg-opacity-5 '>
+      <div className='w-1 rounded-full bg-white bg-opacity-10'>
         <motion.div
           className='h-full origin-top rounded-full'
           style={{
@@ -57,10 +55,7 @@ export default function ContentReadIndicator({
             ? { display: 'flex', opacity: 100, scale: 1 }
             : { display: 'hidden', opacity: 0, scale: 0.2 }
         }
-        className='h-fit overflow-clip rounded-lg p-3 duration-200 hover:ring-2 hover:ring-white hover:ring-opacity-20'
-        style={{
-          backgroundColor: `rgba(${hexToRGB(post.properties.color)},0.2)`,
-        }}
+        className='h-fit overflow-clip rounded-lg bg-white bg-opacity-10 p-3 duration-200 hover:ring-2 hover:ring-white hover:ring-opacity-20'
         onClick={() => {
           setHover(false);
           window.scrollTo({
@@ -75,7 +70,6 @@ export default function ContentReadIndicator({
           variants={buttonIcon}
           initial='initial'
           animate={hover ? 'hover' : 'idle'}
-          style={{ color: `#${post.properties.bgColor}` }}
         >
           <TopArrowIcon className='-rotate-90' />
         </motion.span>
