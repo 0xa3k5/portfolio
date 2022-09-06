@@ -56,6 +56,8 @@ export default function SideProjectCard({
           layout='fill'
           objectFit='contain'
           objectPosition='bottom'
+          unoptimized
+          priority
         />
       </div>
     </motion.div>

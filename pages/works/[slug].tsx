@@ -13,6 +13,7 @@ import FeedbackCard from '../../src/components/Cards/FeedbackCard';
 import { motion, useScroll } from 'framer-motion';
 import { motionVariants } from '../../src/utils/motionVariants';
 import { useState, useEffect, useRef } from 'react';
+import ContentReadIndicator from '../../src/components/ContentReadIndicator/index';
 
 interface DetailProps {
   markdown: string;
@@ -24,26 +25,34 @@ interface DetailProps {
 const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [color, setColor] = useState<string>('fff');
+  const [scrollPos, setScrollPos] = useState(0);
+  const [contentInView, setContentInView] = useState(false);
 
   const ref = useRef(null);
+  const mdRef = useRef();
+  const { scrollYProgress } = useScroll({ target: mdRef });
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
-  const { scrollYProgress } = useScroll();
-
-  const [scrollPos, setScrollPos] = useState(0);
 
   useEffect(() => {
     function updatePos() {
       setScrollPos(window.scrollY);
     }
+    function handleContentInView() {
+      if (scrollPos > ref.current.clientHeight) {
+        setColor('fff');
+        setContentInView(true);
+      } else {
+        setColor(post.properties.color);
+        setContentInView(false);
+      }
+    }
 
     window.addEventListener('scroll', updatePos, { passive: true });
     updatePos();
-    scrollPos > ref.current.clientHeight
-      ? setColor('ffffff')
-      : setColor(post.properties.color);
+    handleContentInView();
 
     return () => window.removeEventListener('scroll', updatePos);
   }, [post.properties.color, scrollPos]);
@@ -79,14 +88,20 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
             color={color}
           />
         </div>
-        <div className='container flex flex-col items-center space-y-24 py-24 px-6 md:px-24'>
+        <div
+          className='container flex flex-col items-center space-y-24 py-24 px-6 md:px-24'
+          ref={mdRef}
+        >
           <OverviewCard post={post} />
           <div className='mx-auto'>
             <div className='flex items-center justify-center'>
-              <motion.div
-                className='fixed bottom-0 left-0 right-0 h-2 origin-[0%] bg-daisy'
-                style={{ scaleX: scrollYProgress }}
-              />
+              {contentInView && (
+                <ContentReadIndicator
+                  contentRef={mdRef}
+                  post={post}
+                  scrollYProgress={scrollYProgress}
+                />
+              )}
               <article className='with-prose'>
                 <ReactMarkdown>{markdown}</ReactMarkdown>
               </article>

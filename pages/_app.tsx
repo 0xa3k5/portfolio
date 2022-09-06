@@ -8,15 +8,17 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   const url = `https://akml.io${router.route}`;
 
   return (
-    <AnimatePresence
-      mode='wait'
-      initial={false}
-      onExitComplete={() => window.scrollTo(0, 0)}
-    >
-      <Component {...pageProps} canonical={url} key={url} />
+    <>
+      <AnimatePresence
+        mode='wait'
+        initial={false}
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        <Component {...pageProps} canonical={url} key={url} />
+      </AnimatePresence>
       <CTA />
       <Footer />
-    </AnimatePresence>
+    </>
   );
 }
 export default MyApp;
