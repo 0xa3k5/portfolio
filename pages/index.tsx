@@ -8,6 +8,7 @@ import PageHead from '../src/components/PageHead';
 import { motion } from 'framer-motion';
 import { motionVariants } from '../src/utils/motionVariants';
 import { useState, useEffect } from 'react';
+import SideProjectCard from '../src/components/Cards/SideProjectCard';
 import { InView } from 'react-intersection-observer';
 
 interface HomeProps {
@@ -74,6 +75,7 @@ export default function Home({ page, posts }: HomeProps) {
                 style={{ backgroundColor: `#${p.properties.bgColor}` }}
                 className='sticky top-0 h-screen rounded-none md:rounded-2xl'
                 className='sticky top-0'
+                className='work-content-card sticky top-0'
                 key={`works-${p.properties.id}`}
                 style={{ backgroundColor: `#${p.properties.bgColor}` }}
               >
@@ -84,6 +86,19 @@ export default function Home({ page, posts }: HomeProps) {
                 )}
               </InView>
             ))}
+        </section>
+        <section className='container flex min-h-screen flex-col gap-8 py-24 md:gap-24 md:py-64'>
+          <div className='flex items-baseline space-x-8'>
+            <h2 className='w-auto whitespace-nowrap text-4xl font-bold md:text-5xl lg:text-6xl'>
+              on the side
+            </h2>
+            <hr className='relative w-full opacity-20' />
+          </div>
+          {sideProjecs.map((p) => {
+            return (
+              <SideProjectCard post={p} key={p.properties.id} className='' />
+            );
+          })}
         </section>
       </motion.main>
     </>

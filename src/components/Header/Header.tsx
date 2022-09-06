@@ -4,10 +4,7 @@ import Logo from '../Logo';
 
 import HamburgerIcon from '../../../public/icons/hamburger.svg';
 import CloseIcon from '../../../public/icons/close.svg';
-import LinkedinIcon from '../../../public/socials/linkedin.svg';
-import TwitterIcon from '../../../public/socials/twitter.svg';
 import { Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
 
 interface HeaderProps {
   className?: string;

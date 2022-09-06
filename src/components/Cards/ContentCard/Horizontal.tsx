@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Button from '../../Button';
 
 import RightArrowCircleIcon from '../../../../public/icons/right-arrow-circle.svg';
-import LockIcon from '../../../../public/icons/lock.svg';
 
 interface HorizontalProps {
   className?: string;
@@ -25,7 +24,7 @@ export default function Horizontal({
         color: `#${post.properties.color}`,
       }}
     >
-      <div className='flex max-w-sm flex-col items-center space-y-4 text-center md:items-start md:space-y-6 md:text-left'>
+      <div className='flex max-w-xs md:max-w-md flex-col items-center space-y-4 text-center md:items-start md:space-y-6 md:text-left'>
         <span className='text-sm uppercase tracking-widest opacity-80'>
           {post.details.period} – {post.org.orgName}
         </span>
