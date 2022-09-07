@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import type { AppProps } from 'next/app';
-import CTA from '../src/components/CTA';
 import '../src/styles/globals.css';
 import Footer from '../src/components/Footer';
+import CTA from '../src/components/CTA';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const url = `https://akml.io${router.route}`;

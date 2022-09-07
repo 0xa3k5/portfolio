@@ -18,6 +18,11 @@ export default function Navigation({
       targetBlank: false,
     },
     {
+      text: 'Side Projects',
+      href: '/projects',
+      targetBlank: false,
+    },
+    {
       text: 'Twitter',
       href: 'https://twitter.com/akemalakcay',
       targetBlank: true,

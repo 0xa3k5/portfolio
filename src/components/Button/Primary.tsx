@@ -3,6 +3,9 @@ import { ReactNode, useState } from 'react';
 import { hexToRGB } from '../../utils/hexToRGB';
 import Link from 'next/link';
 
+import { motion, MotionConfig, Variants } from 'framer-motion';
+import { motionVariants } from '../../utils/motionVariants';
+
 interface PrimaryProps {
   className?: string;
   text: string;
@@ -21,31 +24,55 @@ export default function Primary({
   href,
 }: PrimaryProps): JSX.Element {
   const [hover, setHover] = useState(false);
-
   const textRgb = hexToRGB(color);
   const bgRgb = hexToRGB(bgColor);
 
+  const buttonVariants: Variants = {
+    idle: {},
+    animate: {
+      color: hover ? `rgb(${bgRgb})` : `rgb(${textRgb})`,
+      backgroundColor: hover ? `rgba(${textRgb},1)` : `rgba(${textRgb},0.2)`,
+    },
+  };
+
   return (
     <Link href={href} passHref scroll={false}>
-      <a
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <button
-          className={cx(
-            'group flex w-full md:w-fit items-center justify-center rounded-xl py-4 px-8 text-lg duration-200',
-            className
-          )}
-          style={{
-            color: hover ? `rgb(${bgRgb})` : `rgba(${textRgb})`,
-            backgroundColor: hover
-              ? `rgba(${textRgb})`
-              : `rgba(${textRgb},0.2)`,
+      <a>
+        <MotionConfig
+          transition={{
+            staggerChildren: 0.2,
+            delayChildren: 0.2,
+            staggerDirection: 1,
+            duration: 0.4,
+            ease: [0.85, 0, 0.3, 1],
           }}
         >
-          {text}
-          {icon && icon}
-        </button>
+          <motion.button
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            variants={buttonVariants}
+            initial='idle'
+            animate='animate'
+            className={cx(
+              'group flex flex-row items-center justify-end gap-2 overflow-hidden rounded-full py-4 px-6',
+              className
+            )}
+          >
+            <motion.span
+              variants={motionVariants.buttonText}
+              animate={hover ? 'hover' : 'idle'}
+              className={cx('whitespace-nowrap')}
+            >
+              {text}
+            </motion.span>
+            <motion.span
+              variants={motionVariants.buttonIcon}
+              animate={hover ? 'hover' : 'idle'}
+            >
+              {icon}
+            </motion.span>
+          </motion.button>
+        </MotionConfig>
       </a>
     </Link>
   );

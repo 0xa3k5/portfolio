@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { Feedback } from '../../../@types/schema';
+import { Feedback } from '../../../../@types/schema';
 
 import Image from 'next/image';
 import { useState } from 'react';

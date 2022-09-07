@@ -13,6 +13,7 @@ export type NotionPost = {
     password: boolean;
     bgColor: string;
     color: string;
+    tag: string;
   };
   details: {
     img: string;
@@ -65,4 +66,11 @@ export type StaticPage = {
   description: string;
   heroTitle: string;
   heroText: string;
+};
+
+export type Exploration = {
+  id: string;
+  type: 'video' | 'image';
+  name: string;
+  img: string;
 };

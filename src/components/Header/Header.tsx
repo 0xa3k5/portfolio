@@ -31,7 +31,7 @@ export default function Header({
       targetBlank: true,
     },
     {
-      text: 'Linkedin',
+      text: 'LinkedIn',
       href: 'https://linkedin.com/in/alikemalakcay/',
       targetBlank: true,
     },
@@ -58,7 +58,7 @@ export default function Header({
       )}
     >
       <nav
-        className='flex container items-center justify-between'
+        className='container flex items-center justify-between'
         style={{ color: `#${color}` }}
       >
         <Logo onClick={() => setIsNavbarOpen(false)} />

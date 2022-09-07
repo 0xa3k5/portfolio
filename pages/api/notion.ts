@@ -8,6 +8,9 @@ import {
   StaticPage,
 } from '../../@types/schema';
 import { config } from '../../config';
+import { Exploration } from '../../@types/schema';
+
+import Util from 'util';
 
 export default class NotionService {
   client: Client;
@@ -56,6 +59,18 @@ export default class NotionService {
       .filter((p) => p.properties.published);
 
     return transformedPosts;
+  }
+
+  async getExplorations(): Promise<Exploration[]> {
+    const resp = await this.client.databases.query({
+      database_id: config.notion.explorations,
+    });
+
+    const transformed = resp.results.map((res) => {
+      return NotionService.explorationsTransformer(res);
+    });
+
+    return transformed;
   }
 
   async getFeedbacks(): Promise<Feedback[]> {
@@ -109,6 +124,16 @@ export default class NotionService {
     };
   }
 
+  private static explorationsTransformer(page: any): Exploration {
+    console.log(Util.inspect(page, { depth: 5, colors: true }));
+    return {
+      id: page.id,
+      type: page.properties.Video.checkbox === true ? 'video' : 'image',
+      name: page.properties.Name.title[0].plain_text,
+      img: page.properties.Image.files[0].external.url,
+    };
+  }
+
   private static postTransformer(page: any): NotionPost {
     let cover = page.cover;
 
@@ -134,6 +159,7 @@ export default class NotionService {
         password: page.properties.Password.checkbox === true || false,
         bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
         color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
+        tag: page.properties.Tag.select?.name || null,
       },
       details: {
         img: cover,
@@ -144,7 +170,8 @@ export default class NotionService {
         contributions:
           page.properties.Contributions.rich_text[0]?.plain_text || null,
         position: page.properties.Position.rich_text[0]?.plain_text || null,
-        overviewImg: page.properties.OverviewImg.files[0]?.external?.url || cover,
+        overviewImg:
+          page.properties.OverviewImg.files[0]?.external?.url || cover,
       },
       org: {
         logo: page.properties.Logo.files[0].external.url,

@@ -1,7 +1,7 @@
-import Ghost from './Ghost';
 import Primary from './Primary';
+import Secondary from './Secondary';
 import Text from './Text';
 
-const variants = { Primary, Ghost, Text };
+const variants = { Primary, Secondary, Text };
 
 export default variants;
