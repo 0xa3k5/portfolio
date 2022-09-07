@@ -41,7 +41,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
       setScrollPos(window.scrollY);
     }
     function handleContentInView() {
-      if (scrollPos > ref.current.clientHeight) {
+      if (scrollPos > ref.current.clientHeight + 20) {
         setColor('fff');
         setContentInView(true);
       } else {

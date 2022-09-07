@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { NotionPost, StaticPage } from '../@types/schema';
+import { Exploration, NotionPost, StaticPage } from '../@types/schema';
 import ContentCard from '../src/components/Cards/ContentCard';
 import NotionService from './api/notion';
 import PageHero from '../src/components/PageHero';
@@ -9,13 +9,15 @@ import { motionVariants } from '../src/utils/motionVariants';
 import { useState, useEffect } from 'react';
 import SideProjectCard from '../src/components/Cards/SideProjectCard';
 import { InView } from 'react-intersection-observer';
+import ExplorationsCard from '../src/components/Cards/ExplorationsCard/ExplorationsCard';
 
 interface HomeProps {
   page: StaticPage;
   posts: NotionPost[];
+  explorations: Exploration[];
 }
 
-export default function Home({ page, posts }: HomeProps) {
+export default function Home({ page, posts, explorations }: HomeProps) {
   const works = posts.filter((p) => p.properties.tag !== 'Side Project');
   const sideProjecs = posts.filter((p) => p.properties.tag === 'Side Project');
 
@@ -76,9 +78,9 @@ export default function Home({ page, posts }: HomeProps) {
               </InView>
             ))}
         </section>
-        <section className='container flex min-h-screen flex-col gap-8 py-24 md:gap-24 md:py-64'>
+        <section className='container flex flex-col gap-8 py-24 px-8 md:gap-24 md:py-64'>
           <div className='flex items-baseline space-x-8'>
-            <h2 className='w-auto whitespace-nowrap text-4xl font-bold md:text-5xl lg:text-6xl'>
+            <h2 className='w-auto whitespace-nowrap text-4xl font-bold md:text-5xl'>
               on the side
             </h2>
             <hr className='relative w-full opacity-20' />
@@ -89,6 +91,19 @@ export default function Home({ page, posts }: HomeProps) {
             );
           })}
         </section>
+        <section className='container flex flex-col gap-8 py-24 px-8 md:gap-24 md:py-24'>
+          <div className='flex items-baseline space-x-8'>
+            <h2 className='w-auto whitespace-nowrap text-4xl font-bold md:text-5xl'>
+              some explorations
+            </h2>
+            <hr className='relative w-full opacity-20' />
+          </div>
+          <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+            {explorations.map((exp) => {
+              return <ExplorationsCard exploration={exp} key={exp.id} />;
+            })}
+          </div>
+        </section>
       </motion.main>
     </>
   );
@@ -97,16 +112,17 @@ export default function Home({ page, posts }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
-  const posts = await notionService.getPortfolioPosts();
-
   const page = (await notionService.getStaticPage()).find(
     (data) => data.name === 'Home'
   );
+  const posts = await notionService.getPortfolioPosts();
+  const explorations = await notionService.getExplorations();
 
   return {
     props: {
       page,
       posts,
+      explorations,
     },
   };
 };

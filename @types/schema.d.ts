@@ -67,3 +67,10 @@ export type StaticPage = {
   heroTitle: string;
   heroText: string;
 };
+
+export type Exploration = {
+  id: string;
+  type: 'video' | 'image';
+  name: string;
+  img: string;
+};
