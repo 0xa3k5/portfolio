@@ -40,6 +40,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
     function updatePos() {
       setScrollPos(window.scrollY);
     }
+    watchScroll();
     function handleContentInView() {
       if (scrollPos > ref.current.clientHeight + 20) {
         setColor('fff');
@@ -49,7 +50,6 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
         setContentInView(false);
       }
     }
-
     window.addEventListener('scroll', updatePos, { passive: true });
     updatePos();
     handleContentInView();
