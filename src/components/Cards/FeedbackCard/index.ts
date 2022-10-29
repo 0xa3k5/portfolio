@@ -1,3 +1,6 @@
-import FeedbackCard from './FeedbackCard';
+import Grouped from './Grouped';
+import Single from './Single';
 
-export default FeedbackCard;
+const variants = { Grouped, Single };
+
+export default variants;

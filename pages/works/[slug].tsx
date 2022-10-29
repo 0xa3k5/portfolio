@@ -40,7 +40,13 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
     function updatePos() {
       setScrollPos(window.scrollY);
     }
+
+    function watchScroll() {
+      window.addEventListener('scroll', updatePos, { passive: true });
+    }
+
     watchScroll();
+
     function handleContentInView() {
       if (scrollPos > ref.current.clientHeight + 20) {
         setColor('fff');
@@ -50,6 +56,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
         setContentInView(false);
       }
     }
+
     window.addEventListener('scroll', updatePos, { passive: true });
     updatePos();
     handleContentInView();
@@ -108,7 +115,7 @@ const Detail = ({ markdown, post, morePosts, feedbacks }: DetailProps) => {
             </div>
           </div>
           {postFeedbacks.length > 0 && (
-            <FeedbackCard
+            <FeedbackCard.Grouped
               classname='w-full md:w-11/12'
               feedback={postFeedbacks}
             />

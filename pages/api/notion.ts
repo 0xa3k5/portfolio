@@ -125,7 +125,6 @@ export default class NotionService {
   }
 
   private static explorationsTransformer(page: any): Exploration {
-    console.log(Util.inspect(page, { depth: 5, colors: true }));
     return {
       id: page.id,
       type: page.properties.Video.checkbox === true ? 'video' : 'image',

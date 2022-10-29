@@ -4,15 +4,15 @@ import { Feedback } from '../../../../@types/schema';
 import Image from 'next/image';
 import { useState } from 'react';
 
-interface FeedbackCardProps {
+interface GroupedProps {
   classname?: string;
   feedback: Feedback[];
 }
 
-export default function FeedbackCard({
+export default function Grouped({
   classname,
   feedback,
-}: FeedbackCardProps): JSX.Element {
+}: GroupedProps): JSX.Element {
   const [selected, setSelected] = useState<Feedback>(feedback[0]);
 
   return (
