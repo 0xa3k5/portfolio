@@ -18,17 +18,14 @@ export default function Compact({
 }: CompactProps): JSX.Element {
   return (
     <div
-      className="max-w-md border-b border-white border-opacity-10 last:border-none"
+      className="border-b border-white border-opacity-10 last:border-none pb-8 md:pb-12"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <Link href={`/works/${post.properties.slug}`}>
-        <div className="group flex items-start space-x-4  pb-12 hover:cursor-pointer md:hover:space-x-3">
+        <div className="group flex items-baseline space-x-4 hover:cursor-pointer md:hover:space-x-3">
           <RightArrowPlain className="w-8 shrink-0 opacity-40 duration-100 group-hover:opacity-100 md:group-hover:translate-x-1/3" />
-          <span
-            className="font-vollkorn text-2xl font-medium leading-snug duration-75 md:text-3xl lg:max-w-lg"
-            style={{ color: post.properties.bgColor }}
-          >
+          <span className="font-vollkorn text-3xl font-medium leading-snug duration-75">
             {post.details.title}
           </span>
         </div>

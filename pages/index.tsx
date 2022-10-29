@@ -22,7 +22,8 @@ import MobileMenu from "../src/components/Header/MobileMenu";
 
 interface HomeProps {
   page: StaticPage;
-  posts: NotionPost[];
+  works: NotionPost[];
+  sideProjects: NotionPost[];
   explorations: Exploration[];
   feedbacks: Feedback[];
   workExp: WorkExp[];
@@ -30,14 +31,12 @@ interface HomeProps {
 
 export default function Home({
   page,
-  posts,
+  works,
+  sideProjects,
   explorations,
   feedbacks,
   workExp,
 }: HomeProps) {
-  const works = posts.filter((p) => p.properties.tag !== "Side Project");
-  const sideProjects = posts.filter((p) => p.properties.tag === "Side Project");
-
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [color, setColor] = useState<string>("fff");
   const [bgColor, setBgColor] = useState<string>("000");
@@ -46,8 +45,6 @@ export default function Home({
   useEffect(() => {
     setColor(hovered?.properties?.color || "ffffff");
     setBgColor(hovered?.properties?.bgColor || "000000");
-
-    console.log("Inview", hovered?.details?.title);
   }, [hovered]);
 
   const bgPainterVariants: Variants = {
@@ -106,7 +103,7 @@ export default function Home({
           color={color}
           bgColor={bgColor}
         />
-        <div className="container flex max-w-5xl flex-col space-y-24 px-4 md:space-y-48 md:px-0">
+        <div className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl">
           <PageHero
             page={page}
             color={color}
@@ -114,13 +111,10 @@ export default function Home({
             isNavbarOpen={isNavbarOpen}
             setIsNavbarOpen={setIsNavbarOpen}
           />
-          <section className="flex flex-col px-4 py-24 lg:px-0">
-            <SectionTitle
-              title="highlighted case studies"
-              className="mb-8 md:mb-16"
-            />
-            <div className="flex min-h-[40vh] w-full items-center space-x-4">
-              <div className="flex w-full flex-col space-y-12 md:w-1/2">
+          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+            <SectionTitle title="highlighted case studies" className="mb-16" />
+            <div className="flex items-center space-x-4">
+              <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
                 {works
                   .sort(
                     (a: NotionPost, b: NotionPost) =>
@@ -138,7 +132,7 @@ export default function Home({
                   })}
               </div>
               {hovered && (
-                <div className="relative hidden flex-1 md:inline-block">
+                <div className="relative hidden flex-1 lg:inline-block">
                   <Image
                     src={hovered.details.img}
                     alt={hovered.details.title}
@@ -154,19 +148,19 @@ export default function Home({
               )}
             </div>
           </section>
-          <section className="flex max-w-4xl flex-col px-4 py-24 lg:px-0">
+          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
             <SectionTitle title="people said nice things" />
             {feedbacks.map((f) => {
               return (
                 <FeedbackCard.Single
                   feedback={f}
                   key={f.id}
-                  classname="border-b border-opacity-5 border-white last-of-type:border-none"
+                  classname="border-b border-opacity-10 border-white last-of-type:border-none"
                 />
               );
             })}
           </section>
-          <section className="flex max-w-4xl flex-col px-4 py-24 lg:px-0">
+          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
             <SectionTitle title="work experience" />
             {workExp
               .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
@@ -175,15 +169,15 @@ export default function Home({
                   <WorkExperience
                     job={w}
                     key={`about-${w.id}`}
-                    classname="border-b border-opacity-5 border-white last-of-type:border-none"
+                    classname="border-b border-opacity-10 border-white last-of-type:border-none"
                   />
                 );
               })}
           </section>
-          <section className="flex flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="on the side" className="mb-8 md:mb-16" />
-            <div className="flex min-h-[40vh] w-full items-center justify-center space-x-4">
-              <div className="flex w-full flex-col space-y-12 md:w-1/2">
+          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+            <SectionTitle title="on the side" className="mb-16" />
+            <div className="flex w-full items-center justify-center">
+              <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
                 {sideProjects.map((p) => {
                   return (
                     <ContentCard.Compact
@@ -195,7 +189,7 @@ export default function Home({
                   );
                 })}
               </div>
-              <div className="relative hidden flex-1 md:inline-block">
+              <div className="relative hidden flex-1 lg:inline-block">
                 {hovered && (
                   <Image
                     src={hovered.details.img}
@@ -212,7 +206,7 @@ export default function Home({
               </div>
             </div>
           </section>
-          <section className="flex flex-col px-4 py-24 lg:px-0">
+          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
             <SectionTitle title="some explorations" className="mb-8 md:mb-16" />
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {explorations.map((exp) => {
@@ -237,10 +231,14 @@ export const getStaticProps: GetStaticProps = async () => {
   const feedbacks = await notionService.getFeedbacks();
   const workExp = await notionService.getWorkExp();
 
+  const works = posts.filter((p) => p.properties.tag !== "Side Project");
+  const sideProjects = posts.filter((p) => p.properties.tag === "Side Project");
+
   return {
     props: {
       page,
-      posts,
+      works,
+      sideProjects,
       explorations,
       feedbacks,
       workExp,
