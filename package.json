@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "TAILWIND_MODE=watch next dev",
     "build": "next build",
-    "start": "TAILWIND_MODE=watch next start",
-    "lint": "next lint"
+    "start": "TAILWIND_MODE=watch next start"
   },
   "dependencies": {
     "@svgr/webpack": "^6.1.2",

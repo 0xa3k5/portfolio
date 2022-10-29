@@ -1,16 +1,14 @@
-import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
+import { Client } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
 import {
   NotionPost,
   WorkExp,
   NotionPageDetail,
   Feedback,
   StaticPage,
-} from '../../@types/schema';
-import { config } from '../../config';
-import { Exploration } from '../../@types/schema';
-
-import Util from 'util';
+} from "../../@types/schema";
+import { config } from "../../config";
+import { Exploration } from "../../@types/schema";
 
 export default class NotionService {
   client: Client;
@@ -92,7 +90,7 @@ export default class NotionService {
     const response = await this.client.databases.query({
       database_id: db,
       filter: {
-        property: 'Slug',
+        property: "Slug",
         formula: {
           string: {
             equals: slug,
@@ -118,16 +116,16 @@ export default class NotionService {
     return {
       name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,
-      description: page.properties.Description.rich_text[0]?.plain_text || '',
-      heroText: page.properties.HeroText.rich_text[0]?.plain_text || '',
-      heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || '',
+      description: page.properties.Description.rich_text[0]?.plain_text || "",
+      heroText: page.properties.HeroText.rich_text[0]?.plain_text || "",
+      heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || "",
     };
   }
 
   private static explorationsTransformer(page: any): Exploration {
     return {
       id: page.id,
-      type: page.properties.Video.checkbox === true ? 'video' : 'image',
+      type: page.properties.Video.checkbox === true ? "video" : "image",
       name: page.properties.Name.title[0].plain_text,
       img: page.properties.Image.files[0].external.url,
     };
@@ -137,15 +135,15 @@ export default class NotionService {
     let cover = page.cover;
 
     switch (cover.type) {
-      case 'file':
+      case "file":
         cover = page.cover.file.url;
         break;
-      case 'external':
+      case "external":
         cover = page.cover.external.url;
         break;
       default:
         // placeholder
-        cover = '';
+        cover = "";
     }
 
     const transformedPage = {
@@ -156,8 +154,8 @@ export default class NotionService {
         published: page.properties.Published.checkbox === true,
         vertical: page.properties.Vertical.checkbox === true,
         password: page.properties.Password.checkbox === true || false,
-        bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
-        color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
+        bgColor: page.properties.BgColor.rich_text[0]?.plain_text || "000000",
+        color: page.properties.TextColor.rich_text[0]?.plain_text || "ffffff",
         tag: page.properties.Tag.select?.name || null,
       },
       details: {

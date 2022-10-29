@@ -1,10 +1,10 @@
-import * as dotenv from 'dotenv';
-import { cleanEnv, str } from 'envalid';
+import * as dotenv from "dotenv";
+import { cleanEnv, str } from "envalid";
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: ".env" });
 
 const env = cleanEnv(process.env, {
-  APP_ENV: str<'dev' | 'prod'>({ choices: ['dev', 'prod'], default: 'dev' }),
+  APP_ENV: str<"dev" | "prod">({ choices: ["dev", "prod"], default: "dev" }),
   N_API_KEY: str(),
   N_DB_WORK: str(),
   N_DB_CAREER_HIGHLIGHTS: str(),
@@ -43,16 +43,8 @@ const notionEnv = () => {
   };
 };
 
-let resolvedNotionEnv: ReturnType<typeof notionEnv>;
-
 export const config = {
-  env: env.APP_ENV as 'dev' | 'prod',
-  // notion: () => {
-  //   if (!resolvedNotionEnv) {
-  //     resolvedNotionEnv = notionEnv();
-  //   }
-  //   return notionEnv;
-  // },
+  env: env.APP_ENV as "dev" | "prod",
   notion: {
     apiKey: env.N_API_KEY,
     workExp: env.N_DB_WORK,
