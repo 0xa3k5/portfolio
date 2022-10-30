@@ -1,16 +1,16 @@
-import NotionService from "../api/notion";
+import NotionService from "./api/notion";
 import { GetStaticProps } from "next";
-import { WorkExp, StaticPage, Feedback } from "../../@types/schema";
-import WorkExperience from "../../src/components/WorkExperience";
-import PageHead from "../../src/components/PageHead";
-import PageHero from "../../src/components/PageHero";
+import { WorkExp, StaticPage, Feedback } from "../@types/schema";
+import WorkExperience from "../src/components/WorkExperience";
+import PageHead from "../src/components/PageHead";
+import PageHero from "../src/components/PageHero";
 import { motion } from "framer-motion";
-import { motionVariants } from "../../src/utils/motionVariants";
+import { motionVariants } from "../src/utils/motionVariants";
 import { useState } from "react";
-import FeedbackCard from "../../src/components/Cards/FeedbackCard";
-import SectionTitle from "../../src/components/SectionTitle";
-import Header from "../../src/components/Header/Header";
-import MobileMenu from "../../src/components/Header/MobileMenu";
+import FeedbackCard from "../src/components/Cards/FeedbackCard";
+import SectionTitle from "../src/components/SectionTitle";
+import Header from "../src/components/Header/Header";
+import MobileMenu from "../src/components/Header/MobileMenu";
 
 interface AboutProps {
   page: StaticPage;

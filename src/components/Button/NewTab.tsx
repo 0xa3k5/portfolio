@@ -19,7 +19,7 @@ export default function NewTab({
       color: hovered ? `rgb(0,0,0)` : `rgb(255,255,255)`,
       backgroundColor: hovered
         ? `rgba(255,255,255,1)`
-        : `rgba(255,255,255,0.2)`,
+        : `rgba(255,255,255,0.1)`,
     },
     whileHover: {
       scale: 1,
