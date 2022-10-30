@@ -1,5 +1,4 @@
 import NotionService from "./api/notion";
-import { GetStaticProps } from "next";
 import { WorkExp, StaticPage, Feedback } from "../@types/schema";
 import WorkExperience from "../src/components/WorkExperience";
 import PageHead from "../src/components/PageHead";
@@ -45,17 +44,13 @@ export default function About({
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className="container flex max-w-5xl flex-col space-y-24 px-4 md:space-y-48 md:px-0 xl:max-w-7xl">
+        <div className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl">
           <section className="mb-24 flex max-w-4xl flex-col space-y-16 px-4 py-24 lg:px-0">
             <div className="flex space-x-16">
               <SectionTitle title="yo yo yo" />
               <div className="w-4/6">
                 <p className="text-xl leading-relaxed opacity-70">
-                  “The fact that AK joined with an incredible will to make
-                  things happen and to bring up new cool and up-to-date inputs,
-                  aligned with his specific knowledge about similar niche
-                  products, made all the difference and we can see it on the new
-                  Widget.”
+                  ost.details.description
                 </p>
               </div>
             </div>
@@ -92,7 +87,7 @@ export default function About({
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const notionService = new NotionService();
 
   const workExp = await notionService.getWorkExp();
@@ -109,4 +104,4 @@ export const getStaticProps: GetStaticProps = async () => {
       feedbacks,
     },
   };
-};
+}

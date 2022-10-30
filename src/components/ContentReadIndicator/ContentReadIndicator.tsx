@@ -1,7 +1,7 @@
 import { motion, MotionValue, Variants } from "framer-motion";
 import { MutableRefObject, useState } from "react";
 import { NotionPost } from "../../../@types/schema";
-import TopArrowIcon from "../../../public/icons/right-arrow-plain.svg";
+import RightArrowIcon from "../../../public/icons/right-arrow-plain.svg";
 
 const buttonIcon: Variants = {
   idle: {
@@ -35,19 +35,10 @@ export default function ContentReadIndicator({
 
   return (
     <div
-      className="fixed left-[5%] top-[30%] z-20 hidden h-[40%] origin-[0%] flex-row space-x-4 md:flex xl:left-[20%]"
+      className="fixed left-[5%] top-[30%] z-20 hidden h-[40%] origin-[0%] flex-row space-x-4 lg:flex"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="w-1 rounded-full bg-white bg-opacity-10">
-        <motion.div
-          className="h-full origin-top rounded-full"
-          style={{
-            scaleY: scrollYProgress,
-            backgroundColor: `#${post.properties.color}`,
-          }}
-        />
-      </div>
       <motion.button
         initial={{ display: "hidden", opacity: 0 }}
         animate={
@@ -71,9 +62,18 @@ export default function ContentReadIndicator({
           initial="initial"
           animate={hover ? "hover" : "idle"}
         >
-          <TopArrowIcon className="-rotate-90" />
+          <RightArrowIcon className="-rotate-90" />
         </motion.span>
       </motion.button>
+      <div className="w-1 rounded-full bg-white bg-opacity-10">
+        <motion.div
+          className="h-full origin-top rounded-full"
+          style={{
+            scaleY: scrollYProgress,
+            backgroundColor: `#${post.properties.color}`,
+          }}
+        />
+      </div>
     </div>
   );
 }

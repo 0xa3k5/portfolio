@@ -1,9 +1,9 @@
-import NotionService from '../../pages/api/notion';
+import NotionService from "../../pages/api/notion";
 
 export async function getMorePosts(slug: string) {
   const notionService = new NotionService();
 
-  const posts = await notionService.getPortfolioPosts();
+  const posts = await notionService.getCaseStudies();
 
   const currentPost = posts.find((page) => page.properties.slug === slug);
   const currentPostIndex = posts.findIndex(

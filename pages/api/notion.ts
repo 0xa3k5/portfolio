@@ -6,9 +6,9 @@ import {
   NotionPageDetail,
   Feedback,
   StaticPage,
-} from '../../@types/schema';
-import { config } from '../../config';
-import { Exploration } from '../../@types/schema';
+} from "../../@types/schema";
+import { config } from "../../config";
+import { Exploration } from "../../@types/schema";
 
 export default class NotionService {
   client: Client;
@@ -17,13 +17,13 @@ export default class NotionService {
   notionConfig = config.notion();
 
   constructor() {
-    this.client = new Client({ auth: this.notionConfig.notionApiKey });
+    this.client = new Client({ auth: this.notionConfig.apiKey });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
   }
 
   async getStaticPage(): Promise<StaticPage[]> {
     const response = await this.client.databases.query({
-      database_id: this.notionConfig.notionPages,
+      database_id: this.notionConfig.pages,
     });
 
     const transformedPages = response.results.map((res) => {
@@ -35,7 +35,7 @@ export default class NotionService {
 
   async getWorkExp(): Promise<WorkExp[]> {
     const response = await this.client.databases.query({
-      database_id: this.notionConfig.notionWork,
+      database_id: this.notionConfig.workExperiences,
     });
 
     const transformedPosts = response.results
@@ -47,9 +47,9 @@ export default class NotionService {
     return transformedPosts;
   }
 
-  async getPortfolioPosts(): Promise<NotionPost[]> {
+  async getCaseStudies(): Promise<NotionPost[]> {
     const response = await this.client.databases.query({
-      database_id: this.notionConfig.notionCareer,
+      database_id: this.notionConfig.caseStudies,
     });
 
     const transformedPosts = response.results
@@ -63,7 +63,7 @@ export default class NotionService {
 
   async getExplorations(): Promise<Exploration[]> {
     const resp = await this.client.databases.query({
-      database_id: this.notionConfig.notionExplorations,
+      database_id: this.notionConfig.explorations,
     });
 
     const transformed = resp.results.map((res) => {
@@ -75,7 +75,7 @@ export default class NotionService {
 
   async getFeedbacks(): Promise<Feedback[]> {
     const response = await this.client.databases.query({
-      database_id: this.notionConfig.notionFeedbacks,
+      database_id: this.notionConfig.feedbacks,
     });
 
     const transformedPosts = response.results.map((res) => {
@@ -87,10 +87,10 @@ export default class NotionService {
 
   async getNotionPageDetail(
     slug: string,
-    db: string
+    database_id: string
   ): Promise<NotionPageDetail> {
     const response = await this.client.databases.query({
-      database_id: db,
+      database_id: database_id,
       filter: {
         property: "Slug",
         formula: {
@@ -114,17 +114,19 @@ export default class NotionService {
     };
   }
 
-  private static staticPageTransformer(page: any): StaticPage {
+  private static staticPageTransformer(page): StaticPage {
     return {
       name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,
       description: page.properties.Description.rich_text[0]?.plain_text || "",
       heroText: page.properties.HeroText.rich_text[0]?.plain_text || "",
       heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || "",
+      id: page.id,
+      slug: page.properties.Slug.formula.string,
     };
   }
 
-  private static explorationsTransformer(page: any): Exploration {
+  private static explorationsTransformer(page): Exploration {
     return {
       id: page.id,
       type: page.properties.Video.checkbox === true ? "video" : "image",
@@ -133,8 +135,11 @@ export default class NotionService {
     };
   }
 
-  private static postTransformer(page: any): NotionPost {
+  private static postTransformer(page): NotionPost {
     let cover = page.cover;
+    if (!page.cover) {
+      cover = "";
+    }
 
     switch (cover.type) {
       case "file":
@@ -186,7 +191,7 @@ export default class NotionService {
     return transformedPage;
   }
 
-  private static feedbackTransformer(page: any): Feedback {
+  private static feedbackTransformer(page): Feedback {
     return {
       id: page.id,
       relationId: page.properties.Relation.relation[0].id,
@@ -199,7 +204,7 @@ export default class NotionService {
     };
   }
 
-  private static workExpTransformer(page: any): WorkExp {
+  private static workExpTransformer(page): WorkExp {
     return {
       id: page.id,
       num: page.properties.Num.number,

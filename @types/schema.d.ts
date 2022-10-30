@@ -66,11 +66,13 @@ export type StaticPage = {
   description: string;
   heroTitle: string;
   heroText: string;
+  id: string;
+  slug?: string;
 };
 
 export type Exploration = {
   id: string;
-  type: 'video' | 'image';
+  type: "video" | "image";
   name: string;
   img: string;
 };

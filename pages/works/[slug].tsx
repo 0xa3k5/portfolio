@@ -1,6 +1,5 @@
 import Head from "next/head";
 import NotionService from "../api/notion";
-import { GetStaticProps } from "next";
 import ReactMarkdown from "react-markdown";
 import { config } from "../../config";
 import PostHero from "../../src/components/PostHero";
@@ -152,7 +151,7 @@ export default function Detail({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export async function getStaticProps(context) {
   const pages = await getMorePosts(context.params?.slug as string);
 
   const notionService = new NotionService();
@@ -161,7 +160,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
-    config.notion().notionCareer
+    config.notion().caseStudies
   );
 
   return {
@@ -172,12 +171,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
       feedbacks: feedbacks,
     },
   };
-};
+}
 
 export async function getStaticPaths() {
   const notionService = new NotionService();
 
-  const posts = await notionService.getPortfolioPosts();
+  const posts = await notionService.getCaseStudies();
 
   const paths = posts.map((p) => {
     return `/works/${p.properties.slug}`;

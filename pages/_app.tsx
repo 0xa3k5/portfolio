@@ -31,7 +31,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const cookies = new Cookies(appContext.ctx.req.headers.cookie);
   const password = cookies.get(consts.SiteReadCookie) ?? "";
 
-  if (password === process.env.PAGE_PASSWORD) {
+  if (password === "hireak") {
     appProps.pageProps.hasReadPermission = true;
   }
 

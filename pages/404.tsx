@@ -136,7 +136,7 @@ export const getStaticProps: GetStaticProps = async () => {
     (data) => data.name === "404"
   );
 
-  const posts = (await notionService.getPortfolioPosts()).filter(
+  const posts = (await notionService.getCaseStudies()).filter(
     (p) => p.properties.tag !== "Side Project"
   );
 

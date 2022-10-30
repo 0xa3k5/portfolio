@@ -142,7 +142,6 @@ export default function Home({
                     objectFit="contain"
                     objectPosition="top"
                     priority
-                    unoptimized
                   />
                 </div>
               )}
@@ -226,7 +225,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const page = (await notionService.getStaticPage()).find(
     (data) => data.name === "Home"
   );
-  const posts = await notionService.getPortfolioPosts();
+  const posts = await notionService.getCaseStudies();
   const explorations = await notionService.getExplorations();
   const feedbacks = await notionService.getFeedbacks();
   const workExp = await notionService.getWorkExp();

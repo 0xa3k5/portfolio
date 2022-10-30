@@ -20,12 +20,11 @@ module.exports = {
       center: true,
       padding: "0.5rem",
       screens: {
-        lg: '1124px',
-        xl: '1124px',
-        '2xl': '1440px',
+        lg: "1124px",
+        xl: "1124px",
+        "2xl": "1440px",
       },
     },
-
     colors: {
       black: "#000",
       white: "#ffffff",
