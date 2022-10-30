@@ -19,7 +19,7 @@ export default function PageHero({
     <div
       className={cx(
         className,
-        "flex h-[50vh] md:h-[80vh] flex-col items-center justify-center space-y-8 py-8 text-center md:py-32"
+        "flex h-screen flex-col items-center justify-center space-y-8 py-8 text-center md:py-32"
       )}
     >
       {page.heroTitle.split("-").map((s, i) => {

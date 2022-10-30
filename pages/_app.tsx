@@ -26,11 +26,12 @@ function MyApp({ Component, router, pageProps }: AppProps) {
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-const appProps = await App.getInitialProps(appContext);
+  const appProps = await App.getInitialProps(appContext);
 
   const cookies = new Cookies(appContext.ctx.req.headers.cookie);
   const password = cookies.get(consts.SiteReadCookie) ?? "";
-  if (password === "hireak") {
+
+  if (password === process.env.PAGE_PASSWORD) {
     appProps.pageProps.hasReadPermission = true;
   }
 
