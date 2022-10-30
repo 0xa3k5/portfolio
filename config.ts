@@ -43,16 +43,15 @@ const notionEnv = () => {
   };
 };
 
+let resolvedNotionEnv: ReturnType<typeof notionEnv>;
+
 export const config = {
   env: env.APP_ENV as "dev" | "prod",
-  notion: {
-    apiKey: env.N_API_KEY,
-    workExp: env.N_DB_WORK,
-    portfolioPosts: env.N_DB_CAREER_HIGHLIGHTS,
-    sideProjects: env.N_DB_SIDE_PROJECTS,
-    staticPages: env.N_DB_PAGES,
-    feedbacks: env.N_FEEDBACKS,
-    explorations: env.N_EXPLORATIONS,
+  notion: () => {
+    if (!resolvedNotionEnv) {
+      resolvedNotionEnv = notionEnv();
+    }
+    return resolvedNotionEnv;
   },
 };
 

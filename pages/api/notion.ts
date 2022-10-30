@@ -14,14 +14,16 @@ export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
 
+  notionConfig = config.notion();
+
   constructor() {
-    this.client = new Client({ auth: config.notion.apiKey });
+    this.client = new Client({ auth: this.notionConfig.notionApiKey });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
   }
 
   async getStaticPage(): Promise<StaticPage[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.staticPages,
+      database_id: this.notionConfig.notionPages,
     });
 
     const transformedPages = response.results.map((res) => {
@@ -33,7 +35,7 @@ export default class NotionService {
 
   async getWorkExp(): Promise<WorkExp[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.workExp,
+      database_id: this.notionConfig.notionWork,
     });
 
     const transformedPosts = response.results
@@ -47,7 +49,7 @@ export default class NotionService {
 
   async getPortfolioPosts(): Promise<NotionPost[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.portfolioPosts,
+      database_id: this.notionConfig.notionCareer,
     });
 
     const transformedPosts = response.results
@@ -61,7 +63,7 @@ export default class NotionService {
 
   async getExplorations(): Promise<Exploration[]> {
     const resp = await this.client.databases.query({
-      database_id: config.notion.explorations,
+      database_id: this.notionConfig.notionExplorations,
     });
 
     const transformed = resp.results.map((res) => {
@@ -73,7 +75,7 @@ export default class NotionService {
 
   async getFeedbacks(): Promise<Feedback[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.feedbacks,
+      database_id: this.notionConfig.notionFeedbacks,
     });
 
     const transformedPosts = response.results.map((res) => {
