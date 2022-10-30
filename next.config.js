@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    pagePassword: process.env.PAGE_PASSWORD,
+  },
   reactStrictMode: true,
   poweredByHeader: true,
   output: "standalone",
