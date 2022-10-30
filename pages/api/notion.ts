@@ -1,5 +1,5 @@
-import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
+import { Client } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
 import {
   NotionPost,
   WorkExp,
@@ -14,14 +14,16 @@ export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
 
+  notionConfig = config.notion();
+
   constructor() {
-    this.client = new Client({ auth: config.notion.apiKey });
+    this.client = new Client({ auth: this.notionConfig.notionApiKey });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
   }
 
   async getStaticPage(): Promise<StaticPage[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.staticPages,
+      database_id: this.notionConfig.notionPages,
     });
 
     const transformedPages = response.results.map((res) => {
@@ -33,7 +35,7 @@ export default class NotionService {
 
   async getWorkExp(): Promise<WorkExp[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.workExp,
+      database_id: this.notionConfig.notionWork,
     });
 
     const transformedPosts = response.results
@@ -47,7 +49,7 @@ export default class NotionService {
 
   async getPortfolioPosts(): Promise<NotionPost[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.portfolioPosts,
+      database_id: this.notionConfig.notionCareer,
     });
 
     const transformedPosts = response.results
@@ -61,7 +63,7 @@ export default class NotionService {
 
   async getExplorations(): Promise<Exploration[]> {
     const resp = await this.client.databases.query({
-      database_id: config.notion.explorations,
+      database_id: this.notionConfig.notionExplorations,
     });
 
     const transformed = resp.results.map((res) => {
@@ -73,7 +75,7 @@ export default class NotionService {
 
   async getFeedbacks(): Promise<Feedback[]> {
     const response = await this.client.databases.query({
-      database_id: config.notion.feedbacks,
+      database_id: this.notionConfig.notionFeedbacks,
     });
 
     const transformedPosts = response.results.map((res) => {
@@ -90,7 +92,7 @@ export default class NotionService {
     const response = await this.client.databases.query({
       database_id: db,
       filter: {
-        property: 'Slug',
+        property: "Slug",
         formula: {
           string: {
             equals: slug,
@@ -116,16 +118,16 @@ export default class NotionService {
     return {
       name: page.properties.Name.rich_text[0].plain_text,
       title: page.properties.Title.title[0].plain_text,
-      description: page.properties.Description.rich_text[0]?.plain_text || '',
-      heroText: page.properties.HeroText.rich_text[0]?.plain_text || '',
-      heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || '',
+      description: page.properties.Description.rich_text[0]?.plain_text || "",
+      heroText: page.properties.HeroText.rich_text[0]?.plain_text || "",
+      heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || "",
     };
   }
 
   private static explorationsTransformer(page: any): Exploration {
     return {
       id: page.id,
-      type: page.properties.Video.checkbox === true ? 'video' : 'image',
+      type: page.properties.Video.checkbox === true ? "video" : "image",
       name: page.properties.Name.title[0].plain_text,
       img: page.properties.Image.files[0].external.url,
     };
@@ -135,15 +137,15 @@ export default class NotionService {
     let cover = page.cover;
 
     switch (cover.type) {
-      case 'file':
+      case "file":
         cover = page.cover.file.url;
         break;
-      case 'external':
+      case "external":
         cover = page.cover.external.url;
         break;
       default:
         // placeholder
-        cover = '';
+        cover = "";
     }
 
     const transformedPage = {
@@ -154,8 +156,8 @@ export default class NotionService {
         published: page.properties.Published.checkbox === true,
         vertical: page.properties.Vertical.checkbox === true,
         password: page.properties.Password.checkbox === true || false,
-        bgColor: page.properties.BgColor.rich_text[0]?.plain_text || '000000',
-        color: page.properties.TextColor.rich_text[0]?.plain_text || 'ffffff',
+        bgColor: page.properties.BgColor.rich_text[0]?.plain_text || "000000",
+        color: page.properties.TextColor.rich_text[0]?.plain_text || "ffffff",
         tag: page.properties.Tag.select?.name || null,
       },
       details: {

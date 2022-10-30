@@ -1,7 +1,7 @@
-import Primary from './Primary';
-import Secondary from './Secondary';
-import Text from './Text';
+import Primary from "./Primary";
+import NewTab from "./NewTab";
+import Text from "./Text";
 
-const variants = { Primary, Secondary, Text };
+const variants = { Primary, NewTab, Text };
 
 export default variants;

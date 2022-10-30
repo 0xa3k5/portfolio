@@ -5,7 +5,8 @@
     "dev": "TAILWIND_MODE=watch next dev",
     "build": "next build",
     "start": "TAILWIND_MODE=watch next start",
-    "lint": "next lint"
+    "lint": "eslint --ignore-path .gitignore . --ext js",
+    "lint:fix": "eslint --ignore-path .gitignore . --ext js --fix"
   },
   "dependencies": {
     "@svgr/webpack": "^6.1.2",
@@ -21,7 +22,8 @@
     "react-dom": "18.2.0",
     "react-intersection-observer": "^9.4.0",
     "react-markdown": "^8.0.3",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.4",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@notionhq/client": "^1.0.4",
