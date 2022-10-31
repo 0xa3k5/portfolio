@@ -19,6 +19,7 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
+    loader: "default",
     remotePatterns: [
       {
         protocol: "https",
@@ -31,6 +32,7 @@ module.exports = {
       "www.dropbox.com",
       "https://www.dropbox.com",
       "dropbox.com",
+      "dropboxusercontent.com",
     ],
   },
 };
