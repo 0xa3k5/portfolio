@@ -17,6 +17,8 @@ import MobileMenu from "../../src/components/Header/MobileMenu";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
+import CTA from "../../src/components/CTA";
+import Footer from "../../src/components/Footer";
 
 interface DetailProps {
   markdown: string;
@@ -33,7 +35,7 @@ export default function Detail({
   feedbacks,
   hasReadPermission,
 }: DetailProps) {
-  const { status, data } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const ref = useRef(null);
   const mdRef = useRef();
@@ -145,9 +147,11 @@ export default function Detail({
             <MorePosts posts={morePosts} />
           </div>
         </motion.main>
-      ) : (
+      ) : (   
         <Login redirectPath={router.asPath} />
       )}
+      <CTA />
+      <Footer />
     </>
   );
 }

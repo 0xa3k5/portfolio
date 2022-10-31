@@ -22,22 +22,12 @@ function MyApp({
       >
         <Component {...pageProps} canonical={url} key={url} />
       </AnimatePresence>
-      <CTA />
-      <Footer />
     </SessionProvider>
   );
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
-
-  // const cookies = new Cookies(appContext.ctx.req.headers.cookie);
-  // const password = cookies.get(consts.SiteReadCookie) ?? "";
-
-  // if (password === "hireak") {
-  //   appProps.pageProps.hasReadPermission = true;
-  // }
-
   return { ...appProps };
 };
 

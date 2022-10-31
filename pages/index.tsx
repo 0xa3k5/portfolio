@@ -19,6 +19,8 @@ import SectionTitle from "../src/components/SectionTitle";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import WorkExperience from "../src/components/WorkExperience";
 import MobileMenu from "../src/components/Header/MobileMenu";
+import CTA from "../src/components/CTA";
+import Footer from "../src/components/Footer";
 
 interface HomeProps {
   page: StaticPage;
@@ -142,6 +144,7 @@ export default function Home({
                     objectFit="contain"
                     objectPosition="top"
                     priority
+                    unoptimized
                   />
                 </div>
               )}
@@ -215,6 +218,8 @@ export default function Home({
           </section>
         </div>
       </motion.main>
+      <CTA />
+      <Footer />
     </>
   );
 }

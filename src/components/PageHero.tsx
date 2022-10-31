@@ -30,7 +30,7 @@ export default function PageHero({
         );
       })}
       {page.heroText && (
-        <p className="max-w-2xl px-8 text-xl font-normal opacity-80">
+        <p className="max-w-2xl md:px-8 text-xl font-normal opacity-80">
           {page.heroText}
         </p>
       )}
