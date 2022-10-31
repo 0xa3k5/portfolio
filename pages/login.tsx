@@ -1,14 +1,14 @@
+import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
-import Cookies from "universal-cookie";
-import consts from "../consts";
-import Login from "../src/components/Form/Login";
 import Logout from "../src/components/Form/Logout";
 import Header from "../src/components/Header/Header";
 import MobileMenu from "../src/components/Header/MobileMenu";
+import Login from "../src/components/Form/Login";
 
-export default function LoginPage({ hasReadPermission }) {
+const LoginPage = (props): JSX.Element => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const { status } = useSession();
 
   return (
     <>
@@ -25,18 +25,13 @@ export default function LoginPage({ hasReadPermission }) {
         isNavbarOpen={isNavbarOpen}
         setIsNavbarOpen={setIsNavbarOpen}
       />
-      {!hasReadPermission ? (
+      {status === "unauthenticated" ? (
         <Login redirectPath="/" />
       ) : (
-        <Logout
-          onClick={(e) => {
-            e.preventDefault();
-            const cookies = new Cookies();
-            cookies.remove(consts.SiteReadCookie, { path: "/" });
-            window.location.href = "/login";
-          }}
-        />
+        <Logout onClick={() => signOut()} />
       )}
     </>
   );
-}
+};
+
+export default LoginPage;

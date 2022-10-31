@@ -12,6 +12,7 @@ const env = cleanEnv(process.env, {
   NOTION_DATABASE_PAGES: str(),
   NOTION_EXPLORATIONS: str(),
   NOTION_FEEDBACKS: str(),
+  PAGE_PASSWORD: str(),
 });
 
 const notionEnv = () => {
@@ -53,6 +54,7 @@ export const config = {
     }
     return resolvedNotionEnv;
   },
+  pagePass: env.PAGE_PASSWORD,
 };
 
 export type AppConfig = typeof config;

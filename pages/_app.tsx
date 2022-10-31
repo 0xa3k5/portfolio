@@ -3,15 +3,18 @@ import type { AppContext, AppProps } from "next/app";
 import Footer from "../src/components/Footer";
 import CTA from "../src/components/CTA";
 import App from "next/app";
-import Cookies from "universal-cookie";
-import consts from "../consts";
+import { SessionProvider } from "next-auth/react";
 
 import "../src/styles/globals.css";
-function MyApp({ Component, router, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  router,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   const url = `https://akml.io${router.route}`;
 
   return (
-    <>
+    <SessionProvider session={session}>
       <AnimatePresence
         mode="wait"
         initial={false}
@@ -21,19 +24,19 @@ function MyApp({ Component, router, pageProps }: AppProps) {
       </AnimatePresence>
       <CTA />
       <Footer />
-    </>
+    </SessionProvider>
   );
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const cookies = new Cookies(appContext.ctx.req.headers.cookie);
-  const password = cookies.get(consts.SiteReadCookie) ?? "";
+  // const cookies = new Cookies(appContext.ctx.req.headers.cookie);
+  // const password = cookies.get(consts.SiteReadCookie) ?? "";
 
-  if (password === "hireak") {
-    appProps.pageProps.hasReadPermission = true;
-  }
+  // if (password === "hireak") {
+  //   appProps.pageProps.hasReadPermission = true;
+  // }
 
   return { ...appProps };
 };

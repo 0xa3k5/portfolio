@@ -16,6 +16,8 @@ import Header from "../../src/components/Header/Header";
 import MobileMenu from "../../src/components/Header/MobileMenu";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
+import { useSession } from "next-auth/react";
+
 interface DetailProps {
   markdown: string;
   post: NotionPost;
@@ -31,6 +33,7 @@ export default function Detail({
   feedbacks,
   hasReadPermission,
 }: DetailProps) {
+  const { status, data } = useSession();
   const router = useRouter();
   const ref = useRef(null);
   const mdRef = useRef();
@@ -71,8 +74,6 @@ export default function Detail({
     return () => window.removeEventListener("scroll", updatePos);
   }, [post.properties.color, scrollPos]);
 
-  if (post.properties.password === false) hasReadPermission = true;
-
   return (
     <>
       <Head>
@@ -100,9 +101,7 @@ export default function Detail({
         color={hasReadPermission && color}
         bgColor={hasReadPermission && post.properties.bgColor}
       />
-      {!hasReadPermission ? (
-        <Login redirectPath={router.asPath} />
-      ) : (
+      {post.properties.password === false || status === "authenticated" ? (
         <motion.main
           variants={motionVariants.pageVariants}
           initial="hidden"
@@ -146,6 +145,8 @@ export default function Detail({
             <MorePosts posts={morePosts} />
           </div>
         </motion.main>
+      ) : (
+        <Login redirectPath={router.asPath} />
       )}
     </>
   );
