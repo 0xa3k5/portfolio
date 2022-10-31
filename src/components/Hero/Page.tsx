@@ -1,20 +1,12 @@
 import cx from "classnames";
-import { Dispatch, SetStateAction } from "react";
-import { StaticPage } from "../../@types/schema";
+import { StaticPage } from "../../../@types/schema";
 
-interface PageHeroProps {
+interface PageProps {
   className?: string;
   page: StaticPage;
-  color?: string;
-  bgColor?: string;
-  isNavbarOpen: boolean;
-  setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function PageHero({
-  className,
-  page,
-}: PageHeroProps): JSX.Element {
+export default function Page({ className, page }: PageProps): JSX.Element {
   return (
     <div
       className={cx(
@@ -30,7 +22,7 @@ export default function PageHero({
         );
       })}
       {page.heroText && (
-        <p className="max-w-2xl px-8 text-xl font-normal opacity-80">
+        <p className="max-w-2xl text-xl font-normal opacity-80 md:px-8">
           {page.heroText}
         </p>
       )}

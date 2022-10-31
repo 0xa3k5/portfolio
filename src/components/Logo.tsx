@@ -1,7 +1,6 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { MouseEventHandler, useState } from "react";
-import cx from "classnames";
 import { useRouter } from "next/router";
 interface LogoProps {
   className?: string;
@@ -9,74 +8,87 @@ interface LogoProps {
 }
 
 export default function Logo({ className, onClick }: LogoProps): JSX.Element {
+  const router = useRouter();
   const [hover, setHover] = useState(false);
 
-  const router = useRouter();
-
-  const name = ["a", "l", "i", "k", "e", "m", "a", "l"];
+  const fullName = "alikemal";
 
   const letterVariants: Variants = {
     idle: {
-      opacity: 100,
+      opacity: 0,
+      translateY: 30,
     },
     hover: {
-      opacity: 100,
+      opacity: 0.9,
+      translateY: 0,
     },
   };
 
-  const notAKVariants: Variants = {
-    idle: {
-      opacity: 0,
-      // translateX: -80,
-    },
-    hover: {
-      opacity: 100,
-      // translateX: 0,
-    },
-  };
   return (
-    <Link
-      href="/"
-      className={className}
-      passHref
-      scroll={router.asPath === "/"}
-    >
-      <a
-        onClick={onClick}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+    <div className="">
+      <Link
+        href="/"
+        className={className}
+        passHref
+        scroll={router.asPath === "/"}
       >
-        <motion.h2
-          className={cx(
-            "flex text-3xl md:text-4xl",
-            hover ? "space-x-0" : "-space-x-2"
-          )}
+        <a
+          onClick={onClick}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
         >
-          <AnimatePresence>
-            {name.map((letter, i) => {
-              const notAK = i !== 0 && i !== 3;
+          <motion.h2
+            className="text-3xl tracking-wide md:text-4xl"
+            transition={{
+              delay: 0.5,
+              staggerChildren: 0.4,
+            }}
+          >
+            {fullName.split("").map((letter, i) => {
+              if (i !== 0 && i !== 3) {
+                return (
+                  <motion.span
+                    className="inline-block"
+                    layout
+                    transition={{
+                      type: "tween",
+                      ease: "anticipate",
+                      delay: i * 0.02,
+                      duration: 0.2,
+                    }}
+                    variants={letterVariants}
+                    initial={false}
+                    animate={hover ? "hover" : "idle"}
+                    key={`${letter}-${i}`}
+                  >
+                    {letter}
+                  </motion.span>
+                );
+              }
               return (
                 <motion.span
+                  className="inline-block"
                   layout
                   transition={{
                     type: "tween",
-                    ease: "easeInOut",
-                    delay: i * 0.01,
-                    duration: 0.2,
+                    ease: "anticipate",
+                    duration: 0.3,
                   }}
-                  className="inline-block"
-                  variants={notAK ? notAKVariants : letterVariants}
-                  initial={false}
+                  variants={{
+                    idle: { translateX: i === 3 && -24 },
+                    hover: { translateX: i === 3 && 0 },
+                  }}
                   animate={hover ? "hover" : "idle"}
-                  key={i}
+                  initial={"idle"}
+                  key={`${letter}-${i}`}
                 >
                   {letter}
                 </motion.span>
               );
             })}
-          </AnimatePresence>
-        </motion.h2>
-      </a>
-    </Link>
+          </motion.h2>
+        </a>
+      </Link>
+    </div>
   );
 }

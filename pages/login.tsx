@@ -6,7 +6,7 @@ import Header from "../src/components/Header/Header";
 import MobileMenu from "../src/components/Header/MobileMenu";
 import Login from "../src/components/Form/Login";
 
-const LoginPage = (props): JSX.Element => {
+const LoginPage = (): JSX.Element => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const { status } = useSession();
 

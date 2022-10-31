@@ -2,7 +2,6 @@ import Head from "next/head";
 import NotionService from "../api/notion";
 import ReactMarkdown from "react-markdown";
 import { config } from "../../config";
-import PostHero from "../../src/components/PostHero";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
@@ -12,11 +11,11 @@ import { motion, useScroll } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";
 import { useState, useEffect, useRef } from "react";
 import ContentReadIndicator from "../../src/components/ContentReadIndicator/index";
-import Header from "../../src/components/Header/Header";
-import MobileMenu from "../../src/components/Header/MobileMenu";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
+import Hero from "../../src/components/Hero";
+import { useAppContext } from "../../hooks/useAppContext";
 
 interface DetailProps {
   markdown: string;
@@ -31,17 +30,16 @@ export default function Detail({
   post,
   morePosts,
   feedbacks,
-  hasReadPermission,
 }: DetailProps) {
-  const { status, data } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const ref = useRef(null);
   const mdRef = useRef();
   const { scrollYProgress } = useScroll({ target: mdRef });
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [color, setColor] = useState<string>("fff");
   const [scrollPos, setScrollPos] = useState(0);
   const [contentInView, setContentInView] = useState(false);
+
+  const appContext = useAppContext();
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
@@ -59,11 +57,17 @@ export default function Detail({
     watchScroll();
 
     function handleContentInView() {
-      if (scrollPos > ref.current?.clientHeight + 20) {
-        setColor("fff");
+      if (scrollPos > ref.current?.clientHeight) {
+        appContext.setTheme({
+          color: "ffffff",
+          bgColor: appContext.theme.bgColor,
+        });
         setContentInView(true);
       } else {
-        setColor(post.properties.color);
+        appContext.setTheme({
+          color: post.properties.color,
+          bgColor: appContext.theme.bgColor,
+        });
         setContentInView(false);
       }
     }
@@ -90,17 +94,6 @@ export default function Detail({
         />
         <meta name="og:image" title="og:title" content={post.details.img} />
       </Head>
-      <Header
-        isNavbarOpen={isNavbarOpen}
-        setIsNavbarOpen={setIsNavbarOpen}
-        color={hasReadPermission && color}
-      />
-      <MobileMenu
-        isNavbarOpen={isNavbarOpen}
-        setIsNavbarOpen={setIsNavbarOpen}
-        color={hasReadPermission && color}
-        bgColor={hasReadPermission && post.properties.bgColor}
-      />
       {post.properties.password === false || status === "authenticated" ? (
         <motion.main
           variants={motionVariants.pageVariants}
@@ -110,12 +103,7 @@ export default function Detail({
           transition={{ type: "linear" }}
         >
           <div className="" ref={ref}>
-            <PostHero
-              post={post}
-              isNavbarOpen={isNavbarOpen}
-              setIsNavbarOpen={setIsNavbarOpen}
-              color={color}
-            />
+            <Hero.Post post={post} />
           </div>
           <div
             className="container flex flex-col items-center space-y-24 py-24 px-6 md:px-24"

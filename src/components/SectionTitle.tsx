@@ -10,8 +10,13 @@ export default function SectionTitle({
   className,
 }: SectionTitleProps): JSX.Element {
   return (
-    <div className={cx(className, "flex items-baseline space-x-8")}>
-      <h2 className="w-auto whitespace-nowrap text-2xl uppercase tracking-widest">
+    <div
+      className={cx(
+        className,
+        "flex flex-col items-baseline gap-8 md:flex-row"
+      )}
+    >
+      <h2 className="w-auto text-2xl uppercase tracking-widest md:whitespace-nowrap">
         {title}
       </h2>
       <hr className="relative w-full opacity-20" />
