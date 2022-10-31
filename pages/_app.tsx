@@ -6,6 +6,9 @@ import App from "next/app";
 import { SessionProvider } from "next-auth/react";
 
 import "../src/styles/globals.css";
+import Header from "../src/components/Header/Header";
+import { useState } from "react";
+import MobileMenu from "../src/components/Header/MobileMenu";
 function MyApp({
   Component,
   router,
@@ -13,8 +16,16 @@ function MyApp({
 }: AppProps) {
   const url = `https://akml.io${router.route}`;
 
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [color, setColor] = useState<string>("fff");
+
   return (
     <SessionProvider session={session}>
+      <Header isNavbarOpen={isNavbarOpen} setIsNavbarOpen={setIsNavbarOpen} />
+      <MobileMenu
+        isNavbarOpen={isNavbarOpen}
+        setIsNavbarOpen={setIsNavbarOpen}
+      />
       <AnimatePresence
         mode="wait"
         initial={false}
@@ -22,6 +33,8 @@ function MyApp({
       >
         <Component {...pageProps} canonical={url} key={url} />
       </AnimatePresence>
+      <CTA />
+      <Footer />
     </SessionProvider>
   );
 }

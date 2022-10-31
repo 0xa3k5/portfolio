@@ -11,16 +11,12 @@ import {
 } from "../@types/schema";
 import NotionService from "./api/notion";
 import ContentCard from "../src/components/Cards/ContentCard";
-import PageHero from "../src/components/PageHero";
+import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
-import Header from "../src/components/Header/Header";
 import ExplorationsCard from "../src/components/Cards/ExplorationsCard/ExplorationsCard";
 import SectionTitle from "../src/components/SectionTitle";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import WorkExperience from "../src/components/WorkExperience";
-import MobileMenu from "../src/components/Header/MobileMenu";
-import CTA from "../src/components/CTA";
-import Footer from "../src/components/Footer";
 
 interface HomeProps {
   page: StaticPage;
@@ -92,95 +88,25 @@ export default function Home({
         animate="enter"
         exit="exit"
         onChange={() => motion.animate}
-        className="overflow-x-hidden"
+        className="container flex max-w-5xl flex-col items-center space-y-24 overflow-x-hidden px-4 md:px-12 xl:max-w-6xl"
       >
-        <Header
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
-          color={color}
-        />
-        <MobileMenu
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
+        <Hero.Page
+          page={page}
           color={color}
           bgColor={bgColor}
+          isNavbarOpen={isNavbarOpen}
+          setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl">
-          <PageHero
-            page={page}
-            color={color}
-            bgColor={bgColor}
-            isNavbarOpen={isNavbarOpen}
-            setIsNavbarOpen={setIsNavbarOpen}
-          />
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="highlighted case studies" className="mb-16" />
-            <div className="flex items-center space-x-4">
-              <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
-                {works
-                  .sort(
-                    (a: NotionPost, b: NotionPost) =>
-                      a.properties.number - b.properties.number
-                  )
-                  .map((p: NotionPost) => {
-                    return (
-                      <ContentCard.Compact
-                        post={p}
-                        key={p.properties.id}
-                        onMouseEnter={() => setHovered(p)}
-                        onMouseLeave={() => setHovered(null)}
-                      />
-                    );
-                  })}
-              </div>
-              {hovered && (
-                <div className="relative hidden flex-1 lg:inline-block">
-                  <Image
-                    src={hovered.details.img}
-                    alt={hovered.details.title}
-                    layout="responsive"
-                    height="80%"
-                    width="100%"
-                    objectFit="contain"
-                    objectPosition="top"
-                    priority
-                    unoptimized
-                  />
-                </div>
-              )}
-            </div>
-          </section>
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="people said nice things" />
-            {feedbacks.map((f) => {
-              return (
-                <FeedbackCard.Single
-                  feedback={f}
-                  key={f.id}
-                  classname="border-b border-opacity-10 border-white last-of-type:border-none"
-                />
-              );
-            })}
-          </section>
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="work experience" />
-            {workExp
-              .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
-              .map((w: WorkExp) => {
-                return (
-                  <WorkExperience
-                    job={w}
-                    key={`about-${w.id}`}
-                    classname="border-b border-opacity-10 border-white last-of-type:border-none"
-                  />
-                );
-              })}
-          </section>
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="on the side" className="mb-16" />
-            <div className="flex w-full items-center justify-center">
-              <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
-                {sideProjects.map((p) => {
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="highlighted case studies" className="mb-16" />
+          <div className="flex items-center space-x-4">
+            <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
+              {works
+                .sort(
+                  (a: NotionPost, b: NotionPost) =>
+                    a.properties.number - b.properties.number
+                )
+                .map((p: NotionPost) => {
                   return (
                     <ContentCard.Compact
                       post={p}
@@ -190,36 +116,91 @@ export default function Home({
                     />
                   );
                 })}
-              </div>
-              <div className="relative hidden flex-1 lg:inline-block">
-                {hovered && (
-                  <Image
-                    src={hovered.details.img}
-                    alt={hovered.details.title}
-                    layout="responsive"
-                    height="80%"
-                    width="100%"
-                    objectFit="contain"
-                    objectPosition="top"
-                    priority
-                    unoptimized
-                  />
-                )}
-              </div>
             </div>
-          </section>
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="some explorations" className="mb-8 md:mb-16" />
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {explorations.map((exp) => {
-                return <ExplorationsCard exploration={exp} key={exp.id} />;
+            {hovered && (
+              <div className="relative hidden flex-1 lg:inline-block">
+                <Image
+                  src={hovered.details.img}
+                  alt={hovered.details.title}
+                  layout="responsive"
+                  height="80%"
+                  width="100%"
+                  objectFit="contain"
+                  objectPosition="top"
+                  priority
+                  unoptimized
+                />
+              </div>
+            )}
+          </div>
+        </section>
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="people said nice things" />
+          {feedbacks.map((f) => {
+            return (
+              <FeedbackCard.Single
+                feedback={f}
+                key={f.id}
+                classname="border-b border-opacity-10 border-white last-of-type:border-none"
+              />
+            );
+          })}
+        </section>
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="work experience" />
+          {workExp
+            .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
+            .map((w: WorkExp) => {
+              return (
+                <WorkExperience
+                  job={w}
+                  key={`about-${w.id}`}
+                  classname="border-b border-opacity-10 border-white last-of-type:border-none"
+                />
+              );
+            })}
+        </section>
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="on the side" className="mb-16" />
+          <div className="flex w-full items-center justify-center">
+            <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
+              {sideProjects.map((p) => {
+                return (
+                  <ContentCard.Compact
+                    post={p}
+                    key={p.properties.id}
+                    onMouseEnter={() => setHovered(p)}
+                    onMouseLeave={() => setHovered(null)}
+                  />
+                );
               })}
             </div>
-          </section>
-        </div>
+            <div className="relative hidden flex-1 lg:inline-block">
+              {hovered && (
+                <Image
+                  src={hovered.details.img}
+                  alt={hovered.details.title}
+                  layout="responsive"
+                  height="80%"
+                  width="100%"
+                  objectFit="contain"
+                  objectPosition="top"
+                  priority
+                  unoptimized
+                />
+              )}
+            </div>
+          </div>
+        </section>
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="some explorations" className="mb-8 md:mb-16" />
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {explorations.map((exp) => {
+              return <ExplorationsCard exploration={exp} key={exp.id} />;
+            })}
+          </div>
+        </section>
       </motion.main>
-      <CTA />
-      <Footer />
     </>
   );
 }

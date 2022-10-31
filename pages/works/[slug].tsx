@@ -2,7 +2,7 @@ import Head from "next/head";
 import NotionService from "../api/notion";
 import ReactMarkdown from "react-markdown";
 import { config } from "../../config";
-import PostHero from "../../src/components/PostHero";
+import PostHero from "../../src/components/Hero/Post";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
@@ -12,13 +12,10 @@ import { motion, useScroll } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";
 import { useState, useEffect, useRef } from "react";
 import ContentReadIndicator from "../../src/components/ContentReadIndicator/index";
-import Header from "../../src/components/Header/Header";
-import MobileMenu from "../../src/components/Header/MobileMenu";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
-import CTA from "../../src/components/CTA";
-import Footer from "../../src/components/Footer";
+import Hero from "../../src/components/Hero";
 
 interface DetailProps {
   markdown: string;
@@ -33,7 +30,6 @@ export default function Detail({
   post,
   morePosts,
   feedbacks,
-  hasReadPermission,
 }: DetailProps) {
   const { status } = useSession();
   const router = useRouter();
@@ -92,17 +88,6 @@ export default function Detail({
         />
         <meta name="og:image" title="og:title" content={post.details.img} />
       </Head>
-      <Header
-        isNavbarOpen={isNavbarOpen}
-        setIsNavbarOpen={setIsNavbarOpen}
-        color={hasReadPermission && color}
-      />
-      <MobileMenu
-        isNavbarOpen={isNavbarOpen}
-        setIsNavbarOpen={setIsNavbarOpen}
-        color={hasReadPermission && color}
-        bgColor={hasReadPermission && post.properties.bgColor}
-      />
       {post.properties.password === false || status === "authenticated" ? (
         <motion.main
           variants={motionVariants.pageVariants}
@@ -112,7 +97,7 @@ export default function Detail({
           transition={{ type: "linear" }}
         >
           <div className="" ref={ref}>
-            <PostHero
+            <Hero.Post
               post={post}
               isNavbarOpen={isNavbarOpen}
               setIsNavbarOpen={setIsNavbarOpen}
@@ -147,11 +132,9 @@ export default function Detail({
             <MorePosts posts={morePosts} />
           </div>
         </motion.main>
-      ) : (   
+      ) : (
         <Login redirectPath={router.asPath} />
       )}
-      <CTA />
-      <Footer />
     </>
   );
 }

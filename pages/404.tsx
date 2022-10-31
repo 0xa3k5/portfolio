@@ -3,7 +3,7 @@ import { NotionPost, StaticPage } from "../@types/schema";
 import NotionService from "./api/notion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import PageHero from "../src/components/PageHero";
+import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
 import { motion } from "framer-motion";
 import Header from "../src/components/Header/Header";
@@ -74,56 +74,50 @@ export default function FourOhFour({
         onChange={() => motion.animate}
         exit="exit"
         transition={{ type: "linear" }}
+        className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl"
       >
-        <Header isNavbarOpen={isNavbarOpen} setIsNavbarOpen={setIsNavbarOpen} />
-        <MobileMenu
+        <Hero.Page
+          page={page}
           isNavbarOpen={isNavbarOpen}
           setIsNavbarOpen={setIsNavbarOpen}
         />
-        <div className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl">
-          <PageHero
-            page={page}
-            isNavbarOpen={isNavbarOpen}
-            setIsNavbarOpen={setIsNavbarOpen}
-          />
-          <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-            <SectionTitle title="highlighted case studies" className="mb-16" />
-            <div className="flex items-center space-x-4">
-              <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
-                {posts
-                  .sort(
-                    (a: NotionPost, b: NotionPost) =>
-                      a.properties.number - b.properties.number
-                  )
-                  .map((p: NotionPost) => {
-                    return (
-                      <ContentCard.Compact
-                        post={p}
-                        key={p.properties.id}
-                        onMouseEnter={() => setHovered(p)}
-                        onMouseLeave={() => setHovered(null)}
-                      />
-                    );
-                  })}
-              </div>
-              {hovered && (
-                <div className="relative hidden flex-1 lg:inline-block">
-                  <Image
-                    src={hovered.details.img}
-                    alt={hovered.details.title}
-                    layout="responsive"
-                    height="80%"
-                    width="100%"
-                    objectFit="contain"
-                    objectPosition="top"
-                    priority
-                    unoptimized
-                  />
-                </div>
-              )}
+        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
+          <SectionTitle title="highlighted case studies" className="mb-16" />
+          <div className="flex items-center space-x-4">
+            <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
+              {posts
+                .sort(
+                  (a: NotionPost, b: NotionPost) =>
+                    a.properties.number - b.properties.number
+                )
+                .map((p: NotionPost) => {
+                  return (
+                    <ContentCard.Compact
+                      post={p}
+                      key={p.properties.id}
+                      onMouseEnter={() => setHovered(p)}
+                      onMouseLeave={() => setHovered(null)}
+                    />
+                  );
+                })}
             </div>
-          </section>
-        </div>
+            {hovered && (
+              <div className="relative hidden flex-1 lg:inline-block">
+                <Image
+                  src={hovered.details.img}
+                  alt={hovered.details.title}
+                  layout="responsive"
+                  height="80%"
+                  width="100%"
+                  objectFit="contain"
+                  objectPosition="top"
+                  priority
+                  unoptimized
+                />
+              </div>
+            )}
+          </div>
+        </section>
       </motion.main>
     </>
   );
