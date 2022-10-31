@@ -2,7 +2,6 @@ import Head from "next/head";
 import NotionService from "../api/notion";
 import ReactMarkdown from "react-markdown";
 import { config } from "../../config";
-import PostHero from "../../src/components/Hero/Post";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
@@ -16,6 +15,7 @@ import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
+import { useAppContext } from "../hooks/useAppContext";
 
 interface DetailProps {
   markdown: string;
@@ -36,10 +36,10 @@ export default function Detail({
   const ref = useRef(null);
   const mdRef = useRef();
   const { scrollYProgress } = useScroll({ target: mdRef });
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [color, setColor] = useState<string>("fff");
   const [scrollPos, setScrollPos] = useState(0);
   const [contentInView, setContentInView] = useState(false);
+
+  const appContext = useAppContext();
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
@@ -57,11 +57,17 @@ export default function Detail({
     watchScroll();
 
     function handleContentInView() {
-      if (scrollPos > ref.current?.clientHeight + 20) {
-        setColor("fff");
+      if (scrollPos > ref.current?.clientHeight) {
+        appContext.setTheme({
+          color: "ffffff",
+          bgColor: appContext.theme.bgColor,
+        });
         setContentInView(true);
       } else {
-        setColor(post.properties.color);
+        appContext.setTheme({
+          color: post.properties.color,
+          bgColor: appContext.theme.bgColor,
+        });
         setContentInView(false);
       }
     }
@@ -97,12 +103,7 @@ export default function Detail({
           transition={{ type: "linear" }}
         >
           <div className="" ref={ref}>
-            <Hero.Post
-              post={post}
-              isNavbarOpen={isNavbarOpen}
-              setIsNavbarOpen={setIsNavbarOpen}
-              color={color}
-            />
+            <Hero.Post post={post} />
           </div>
           <div
             className="container flex flex-col items-center space-y-24 py-24 px-6 md:px-24"

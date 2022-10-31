@@ -1,20 +1,12 @@
 import cx from "classnames";
-import { Dispatch, SetStateAction } from "react";
 import { StaticPage } from "../../../@types/schema";
 
 interface PageProps {
   className?: string;
   page: StaticPage;
-  color?: string;
-  bgColor?: string;
-  isNavbarOpen: boolean;
-  setIsNavbarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Page({
-  className,
-  page,
-}: PageProps): JSX.Element {
+export default function Page({ className, page }: PageProps): JSX.Element {
   return (
     <div
       className={cx(

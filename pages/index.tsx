@@ -17,6 +17,7 @@ import ExplorationsCard from "../src/components/Cards/ExplorationsCard/Explorati
 import SectionTitle from "../src/components/SectionTitle";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import WorkExperience from "../src/components/WorkExperience";
+import { useAppContext } from "./hooks/useAppContext";
 
 interface HomeProps {
   page: StaticPage;
@@ -35,14 +36,14 @@ export default function Home({
   feedbacks,
   workExp,
 }: HomeProps) {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [color, setColor] = useState<string>("fff");
-  const [bgColor, setBgColor] = useState<string>("000");
+  const appContext = useAppContext();
   const [hovered, setHovered] = useState<NotionPost>(null);
 
   useEffect(() => {
-    setColor(hovered?.properties?.color || "ffffff");
-    setBgColor(hovered?.properties?.bgColor || "000000");
+    appContext.setTheme({
+      color: hovered ? hovered?.properties?.color : "ffffff",
+      bgColor: hovered ? hovered?.properties?.bgColor : "000000",
+    });
   }, [hovered]);
 
   const bgPainterVariants: Variants = {
@@ -50,7 +51,7 @@ export default function Home({
       backgroundColor: "#ffffff",
     },
     target: {
-      backgroundColor: `#${bgColor}`,
+      backgroundColor: `#${appContext.theme.bgColor}`,
     },
   };
 
@@ -60,7 +61,7 @@ export default function Home({
       opacity: 1,
       x: 0,
       y: 0,
-      color: `#${color}`,
+      color: `#${appContext.theme.color}`,
       transition: { duration: 0.3 },
     },
     exit: { opacity: 0, x: 0, y: -60, transition: { duration: 0.6 } },
@@ -90,13 +91,7 @@ export default function Home({
         onChange={() => motion.animate}
         className="container flex max-w-5xl flex-col items-center space-y-24 overflow-x-hidden px-4 md:px-12 xl:max-w-6xl"
       >
-        <Hero.Page
-          page={page}
-          color={color}
-          bgColor={bgColor}
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
-        />
+        <Hero.Page page={page} />
         <section className="flex w-full flex-col px-4 py-24 lg:px-0">
           <SectionTitle title="highlighted case studies" className="mb-16" />
           <div className="flex items-center space-x-4">

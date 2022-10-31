@@ -5,7 +5,6 @@ import PageHead from "../src/components/PageHead";
 import Hero from "../src/components/Hero";
 import { motion } from "framer-motion";
 import { motionVariants } from "../src/utils/motionVariants";
-import { useState } from "react";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import SectionTitle from "../src/components/SectionTitle";
 
@@ -20,8 +19,6 @@ export default function About({
   workExp,
   feedbacks,
 }: AboutProps): JSX.Element {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-
   return (
     <>
       <PageHead page={page} />
@@ -33,12 +30,7 @@ export default function About({
         transition={{ type: "linear" }}
         className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl"
       >
-        <Hero.Page
-          page={page}
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
-        />
-
+        <Hero.Page page={page} />
         <section className="mb-24 flex max-w-4xl flex-col space-y-16 px-4 py-24 lg:px-0">
           <div className="flex space-x-16">
             <SectionTitle title="yo yo yo" />

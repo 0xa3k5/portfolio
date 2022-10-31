@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
 import { motion } from "framer-motion";
-import Header from "../src/components/Header/Header";
-import MobileMenu from "../src/components/Header/MobileMenu";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
+import { useAppContext } from "./hooks/useAppContext";
 
 interface FourOhFourProps {
   page: StaticPage;
@@ -20,14 +19,14 @@ export default function FourOhFour({
   page,
   posts,
 }: FourOhFourProps): JSX.Element {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [color, setColor] = useState<string>("fff");
-  const [bgColor, setBgColor] = useState<string>("000");
+  const appContext = useAppContext();
   const [hovered, setHovered] = useState<NotionPost>(null);
 
   useEffect(() => {
-    setColor(hovered?.properties?.color || "ffffff");
-    setBgColor(hovered?.properties?.bgColor || "000000");
+    appContext.setTheme({
+      color: hovered ? hovered?.properties?.color : "ffffff",
+      bgColor: hovered ? hovered?.properties?.bgColor : "000000",
+    });
   }, [hovered]);
 
   const bgPainterVariants = {
@@ -35,7 +34,7 @@ export default function FourOhFour({
       backgroundColor: "#ffffff",
     },
     target: {
-      backgroundColor: `#${bgColor}`,
+      backgroundColor: `#${appContext.theme.bgColor}`,
     },
   };
 
@@ -45,7 +44,7 @@ export default function FourOhFour({
       opacity: 1,
       x: 0,
       y: 0,
-      color: `#${color}`,
+      color: `#${appContext.theme.color}`,
       transition: { duration: 0.3 },
     },
     exit: { opacity: 0, x: 0, y: -60, transition: { duration: 0.6 } },
@@ -76,11 +75,7 @@ export default function FourOhFour({
         transition={{ type: "linear" }}
         className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl"
       >
-        <Hero.Page
-          page={page}
-          isNavbarOpen={isNavbarOpen}
-          setIsNavbarOpen={setIsNavbarOpen}
-        />
+        <Hero.Page page={page} />
         <section className="flex w-full flex-col px-4 py-24 lg:px-0">
           <SectionTitle title="highlighted case studies" className="mb-16" />
           <div className="flex items-center space-x-4">

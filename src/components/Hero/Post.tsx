@@ -12,28 +12,28 @@ export default function Post({ className, post }: PostProps): JSX.Element {
     <div
       className={cx(
         className,
-        "mb:pb-8 flex h-[60vh] md:h-[90vh] items-center justify-center px-6 pb-4 md:gap-24 md:px-0"
+        "mb:pb-8 flex h-[60vh] items-center justify-center px-6 pb-4 md:h-[90vh] md:gap-24 md:px-0"
       )}
       style={{
         backgroundColor: `#${post.properties.bgColor}`,
         color: `#${post.properties.color}`,
       }}
     >
-      <div className="flex md:pl-16 max-w-lg flex-col space-y-2 md:space-y-4 ">
+      <div className="flex max-w-lg flex-col space-y-2 md:space-y-4 md:pl-16 ">
         <h1 className="font-vollkorn text-5xl font-bold md:leading-snug">
           {post.details.title}
         </h1>
-        <p className="max-w-md opacity-80 text-xl md:leading-loose">
+        <p className="max-w-md text-xl opacity-80 md:leading-loose">
           {post.details.description}
         </p>
       </div>
-      <div className="hidden md:inline-block relative h-full w-1/2">
+      <div className="relative hidden h-full w-1/2 md:inline-block">
         <Image
           src={post.details.img}
           alt={post.details.title}
           layout="fill"
           objectFit="contain"
-          objectPosition='right'
+          objectPosition="right"
           priority
           unoptimized
         />
