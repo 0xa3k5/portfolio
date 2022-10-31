@@ -5,7 +5,7 @@ import Logo from "../Logo";
 import HamburgerIcon from "../../../public/icons/hamburger.svg";
 import CloseIcon from "../../../public/icons/close.svg";
 
-import { useAppContext } from "../../../pages/hooks/useAppContext";
+import { useAppContext } from "../../../hooks/useAppContext";
 
 interface HeaderProps {
   className?: string;

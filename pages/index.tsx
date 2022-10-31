@@ -17,7 +17,7 @@ import ExplorationsCard from "../src/components/Cards/ExplorationsCard/Explorati
 import SectionTitle from "../src/components/SectionTitle";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import WorkExperience from "../src/components/WorkExperience";
-import { useAppContext } from "./hooks/useAppContext";
+import { useAppContext } from "../hooks/useAppContext";
 
 interface HomeProps {
   page: StaticPage;

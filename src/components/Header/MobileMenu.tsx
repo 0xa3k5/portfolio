@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { motionVariants } from "../../utils/motionVariants";
 import Button from "../Button";
 import { hexToRGB } from "../../utils/hexToRGB";
-import { useAppContext } from "../../../pages/hooks/useAppContext";
+import { useAppContext } from "../../../hooks/useAppContext";
 
 export default function MobileMenu(): JSX.Element {
   const appContext = useAppContext();

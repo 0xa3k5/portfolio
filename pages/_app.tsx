@@ -4,12 +4,10 @@ import Footer from "../src/components/Footer";
 import CTA from "../src/components/CTA";
 import App from "next/app";
 import { SessionProvider } from "next-auth/react";
-
 import "../src/styles/globals.css";
 import Header from "../src/components/Header/Header";
-import { useState } from "react";
 import MobileMenu from "../src/components/Header/MobileMenu";
-import { ContextProvider } from "./hooks/useAppContext";
+import { ContextProvider } from "../hooks/useAppContext";
 function MyApp({
   Component,
   router,

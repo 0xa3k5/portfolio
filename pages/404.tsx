@@ -8,7 +8,7 @@ import PageHead from "../src/components/PageHead";
 import { motion } from "framer-motion";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
-import { useAppContext } from "./hooks/useAppContext";
+import { useAppContext } from "../hooks/useAppContext";
 
 interface FourOhFourProps {
   page: StaticPage;

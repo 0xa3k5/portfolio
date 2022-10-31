@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
-import { useAppContext } from "../hooks/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 
 interface DetailProps {
   markdown: string;
