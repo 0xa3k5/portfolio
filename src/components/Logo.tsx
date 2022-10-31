@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { MouseEventHandler, useState } from "react";
 import { useRouter } from "next/router";

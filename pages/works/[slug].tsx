@@ -57,18 +57,18 @@ export default function Detail({
     watchScroll();
 
     function handleContentInView() {
-      if (scrollPos > ref.current?.clientHeight) {
+      setContentInView(scrollPos > ref.current?.clientHeight);
+
+      if (contentInView || status !== "authenticated") {
         appContext.setTheme({
           color: "ffffff",
-          bgColor: appContext.theme.bgColor,
+          bgColor: "000000",
         });
-        setContentInView(true);
       } else {
         appContext.setTheme({
           color: post.properties.color,
           bgColor: appContext.theme.bgColor,
         });
-        setContentInView(false);
       }
     }
 
@@ -76,7 +76,7 @@ export default function Detail({
     updatePos();
     handleContentInView();
     return () => window.removeEventListener("scroll", updatePos);
-  }, [post.properties.color, scrollPos]);
+  }, [post.properties.color, scrollPos, status]);
 
   return (
     <>
