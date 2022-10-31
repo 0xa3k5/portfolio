@@ -13,12 +13,7 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div
-      className={cx(
-        classname,
-        "flex w-full flex-col py-16 lg:flex-row"
-      )}
-    >
+    <div className={cx(classname, "flex w-full flex-col py-16 lg:flex-row")}>
       <div className="group mb-8 flex flex-1 lg:mb-0">
         <a href={job.website} target="_blank" rel="noreferrer">
           <div className="flex flex-col space-y-4">
@@ -30,6 +25,7 @@ export default function WorkExperience({
                   alt={`${job.logo} logo`}
                   layout="fill"
                   objectFit="fill"
+                  unoptimized
                 />
               </div>
               <div className="flex flex-col">

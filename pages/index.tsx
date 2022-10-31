@@ -112,20 +112,18 @@ export default function Home({
                   );
                 })}
             </div>
-            {hovered && (
-              <div className="relative hidden flex-1 lg:inline-block">
-                <Image
+            <div className="relative hidden flex-1 lg:inline-block">
+              {hovered && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={hovered.details.img}
                   alt={hovered.details.title}
-                  layout="responsive"
                   height="80%"
                   width="100%"
-                  objectFit="contain"
-                  objectPosition="top"
-                  priority
+                  loading="lazy"
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </section>
         <section className="flex w-full flex-col px-4 py-24 lg:px-0">
@@ -171,15 +169,13 @@ export default function Home({
             </div>
             <div className="relative hidden flex-1 lg:inline-block">
               {hovered && (
-                <Image
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={hovered.details.img}
                   alt={hovered.details.title}
-                  layout="responsive"
                   height="80%"
                   width="100%"
-                  objectFit="contain"
-                  objectPosition="top"
-                  priority
+                  loading="lazy"
                 />
               )}
             </div>

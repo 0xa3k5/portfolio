@@ -34,6 +34,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           layout="fill"
           objectFit="contain"
           objectPosition="right"
+          unoptimized
         />
       </div>
     </div>

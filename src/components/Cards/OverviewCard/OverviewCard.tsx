@@ -1,6 +1,6 @@
-import cx from 'classnames';
-import Image from 'next/image';
-import { NotionPost } from '../../../../@types/schema';
+import cx from "classnames";
+import Image from "next/image";
+import { NotionPost } from "../../../../@types/schema";
 
 interface OverviewCardProps {
   className?: string;
@@ -14,37 +14,37 @@ export default function OverviewCard({
   return (
     <div
       className={cx(
-        'flex w-full flex-col rounded-2xl bg-white bg-opacity-5 md:w-10/12 md:flex-row',
+        "flex w-full flex-col rounded-2xl bg-white bg-opacity-5 md:w-10/12 md:flex-row",
         className
       )}
     >
-      <div className='flex flex-col p-16 md:flex-row md:space-x-48 md:p-24'>
-        <div className=''>
-          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+      <div className="flex flex-col p-16 md:flex-row md:space-x-48 md:p-24">
+        <div className="">
+          <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             ORG
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.org.orgName}</p>
-          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+          <p className="mb-8 text-lg md:text-base">{post.org.orgName}</p>
+          <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             Type
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.details.type}</p>
-          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+          <p className="mb-8 text-lg md:text-base">{post.details.type}</p>
+          <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             Year
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.details.period}</p>
+          <p className="mb-8 text-lg md:text-base">{post.details.period}</p>
         </div>
-        <div className=''>
-          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+        <div className="">
+          <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             Position
           </p>
-          <p className='mb-8 text-lg md:text-base'>{post.details.position}</p>
-          <p className='mb-4 text-xs uppercase tracking-widest opacity-60'>
+          <p className="mb-8 text-lg md:text-base">{post.details.position}</p>
+          <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             Contributions
           </p>
-          <ul className='space-y-2'>
-            {post.details.contributions.split('-').map((c, i) => {
+          <ul className="space-y-2">
+            {post.details.contributions.split("-").map((c, i) => {
               return (
-                <li className='text-lg md:text-base' key={i}>
+                <li className="text-lg md:text-base" key={i}>
                   {c}
                 </li>
               );
@@ -52,13 +52,14 @@ export default function OverviewCard({
           </ul>
         </div>
       </div>
-      <div className='relative w-full flex-1 translate-y-8 hidden xl:flex'>
+      <div className="relative hidden w-full flex-1 translate-y-8 xl:flex">
         <Image
           src={post.details.overviewImg}
           alt={post.details.title}
-          layout='fill'
-          objectFit='contain'
-          objectPosition='right right'
+          layout="fill"
+          objectFit="contain"
+          objectPosition="right right"
+          unoptimized
         />
       </div>
     </div>

@@ -96,20 +96,18 @@ export default function FourOhFour({
                   );
                 })}
             </div>
-            {hovered && (
-              <div className="relative hidden flex-1 lg:inline-block">
-                <Image
+            <div className="relative hidden flex-1 lg:inline-block">
+              {hovered && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={hovered.details.img}
                   alt={hovered.details.title}
-                  layout="responsive"
                   height="80%"
                   width="100%"
-                  objectFit="contain"
-                  objectPosition="top"
-                  priority
+                  loading="lazy"
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </section>
       </motion.main>
