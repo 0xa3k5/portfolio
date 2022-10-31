@@ -23,8 +23,6 @@ export default function Single({
             alt={feedback.name}
             layout="fill"
             objectFit="cover"
-            priority
-            unoptimized
           />
         </div>
         <div className="flex w-fit flex-col space-y-2">

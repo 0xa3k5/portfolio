@@ -12,7 +12,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
     <div
       className={cx(
         className,
-        "mb:pb-8 flex h-[60vh] items-center justify-center px-6 pb-4 md:h-[90vh] md:gap-24 md:px-0"
+        "flex h-[90vh] items-center justify-center px-6 pb-4 md:gap-24 md:px-0 md:pb-8"
       )}
       style={{
         backgroundColor: `#${post.properties.bgColor}`,
@@ -20,7 +20,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
       }}
     >
       <div className="flex max-w-lg flex-col space-y-2 md:space-y-4 md:pl-16 ">
-        <h1 className="font-vollkorn text-5xl font-bold md:leading-snug">
+        <h1 className="text-5xl font-bold md:leading-snug">
           {post.details.title}
         </h1>
         <p className="max-w-md text-xl opacity-80 md:leading-loose">
@@ -34,8 +34,6 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           layout="fill"
           objectFit="contain"
           objectPosition="right"
-          priority
-          unoptimized
         />
       </div>
     </div>

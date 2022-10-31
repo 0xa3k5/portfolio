@@ -59,8 +59,6 @@ export default function OverviewCard({
           layout='fill'
           objectFit='contain'
           objectPosition='right right'
-          priority
-          unoptimized
         />
       </div>
     </div>

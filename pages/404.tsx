@@ -107,7 +107,6 @@ export default function FourOhFour({
                   objectFit="contain"
                   objectPosition="top"
                   priority
-                  unoptimized
                 />
               </div>
             )}

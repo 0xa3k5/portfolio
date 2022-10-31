@@ -123,7 +123,6 @@ export default function Home({
                   objectFit="contain"
                   objectPosition="top"
                   priority
-                  unoptimized
                 />
               </div>
             )}
@@ -181,7 +180,6 @@ export default function Home({
                   objectFit="contain"
                   objectPosition="top"
                   priority
-                  unoptimized
                 />
               )}
             </div>
