@@ -19,20 +19,6 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    loader: "default",
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**dropbox.com",
-      },
-    ],
-    domains: [
-      "s3.us-west-2.amazonaws.com",
-      "www.notion.so",
-      "www.dropbox.com",
-      "https://www.dropbox.com",
-      "dropbox.com",
-      "dropboxusercontent.com",
-    ],
+    domains: ["imagedelivery.net"],
   },
 };

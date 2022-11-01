@@ -17,6 +17,7 @@ import SectionTitle from "../src/components/SectionTitle";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import WorkExperience from "../src/components/WorkExperience";
 import { useAppContext } from "../hooks/useAppContext";
+import Image from "next/image";
 
 interface HomeProps {
   page: StaticPage;
@@ -113,12 +114,11 @@ export default function Home({
             </div>
             <div className="relative hidden flex-1 lg:inline-block">
               {hovered && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={hovered.details.img}
                   alt={hovered.details.title}
-                  height="80%"
-                  width="100%"
+                  fill
+                  style={{ objectFit: "contain", objectPosition: "center" }}
                 />
               )}
             </div>
