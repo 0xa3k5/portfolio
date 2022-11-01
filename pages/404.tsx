@@ -1,7 +1,6 @@
 import { GetStaticProps } from "next";
 import { NotionPost, StaticPage } from "../@types/schema";
 import NotionService from "./api/notion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";

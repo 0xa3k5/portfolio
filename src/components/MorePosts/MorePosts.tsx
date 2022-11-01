@@ -24,50 +24,50 @@ export default function MorePosts({
     >
       {posts.map((p, i) => {
         return (
-          <Link
+          (<Link
             key={p.properties.id}
             href={`/works/${encodeURIComponent(p.properties.slug)}`}
             passHref
-          >
-            <a className="">
+            className="">
+
+            <div
+              className={cx(
+                "group flex flex-col space-y-4 hover:text-daisy",
+                i === 0 ? "items-start" : "items-end"
+              )}
+            >
               <div
                 className={cx(
-                  "group flex flex-col space-y-4 hover:text-daisy",
-                  i === 0 ? "items-start" : "items-end"
+                  "flex space-x-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100",
+                  i === 0 ? "flex-row" : "flex-row-reverse"
                 )}
               >
-                <div
-                  className={cx(
-                    "flex space-x-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100",
-                    i === 0 ? "flex-row" : "flex-row-reverse"
-                  )}
-                >
-                  {i === 0 ? (
-                    <LeftArrowPlainIcon className="w-6 duration-200 group-hover:-translate-x-1/2" />
-                  ) : (
-                    <RightArrowPlainIcon className="w-6 duration-200 group-hover:translate-x-1/2" />
-                  )}
-                  <p className="text-md uppercase tracking-widest">
-                    {i === 0 ? "Previous" : "Next"}
-                  </p>
-                </div>
-
-                <h6
-                  className={cx(
-                    "max-w-sm font-vollkorn text-3xl font-medium leading-snug",
-                    i === 0 ? "text-left" : "text-right"
-                  )}
-                >
-                  <span className="inline-block">
-                    {p.properties.password && (
-                      <LockIcon className="mr-2 shrink-0 opacity-100" />
-                    )}
-                  </span>
-                  {p.details.title}
-                </h6>
+                {i === 0 ? (
+                  <LeftArrowPlainIcon className="w-6 duration-200 group-hover:-translate-x-1/2" />
+                ) : (
+                  <RightArrowPlainIcon className="w-6 duration-200 group-hover:translate-x-1/2" />
+                )}
+                <p className="text-md uppercase tracking-widest">
+                  {i === 0 ? "Previous" : "Next"}
+                </p>
               </div>
-            </a>
-          </Link>
+
+              <h6
+                className={cx(
+                  "max-w-sm font-vollkorn text-3xl font-medium leading-snug",
+                  i === 0 ? "text-left" : "text-right"
+                )}
+              >
+                <span className="inline-block">
+                  {p.properties.password && (
+                    <LockIcon className="mr-2 shrink-0 opacity-100" />
+                  )}
+                </span>
+                {p.details.title}
+              </h6>
+            </div>
+
+          </Link>)
         );
       })}
     </div>

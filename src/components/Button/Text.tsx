@@ -29,8 +29,8 @@ export default function Text({
           {text}
         </a>
       ) : (
-        <Link href={href} passHref scroll={false}>
-          <a onClick={onClick}>{text}</a>
+        <Link href={href} passHref scroll={false} onClick={onClick}>
+          {text}
         </Link>
       )}
     </div>

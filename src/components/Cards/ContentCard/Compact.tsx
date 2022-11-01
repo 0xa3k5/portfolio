@@ -24,7 +24,7 @@ export default function Compact({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Link href={`/works/${post.properties.slug}`}>
+      <Link href={`/works/${post.properties.slug}`} legacyBehavior>
         <div
           className={cx(
             "group flex items-baseline space-x-4 hover:cursor-pointer",
