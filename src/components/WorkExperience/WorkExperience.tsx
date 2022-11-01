@@ -23,10 +23,12 @@ export default function WorkExperience({
                 <Image
                   src={job.logo}
                   alt={`${job.logo} logo`}
-                  layout="fill"
-                  objectFit="fill"
                   unoptimized
-                />
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "fill"
+                  }} />
               </div>
               <div className="flex flex-col">
                 <p className="text-lg">{job.company}</p>

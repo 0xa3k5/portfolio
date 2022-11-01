@@ -31,10 +31,14 @@ export default function Post({ className, post }: PostProps): JSX.Element {
         <Image
           src={post.details.img}
           alt={post.details.title}
-          layout="fill"
-          objectFit="contain"
-          objectPosition="right"
-          unoptimized
+          fill
+          style={{
+            objectFit: "contain",
+            objectPosition: "center",
+            height: "100%",
+            width: "80%",
+            maxWidth: "100%",
+          }}
         />
       </div>
     </div>

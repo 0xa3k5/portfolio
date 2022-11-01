@@ -21,10 +21,12 @@ export default function Single({
           <Image
             src={feedback.img}
             alt={feedback.name}
-            layout="fill"
-            objectFit="cover"
             unoptimized
-          />
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover"
+            }} />
         </div>
         <div className="flex w-fit flex-col space-y-2">
           <span className="text-xl">{feedback.name}</span>

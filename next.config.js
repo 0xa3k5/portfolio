@@ -19,6 +19,23 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["imagedelivery.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "imagedelivery.net",
+      },
+      {
+        protocol: "https",
+        hostname: "cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "dropbox.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.dropbox.com",
+      },
+    ],
   },
 };

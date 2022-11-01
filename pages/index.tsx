@@ -112,13 +112,17 @@ export default function Home({
                   );
                 })}
             </div>
-            <div className="relative hidden flex-1 lg:inline-block">
+            <div className="relative hidden h-[40rem] flex-1 lg:inline-block">
               {hovered && (
                 <Image
                   src={hovered.details.img}
                   alt={hovered.details.title}
                   fill
-                  style={{ objectFit: "contain", objectPosition: "center" }}
+                  style={{
+                    objectFit: "contain",
+                    objectPosition: "center",
+                    maxWidth: "100%",
+                  }}
                 />
               )}
             </div>
@@ -165,15 +169,17 @@ export default function Home({
                 );
               })}
             </div>
-            <div className="relative hidden flex-1 lg:inline-block">
+            <div className="relative hidden h-[40rem] flex-1 lg:inline-block">
               {hovered && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={hovered.details.img}
                   alt={hovered.details.title}
-                  height="80%"
-                  width="100%"
-                  loading="eager"
+                  fill
+                  style={{
+                    objectFit: "contain",
+                    objectPosition: "center",
+                    maxWidth: "100%",
+                  }}
                 />
               )}
             </div>

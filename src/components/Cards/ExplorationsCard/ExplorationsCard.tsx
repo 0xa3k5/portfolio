@@ -18,10 +18,12 @@ export default function ExplorationsCard({
           <Image
             src={exploration.img}
             alt={exploration.name}
-            layout="fill"
-            objectFit="cover"
             unoptimized
-          />
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover"
+            }} />
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { Feedback } from '../../../../@types/schema';
 
-import Image from 'next/image';
+import Image from "next/image";
 import { useState } from 'react';
 
 interface GroupedProps {
@@ -35,7 +35,16 @@ export default function Grouped({
               key={f.id}
               onClick={() => setSelected(f)}
             >
-              <Image src={f.img} alt={f.name} layout='fill' objectFit='cover' priority unoptimized />
+              <Image
+                src={f.img}
+                alt={f.name}
+                priority
+                unoptimized
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
             </div>
           );
         })}
