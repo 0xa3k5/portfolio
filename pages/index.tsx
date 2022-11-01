@@ -120,7 +120,6 @@ export default function Home({
                   alt={hovered.details.title}
                   height="80%"
                   width="100%"
-                  loading="lazy"
                 />
               )}
             </div>
@@ -175,7 +174,7 @@ export default function Home({
                   alt={hovered.details.title}
                   height="80%"
                   width="100%"
-                  loading="lazy"
+                  loading="eager"
                 />
               )}
             </div>

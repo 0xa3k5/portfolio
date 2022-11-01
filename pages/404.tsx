@@ -104,7 +104,6 @@ export default function FourOhFour({
                   alt={hovered.details.title}
                   height="80%"
                   width="100%"
-                  loading="lazy"
                 />
               )}
             </div>
