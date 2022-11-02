@@ -56,13 +56,12 @@ export default function OverviewCard({
         <Image
           src={post.details.overviewImg}
           alt={post.details.title}
-          unoptimized
           fill
-          sizes="100vw"
           style={{
             objectFit: "contain",
-            objectPosition: "right right"
-          }} />
+            objectPosition: "right right",
+          }}
+        />
       </div>
     </div>
   );

@@ -38,10 +38,7 @@ export default function Grouped({
               <Image
                 src={f.img}
                 alt={f.name}
-                priority
-                unoptimized
                 fill
-                sizes="100vw"
                 style={{
                   objectFit: "cover"
                 }} />
