@@ -35,8 +35,6 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           style={{
             objectFit: "contain",
             objectPosition: "center",
-            height: "100%",
-            width: "80%",
             maxWidth: "100%",
           }}
         />
