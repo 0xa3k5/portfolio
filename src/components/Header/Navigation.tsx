@@ -3,7 +3,6 @@ import { motionVariants } from "../../utils/motionVariants";
 import Button from "../Button";
 import { useAppContext } from "../../../hooks/useAppContext";
 import cx from "classnames";
-import { useRouter } from "next/router";
 
 const navList = [
   {
