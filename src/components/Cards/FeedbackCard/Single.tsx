@@ -26,6 +26,9 @@ export default function Single({
               objectFit: "contain",
               maxWidth: "100%",
             }}
+            sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
           />
         </div>
         <div className="flex flex-col gap-1">

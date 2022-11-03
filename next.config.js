@@ -32,6 +32,10 @@ module.exports = {
         protocol: "https",
         hostname: "**.dropbox.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.dropboxusercontent.com",
+      },
     ],
   },
 };

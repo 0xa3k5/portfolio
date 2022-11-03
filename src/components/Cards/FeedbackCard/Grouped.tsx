@@ -43,6 +43,9 @@ export default function Grouped({
                   objectFit: "cover",
                   maxWidth: "100%",
                 }}
+                sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
               />
             </div>
           );
