@@ -18,27 +18,27 @@ export default function MorePosts({
   return (
     <div
       className={cx(
-        "flex flex-col space-y-24 space-x-0 px-4 py-24 md:flex-row md:space-y-0 md:space-x-24",
+        "flex flex-col gap-24 px-4 py-24 md:flex-row",
         className
       )}
     >
       {posts.map((p, i) => {
         return (
-          (<Link
+          <Link
             key={p.properties.id}
             href={`/works/${encodeURIComponent(p.properties.slug)}`}
             passHref
-            className="">
-
+            className=""
+          >
             <div
               className={cx(
-                "group flex flex-col space-y-4 hover:text-daisy",
+                "group flex flex-col gap-4 hover:text-daisy",
                 i === 0 ? "items-start" : "items-end"
               )}
             >
               <div
                 className={cx(
-                  "flex space-x-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100",
+                  "flex gap-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100",
                   i === 0 ? "flex-row" : "flex-row-reverse"
                 )}
               >
@@ -54,7 +54,7 @@ export default function MorePosts({
 
               <h6
                 className={cx(
-                  "max-w-sm font-vollkorn text-3xl font-medium leading-snug",
+                  "max-w-xs text-3xl font-medium leading-snug",
                   i === 0 ? "text-left" : "text-right"
                 )}
               >
@@ -66,8 +66,7 @@ export default function MorePosts({
                 {p.details.title}
               </h6>
             </div>
-
-          </Link>)
+          </Link>
         );
       })}
     </div>

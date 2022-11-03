@@ -18,7 +18,7 @@ export default function OverviewCard({
         className
       )}
     >
-      <div className="flex flex-col p-16 md:flex-row md:space-x-48 md:p-24">
+      <div className="flex flex-col p-16 md:flex-row md:gap-48 md:p-24">
         <div className="">
           <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             ORG
@@ -41,7 +41,7 @@ export default function OverviewCard({
           <p className="mb-4 text-xs uppercase tracking-widest opacity-60">
             Contributions
           </p>
-          <ul className="space-y-2">
+          <ul className="gap-2">
             {post.details.contributions.split("-").map((c, i) => {
               return (
                 <li className="text-lg md:text-base" key={i}>
@@ -60,6 +60,7 @@ export default function OverviewCard({
           style={{
             objectFit: "contain",
             objectPosition: "right right",
+            maxWidth: "100%",
           }}
         />
       </div>

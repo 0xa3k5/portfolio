@@ -1,8 +1,8 @@
-import cx from 'classnames';
-import { Feedback } from '../../../../@types/schema';
+import cx from "classnames";
+import { Feedback } from "../../../../@types/schema";
 
 import Image from "next/image";
-import { useState } from 'react';
+import { useState } from "react";
 
 interface GroupedProps {
   classname?: string;
@@ -19,18 +19,18 @@ export default function Grouped({
     <div
       className={cx(
         classname,
-        'container flex flex-col items-center space-y-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16'
+        "container flex flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16"
       )}
     >
-      <div className='flex h-16 items-center space-x-8'>
+      <div className="flex h-16 items-center gap-8">
         {feedback.map((f) => {
           return (
             <div
               className={cx(
-                'relative overflow-hidden rounded-full duration-200',
+                "relative overflow-hidden rounded-full duration-200",
                 selected === f
-                  ? 'h-16 w-16 opacity-100 outline outline-2 outline-offset-4 outline-white'
-                  : 'h-12 w-12 opacity-40'
+                  ? "h-16 w-16 opacity-100 outline outline-2 outline-offset-4 outline-white"
+                  : "h-12 w-12 opacity-40"
               )}
               key={f.id}
               onClick={() => setSelected(f)}
@@ -40,28 +40,30 @@ export default function Grouped({
                 alt={f.name}
                 fill
                 style={{
-                  objectFit: "cover"
-                }} />
+                  objectFit: "cover",
+                  maxWidth: "100%",
+                }}
+              />
             </div>
           );
         })}
       </div>
-      <div className='flex'>
+      <div className="flex">
         {feedback.map((f) => {
           return (
             <div
               className={cx(
-                selected === f ? 'visible' : 'hidden',
-                'flex h-full max-w-xl flex-col items-center space-y-8 text-center duration-200'
+                selected === f ? "visible" : "hidden",
+                "flex h-full max-w-xl flex-col items-center gap-8 text-center duration-200"
               )}
               key={f.id}
             >
-              <span className='text-2xl leading-normal tracking-wide'>
+              <span className="text-2xl leading-normal tracking-wide">
                 {f.feedback}
               </span>
-              <div className='flex flex-col space-y-2 border-t border-t-white border-opacity-20 pt-8'>
-                <span className='text-xl'>{f.name}</span>
-                <span className='opacity-40'>
+              <div className="flex flex-col gap-2 border-t border-t-white border-opacity-20 pt-8">
+                <span className="text-xl">{f.name}</span>
+                <span className="opacity-40">
                   {f.role} @ {f.orgName}
                 </span>
               </div>

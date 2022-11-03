@@ -87,7 +87,8 @@ export default class NotionService {
 
   async getNotionPageDetail(
     slug: string,
-    database_id: string
+    database_id: string,
+    pageType: "post" | "page"
   ): Promise<NotionPageDetail> {
     const response = await this.client.databases.query({
       database_id: database_id,
@@ -106,11 +107,13 @@ export default class NotionService {
     const mdBlocks = await this.n2m.pageToMarkdown(detail.id);
     const markdown = this.n2m.toMarkdownString(mdBlocks);
 
-    const post = NotionService.postTransformer(detail);
+    if (pageType === "post") {
+      const post = NotionService.postTransformer(detail);
+      return { markdown, post };
+    }
 
     return {
       markdown,
-      post,
     };
   }
 
@@ -153,7 +156,7 @@ export default class NotionService {
         cover = "";
     }
 
-    const transformedPage = {
+    const transformedPost = {
       properties: {
         id: page.id,
         slug: page.properties.Slug.formula.string,
@@ -188,7 +191,7 @@ export default class NotionService {
           page.properties.Feedbacks.relation.map((obj) => obj.id) || null,
       },
     };
-    return transformedPage;
+    return transformedPost;
   }
 
   private static feedbackTransformer(page): Feedback {

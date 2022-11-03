@@ -11,21 +11,21 @@ export default function Page({ className, page }: PageProps): JSX.Element {
     <div
       className={cx(
         className,
-        "flex h-screen flex-col items-center justify-center space-y-8 py-8 text-center md:py-32"
+        "flex min-h-[40vh] w-full justify-end flex-col p-4 mt-32 sm:mt-0"
       )}
     >
-      {page.heroTitle.split("-").map((s, i) => {
-        return (
-          <h1 className="max-w-2xl text-4xl font-semibold md:text-5xl" key={i}>
-            {s}
-          </h1>
-        );
-      })}
-      {page.heroText && (
-        <p className="max-w-2xl text-xl font-normal opacity-80 md:px-8">
-          {page.heroText}
-        </p>
-      )}
+      <div className="flex max-w-xl flex-col gap-8">
+        {page.heroTitle.split("-").map((s, i) => {
+          return (
+            <h1 className="text-5xl font-bold" key={i}>
+              {s}
+            </h1>
+          );
+        })}
+        {page.heroText && (
+          <p className="text-xl font-normal opacity-80">{page.heroText}</p>
+        )}
+      </div>
     </div>
   );
 }

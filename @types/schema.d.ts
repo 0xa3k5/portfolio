@@ -56,8 +56,8 @@ export type WorkExp = {
 };
 
 export type NotionPageDetail = {
-  post: NotionPost;
   markdown: string;
+  post?: NotionPost;
 };
 
 export type StaticPage = {

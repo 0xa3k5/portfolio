@@ -35,7 +35,7 @@ export default function ContentReadIndicator({
 
   return (
     <div
-      className="fixed left-[5%] top-[30%] z-20 hidden h-[40%] origin-[0%] flex-row space-x-4 lg:flex"
+      className="fixed left-[5%] top-[30%] z-20 hidden h-[40%] origin-[0%] flex-row gap-4 lg:flex"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

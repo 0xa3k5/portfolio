@@ -61,7 +61,7 @@ export default function FourOhFour({
             ease: "easeInOut",
             duration: 0.3,
           }}
-          className="absolute top-1/2 left-1/2 h-screen w-screen -translate-x-1/2 -translate-y-1/2 transform"
+          className="absolute top-1/2 left-1/2 h-screen w-screen -translate-x-1/2 -translate-y-1/2"
         />
       </div>
       <PageHead page={page} />
@@ -72,13 +72,13 @@ export default function FourOhFour({
         onChange={() => motion.animate}
         exit="exit"
         transition={{ type: "linear" }}
-        className="container flex max-w-5xl flex-col items-center space-y-24 px-4 md:px-12 xl:max-w-6xl"
+        className="container flex max-w-5xl flex-col items-center gap-24 px-4 md:px-12 xl:max-w-6xl"
       >
         <Hero.Page page={page} />
         <section className="flex w-full flex-col px-4 py-24 lg:px-0">
           <SectionTitle title="highlighted case studies" className="mb-16" />
-          <div className="flex items-center space-x-4">
-            <div className="flex w-full flex-col space-y-8 md:space-y-12 lg:w-1/2 lg:pr-12">
+          <div className="flex items-center gap-4">
+            <div className="flex w-full flex-col gap-8 md:gap-12 lg:w-1/2 lg:pr-12">
               {posts
                 .sort(
                   (a: NotionPost, b: NotionPost) =>

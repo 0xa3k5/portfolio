@@ -8,7 +8,7 @@ export default function Logout({ onClick }: LogoutProps) {
   return (
     <>
       <div className="mx-auto flex h-screen max-w-md items-center justify-center">
-        <form className="flex flex-col items-center space-y-6">
+        <form className="flex flex-col items-center gap-6">
           <h4 className="text-center text-4xl font-semibold md:text-5xl">
             I see that you are logged in
           </h4>

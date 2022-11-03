@@ -19,7 +19,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
         color: `#${post.properties.color}`,
       }}
     >
-      <div className="flex max-w-lg flex-col space-y-2 md:space-y-4 md:pl-16 ">
+      <div className="flex max-w-lg flex-col gap-2 md:gap-4 md:pl-16 ">
         <h1 className="text-5xl font-bold md:leading-snug">
           {post.details.title}
         </h1>
@@ -27,7 +27,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           {post.details.description}
         </p>
       </div>
-      <div className="relative hidden h-full w-1/2 md:inline-block">
+      <div className="relative hidden h-2/3 w-1/2 md:inline-block">
         <Image
           src={post.details.img}
           alt={post.details.title}

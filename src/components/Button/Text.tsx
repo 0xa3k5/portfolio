@@ -20,7 +20,7 @@ export default function Text({
   return (
     <div
       className={cx(
-        "flex items-center space-x-2 rounded-full duration-200 hover:text-daisy",
+        "flex items-center gap-2 rounded-full duration-200 hover:text-daisy",
         className
       )}
     >
