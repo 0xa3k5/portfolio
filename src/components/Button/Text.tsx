@@ -20,7 +20,7 @@ export default function Text({
   return (
     <div
       className={cx(
-        "flex items-center space-x-2 rounded-full duration-200 hover:text-daisy",
+        "flex items-center gap-2 rounded-full duration-200 hover:text-daisy",
         className
       )}
     >
@@ -29,8 +29,8 @@ export default function Text({
           {text}
         </a>
       ) : (
-        <Link href={href} passHref scroll={false}>
-          <a onClick={onClick}>{text}</a>
+        <Link href={href} passHref scroll={false} onClick={onClick}>
+          {text}
         </Link>
       )}
     </div>

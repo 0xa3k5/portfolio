@@ -1,10 +1,10 @@
 export type NotionPost = {
-  org: {
+  org?: {
     logo: string;
     website: string;
     orgName: string;
   };
-  properties: {
+  properties?: {
     id: string;
     number: number;
     slug: string;
@@ -15,7 +15,7 @@ export type NotionPost = {
     color: string;
     tag: string;
   };
-  details: {
+  details?: {
     img: string;
     title: string;
     type: string;
@@ -25,7 +25,7 @@ export type NotionPost = {
     contributions: string;
     overviewImg: string;
   };
-  feedbacks: {
+  feedbacks?: {
     id: string;
     relationIds: string[];
   };
@@ -56,8 +56,8 @@ export type WorkExp = {
 };
 
 export type NotionPageDetail = {
-  post: NotionPost;
   markdown: string;
+  post?: NotionPost;
 };
 
 export type StaticPage = {

@@ -6,9 +6,9 @@ import {
   NotionPageDetail,
   Feedback,
   StaticPage,
-} from "../../@types/schema";
+} from "../../src/types";
 import { config } from "../../config";
-import { Exploration } from "../../@types/schema";
+import { Exploration } from "../../src/types";
 
 export default class NotionService {
   client: Client;
@@ -56,7 +56,6 @@ export default class NotionService {
       .map((res) => {
         return NotionService.postTransformer(res);
       })
-      .filter((p) => p.properties.published);
 
     return transformedPosts;
   }
@@ -87,7 +86,8 @@ export default class NotionService {
 
   async getNotionPageDetail(
     slug: string,
-    database_id: string
+    database_id: string,
+    pageType: "post" | "page"
   ): Promise<NotionPageDetail> {
     const response = await this.client.databases.query({
       database_id: database_id,
@@ -106,11 +106,13 @@ export default class NotionService {
     const mdBlocks = await this.n2m.pageToMarkdown(detail.id);
     const markdown = this.n2m.toMarkdownString(mdBlocks);
 
-    const post = NotionService.postTransformer(detail);
+    if (pageType === "post") {
+      const post = NotionService.postTransformer(detail);
+      return { markdown, post };
+    }
 
     return {
       markdown,
-      post,
     };
   }
 
@@ -149,18 +151,17 @@ export default class NotionService {
         cover = page.cover.external.url;
         break;
       default:
-        // placeholder
         cover = "";
     }
 
-    const transformedPage = {
+    const transformedPost = {
       properties: {
         id: page.id,
         slug: page.properties.Slug.formula.string,
         number: page.properties.Sort.number,
         published: page.properties.Published.checkbox === true,
         vertical: page.properties.Vertical.checkbox === true,
-        password: page.properties.Password.checkbox === true || false,
+        password: page.properties.Password.checkbox === true,
         bgColor: page.properties.BgColor.rich_text[0]?.plain_text || "000000",
         color: page.properties.TextColor.rich_text[0]?.plain_text || "ffffff",
         tag: page.properties.Tag.select?.name || null,
@@ -188,13 +189,13 @@ export default class NotionService {
           page.properties.Feedbacks.relation.map((obj) => obj.id) || null,
       },
     };
-    return transformedPage;
+    return transformedPost;
   }
 
   private static feedbackTransformer(page): Feedback {
     return {
       id: page.id,
-      relationId: page.properties.Relation.relation[0].id,
+      relationId: page.properties.Relation.relation[0]?.id || null,
       name: page.properties.Name.title[0].plain_text,
       img: page.properties.Photo.files[0].external.url,
       orgName: page.properties.Company.multi_select[0].name,

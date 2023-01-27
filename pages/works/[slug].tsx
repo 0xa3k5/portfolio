@@ -5,7 +5,7 @@ import { config } from "../../config";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
-import { NotionPost, Feedback } from "../../@types/schema";
+import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
 import { motion, useScroll } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";
@@ -106,7 +106,7 @@ export default function Detail({
             <Hero.Post post={post} />
           </div>
           <div
-            className="container flex flex-col items-center space-y-24 py-24 px-6 md:px-24"
+            className="container flex flex-col items-center gap-24 py-24 px-6 md:px-24"
             ref={mdRef}
           >
             <OverviewCard post={post} />
@@ -149,7 +149,8 @@ export async function getStaticProps(context) {
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
-    config.notion().caseStudies
+    config.notion().caseStudies,
+    "post"
   );
 
   return {

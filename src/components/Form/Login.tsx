@@ -23,13 +23,13 @@ export default function Login({ redirectPath }: LoginProps) {
     <>
       <div className="mx-auto flex h-screen max-w-md items-center justify-center px-4">
         <form
-          className="flex flex-col items-center space-y-6"
+          className="flex flex-col items-center gap-6"
           onSubmit={handleSubmit}
         >
           <h4 className="text-center text-4xl font-semibold md:text-5xl">
             I signed some papers
           </h4>
-          <p className="md:px-8 text-center text-xl opacity-80">
+          <p className="text-center text-xl opacity-80 md:px-8">
             I can not make this case study public. Please enter the password or{" "}
             <a
               className="cursor-pointer text-daisy duration-200 hover:underline"

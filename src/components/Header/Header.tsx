@@ -1,77 +1,43 @@
 import cx from "classnames";
-import Button from "../Button";
 import Logo from "../Logo";
 
 import HamburgerIcon from "../../../public/icons/hamburger.svg";
 import CloseIcon from "../../../public/icons/close.svg";
 
 import { useAppContext } from "../../../hooks/useAppContext";
+import Navigation from "./Navigation";
 
 interface HeaderProps {
   className?: string;
 }
 
 export default function Header({ className }: HeaderProps): JSX.Element {
-  const appContext = useAppContext();
-
-  const navList = [
-    {
-      text: "About",
-      href: "/about",
-      targetBlank: false,
-    },
-    {
-      text: "Twitter",
-      href: "https://twitter.com/akemalakcay",
-      targetBlank: true,
-    },
-    {
-      text: "LinkedIn",
-      href: "https://linkedin.com/in/alikemalakcay/",
-      targetBlank: true,
-    },
-    {
-      text: "Resume",
-      href: "/akresume.pdf",
-      targetBlank: true,
-    },
-    {
-      text: "hey@akml.io",
-      href: "mailto:hey@akml.io",
-      targetBlank: true,
-    },
-  ];
+  const { theme, isNavbarOpen, setIsNavbarOpen } = useAppContext();
 
   return (
-    <div
-      className={cx(
-        className,
-        "fixed top-0 z-20 w-full bg-midnight py-4 px-4 duration-200 md:py-6 md:px-16",
-        appContext.isNavbarOpen
-          ? "bg-opacity-0 backdrop-blur-none"
-          : "bg-opacity-10 backdrop-blur-lg"
-      )}
-    >
+    <div className="fixed top-0 z-20 w-screen bg-opacity-10 backdrop-blur-lg">
       <nav
-        className="container flex items-center justify-between"
-        style={{ color: `#${appContext.theme.color}` }}
+        className={cx(
+          className,
+          "container flex py-4 px-8 duration-200 lg:items-center lg:justify-between lg:py-6 lg:px-16",
+          isNavbarOpen ? "h-screen " : "h-fit"
+        )}
+        style={{ color: `#${theme.color}` }}
       >
-        <Logo onClick={() => appContext.setIsNavbarOpen(false)} />
-        <ul className="hidden items-center space-x-12 lg:flex">
-          {navList.map(({ text, href, targetBlank }) => (
-            <li className="text-sm uppercase tracking-widest" key={href}>
-              <Button.Text text={text} href={href} targetBlank={targetBlank} />
-            </li>
-          ))}
-        </ul>
+        <Logo
+          className="w-12 lg:w-full"
+          onClick={() => setIsNavbarOpen(false)}
+        />
+        <Navigation.Desktop />
+        <Navigation.Mobile />
         <button
-          className="block lg:hidden"
-          onClick={() => appContext.setIsNavbarOpen(!appContext.isNavbarOpen)}
+          className="inline-block h-fit lg:hidden"
+          onClick={() => setIsNavbarOpen(!isNavbarOpen)}
         >
-          {appContext.isNavbarOpen ? (
-            <CloseIcon className="w-8 md:w-10" />
+          {isNavbarOpen ? (
+            <CloseIcon className="w-8 lg:w-10" />
           ) : (
-            <HamburgerIcon className="w-8 md:w-10" />
+            <HamburgerIcon className="w-8 lg:w-10" />
           )}
         </button>
       </nav>

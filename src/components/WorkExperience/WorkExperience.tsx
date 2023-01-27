@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { WorkExp } from "../../../@types/schema";
+import { WorkExp } from "../../types";
 
 import Image from "next/image";
 
@@ -13,25 +13,24 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div
-      className={cx(
-        classname,
-        "flex w-full flex-col py-16 lg:flex-row"
-      )}
-    >
+    <div className={cx(classname, "flex w-full flex-col py-12 lg:flex-row")}>
       <div className="group mb-8 flex flex-1 lg:mb-0">
         <a href={job.website} target="_blank" rel="noreferrer">
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col gap-4">
             <p className="text-lg opacity-40">{job.period}</p>
-            <div className="flex items-start space-x-4 duration-200 group-hover:text-daisy">
+            <div className="flex items-start  gap-4 duration-200 group-hover:text-daisy">
               <div className="relative h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1">
                 <Image
                   src={job.logo}
                   alt={`${job.logo} logo`}
-                  layout="fill"
-                  objectFit="fill"
-                  priority
-                  unoptimized
+                  fill
+                  style={{
+                    objectFit: "fill",
+                    maxWidth: "100%",
+                  }}
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
                 />
               </div>
               <div className="flex flex-col">
@@ -42,9 +41,8 @@ export default function WorkExperience({
           </div>
         </a>
       </div>
-
       <div className="flex-1">
-        <p className="text-lg leading-relaxed opacity-70">{job.description}</p>
+        <p className="text-lg leading-relaxed opacity-90">{job.description}</p>
       </div>
     </div>
   );

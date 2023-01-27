@@ -2,7 +2,6 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Logout from "../src/components/Form/Logout";
 import Header from "../src/components/Header/Header";
-import MobileMenu from "../src/components/Header/MobileMenu";
 import Login from "../src/components/Form/Login";
 
 const LoginPage = (): JSX.Element => {
@@ -19,7 +18,6 @@ const LoginPage = (): JSX.Element => {
         />
       </Head>
       <Header />
-      <MobileMenu />
       {status === "unauthenticated" ? (
         <Login redirectPath="/" />
       ) : (

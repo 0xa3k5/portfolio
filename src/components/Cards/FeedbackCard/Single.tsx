@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { Feedback } from "../../../../@types/schema";
+import { Feedback } from "../../../types";
 import Image from "next/image";
 
 interface SingleProps {
@@ -12,8 +12,8 @@ export default function Single({
   feedback,
 }: SingleProps): JSX.Element {
   return (
-    <div className={cx(classname, "flex space-x-12 py-12")}>
-      <div className="flex w-2/6 flex-col space-y-8">
+    <div className={cx(classname, "flex flex-col gap-8 py-12 md:flex-row")}>
+      <div className="flex h-fit w-full flex-col gap-4 md:w-2/6 md:flex-row md:items-center">
         <div
           className={cx("relative h-16 w-16 overflow-hidden rounded-full")}
           key={feedback.id}
@@ -21,20 +21,24 @@ export default function Single({
           <Image
             src={feedback.img}
             alt={feedback.name}
-            layout="fill"
-            objectFit="cover"
+            fill
             priority
-            unoptimized
+            style={{
+              objectFit: "contain",
+              maxWidth: "100%",
+            }}
+            sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
           />
         </div>
-        <div className="flex w-fit flex-col space-y-2">
+        <div className="flex flex-col gap-1">
           <span className="text-xl">{feedback.name}</span>
           <span className="opacity-40">{feedback.role}</span>
         </div>
       </div>
-
-      <div className={cx("flex w-4/6 flex-col space-y-8")}>
-        <span className="text-xl font-light leading-normal tracking-wide">
+      <div className={cx("flex w-full flex-col gap-8 md:w-4/6")}>
+        <span className="text-xl font-light leading-normal tracking-wide opacity-90">
           {feedback.feedback}
         </span>
       </div>

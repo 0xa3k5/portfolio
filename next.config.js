@@ -1,9 +1,5 @@
 module.exports = {
-  env: {
-    pagePassword: process.env.PAGE_PASSWORD,
-  },
   reactStrictMode: true,
-  poweredByHeader: true,
   output: "standalone",
   webpack(config) {
     config.module.rules.push({
@@ -19,11 +15,23 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: [
-      "s3.us-west-2.amazonaws.com",
-      "www.notion.so",
-      "www.dropbox.com",
-      "https://www.dropbox.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "imagedelivery.net",
+      },
+      {
+        protocol: "https",
+        hostname: "cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "**.dropbox.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.dropboxusercontent.com",
+      },
     ],
   },
 };

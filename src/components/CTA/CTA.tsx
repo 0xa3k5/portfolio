@@ -22,7 +22,7 @@ export default function CTA({
         "flex h-[40vh] items-center justify-center px-4 md:h-[60vh] md:px-0"
       )}
     >
-      <div className="flex flex-col items-center justify-center space-y-6 text-center md:space-y-8">
+      <div className="flex flex-col items-center justify-center gap-6 text-center md:gap-8">
         <h4 className="max-w-xl font-vollkorn text-4xl font-semibold md:text-5xl">
           {title}
         </h4>

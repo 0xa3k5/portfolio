@@ -17,13 +17,13 @@
   }
 
   body {
-    @apply bg-midnight font-muli text-white scroll-smooth;
+    @apply scroll-smooth bg-midnight font-muli text-white;
   }
 }
 
 .with-prose {
-  @apply prose
-    prose-lg
+  @apply prose-lg
+    prose
     prose-invert
     prose-headings:font-vollkorn
     prose-h3:font-normal
@@ -38,28 +38,4 @@
     prose-img:rounded-xl
     md:prose-xl
     md:prose-img:rounded-2xl;
-}
-
-.with-bg-pattern {
-  background-color: #06060b;
-  background: radial-gradient(
-      circle,
-      transparent 20%,
-      #06060b 20%,
-      #06060b 80%,
-      transparent 80%,
-      transparent
-    ),
-    radial-gradient(
-        circle,
-        transparent 20%,
-        #06060b 20%,
-        #06060b 80%,
-        transparent 80%,
-        transparent
-      )
-      25px 25px,
-    linear-gradient(#fff 2px, transparent 2px) 0 -1px,
-    linear-gradient(90deg, #fff 2px, #06060b 2px) -1px 0;
-  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
 }
