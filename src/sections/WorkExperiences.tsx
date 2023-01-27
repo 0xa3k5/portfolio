@@ -1,4 +1,4 @@
-import { WorkExp } from "../../@types/schema";
+import { WorkExp } from "../types";
 import SectionTitle from "../components/SectionTitle";
 import WorkExperience from "../components/WorkExperience";
 import SectionsWrapper from "./SectionsWrapper";

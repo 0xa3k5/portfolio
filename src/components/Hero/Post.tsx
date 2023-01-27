@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { NotionPost } from "../../../@types/schema";
+import { NotionPost } from "../../types";
 import Image from "next/image";
 
 interface PostProps {
@@ -32,6 +32,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           src={post.details.img}
           alt={post.details.title}
           fill
+          priority
           style={{
             objectFit: "contain",
             objectPosition: "center",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Exploration } from "../../../../@types/schema";
+import { Exploration } from "../../../types";
 import Video from "./Video";
 
 interface ExplorationsCardProps {

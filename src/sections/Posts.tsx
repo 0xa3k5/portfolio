@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { NotionPost } from "../../@types/schema";
+import { NotionPost } from "../types";
 import ContentCard from "../components/Cards/ContentCard";
 import SectionTitle from "../components/SectionTitle";
 import Image from "next/image";
@@ -33,7 +33,7 @@ export default function Posts({
             )
             .map((p: NotionPost) => {
               return (
-                <ContentCard.Compact
+                <ContentCard
                   post={p}
                   key={p.properties.id}
                   onMouseEnter={() => state.setHovered(p)}
@@ -47,6 +47,7 @@ export default function Posts({
             <Image
               src={state.hovered.details.img}
               alt={state.hovered.details.title}
+              priority
               fill
               style={{
                 objectFit: "contain",

@@ -1,4 +1,4 @@
-import { Exploration } from "../../@types/schema";
+import { Exploration } from "../types";
 import SectionTitle from "../components/SectionTitle";
 import ExplorationsCard from "../components/Cards/ExplorationsCard/ExplorationsCard";
 import SectionsWrapper from "./SectionsWrapper";

@@ -7,7 +7,7 @@ import {
   StaticPage,
   Feedback,
   WorkExp,
-} from "../@types/schema";
+} from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";

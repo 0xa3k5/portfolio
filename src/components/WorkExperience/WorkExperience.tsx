@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { WorkExp } from "../../../@types/schema";
+import { WorkExp } from "../../types";
 
 import Image from "next/image";
 

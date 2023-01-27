@@ -6,9 +6,9 @@ import {
   NotionPageDetail,
   Feedback,
   StaticPage,
-} from "../../@types/schema";
+} from "../../src/types";
 import { config } from "../../config";
-import { Exploration } from "../../@types/schema";
+import { Exploration } from "../../src/types";
 
 export default class NotionService {
   client: Client;
@@ -56,7 +56,6 @@ export default class NotionService {
       .map((res) => {
         return NotionService.postTransformer(res);
       })
-      .filter((p) => p.properties.published);
 
     return transformedPosts;
   }
@@ -152,7 +151,6 @@ export default class NotionService {
         cover = page.cover.external.url;
         break;
       default:
-        // placeholder
         cover = "";
     }
 
@@ -163,7 +161,7 @@ export default class NotionService {
         number: page.properties.Sort.number,
         published: page.properties.Published.checkbox === true,
         vertical: page.properties.Vertical.checkbox === true,
-        password: page.properties.Password.checkbox === true || false,
+        password: page.properties.Password.checkbox === true,
         bgColor: page.properties.BgColor.rich_text[0]?.plain_text || "000000",
         color: page.properties.TextColor.rich_text[0]?.plain_text || "ffffff",
         tag: page.properties.Tag.select?.name || null,
@@ -197,7 +195,7 @@ export default class NotionService {
   private static feedbackTransformer(page): Feedback {
     return {
       id: page.id,
-      relationId: page.properties.Relation.relation[0].id,
+      relationId: page.properties.Relation.relation[0]?.id || null,
       name: page.properties.Name.title[0].plain_text,
       img: page.properties.Photo.files[0].external.url,
       orgName: page.properties.Company.multi_select[0].name,

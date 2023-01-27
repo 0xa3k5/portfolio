@@ -1,6 +1,6 @@
 import cx from "classnames";
 import Image from "next/image";
-import { NotionPost } from "../../../../@types/schema";
+import { NotionPost } from "../../../types";
 
 interface OverviewCardProps {
   className?: string;
@@ -57,6 +57,7 @@ export default function OverviewCard({
           src={post.details.overviewImg}
           alt={post.details.title}
           fill
+          priority
           style={{
             objectFit: "contain",
             objectPosition: "right right",

@@ -5,7 +5,7 @@ import { config } from "../../config";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
-import { NotionPost, Feedback } from "../../@types/schema";
+import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
 import { motion, useScroll } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";

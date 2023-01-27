@@ -1,6 +1,6 @@
 import cx from "classnames";
 import Link from "next/link";
-import { NotionPost } from "../../../@types/schema";
+import { NotionPost } from "../../types";
 
 import LeftArrowPlainIcon from "../../../public/icons/left-arrow-plain.svg";
 import RightArrowPlainIcon from "../../../public/icons/right-arrow-plain.svg";
@@ -17,10 +17,7 @@ export default function MorePosts({
 }: MorePostsProps): JSX.Element {
   return (
     <div
-      className={cx(
-        "flex flex-col gap-24 px-4 py-24 md:flex-row",
-        className
-      )}
+      className={cx("flex flex-col gap-24 px-4 py-24 md:flex-row", className)}
     >
       {posts.map((p, i) => {
         return (

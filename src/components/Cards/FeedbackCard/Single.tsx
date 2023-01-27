@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { Feedback } from "../../../../@types/schema";
+import { Feedback } from "../../../types";
 import Image from "next/image";
 
 interface SingleProps {
@@ -22,6 +22,7 @@ export default function Single({
             src={feedback.img}
             alt={feedback.name}
             fill
+            priority
             style={{
               objectFit: "contain",
               maxWidth: "100%",

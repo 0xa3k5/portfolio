@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { StaticPage } from "../../../@types/schema";
+import { StaticPage } from "../../types";
 
 interface PageProps {
   className?: string;
@@ -11,7 +11,7 @@ export default function Page({ className, page }: PageProps): JSX.Element {
     <div
       className={cx(
         className,
-        "flex min-h-[40vh] w-full justify-end flex-col p-4 mt-32 sm:mt-0"
+        "mt-32 flex min-h-[40vh] w-full flex-col justify-end p-4 sm:mt-0"
       )}
     >
       <div className="flex max-w-xl flex-col gap-8">

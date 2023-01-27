@@ -1,4 +1,4 @@
-import { Feedback } from "../../@types/schema";
+import { Feedback } from "../types";
 import FeedbackCard from "../components/Cards/FeedbackCard";
 import SectionTitle from "../components/SectionTitle";
 import SectionsWrapper from "./SectionsWrapper";
