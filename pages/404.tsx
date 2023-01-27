@@ -86,7 +86,7 @@ export default function FourOhFour({
                 )
                 .map((p: NotionPost) => {
                   return (
-                    <ContentCard.Compact
+                    <ContentCard
                       post={p}
                       key={p.properties.id}
                       onMouseEnter={() => setHovered(p)}
