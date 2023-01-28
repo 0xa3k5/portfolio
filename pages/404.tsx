@@ -80,6 +80,7 @@ export default function FourOhFour({
           <div className="flex items-center gap-4">
             <div className="flex w-full flex-col gap-8 md:gap-12 lg:w-1/2 lg:pr-12">
               {posts
+                .filter((p) => p.properties.published)
                 .sort(
                   (a: NotionPost, b: NotionPost) =>
                     a.properties.number - b.properties.number

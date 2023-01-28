@@ -41,7 +41,6 @@ function NavLi({ navList, className }): JSX.Element {
         href={l.href}
         targetBlank={l.targetBlank}
         onClick={(e) => {
-          e.preventDefault();
           setIsNavbarOpen(false);
         }}
       />
