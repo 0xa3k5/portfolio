@@ -6,6 +6,8 @@ import { SessionProvider } from "next-auth/react";
 import "../src/styles/globals.css";
 import Header from "../src/components/Header/Header";
 import { ContextProvider } from "../hooks/useAppContext";
+import { Analytics } from '@vercel/analytics/react';
+
 function MyApp({
   Component,
   router,
@@ -23,6 +25,7 @@ function MyApp({
           onExitComplete={() => window.scrollTo(0, 0)}
         >
           <Component {...pageProps} canonical={url} key={url} />
+          <Analytics />
         </AnimatePresence>
         <CTA />
         <Footer />

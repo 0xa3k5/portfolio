@@ -40,7 +40,7 @@ function NavLi({ navList, className }): JSX.Element {
         text={l.text}
         href={l.href}
         targetBlank={l.targetBlank}
-        onClick={(e) => {
+        onClick={() => {
           setIsNavbarOpen(false);
         }}
       />
