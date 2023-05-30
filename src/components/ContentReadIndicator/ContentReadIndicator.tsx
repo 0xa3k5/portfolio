@@ -1,7 +1,7 @@
 import { motion, MotionValue, Variants } from "framer-motion";
 import { MutableRefObject, useState } from "react";
 import { NotionPost } from "../../types";
-import RightArrowIcon from "../../../public/icons/right-arrow-plain.svg";
+import { RightArrowIcon } from "../../icons";
 
 const buttonIcon: Variants = {
   idle: {

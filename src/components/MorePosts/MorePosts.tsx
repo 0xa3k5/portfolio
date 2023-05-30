@@ -1,10 +1,8 @@
 import cx from "classnames";
 import Link from "next/link";
 import { NotionPost } from "../../types";
-
-import LeftArrowPlainIcon from "../../../public/icons/left-arrow-plain.svg";
-import RightArrowPlainIcon from "../../../public/icons/right-arrow-plain.svg";
 import LockIcon from "../../../public/icons/lock.svg";
+import { RightArrowIcon } from "../../icons";
 
 interface MorePostsProps {
   className?: string;
@@ -40,9 +38,9 @@ export default function MorePosts({
                 )}
               >
                 {i === 0 ? (
-                  <LeftArrowPlainIcon className="w-6 duration-200 group-hover:-translate-x-1/2" />
+                  <RightArrowIcon className="w-6 rotate-180 duration-200 group-hover:-translate-x-1/2" />
                 ) : (
-                  <RightArrowPlainIcon className="w-6 duration-200 group-hover:translate-x-1/2" />
+                  <RightArrowIcon className="w-6 duration-200 group-hover:translate-x-1/2" />
                 )}
                 <p className="text-md uppercase tracking-widest">
                   {i === 0 ? "Previous" : "Next"}

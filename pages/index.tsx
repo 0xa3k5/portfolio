@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Exploration,
   NotionPost,
