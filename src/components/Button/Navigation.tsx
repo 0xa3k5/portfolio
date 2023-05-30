@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  HomeFilledIcon,
-  HomeIcon,
-  TestFilledIcon,
-  TestIcon,
-} from "../../icons";
+import { CVIcon, HomeIcon, TestIcon } from "../../icons";
 import { useState } from "react";
 
 interface NavigationProps {
@@ -19,29 +14,40 @@ export default function Navigation({
 }: NavigationProps): JSX.Element {
   const router = useRouter();
   const isActive = router.pathname === href;
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const isIconFilled = isHovered || isActive;
 
   const handleMouseEnter = () => {
-    setShowTooltip(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setShowTooltip(false);
+    setIsHovered(false);
   };
 
   const getIcon = () => {
     switch (href) {
       case "/":
-        return isActive ? (
-          <HomeFilledIcon className="h-6 w-6 text-white" />
-        ) : (
-          <HomeIcon className="h-6 w-6 text-white/40 duration-200 group-hover:text-white" />
+        return (
+          <HomeIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+          />
         );
       case "/404":
-        return isActive ? (
-          <TestFilledIcon className="h-6 w-6 text-white" />
-        ) : (
-          <TestIcon className="h-6 w-6 text-white/40 duration-200 group-hover:text-white" />
+        return (
+          <TestIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+          />
+        );
+      case "/cv":
+        return (
+          <CVIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+          />
         );
     }
   };
@@ -54,7 +60,7 @@ export default function Navigation({
       onMouseLeave={handleMouseLeave}
     >
       {getIcon()}
-      <div className="relative">{showTooltip && <Tooltip name={name} />}</div>
+      <div className="relative">{isHovered && <Tooltip name={name} />}</div>
     </Link>
   );
 }

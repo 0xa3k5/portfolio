@@ -19,7 +19,7 @@ export default function SideBar(): JSX.Element {
         <Button.Navigation href="/" name="Home" />
         <Button.Navigation href="/404" name="Works" />
         <Button.Navigation href="/404" name="Feedbacks" />
-        <Button.Navigation href="/404" name="About Me" />
+        <Button.Navigation href="/cv" name="CV" />
         
       </div>
       <div className="h-12" />
