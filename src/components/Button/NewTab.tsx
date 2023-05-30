@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { motion, Variants } from "framer-motion";
-import RightArrowIcon from "../../../public/icons/right-arrow-plain.svg";
+import { RightArrowIcon } from "../../icons";
 
 interface NewTabProps {
   className?: string;
