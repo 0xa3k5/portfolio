@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
-import { useAppContext } from "../../hooks/useAppContext";
 
 interface DetailProps {
   markdown: string;
@@ -39,8 +38,6 @@ export default function Detail({
   const [scrollPos, setScrollPos] = useState(0);
   const [contentInView, setContentInView] = useState(false);
 
-  const appContext = useAppContext();
-
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
@@ -56,25 +53,8 @@ export default function Detail({
 
     watchScroll();
 
-    function handleContentInView() {
-      setContentInView(scrollPos > ref.current?.clientHeight);
-
-      if (contentInView || status !== "authenticated") {
-        appContext.setTheme({
-          color: "ffffff",
-          bgColor: "000000",
-        });
-      } else {
-        appContext.setTheme({
-          color: post.properties.color,
-          bgColor: appContext.theme.bgColor,
-        });
-      }
-    }
-
     window.addEventListener("scroll", updatePos, { passive: true });
     updatePos();
-    handleContentInView();
     return () => window.removeEventListener("scroll", updatePos);
   }, [post.properties.color, scrollPos, status]);
 

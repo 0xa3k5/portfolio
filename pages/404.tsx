@@ -1,13 +1,11 @@
 import { GetStaticProps } from "next";
 import { NotionPost, StaticPage } from "../src/types";
 import NotionService from "./api/notion";
-import { useEffect, useState } from "react";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
 import { motion } from "framer-motion";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
-import { useAppContext } from "../hooks/useAppContext";
 
 interface FourOhFourProps {
   page: StaticPage;
@@ -18,42 +16,10 @@ export default function FourOhFour({
   page,
   posts,
 }: FourOhFourProps): JSX.Element {
-  const appContext = useAppContext();
-  const [hovered, setHovered] = useState<NotionPost>(null);
-
-  useEffect(() => {
-    appContext.setTheme({
-      color: hovered ? hovered?.properties?.color : "ffffff",
-      bgColor: hovered ? hovered?.properties?.bgColor : "000000",
-    });
-  }, [hovered]);
-
-  const bgPainterVariants = {
-    initial: {
-      backgroundColor: "#ffffff",
-    },
-    target: {
-      backgroundColor: `#${appContext.theme.bgColor}`,
-    },
-  };
-
-  const pageVariants = {
-    hidden: { opacity: 0, x: 0, y: -60, transition: { duration: 0.2 } },
-    enter: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      color: `#${appContext.theme.color}`,
-      transition: { duration: 0.3 },
-    },
-    exit: { opacity: 0, x: 0, y: -60, transition: { duration: 0.6 } },
-  };
-
   return (
     <>
       <div className="fixed -z-50 h-screen w-screen">
         <motion.div
-          variants={bgPainterVariants}
           initial="initial"
           animate="target"
           onChange={() => motion.animate}
@@ -66,7 +32,6 @@ export default function FourOhFour({
       </div>
       <PageHead page={page} />
       <motion.main
-        variants={pageVariants}
         initial="hidden"
         animate="enter"
         onChange={() => motion.animate}
@@ -86,26 +51,8 @@ export default function FourOhFour({
                     a.properties.number - b.properties.number
                 )
                 .map((p: NotionPost) => {
-                  return (
-                    <ContentCard
-                      post={p}
-                      key={p.properties.id}
-                      onMouseEnter={() => setHovered(p)}
-                      onMouseLeave={() => setHovered(null)}
-                    />
-                  );
+                  return <ContentCard post={p} key={p.properties.id} />;
                 })}
-            </div>
-            <div className="relative hidden flex-1 lg:inline-block">
-              {hovered && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={hovered.details.img}
-                  alt={hovered.details.title}
-                  height="80%"
-                  width="100%"
-                />
-              )}
             </div>
           </div>
         </section>
