@@ -24,18 +24,11 @@ interface HomeProps {
   workExp: WorkExp[];
 }
 
-export default function Home({
-  page,
-  works,
-  sideProjects,
-  explorations,
-  feedbacks,
-  workExp,
-}: HomeProps) {
+export default function Home({ page, works }: HomeProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container my-24 flex max-w-3xl flex-col items-center gap-24 overflow-x-hidden ">
+      <motion.main className="container my-48 flex max-w-4xl flex-col items-center gap-24 overflow-x-hidden ">
         <Hero.Page page={page} />
         <SectionsWrapper>
           <SectionTitle title="highlighted projects" className="mb-16" />
@@ -50,8 +43,6 @@ export default function Home({
               })}
           </div>
         </SectionsWrapper>
-
-        {/* <Sections.Explorations explorations={explorations} /> */}
       </motion.main>
     </>
   );
