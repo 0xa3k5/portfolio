@@ -29,6 +29,7 @@ module.exports = {
       black: "#000",
       white: "#ffffff",
       daisy: "#FFEF60",
+      shark: "#1A1B1F",
       midnight: "#06060B",
     },
     borderRadius: {
