@@ -16,10 +16,10 @@ export default function SectionTitle({
         "flex flex-col items-baseline gap-8 md:flex-row"
       )}
     >
-      <h2 className="w-auto text-2xl uppercase tracking-widest md:whitespace-nowrap">
+      <h2 className="text-2xl whitespace-nowrap lowercase">
         {title}
       </h2>
-      <hr className="relative w-full opacity-10" />
+      <hr className="w-full text-shark" />
     </div>
   );
 }
