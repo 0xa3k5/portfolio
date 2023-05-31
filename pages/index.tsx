@@ -28,10 +28,10 @@ export default function Home({ page, works }: HomeProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container my-48 flex max-w-4xl flex-col items-center gap-24 overflow-x-hidden ">
+      <motion.main className="container flex max-w-5xl flex-col items-center gap-24 overflow-x-hidden py-24">
         <Hero.Page page={page} />
         <SectionsWrapper>
-          <SectionTitle title="highlighted projects" className="mb-16" />
+          <SectionTitle title="case studies" className="mb-16" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
               .sort(
