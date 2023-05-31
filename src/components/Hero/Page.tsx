@@ -26,10 +26,11 @@ export default function Page({ className, page }: PageProps): JSX.Element {
           icon={<PaperPlaneIcon className="h-5 w-5" />}
         />
         <div className="flex gap-4 text-white">
-          <Button.Social type="twitter" />
+          <Button.Social type="figma" />
           <Button.Social type="github" />
-          <Button.Social type="dribbble" />
           <Button.Social type="linkedin" />
+          <Button.Social type="twitter" />
+          <Button.Social type="dribbble" />
         </div>
       </div>
     </div>

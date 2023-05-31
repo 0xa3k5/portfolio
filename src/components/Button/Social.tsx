@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SocialIcons } from "../../icons";
 
 interface SocialProps {
-  type: "twitter" | "github" | "dribbble" | "linkedin";
+  type: "twitter" | "github" | "dribbble" | "linkedin" | 'figma';
 }
 
 export default function Social({ type }: SocialProps): JSX.Element {
@@ -27,6 +27,8 @@ export default function Social({ type }: SocialProps): JSX.Element {
         return <SocialIcons.Dribbble filled={isHovered} />;
       case "linkedin":
         return <SocialIcons.Linkedin filled={isHovered} />;
+      case "figma":
+        return <SocialIcons.Figma filled={isHovered} />;
     }
   };
 
@@ -40,6 +42,8 @@ export default function Social({ type }: SocialProps): JSX.Element {
         return "https://github.com/0xA3K5";
       case "linkedin":
         return "https://linkedin.com/in/alikemalakcay";
+      case "figma":
+        return "https://figma.com/a3k5";
     }
   };
 
