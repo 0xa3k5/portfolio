@@ -16,12 +16,12 @@ function MyApp({
 
   return (
     <SessionProvider session={session}>
+      <Sidebar />
       <AnimatePresence
         mode="wait"
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <Sidebar />
         <Component {...pageProps} canonical={url} key={url} />
         <Analytics />
       </AnimatePresence>
