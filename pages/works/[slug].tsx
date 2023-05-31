@@ -7,10 +7,9 @@ import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
 import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";
 import { useState, useEffect, useRef } from "react";
-import ContentReadIndicator from "../../src/components/ContentReadIndicator/index";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
@@ -34,9 +33,7 @@ export default function Detail({
   const router = useRouter();
   const ref = useRef(null);
   const mdRef = useRef();
-  const { scrollYProgress } = useScroll({ target: mdRef });
   const [scrollPos, setScrollPos] = useState(0);
-  const [contentInView, setContentInView] = useState(false);
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
@@ -90,20 +87,9 @@ export default function Detail({
             ref={mdRef}
           >
             <OverviewCard post={post} />
-            <div className="mx-auto">
-              <div className="flex items-center justify-center">
-                {contentInView && (
-                  <ContentReadIndicator
-                    contentRef={mdRef}
-                    post={post}
-                    scrollYProgress={scrollYProgress}
-                  />
-                )}
-                <article className="with-prose">
-                  <ReactMarkdown>{markdown}</ReactMarkdown>
-                </article>
-              </div>
-            </div>
+            <article className="with-prose max-w-4xl">
+              <ReactMarkdown>{markdown}</ReactMarkdown>
+            </article>
             {postFeedbacks.length > 0 && (
               <FeedbackCard.Grouped
                 classname="w-full md:w-11/12"

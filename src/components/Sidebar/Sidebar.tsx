@@ -8,7 +8,7 @@ export default function SideBar(): JSX.Element {
   const [isControlHovered, setIsControlHovered] = useState(false);
 
   return (
-    <div className="fixed top-0 flex h-screen flex-col items-center justify-between border-r border-shark px-6 py-16">
+    <div className="fixed bg-midnight top-0 flex h-screen flex-col items-center justify-between border-r border-shark px-6 py-16">
       <Link
         href="/"
         className="overflow-clip rounded-full duration-150 hover:scale-105"
