@@ -19,7 +19,7 @@ export default function Grouped({
     <div
       className={cx(
         classname,
-        "container flex max-w-3xl flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16"
+        "container flex max-w-3xl flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white/5 px-4 py-12 md:p-16"
       )}
     >
       <div className="flex h-16 items-center gap-8">

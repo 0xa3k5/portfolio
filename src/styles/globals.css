@@ -26,6 +26,8 @@
     prose
     prose-invert
     prose-headings:font-vollkorn
+    prose-headings:font-semibold
+    prose-h1:text-2xl
     prose-h3:font-normal
     prose-p:font-light
     prose-p:leading-snug
@@ -37,5 +39,4 @@
     prose-ul:tracking-wider
     prose-img:rounded-xl
     md:prose-xl
-    md:prose-img:rounded-2xl;
 }

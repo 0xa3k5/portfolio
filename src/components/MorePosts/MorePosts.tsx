@@ -14,7 +14,7 @@ export default function MorePosts({
 }: MorePostsProps): JSX.Element {
   return (
     <div
-      className={cx("flex flex-col gap-24 px-4 py-24 md:flex-row", className)}
+      className={cx("flex flex-col w-full px-16 md:flex-row max-w-3xl justify-between", className)}
     >
       {posts.map((p, i) => {
         return (
