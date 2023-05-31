@@ -17,7 +17,7 @@ const getIconByProp = (prop: NotionPost["properties"]) => {
       return <LockIcon className="h-5 w-5" />;
     case prop.published:
       return (
-        <RightArrowIcon className="h-5 w-5 duration-150 md:group-hover:translate-x-1/3" />
+        <RightArrowIcon className="h-5 w-5 duration-100 md:group-hover:translate-x-1/3" />
       );
     default:
       return <SoonIcon className="h-5 w-5" />;
