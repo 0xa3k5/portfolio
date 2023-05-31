@@ -13,7 +13,7 @@ import PageHead from "../src/components/PageHead";
 
 import ContentCard from "../src/components/Cards/ContentCard/Content";
 import SectionTitle from "../src/components/SectionTitle";
-import SectionsWrapper from "../src/sections/SectionsWrapper";
+import SectionsWrapper from "../src/components/SectionsWrapper";
 
 interface HomeProps {
   page: StaticPage;

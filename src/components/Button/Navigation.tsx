@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { CVIcon, HomeIcon, TestIcon } from "../../icons";
+import { AboutIcon, CVIcon, HomeIcon, TestIcon } from "../../icons";
 import { useState } from "react";
 
 interface NavigationProps {
@@ -32,21 +32,36 @@ export default function Navigation({
         return (
           <HomeIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-200 group-hover:text-white`}
           />
         );
-      case "/404":
+      case "/about":
         return (
-          <TestIcon
+          <AboutIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-200 group-hover:text-white`}
           />
         );
       case "/cv":
         return (
           <CVIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${isIconFilled ? "text-white" : "text-white/40"} duration-200 group-hover:text-white`}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-200 group-hover:text-white`}
+          />
+        );
+      default:
+        return (
+          <TestIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-200 group-hover:text-white`}
           />
         );
     }

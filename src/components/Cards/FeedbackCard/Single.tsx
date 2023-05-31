@@ -1,4 +1,3 @@
-import cx from "classnames";
 import { Feedback } from "../../../types";
 import Image from "next/image";
 
@@ -7,15 +6,12 @@ interface SingleProps {
   feedback: Feedback;
 }
 
-export default function Single({
-  classname,
-  feedback,
-}: SingleProps): JSX.Element {
+export default function Single({ feedback }: SingleProps): JSX.Element {
   return (
-    <div className={cx(classname, "flex flex-col gap-8 py-12 md:flex-row")}>
-      <div className="flex h-fit w-full flex-col gap-4 md:w-2/6 md:flex-row md:items-center">
+    <div className="flex flex-col border-b border-white border-opacity-10 py-12 last-of-type:border-none md:flex-row">
+      <div className="flex w-1/2 flex-col gap-4 md:flex-row">
         <div
-          className={cx("relative h-16 w-16 overflow-hidden rounded-full")}
+          className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
           key={feedback.id}
         >
           <Image
@@ -32,13 +28,13 @@ export default function Single({
                   33vw"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-xl">{feedback.name}</span>
+        <div className="flex flex-col">
+          <span className="text-lg">{feedback.name}</span>
           <span className="opacity-40">{feedback.role}</span>
         </div>
       </div>
-      <div className={cx("flex w-full flex-col gap-8 md:w-4/6")}>
-        <span className="text-xl font-light leading-normal tracking-wide opacity-90">
+      <div className="flex w-full flex-col gap-8 md:w-4/6">
+        <span className="text-lg font-light leading-normal tracking-wide opacity-80">
           {feedback.feedback}
         </span>
       </div>

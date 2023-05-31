@@ -15,7 +15,9 @@ export default function Icon({
 }: IconProps): JSX.Element {
   return (
     <div className={cx("flex p-2", className)}>
-      <Link href={href}>{icon}</Link>
+      <Link className="flex p-2" href={href}>
+        {icon}
+      </Link>
     </div>
   );
 }

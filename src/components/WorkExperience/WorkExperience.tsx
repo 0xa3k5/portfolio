@@ -1,48 +1,53 @@
-import cx from "classnames";
 import { WorkExp } from "../../types";
 
 import Image from "next/image";
+import Link from "next/link";
 
 interface WorkExperienceProps {
-  classname?: string;
   job: WorkExp;
 }
 
 export default function WorkExperience({
-  classname,
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div className={cx(classname, "flex w-full flex-col py-12 lg:flex-row")}>
-      <div className="group mb-8 flex flex-1 lg:mb-0">
-        <a href={job.website} target="_blank" rel="noreferrer">
-          <div className="flex flex-col gap-4">
-            <p className="text-lg opacity-40">{job.period}</p>
-            <div className="flex items-start  gap-4 duration-200 group-hover:text-daisy">
-              <div className="relative h-12 w-12 overflow-hidden rounded-lg duration-200 group-hover:-translate-y-1">
-                <Image
-                  src={job.logo}
-                  alt={`${job.logo} logo`}
-                  fill
-                  style={{
-                    objectFit: "fill",
-                    maxWidth: "100%",
-                  }}
-                  sizes="(max-width: 768px) 100vw,
-                  (max-width: 1200px) 50vw,
-                  33vw"
-                />
-              </div>
-              <div className="flex flex-col">
-                <p className="text-lg">{job.company}</p>
-                <p className="opacity-60">{job.tagline}</p>
-              </div>
-            </div>
+    <div className="flex flex-col border-b border-white border-opacity-10 py-12 last-of-type:border-none md:flex-row">
+      <div className="flex w-1/2 flex-col gap-4">
+        <span>{job.period}</span>
+        <Link
+          href={job.website}
+          target="_blank"
+          rel="noreferrer"
+          className="group flex w-full flex-col gap-4 md:flex-row md:items-center"
+        >
+          <div
+            className="relative h-12 w-12 shrink-0 overflow-clip rounded-lg duration-200 group-hover:-translate-y-1"
+            key={job.id}
+          >
+            <Image
+              src={job.logo}
+              alt={`${job.logo} logo`}
+              fill
+              priority
+              style={{
+                objectFit: "contain",
+                maxWidth: "100%",
+              }}
+              sizes="(max-width: 768px) 100vw,
+            (max-width: 1200px) 50vw,
+            33vw"
+            />
           </div>
-        </a>
+          <div className="flex flex-col duration-200 group-hover:text-daisy">
+            <span className="text-lg">{job.company}</span>
+            <span className="opacity-40">{job.tagline}</span>
+          </div>
+        </Link>
       </div>
-      <div className="flex-1">
-        <p className="text-lg leading-relaxed opacity-90">{job.description}</p>
+      <div className="flex w-full flex-col gap-8 md:w-4/6">
+        <span className="text-lg font-light leading-normal tracking-wide opacity-80">
+          {job.description}
+        </span>
       </div>
     </div>
   );

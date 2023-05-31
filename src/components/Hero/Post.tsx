@@ -12,7 +12,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
     <div
       className={cx(
         className,
-        "flex h-[90vh] items-center justify-center px-6 pb-4 md:gap-24 md:px-0 md:pb-8"
+        "flex h-[90vh] items-center justify-center px-6 pb-4 md:gap-24 md:px-32 md:pb-8"
       )}
       style={{
         backgroundColor: `#${post.properties.bgColor}`,

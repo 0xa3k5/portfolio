@@ -19,7 +19,7 @@ export default function Grouped({
     <div
       className={cx(
         classname,
-        "container flex flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16"
+        "container max-w-3xl flex flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white bg-opacity-5 px-4 py-12 md:p-16"
       )}
     >
       <div className="flex h-16 items-center gap-8">
@@ -57,11 +57,11 @@ export default function Grouped({
             <div
               className={cx(
                 selected === f ? "visible" : "hidden",
-                "flex h-full max-w-xl flex-col items-center gap-8 text-center duration-200"
+                "flex h-full flex-col items-center gap-8 text-center duration-200"
               )}
               key={f.id}
             >
-              <span className="text-2xl leading-normal tracking-wide">
+              <span className="text-lg font-extralight leading-normal tracking-wide">
                 {f.feedback}
               </span>
               <div className="flex flex-col gap-2 border-t border-t-white border-opacity-20 pt-8">

@@ -1,8 +1,7 @@
 import cx from "classnames";
 import Link from "next/link";
 import { NotionPost } from "../../types";
-import LockIcon from "../../../public/icons/lock.svg";
-import { RightArrowIcon } from "../../icons";
+import { LockIcon, RightArrowIcon } from "../../icons";
 
 interface MorePostsProps {
   className?: string;

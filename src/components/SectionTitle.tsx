@@ -19,7 +19,7 @@ export default function SectionTitle({
       <h2 className="w-auto text-2xl uppercase tracking-widest md:whitespace-nowrap">
         {title}
       </h2>
-      <hr className="relative w-full opacity-20" />
+      <hr className="relative w-full opacity-10" />
     </div>
   );
 }
