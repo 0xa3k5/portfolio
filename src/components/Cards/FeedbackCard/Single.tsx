@@ -8,7 +8,7 @@ interface SingleProps {
 
 export default function Single({ feedback }: SingleProps): JSX.Element {
   return (
-    <div className="flex flex-col border-b border-white border-opacity-10 py-12 last-of-type:border-none md:flex-row">
+    <div className="flex flex-col border-b border-shark py-12 last-of-type:border-none md:flex-row">
       <div className="flex w-1/2 flex-col gap-4 md:flex-row">
         <div
           className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
@@ -33,11 +33,9 @@ export default function Single({ feedback }: SingleProps): JSX.Element {
           <span className="opacity-40">{feedback.role}</span>
         </div>
       </div>
-      <div className="flex w-full flex-col gap-8 md:w-4/6">
-        <span className="text-lg font-light leading-normal tracking-wide opacity-80">
-          {feedback.feedback}
-        </span>
-      </div>
+      <span className="text-lg font-light leading-normal tracking-wide text-white/80 md:w-2/3">
+        {feedback.feedback}
+      </span>
     </div>
   );
 }

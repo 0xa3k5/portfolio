@@ -1,17 +1,14 @@
 import Link from "next/link";
-import { MouseEventHandler } from "react";
+import { useState } from "react";
 import { NotionPost } from "../../../types";
+import Image from "next/image";
 
-import RightArrowPlainIcon from "../../../../public/icons/right-arrow-plain.svg";
-import LockIcon from "../../../../public/icons/lock.svg";
-import SoonIcon from "../../../../public/icons/soon.svg";
 import cx from "classnames";
+import { LockIcon, RightArrowIcon, SoonIcon } from "../../../icons";
 
 interface ContentCardProps {
   className?: string;
   post: NotionPost;
-  onMouseEnter: MouseEventHandler<HTMLDivElement>;
-  onMouseLeave: MouseEventHandler<HTMLDivElement>;
 }
 
 const getIconByProp = (prop: NotionPost["properties"]) => {
@@ -22,7 +19,7 @@ const getIconByProp = (prop: NotionPost["properties"]) => {
       );
     case prop.published:
       return (
-        <RightArrowPlainIcon className="w-8 shrink-0 opacity-40 duration-100 group-hover:opacity-100 md:group-hover:translate-x-1/3" />
+        <RightArrowIcon className="w-8 shrink-0 opacity-40 duration-150 group-hover:opacity-100 md:group-hover:translate-x-1/3" />
       );
     default:
       return (
@@ -31,26 +28,30 @@ const getIconByProp = (prop: NotionPost["properties"]) => {
   }
 };
 
-export default function ContentCard({
-  post,
-  onMouseEnter,
-  onMouseLeave,
-}: ContentCardProps): JSX.Element {
+export default function ContentCard({ post }: ContentCardProps): JSX.Element {
+  const [hover, setHover] = useState(false);
+
   return (
-    <div
-      className="border-b border-white border-opacity-10 pb-8 last:border-none md:pb-12"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+    <Link
+      href={`/works/${post.properties.slug}`}
+      className={post.properties.published ? null : "pointer-events-none"}
     >
-      <Link
-        href={`/works/${post.properties.slug}`}
-        className={!post.properties.published ? "pointer-events-none" : null}
+      <div
+        className={`group flex h-[28rem] w-full items-center justify-between gap-16 overflow-clip rounded-xl py-8 pl-8 duration-150`}
+        onMouseEnter={() => setHover(!hover)}
+        onMouseLeave={() => setHover(!hover)}
+        style={{
+          backgroundColor: hover ? `#${post.properties.bgColor}` : "#0d0d12",
+        }}
       >
-        <div className="group flex items-baseline gap-4 hover:cursor-pointer">
+        <div
+          className="flex items-baseline gap-4 hover:cursor-pointer"
+          style={{ color: hover ? `#${post.properties.color}` : "#fff" }}
+        >
           {getIconByProp(post.properties)}
           <h6
             className={cx(
-              "text-3xl leading-snug duration-100",
+              "text-3xl leading-snug duration-150",
               !post.properties.password &&
                 post.properties.published &&
                 "md:group-hover:-translate-x-2"
@@ -59,7 +60,14 @@ export default function ContentCard({
             {post.details.title}
           </h6>
         </div>
-      </Link>
-    </div>
+        <Image
+          className="duration-150 group-hover:scale-105"
+          alt={post.details.title}
+          src={post.details.overviewImg}
+          width={400}
+          height={400}
+        />
+      </div>
+    </Link>
   );
 }

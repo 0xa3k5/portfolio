@@ -46,7 +46,7 @@ export default function ContentReadIndicator({
             ? { display: "flex", opacity: 100, scale: 1 }
             : { display: "hidden", opacity: 0, scale: 0.2 }
         }
-        className="h-fit overflow-clip rounded-lg bg-white bg-opacity-10 p-3 duration-200 hover:ring-2 hover:ring-white hover:ring-opacity-20"
+        className="h-fit overflow-clip rounded-lg bg-white bg-opacity-10 p-3 duration-150 hover:ring-2 hover:ring-white hover:ring-opacity-20"
         onClick={() => {
           setHover(false);
           window.scrollTo({

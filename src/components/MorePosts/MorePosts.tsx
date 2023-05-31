@@ -32,14 +32,14 @@ export default function MorePosts({
             >
               <div
                 className={cx(
-                  "flex gap-2 text-white text-opacity-40 duration-200 group-hover:text-opacity-100",
+                  "flex gap-2 text-white text-opacity-40 duration-150 group-hover:text-opacity-100",
                   i === 0 ? "flex-row" : "flex-row-reverse"
                 )}
               >
                 {i === 0 ? (
-                  <RightArrowIcon className="w-6 rotate-180 duration-200 group-hover:-translate-x-1/2" />
+                  <RightArrowIcon className="w-6 rotate-180 duration-150 group-hover:-translate-x-1/2" />
                 ) : (
-                  <RightArrowIcon className="w-6 duration-200 group-hover:translate-x-1/2" />
+                  <RightArrowIcon className="w-6 duration-150 group-hover:translate-x-1/2" />
                 )}
                 <p className="text-md uppercase tracking-widest">
                   {i === 0 ? "Previous" : "Next"}
