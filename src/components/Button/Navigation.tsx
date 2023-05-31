@@ -1,10 +1,18 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { AboutIcon, CVIcon, HomeIcon, TestIcon } from "../../icons";
+import {
+  AboutIcon,
+  CVIcon,
+  HomeIcon,
+  FlashIcon,
+  TestIcon,
+  PenIcon,
+} from "../../icons";
 import { useState } from "react";
+import Tooltip from "../Tooltip";
 
 interface NavigationProps {
-  href: string;
+  href: "/" | "/about" | "/side-projects" | "/explorations" | "/ak-resume.pdf";
   name: string;
 }
 
@@ -34,7 +42,7 @@ export default function Navigation({
             filled={isIconFilled}
             className={`h-6 w-6 ${
               isIconFilled ? "text-white" : "text-white/40"
-            } duration-200 group-hover:text-white`}
+            } duration-150 group-hover:text-white`}
           />
         );
       case "/about":
@@ -43,16 +51,34 @@ export default function Navigation({
             filled={isIconFilled}
             className={`h-6 w-6 ${
               isIconFilled ? "text-white" : "text-white/40"
-            } duration-200 group-hover:text-white`}
+            } duration-150 group-hover:text-white`}
           />
         );
-      case "/cv":
+      case "/side-projects":
+        return (
+          <FlashIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-150 group-hover:text-white`}
+          />
+        );
+      case "/explorations":
+        return (
+          <PenIcon
+            filled={isIconFilled}
+            className={`h-6 w-6 ${
+              isIconFilled ? "text-white" : "text-white/40"
+            } duration-150 group-hover:text-white`}
+          />
+        );
+      case "/ak-resume.pdf":
         return (
           <CVIcon
             filled={isIconFilled}
             className={`h-6 w-6 ${
               isIconFilled ? "text-white" : "text-white/40"
-            } duration-200 group-hover:text-white`}
+            } duration-150 group-hover:text-white`}
           />
         );
       default:
@@ -61,7 +87,7 @@ export default function Navigation({
             filled={isIconFilled}
             className={`h-6 w-6 ${
               isIconFilled ? "text-white" : "text-white/40"
-            } duration-200 group-hover:text-white`}
+            } duration-150 group-hover:text-white`}
           />
         );
     }
@@ -75,19 +101,7 @@ export default function Navigation({
       onMouseLeave={handleMouseLeave}
     >
       {getIcon()}
-      <div className="relative">{isHovered && <Tooltip name={name} />}</div>
+      <div className="relative">{isHovered && <Tooltip text={name} />}</div>
     </Link>
   );
 }
-
-interface TooltipProps {
-  name: string;
-}
-
-const Tooltip = ({ name }: TooltipProps) => {
-  return (
-    <div className="absolute left-0 top-0 -translate-y-1/2 translate-x-4 transform whitespace-nowrap rounded-full bg-white/10 px-4 py-2 text-sm text-white">
-      {name}
-    </div>
-  );
-};

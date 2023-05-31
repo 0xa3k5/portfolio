@@ -52,7 +52,7 @@ export default function NewTab({
         whileHover="whileHover"
         animate="animate"
         className={cx(
-          "flex overflow-hidden rounded-full p-4 duration-200 hover:ring-4 hover:ring-white hover:ring-opacity-40",
+          "flex overflow-hidden rounded-full p-4 duration-150 hover:ring-4 hover:ring-white hover:ring-opacity-40",
           className
         )}
       >

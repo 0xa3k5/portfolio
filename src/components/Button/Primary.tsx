@@ -31,7 +31,9 @@ export default function Primary({
     idle: {},
     animate: {
       color: hover ? `rgb(${bgRgb})` : `rgb(${textRgb})`,
-      backgroundColor: hover ? `rgba(${textRgb},1)` : `rgba(${textRgb},0.08)`,
+      backgroundColor: hover
+        ? `rgba(${textRgb},1)`
+        : `rgba(${hexToRGB("1A1B1F")})`,
     },
   };
 
