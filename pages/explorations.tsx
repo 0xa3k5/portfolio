@@ -16,7 +16,7 @@ export default function Home({ page, explorations }: HomeProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex max-w-5xl flex-col items-center gap-24 overflow-x-hidden py-24">
+      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-48">
         <SectionsWrapper>
           <SectionTitle title="explorations" className="mb-16" />
           <div className="grid grid-cols-2 gap-x-8 gap-y-12">
