@@ -1,11 +1,11 @@
 import { GetStaticProps } from "next";
 import { NotionPost, StaticPage } from "../src/types";
 import NotionService from "./api/notion";
-import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
 import { motion } from "framer-motion";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
+import SectionsWrapper from "../src/components/SectionsWrapper";
 
 interface FourOhFourProps {
   page: StaticPage;
@@ -18,44 +18,32 @@ export default function FourOhFour({
 }: FourOhFourProps): JSX.Element {
   return (
     <>
-      <div className="fixed -z-50 h-screen w-screen">
-        <motion.div
-          initial="initial"
-          animate="target"
-          onChange={() => motion.animate}
-          transition={{
-            ease: "easeInOut",
-            duration: 0.3,
-          }}
-          className="absolute top-1/2 left-1/2 h-screen w-screen -translate-x-1/2 -translate-y-1/2"
-        />
-      </div>
       <PageHead page={page} />
-      <motion.main
-        initial="hidden"
-        animate="enter"
-        onChange={() => motion.animate}
-        exit="exit"
-        transition={{ type: "linear" }}
-        className="container flex max-w-5xl flex-col items-center gap-24 px-4 md:px-12 xl:max-w-6xl"
-      >
-        <Hero.Page page={page} />
-        <section className="flex w-full flex-col px-4 py-24 lg:px-0">
-          <SectionTitle title="highlighted case studies" className="mb-16" />
-          <div className="flex items-center gap-4">
-            <div className="flex w-full flex-col gap-8 md:gap-12 lg:w-1/2 lg:pr-12">
-              {posts
-                .filter((p) => p.properties.published)
-                .sort(
-                  (a: NotionPost, b: NotionPost) =>
-                    a.properties.number - b.properties.number
-                )
-                .map((p: NotionPost) => {
-                  return <ContentCard post={p} key={p.properties.id} />;
-                })}
-            </div>
+      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-32">
+        <div className="flex w-full flex-col gap-8 sm:mt-0">
+          <div className="flex flex-col gap-4">
+            <h1 className="max-w-2xl text-4xl font-semibold" key="hero_title">
+              {page.heroTitle}
+            </h1>
+            <p className="max-w-xl text-xl font-light opacity-70">
+              {page.heroText}
+            </p>
           </div>
-        </section>
+        </div>
+        <SectionsWrapper>
+          <SectionTitle title="case studies"/>
+          <div className="flex flex-col gap-8 md:gap-12">
+            {posts
+              .filter((p) => p.properties.published)
+              .sort(
+                (a: NotionPost, b: NotionPost) =>
+                  a.properties.number - b.properties.number
+              )
+              .map((p: NotionPost) => {
+                return <ContentCard post={p} key={p.properties.id} />;
+              })}
+          </div>
+        </SectionsWrapper>
       </motion.main>
     </>
   );

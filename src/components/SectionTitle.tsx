@@ -13,7 +13,7 @@ export default function SectionTitle({
     <div
       className={cx(
         className,
-        "flex flex-col items-baseline gap-8 md:flex-row"
+        "flex items-baseline gap-8 flex-row"
       )}
     >
       <h2 className="text-2xl whitespace-nowrap lowercase">

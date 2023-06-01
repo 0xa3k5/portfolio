@@ -11,7 +11,7 @@ export default function SectionsWrapper({
 }: PropsWithChildren<SectionsWrapperProps>): JSX.Element {
   return (
     <section
-      className={cx("flex w-full flex-col px-4 lg:px-0", className)}
+      className={cx("flex w-full flex-col px-4 md:px-12 gap-12", className)}
     >
       {children}
     </section>

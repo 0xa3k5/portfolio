@@ -33,7 +33,7 @@ export default function ContentCard({ post }: ContentCardProps): JSX.Element {
       className={post.properties.published ? null : "pointer-events-none"}
     >
       <div
-        className="group flex h-[28rem] w-full items-center justify-between gap-8 overflow-clip rounded-xl py-8 duration-150"
+        className="group flex h-[28rem] w-full flex-col justify-center gap-8 overflow-clip rounded-xl py-8 duration-150 lg:flex-row lg:items-center lg:justify-between 2xl:gap-24"
         onMouseEnter={() => setHover(!hover)}
         onMouseLeave={() => setHover(!hover)}
         style={{
@@ -78,6 +78,7 @@ export default function ContentCard({ post }: ContentCardProps): JSX.Element {
           src={post.details.overviewImg}
           width={400}
           height={400}
+          className="hidden lg:block"
         />
       </div>
     </Link>

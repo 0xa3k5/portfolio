@@ -11,13 +11,13 @@ export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
   return (
-    <div className="flex flex-col border-b border-shark py-12 last-of-type:border-none md:flex-row md:justify-between">
+    <div className="flex border-b border-shark py-8 md:py-12 last-of-type:border-none flex-col-reverse gap-4 sm:flex-row justify-between">
       <div className="flex flex-col gap-4">
         <Link
           href={job.website}
           target="_blank"
           rel="noreferrer"
-          className="group flex w-full flex-col gap-4 md:flex-row md:items-center"
+          className="group flex w-full gap-4 flex-row items-center"
         >
           <div
             className="relative h-12 w-12 shrink-0 overflow-clip rounded-lg duration-150 group-hover:-translate-y-1"

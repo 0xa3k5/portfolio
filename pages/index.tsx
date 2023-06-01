@@ -1,12 +1,6 @@
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
-import {
-  Exploration,
-  NotionPost,
-  StaticPage,
-  Feedback,
-  WorkExp,
-} from "../src/types";
+import { NotionPost, StaticPage } from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
@@ -18,20 +12,16 @@ import SectionsWrapper from "../src/components/SectionsWrapper";
 interface HomeProps {
   page: StaticPage;
   works: NotionPost[];
-  sideProjects: NotionPost[];
-  explorations: Exploration[];
-  feedbacks: Feedback[];
-  workExp: WorkExp[];
 }
 
 export default function Home({ page, works }: HomeProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-48">
+      <motion.main className="container flex flex-col items-center gap-24 md:gap-48 overflow-x-hidden py-32 md:max-w-4xl 2xl:max-w-6xl">
         <Hero.Page page={page} />
         <SectionsWrapper>
-          <SectionTitle title="case studies" className="mb-12" />
+          <SectionTitle title="case studies" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
               .sort(
@@ -55,21 +45,13 @@ export const getStaticProps: GetStaticProps = async () => {
     (data) => data.name === "Home"
   );
   const posts = await notionService.getCaseStudies();
-  const explorations = await notionService.getExplorations();
-  const feedbacks = await notionService.getFeedbacks();
-  const workExp = await notionService.getWorkExp();
 
   const works = posts.filter((p) => p.properties.tag !== "Side Project");
-  const sideProjects = posts.filter((p) => p.properties.tag === "Side Project");
 
   return {
     props: {
       page,
       works,
-      sideProjects,
-      explorations,
-      feedbacks,
-      workExp,
     },
   };
 };

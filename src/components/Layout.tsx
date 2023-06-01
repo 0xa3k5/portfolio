@@ -36,7 +36,7 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div className="flex flex-col">
       <div
-        className="fixed top-0 z-20 flex h-16 w-full items-center border-b border-shark bg-midnight/20 px-4 md:hidden"
+        className="fixed top-0 z-20 flex h-16 w-full items-center border-b border-shark bg-midnight/60 backdrop-blur-xl px-4 md:hidden"
         onClick={toggleSidebar}
       >
         <button className="flex" onClick={toggleSidebar}>

@@ -22,7 +22,7 @@ export default function SideProjectsCard({
       onMouseEnter={() => setHover(!hover)}
       onMouseLeave={() => setHover(!hover)}
     >
-      <div className="relative flex aspect-square w-full items-center justify-center overflow-clip rounded-2xl border border-shark">
+      <div className="relative flex w-full items-center justify-center overflow-clip rounded-xl border border-shark md:aspect-square">
         <Image
           className="duration-150 group-hover:scale-105"
           alt={post.details.title}
@@ -31,7 +31,7 @@ export default function SideProjectsCard({
           height={512}
         />
       </div>
-      <div className="flex flex-col gap-2 px-4">
+      <div className="flex flex-col gap-2">
         <span className="text-white/40">{post.details.period}</span>
         <h6 className="text-2xl leading-snug">{post.details.title}</h6>
       </div>

@@ -12,7 +12,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
     <div
       className={cx(
         className,
-        "flex h-[90vh] items-center justify-center px-6 pb-4 md:gap-24 md:px-32 md:pb-8"
+        "flex h-[70vh] md:h-[90vh] items-center justify-center pb-4 md:gap-24 md:pb-8 px-4 md:px-16"
       )}
       style={{
         backgroundColor: `#${post.properties.bgColor}`,
@@ -27,7 +27,7 @@ export default function Post({ className, post }: PostProps): JSX.Element {
           {post.details.description}
         </p>
       </div>
-      <div className="relative hidden h-2/3 w-1/2 md:inline-block">
+      <div className="relative hidden h-2/3 w-1/2 md:block shrink-0">
         <Image
           src={post.details.img}
           alt={post.details.title}

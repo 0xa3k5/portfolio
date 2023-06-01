@@ -20,7 +20,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-48">
+      <motion.main className="container 2xl:max-w-6xl flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-32">
         <Hero.Page page={page} />
         <SectionsWrapper>
           <SectionTitle title="Work Experiences" />

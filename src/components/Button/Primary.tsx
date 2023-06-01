@@ -57,7 +57,7 @@ export default function Primary({
   };
 
   return (
-    <Link href={href} target="_blank" rel="" passHref scroll={false}>
+    <Link href={href} target="_blank" rel="" passHref scroll={false} className="w-full">
       <MotionConfig
         transition={{
           staggerChildren: 0.2,
@@ -67,14 +67,14 @@ export default function Primary({
           ease: [0.85, 0, 0.3, 1],
         }}
       >
-        <motion.button
+        <motion.div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           variants={buttonVariants}
           initial="idle"
           animate="animate"
           className={cx(
-            "group flex flex-row items-center gap-3 overflow-hidden rounded-xl py-4 px-6",
+            "group flex flex-row justify-center sm:w-fit w-full items-center gap-3 overflow-hidden rounded-xl py-4 px-6",
             className
           )}
         >
@@ -88,7 +88,7 @@ export default function Primary({
           <motion.span variants={buttonIcon} animate={hover ? "hover" : "idle"}>
             {icon}
           </motion.span>
-        </motion.button>
+        </motion.div>
       </MotionConfig>
     </Link>
   );

@@ -20,10 +20,10 @@ export default function SideProjects({
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-48">
+      <motion.main className="container flex max-w-4xl 2xl:max-w-6xl flex-col items-center gap-48 overflow-x-hidden py-32">
         <SectionsWrapper>
-          <SectionTitle title="on the side" className="mb-12" />
-          <div className="grid grid-cols-2 gap-x-8 gap-y-16">
+          <SectionTitle title="on the side" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
             {sideProjects
               .sort(
                 (a: NotionPost, b: NotionPost) =>

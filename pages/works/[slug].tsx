@@ -9,7 +9,6 @@ import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
 import { motion } from "framer-motion";
 import { motionVariants } from "../../src/utils/motionVariants";
-import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
@@ -31,29 +30,10 @@ export default function Detail({
 }: DetailProps) {
   const { status } = useSession();
   const router = useRouter();
-  const ref = useRef(null);
-  const mdRef = useRef();
-  const [scrollPos, setScrollPos] = useState(0);
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
-
-  function updatePos() {
-    setScrollPos(window.scrollY);
-  }
-
-  useEffect(() => {
-    function watchScroll() {
-      window.addEventListener("scroll", updatePos, { passive: true });
-    }
-
-    watchScroll();
-
-    window.addEventListener("scroll", updatePos, { passive: true });
-    updatePos();
-    return () => window.removeEventListener("scroll", updatePos);
-  }, [post.properties.color, scrollPos, status]);
 
   return (
     <>
@@ -78,16 +58,12 @@ export default function Detail({
           animate="enter"
           exit="exit"
           transition={{ type: "linear" }}
+          className="flex flex-col items-center"
         >
-          <div className="" ref={ref}>
-            <Hero.Post post={post} />
-          </div>
-          <div
-            className="container flex flex-col items-center gap-24 py-24 px-6 md:px-24"
-            ref={mdRef}
-          >
+          <Hero.Post post={post} className="w-full" />
+          <div className="flex w-full max-w-4xl 2xl:max-w-6xl flex-col items-center gap-24 py-24 px-4">
             <OverviewCard post={post} />
-            <article className="with-prose max-w-4xl">
+            <article className="with-prose">
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </article>
             {postFeedbacks.length > 0 && (

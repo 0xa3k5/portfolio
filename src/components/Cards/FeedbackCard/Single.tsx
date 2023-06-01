@@ -8,8 +8,8 @@ interface SingleProps {
 
 export default function Single({ feedback }: SingleProps): JSX.Element {
   return (
-    <div className="flex flex-col border-b border-shark py-12 last-of-type:border-none md:flex-row">
-      <div className="flex w-1/2 flex-col gap-4 md:flex-row">
+    <div className="flex flex-col border-b border-shark py-12 last-of-type:border-none md:flex-row gap-4">
+      <div className="flex w-full md:w-1/2 flex-col gap-4 md:flex-row">
         <div
           className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
           key={feedback.id}
