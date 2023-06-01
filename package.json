@@ -1,5 +1,6 @@
 {
   "name": "ak-portfolio",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "TAILWIND_MODE=watch next dev",

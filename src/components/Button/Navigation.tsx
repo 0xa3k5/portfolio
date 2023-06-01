@@ -8,17 +8,19 @@ import {
   TestIcon,
   PenIcon,
 } from "../../icons";
-import { useState } from "react";
+import { Dispatch, useState, SetStateAction } from "react";
 import Tooltip from "../Tooltip";
 
 interface NavigationProps {
   href: "/" | "/about" | "/side-projects" | "/explorations" | "/ak-resume.pdf";
   name: string;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Navigation({
   href,
   name,
+  setIsSidebarOpen,
 }: NavigationProps): JSX.Element {
   const router = useRouter();
   const isActive = router.pathname === href;
@@ -96,12 +98,23 @@ export default function Navigation({
   return (
     <Link
       href={href}
-      className="group flex items-center justify-center p-4"
+      className="group flex items-center gap-4 p-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={() => setIsSidebarOpen(false)}
     >
       {getIcon()}
-      <div className="relative">{isHovered && <Tooltip text={name} />}</div>
+      <span className="block md:hidden">{name}</span>
+      <div className="relative">
+        {isHovered && (
+          <Tooltip
+            className={`${
+              isHovered ? "hidden md:block" : "hidden"
+            } -translate-y-1/2`}
+            text={name}
+          />
+        )}
+      </div>
     </Link>
   );
 }

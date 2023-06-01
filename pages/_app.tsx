@@ -5,7 +5,7 @@ import CTA from "../src/components/CTA";
 import { SessionProvider } from "next-auth/react";
 import "../src/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Sidebar from "../src/components/Sidebar";
+import Layout from "../src/components/Layout";
 
 function MyApp({
   Component,
@@ -16,17 +16,18 @@ function MyApp({
 
   return (
     <SessionProvider session={session}>
-      <Sidebar />
       <AnimatePresence
         mode="wait"
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <Component {...pageProps} canonical={url} key={url} />
-        <Analytics />
+        <Layout>
+          <Component {...pageProps} canonical={url} key={url} />
+          <Analytics />
+          <CTA />
+          <Footer />
+        </Layout>
       </AnimatePresence>
-      <CTA />
-      <Footer />
     </SessionProvider>
   );
 }
