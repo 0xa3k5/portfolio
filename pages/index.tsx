@@ -8,6 +8,7 @@ import PageHead from "../src/components/PageHead";
 import ContentCard from "../src/components/Cards/ContentCard/Content";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
+import { useTheme } from "../src/contexts/ThemeContext";
 
 interface HomeProps {
   page: StaticPage;
@@ -15,10 +16,15 @@ interface HomeProps {
 }
 
 export default function Home({ page, works }: HomeProps) {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex flex-col items-center gap-24 md:gap-48 overflow-x-hidden py-32 md:max-w-4xl 2xl:max-w-6xl">
+      <motion.main
+        className={`container flex flex-col items-center gap-24 overflow-x-hidden py-32 md:max-w-4xl md:gap-48 2xl:max-w-6xl ${themeClasses.bg} ${themeClasses.color}`}
+      >
         <Hero.Page page={page} />
         <SectionsWrapper>
           <SectionTitle title="case studies" />

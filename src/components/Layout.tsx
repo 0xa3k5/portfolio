@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import { CrossICon, HamburgerIcon } from "../icons";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +10,8 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps): JSX.Element {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -34,9 +37,11 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div
+      className={`${themeClasses.bg} ${themeClasses.color} flex w-full flex-col`}
+    >
       <div
-        className="fixed top-0 z-20 flex h-16 w-full items-center border-b border-shark bg-midnight/60 backdrop-blur-xl px-4 md:hidden"
+        className={`fixed top-0 z-20 flex h-16 w-full items-center border-b ${themeClasses.border} border-opacity-10 px-4 backdrop-blur-xl md:hidden ${themeClasses.bg} bg-opacity-60`}
         onClick={toggleSidebar}
       >
         <button className="flex" onClick={toggleSidebar}>

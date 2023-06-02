@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { NotionPost } from "../../../types";
 import Image from "next/image";
+import { useTheme } from "../../../contexts/ThemeContext";
 
 interface SideProjectsCardProps {
   className?: string;
@@ -12,7 +13,8 @@ export default function SideProjectsCard({
   post,
 }: SideProjectsCardProps): JSX.Element {
   const [hover, setHover] = useState(false);
-
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
   return (
     <Link
       href={`/works/${post.properties.slug}`}
@@ -22,7 +24,9 @@ export default function SideProjectsCard({
       onMouseEnter={() => setHover(!hover)}
       onMouseLeave={() => setHover(!hover)}
     >
-      <div className="relative flex w-full items-center justify-center overflow-clip rounded-xl border border-shark md:aspect-square">
+      <div
+        className={`relative flex w-full items-center justify-center overflow-clip rounded-xl border border-opacity-10 ${themeClasses.border} md:aspect-square`}
+      >
         <Image
           className="duration-150 group-hover:scale-105"
           alt={post.details.title}
@@ -32,7 +36,9 @@ export default function SideProjectsCard({
         />
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-white/40">{post.details.period}</span>
+        <span className={`${themeClasses.color} text-opacity-40`}>
+          {post.details.period}
+        </span>
         <h6 className="text-2xl leading-snug">{post.details.title}</h6>
       </div>
     </Link>

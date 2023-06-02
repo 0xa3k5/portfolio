@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { SocialIcons } from "../../icons";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface SocialProps {
-  type: "twitter" | "github" | "dribbble" | "linkedin" | 'figma';
+  type: "twitter" | "github" | "dribbble" | "linkedin" | "figma";
 }
 
 export default function Social({ type }: SocialProps): JSX.Element {
   const [isHovered, setIsHovered] = useState(false);
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -51,7 +54,9 @@ export default function Social({ type }: SocialProps): JSX.Element {
     <Link
       onMouseEnter={() => handleMouseEnter()}
       onMouseLeave={() => handleMouseLeave()}
-      className={`flex p-2 ${isHovered ? "text-white" : "text-white/40"}`}
+      className={`flex p-2 ${themeClasses.color} ${
+        isHovered ? `text-opacity-100` : `text-opacity-40`
+      }`}
       href={getHref()}
       target="_blank"
     >

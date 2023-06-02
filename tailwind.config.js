@@ -16,6 +16,10 @@ module.exports = {
         vollkorn: ["Vollkorn", "serif"],
         muli: ["Muli", "sans-serif"],
       },
+      colors: {
+        "bg": "var(--bg-color)",
+        "text": "var(--text-color)",
+      },
     },
     container: {
       center: true,
@@ -27,11 +31,12 @@ module.exports = {
       },
     },
     colors: {
-      black: "#000",
-      white: "#ffffff",
+      black: "#000000",
+      white: "#FFFFFF",
       daisy: "#FFEF60",
       shark: "#1A1B1F",
       midnight: "#06060B",
+      foam: '#F4F6FF'
     },
     borderRadius: {
       none: "0",

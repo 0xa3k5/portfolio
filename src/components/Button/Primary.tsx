@@ -1,17 +1,15 @@
 import cx from "classnames";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { hexToRGB } from "../../utils/hexToRGB";
 import Link from "next/link";
 
 import { motion, MotionConfig, Variants } from "framer-motion";
-import { motionVariants } from "../../utils/motionVariants";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface PrimaryProps {
   className?: string;
   text: string;
   icon: ReactNode;
-  color?: string;
-  bgColor?: string;
   href: string;
 }
 
@@ -19,23 +17,22 @@ export default function Primary({
   className,
   text,
   icon,
-  color = "ffffff",
-  bgColor = "000000",
   href,
 }: PrimaryProps): JSX.Element {
   const [hover, setHover] = useState(false);
-  const textRgb = hexToRGB(color);
-  const bgRgb = hexToRGB(bgColor);
+  const [textRgb, setTextRgb] = useState("");
+  const { theme, getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
 
-  const buttonVariants: Variants = {
-    idle: {},
-    animate: {
-      color: hover ? `rgb(${bgRgb})` : `rgb(${textRgb})`,
-      backgroundColor: hover
-        ? `rgba(${textRgb},1)`
-        : `rgba(${hexToRGB("1A1B1F")})`,
-    },
-  };
+  useEffect(() => {
+    if (theme === "dark") {
+      setTextRgb(hexToRGB("ffffff"));
+    } else if (theme === "light") {
+      setTextRgb(hexToRGB("06060B"));
+    } else if (theme === "dim") {
+      setTextRgb(hexToRGB("ffffff"));
+    }
+  }, [theme]);
 
   const buttonIcon: Variants = {
     idle: {
@@ -57,7 +54,14 @@ export default function Primary({
   };
 
   return (
-    <Link href={href} target="_blank" rel="" passHref scroll={false} className="w-full">
+    <Link
+      href={href}
+      target="_blank"
+      rel=""
+      passHref
+      scroll={false}
+      className="w-full"
+    >
       <MotionConfig
         transition={{
           staggerChildren: 0.2,
@@ -67,28 +71,26 @@ export default function Primary({
           ease: [0.85, 0, 0.3, 1],
         }}
       >
-        <motion.div
+        <div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          variants={buttonVariants}
-          initial="idle"
-          animate="animate"
+          style={{
+            backgroundColor: hover ? `rgba(${textRgb})` : `rgba(${textRgb},.1)`,
+          }}
           className={cx(
-            "group flex flex-row justify-center sm:w-fit w-full items-center gap-3 overflow-hidden rounded-xl py-4 px-6",
+            "group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl py-4 px-6 duration-50 sm:w-fit",
+            themeClasses.color,
+            themeClasses.textHover,
             className
           )}
         >
-          <motion.span
-            variants={motionVariants.buttonText}
-            animate={hover ? "hover" : "idle"}
-            className="whitespace-nowrap"
-          >
+          <span className="whitespace-nowrap duration-150 group-hover:-translate-x-2">
             {text}
-          </motion.span>
+          </span>
           <motion.span variants={buttonIcon} animate={hover ? "hover" : "idle"}>
             {icon}
           </motion.span>
-        </motion.div>
+        </div>
       </MotionConfig>
     </Link>
   );

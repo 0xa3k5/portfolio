@@ -1,3 +1,4 @@
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Feedback } from "../../../types";
 import Image from "next/image";
 
@@ -7,9 +8,14 @@ interface SingleProps {
 }
 
 export default function Single({ feedback }: SingleProps): JSX.Element {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
-    <div className="flex flex-col border-b border-shark py-12 last-of-type:border-none md:flex-row gap-4">
-      <div className="flex w-full md:w-1/2 flex-col gap-4 md:flex-row">
+    <div
+      className={`flex flex-col gap-4 border-b border-opacity-10 ${themeClasses.border} py-12 last-of-type:border-none md:flex-row`}
+    >
+      <div className="flex w-full flex-col gap-4 md:w-1/2 md:flex-row">
         <div
           className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
           key={feedback.id}
@@ -33,7 +39,9 @@ export default function Single({ feedback }: SingleProps): JSX.Element {
           <span className="opacity-40">{feedback.role}</span>
         </div>
       </div>
-      <span className="text-lg font-light leading-normal tracking-wide text-white/80 md:w-2/3">
+      <span
+        className={`${themeClasses.color}/80 text-lg font-light leading-normal tracking-wide md:w-2/3`}
+      >
         {feedback.feedback}
       </span>
     </div>

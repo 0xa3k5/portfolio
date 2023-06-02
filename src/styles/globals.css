@@ -17,7 +17,7 @@
   }
 
   body {
-    @apply scroll-smooth bg-midnight font-muli text-white;
+    @apply scroll-smooth bg-bg font-muli text-text;
   }
 }
 
@@ -35,7 +35,7 @@
     prose-p:tracking-wide
     prose-a:text-daisy
     prose-a:duration-150 
-    prose-a:hover:text-white
+    /* prose-a:hover:text-white */
     prose-ul:font-light
     prose-ul:tracking-wider
     prose-img:rounded-xl

@@ -2,6 +2,7 @@ import { WorkExp } from "../../types";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface WorkExperienceProps {
   job: WorkExp;
@@ -10,14 +11,19 @@ interface WorkExperienceProps {
 export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
-    <div className="flex border-b border-shark py-8 md:py-12 last-of-type:border-none flex-col-reverse gap-4 sm:flex-row justify-between">
+    <div
+      className={`flex ${themeClasses.border} border-opacity-10 flex-col-reverse justify-between gap-4 border-b py-8 last-of-type:border-none sm:flex-row md:py-12`}
+    >
       <div className="flex flex-col gap-4">
         <Link
           href={job.website}
           target="_blank"
           rel="noreferrer"
-          className="group flex w-full gap-4 flex-row items-center"
+          className="group flex w-full flex-row items-center gap-4"
         >
           <div
             className="relative h-12 w-12 shrink-0 overflow-clip rounded-lg duration-150 group-hover:-translate-y-1"
@@ -43,7 +49,7 @@ export default function WorkExperience({
           </div>
         </Link>
       </div>
-      <span className="text-white/40">{job.period}</span>
+      <span className={`${themeClasses.color} text-opacity-40`}>{job.period}</span>
     </div>
   );
 }

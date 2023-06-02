@@ -3,6 +3,8 @@ import Button from "../Button";
 import { SocialIcons } from "../../icons";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import { useTheme } from "../../contexts/ThemeContext";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 interface SidebarProps {
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
@@ -11,8 +13,13 @@ interface SidebarProps {
 export default function Sidebar({
   setIsSidebarOpen,
 }: SidebarProps): JSX.Element {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
-    <div className="flex h-full flex-col justify-between border-r border-shark bg-midnight px-6 py-16 md:items-center">
+    <div
+      className={`flex h-full flex-col justify-between border-r ${themeClasses.border} border-opacity-10 ${themeClasses.bg} px-6 py-16 md:py-8 md:items-center`}
+    >
       <Link
         href="/"
         onClick={() => setIsSidebarOpen(false)}
@@ -47,9 +54,7 @@ export default function Sidebar({
           name="Resume"
         />
       </nav>
-      <div className="flex flex-col gap-8">
-        <Button.Icon href="" icon={<SocialIcons.Dribbble />} />
-      </div>
+      <ThemeSwitcher />
     </div>
   );
 }

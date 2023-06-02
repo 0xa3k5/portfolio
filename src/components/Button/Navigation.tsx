@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState, Dispatch, SetStateAction } from "react";
+import cx from "classnames";
+import { useTheme } from "../../contexts/ThemeContext";
+import Tooltip from "../Tooltip";
 import {
   AboutIcon,
   CVIcon,
@@ -8,8 +12,6 @@ import {
   TestIcon,
   PenIcon,
 } from "../../icons";
-import { Dispatch, useState, SetStateAction } from "react";
-import Tooltip from "../Tooltip";
 
 interface NavigationProps {
   href: "/" | "/about" | "/side-projects" | "/explorations" | "/ak-resume.pdf";
@@ -25,6 +27,8 @@ export default function Navigation({
   const router = useRouter();
   const isActive = router.pathname === href;
   const [isHovered, setIsHovered] = useState(false);
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
 
   const isIconFilled = isHovered || isActive;
 
@@ -42,54 +46,72 @@ export default function Navigation({
         return (
           <HomeIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
       case "/about":
         return (
           <AboutIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
       case "/side-projects":
         return (
           <FlashIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
       case "/explorations":
         return (
           <PenIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
       case "/ak-resume.pdf":
         return (
           <CVIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
       default:
         return (
           <TestIcon
             filled={isIconFilled}
-            className={`h-6 w-6 ${
-              isIconFilled ? "text-white" : "text-white/40"
-            } duration-150 group-hover:text-white`}
+            className={cx(
+              "h-6 w-6",
+              themeClasses.color,
+              isIconFilled ? "text-opacity-100" : "text-opacity-40",
+              "duration-150"
+            )}
           />
         );
     }
@@ -97,24 +119,20 @@ export default function Navigation({
 
   return (
     <Link
-      href={href}
-      className="group flex items-center gap-4 p-4"
+      href={href.toString()}
+      className="group relative flex items-center gap-4 p-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => setIsSidebarOpen(false)}
     >
       {getIcon()}
       <span className="block md:hidden">{name}</span>
-      <div className="relative">
-        {isHovered && (
-          <Tooltip
-            className={`${
-              isHovered ? "hidden md:block" : "hidden"
-            } -translate-y-1/2`}
-            text={name}
-          />
-        )}
-      </div>
+      {isHovered && (
+        <Tooltip
+          className="absolute left-full top-1/2 hidden -translate-y-1/2 md:block"
+          text={name}
+        />
+      )}
     </Link>
   );
 }

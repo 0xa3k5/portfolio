@@ -1,3 +1,4 @@
+import { useTheme } from "../../../contexts/ThemeContext";
 import { NotionPost } from "../../../types";
 
 interface OverviewCardProps {
@@ -5,8 +6,13 @@ interface OverviewCardProps {
 }
 
 export default function OverviewCard({ post }: OverviewCardProps): JSX.Element {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
-    <div className="grid grid-cols-2 justify-center gap-12 border-b border-shark pb-12 sm:grid-cols-12">
+    <div
+      className={`grid grid-cols-2 justify-center gap-12 border-b border-opacity-10 pb-12 sm:grid-cols-12 ${themeClasses.border}`}
+    >
       <div className="col-span-1 flex flex-col gap-1 sm:col-span-2 sm:col-start-2">
         <p className="text-xs uppercase tracking-widest opacity-60">ORG</p>
         <p className="text-lg md:text-base">{post.org.orgName}</p>
