@@ -6,6 +6,7 @@ import {
   NotionPageDetail,
   Feedback,
   StaticPage,
+  SideProject,
 } from "../../src/types";
 import { config } from "../../config";
 import { Exploration } from "../../src/types";
@@ -52,10 +53,21 @@ export default class NotionService {
       database_id: this.notionConfig.caseStudies,
     });
 
-    const transformedPosts = response.results
-      .map((res) => {
-        return NotionService.postTransformer(res);
-      })
+    const transformedPosts = response.results.map((res) => {
+      return NotionService.postTransformer(res);
+    });
+
+    return transformedPosts;
+  }
+
+  async getSideProjects(): Promise<SideProject[]> {
+    const response = await this.client.databases.query({
+      database_id: this.notionConfig.sideProjects,
+    });
+
+    const transformedPosts = response.results.map((res) => {
+      return NotionService.sideProjectsTransformer(res);
+    });
 
     return transformedPosts;
   }
@@ -160,7 +172,6 @@ export default class NotionService {
         slug: page.properties.Slug.formula.string,
         number: page.properties.Sort.number,
         published: page.properties.Published.checkbox === true,
-        vertical: page.properties.Vertical.checkbox === true,
         password: page.properties.Password.checkbox === true,
         bgColor: page.properties.BgColor.rich_text[0]?.plain_text || "000000",
         color: page.properties.TextColor.rich_text[0]?.plain_text || "ffffff",
@@ -217,6 +228,35 @@ export default class NotionService {
       logo: page.properties.Logo.files[0].external.url,
       website: page.properties.Website.rich_text[0].plain_text,
       description: page.properties.Description.rich_text[0].plain_text,
+    };
+  }
+
+  private static sideProjectsTransformer(page): SideProject {
+    let cover = page.cover;
+    if (!page.cover) {
+      cover = "";
+    }
+
+    switch (cover.type) {
+      case "file":
+        cover = page.cover.file.url;
+        break;
+      case "external":
+        cover = page.cover.external.url;
+        break;
+      default:
+        cover = "";
+    }
+
+    return {
+      id: page.id,
+      img: cover,
+      logo: page.properties.Logo.files[0].external?.url ?? page.properties.Logo.files[0].file.url ?? null,
+      title: page.properties.Name.title[0].plain_text,
+      website: page.properties.Website.rich_text[0]?.plain_text ?? null,
+      description: page.properties.Description.rich_text[0].plain_text,
+      date: page.properties.Date.rich_text[0].plain_text,
+      number: page.properties.Sort.number,
     };
   }
 }

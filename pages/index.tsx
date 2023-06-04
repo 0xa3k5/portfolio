@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
-import { NotionPost, StaticPage } from "../src/types";
+import { NotionPost, SideProject, StaticPage } from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
@@ -9,13 +9,15 @@ import ContentCard from "../src/components/Cards/ContentCard/Content";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
 import { useTheme } from "../src/contexts/ThemeContext";
+import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
 
 interface HomeProps {
   page: StaticPage;
   works: NotionPost[];
+  sideProjects: SideProject[];
 }
 
-export default function Home({ page, works }: HomeProps) {
+export default function Home({ page, works, sideProjects }: HomeProps) {
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
 
@@ -39,6 +41,19 @@ export default function Home({ page, works }: HomeProps) {
               })}
           </div>
         </SectionsWrapper>
+        <SectionsWrapper>
+          <SectionTitle title="on the side" />
+          <div className="flex flex-col gap-16">
+            {sideProjects
+              .sort(
+                (a: SideProject, b: SideProject) =>
+                  b.number - a.number
+              )
+              .map((p: SideProject) => {
+                return <SideProjectsCard post={p} key={p.id} />;
+              })}
+          </div>
+        </SectionsWrapper>
       </motion.main>
     </>
   );
@@ -51,6 +66,7 @@ export const getStaticProps: GetStaticProps = async () => {
     (data) => data.name === "Home"
   );
   const posts = await notionService.getCaseStudies();
+  const sideProjects = await notionService.getSideProjects();
 
   const works = posts.filter((p) => p.properties.tag !== "Side Project");
 
@@ -58,6 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       page,
       works,
+      sideProjects,
     },
   };
 };

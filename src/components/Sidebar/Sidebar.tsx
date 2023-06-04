@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Button from "../Button";
-import { SocialIcons } from "../../icons";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
