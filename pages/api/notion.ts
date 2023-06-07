@@ -190,7 +190,7 @@ export default class NotionService {
           page.properties.OverviewImg.files[0]?.external?.url || cover,
       },
       org: {
-        logo: page.properties.Logo.files[0].external.url,
+        logo: page.properties.Logo.files[0]?.external?.url,
         website: page.properties.Website.rich_text[0].plain_text,
         orgName: page.properties.Client.rich_text[0]?.plain_text || null,
       },
@@ -232,31 +232,14 @@ export default class NotionService {
   }
 
   private static sideProjectsTransformer(page): SideProject {
-    let cover = page.cover;
-    if (!page.cover) {
-      cover = "";
-    }
-
-    switch (cover.type) {
-      case "file":
-        cover = page.cover.file.url;
-        break;
-      case "external":
-        cover = page.cover.external.url;
-        break;
-      default:
-        cover = "";
-    }
-
     return {
       id: page.id,
-      img: cover,
-      logo: page.properties.Logo.files[0].external?.url ?? page.properties.Logo.files[0].file.url ?? null,
+      logo: page.properties.Logo.files[0]?.external?.url ?? page.properties.Logo.files[0]?.file?.url ?? null,
       title: page.properties.Name.title[0].plain_text,
       website: page.properties.Website.rich_text[0]?.plain_text ?? null,
       description: page.properties.Description.rich_text[0].plain_text,
-      date: page.properties.Date.rich_text[0].plain_text,
-      number: page.properties.Sort.number,
+      date: page.properties.Date.number,
+      thumbnail: page.properties.Thumbnail.files[0]?.external.url ?? null
     };
   }
 }

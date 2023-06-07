@@ -1,12 +1,11 @@
 export type SideProject = {
   id: string;
-  img: string;
   title: string;
   description: string;
-  date: string;
+  date: number;
   website: string | null;
   logo: string | null;
-  number: number;
+  thumbnail: string | null;
 };
 
 export type NotionPost = {

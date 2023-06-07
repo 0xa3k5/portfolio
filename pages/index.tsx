@@ -1,6 +1,11 @@
 import { GetStaticProps } from "next";
-import { motion } from "framer-motion";
-import { NotionPost, SideProject, StaticPage } from "../src/types";
+import {
+  NotionPost,
+  SideProject,
+  StaticPage,
+  Feedback,
+  Exploration,
+} from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
@@ -8,30 +13,36 @@ import PageHead from "../src/components/PageHead";
 import ContentCard from "../src/components/Cards/ContentCard/Content";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
-import { useTheme } from "../src/contexts/ThemeContext";
 import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
+import FeedbackCard from "../src/components/Cards/FeedbackCard";
+import ExplorationsCard from "../src/components/Cards/ExplorationsCard/ExplorationsCard";
+import MainWrapper from "../src/components/MainWrapper";
 
 interface HomeProps {
   page: StaticPage;
   works: NotionPost[];
   sideProjects: SideProject[];
+  feedbacks: Feedback[];
+  explorations: Exploration[];
 }
 
-export default function Home({ page, works, sideProjects }: HomeProps) {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
-
+export default function Home({
+  page,
+  works,
+  sideProjects,
+  feedbacks,
+  explorations,
+}: HomeProps) {
   return (
     <>
       <PageHead page={page} />
-      <motion.main
-        className={`container flex flex-col items-center gap-24 overflow-x-hidden py-32 md:max-w-4xl md:gap-48 2xl:max-w-6xl ${themeClasses.bg} ${themeClasses.color}`}
-      >
+      <MainWrapper>
         <Hero.Page page={page} />
         <SectionsWrapper>
-          <SectionTitle title="case studies" />
+          <SectionTitle title="case studies" href="/works" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
+              .filter((work) => work.properties.published === true)
               .sort(
                 (a: NotionPost, b: NotionPost) =>
                   a.properties.number - b.properties.number
@@ -43,18 +54,27 @@ export default function Home({ page, works, sideProjects }: HomeProps) {
         </SectionsWrapper>
         <SectionsWrapper>
           <SectionTitle title="on the side" />
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-12">
             {sideProjects
-              .sort(
-                (a: SideProject, b: SideProject) =>
-                  b.number - a.number
-              )
+              .sort((a: SideProject, b: SideProject) => b.date - a.date)
               .map((p: SideProject) => {
                 return <SideProjectsCard post={p} key={p.id} />;
               })}
           </div>
         </SectionsWrapper>
-      </motion.main>
+        <SectionsWrapper>
+          <SectionTitle title="feedbacks & testimonials" />
+          <FeedbackCard.Grouped feedback={feedbacks} />
+        </SectionsWrapper>
+        <SectionsWrapper>
+          <SectionTitle title="explorations" />
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+            {explorations.map((p: Exploration) => {
+              return <ExplorationsCard exploration={p} key={p.id} />;
+            })}
+          </div>
+        </SectionsWrapper>
+      </MainWrapper>
     </>
   );
 }
@@ -67,6 +87,8 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const posts = await notionService.getCaseStudies();
   const sideProjects = await notionService.getSideProjects();
+  const feedbacks = await notionService.getFeedbacks();
+  const explorations = await notionService.getExplorations();
 
   const works = posts.filter((p) => p.properties.tag !== "Side Project");
 
@@ -75,6 +97,8 @@ export const getStaticProps: GetStaticProps = async () => {
       page,
       works,
       sideProjects,
+      feedbacks,
+      explorations,
     },
   };
 };

@@ -8,14 +8,12 @@ import { Analytics } from "@vercel/analytics/react";
 import Layout from "../src/components/Layout";
 import { ThemeContextProvider } from "../src/contexts/ThemeContext";
 
-
 function MyApp({
   Component,
   router,
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const url = `https://akml.io${router.route}`;
-
   return (
     <SessionProvider session={session}>
       <ThemeContextProvider>
