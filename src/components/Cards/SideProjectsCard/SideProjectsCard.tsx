@@ -16,17 +16,34 @@ export default function SideProjectsCard({
   const themeClasses = getThemeClasses();
   return (
     <div
-      className={`${themeClasses.color} flex w-full items-center gap-8 overflow-clip duration-150`}
+      className={`${themeClasses.color} flex w-full flex-col gap-12 overflow-clip duration-150 md:flex-row md:items-center`}
     >
       <div
-        className={`relative flex h-64 w-64 shrink-0 items-center justify-center overflow-clip rounded-xl border border-opacity-10 ${themeClasses.border} md:aspect-square`}
+        className={`relative flex h-56 w-full shrink-0 items-center justify-center overflow-clip rounded-xl border border-opacity-10 md:w-56 ${themeClasses.border}`}
       >
-        <Image alt={post.title} src={post.img} fill />
+        <Image
+          alt={post.title}
+          src={post.thumbnail && post.thumbnail}
+          fill
+          priority
+          style={{
+            objectFit: "cover",
+          }}
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        />
       </div>
-      <div className="flex flex-col gap-2 py-4">
-        <span className="opacity-40">{post.date}</span>
-        <h6 className="text-3xl">{post.title}</h6>
-        <span className="opacity-60">{post.description}</span>
+      <div className="flex flex-col gap-4 py-4">
+        <div
+          className={`flex rounded-full ${themeClasses.border} w-fit border border-opacity-10  bg-opacity-10 px-2 py-1`}
+        >
+          <span className="text-sm opacity-60">{post.date}</span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <h6 className="text-2xl">{post.title}</h6>
+          <span className="opacity-60">{post.description}</span>
+        </div>
         {post.website && (
           <Link
             href={post.website}

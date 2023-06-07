@@ -13,9 +13,9 @@ export default function Single({ feedback }: SingleProps): JSX.Element {
 
   return (
     <div
-      className={`flex flex-col gap-4 border-b border-opacity-10 ${themeClasses.border} py-12 last-of-type:border-none md:flex-row`}
+      className={`flex flex-col gap-4 border-b border-opacity-10 pb-12 ${themeClasses.border} last-of-type:border-none`}
     >
-      <div className="flex w-full flex-col gap-4 md:w-1/2 md:flex-row">
+      <div className="flex w-full flex-col gap-4 md:flex-row">
         <div
           className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
           key={feedback.id}
@@ -40,7 +40,7 @@ export default function Single({ feedback }: SingleProps): JSX.Element {
         </div>
       </div>
       <span
-        className={`${themeClasses.color}/80 text-lg font-light leading-normal tracking-wide md:w-2/3`}
+        className={`${themeClasses.color} text-opacity-80 text-lg font-light leading-normal tracking-wide`}
       >
         {feedback.feedback}
       </span>

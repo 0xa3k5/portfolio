@@ -2,10 +2,10 @@ import { GetStaticProps } from "next";
 import { NotionPost, StaticPage } from "../src/types";
 import NotionService from "./api/notion";
 import PageHead from "../src/components/PageHead";
-import { motion } from "framer-motion";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
+import MainWrapper from "../src/components/MainWrapper";
 
 interface FourOhFourProps {
   page: StaticPage;
@@ -19,7 +19,7 @@ export default function FourOhFour({
   return (
     <>
       <PageHead page={page} />
-      <motion.main className="container flex max-w-4xl flex-col items-center gap-48 overflow-x-hidden py-32">
+      <MainWrapper>
         <div className="flex w-full flex-col gap-8 sm:mt-0">
           <div className="flex flex-col gap-4">
             <h1 className="max-w-2xl text-4xl font-semibold" key="hero_title">
@@ -31,7 +31,7 @@ export default function FourOhFour({
           </div>
         </div>
         <SectionsWrapper>
-          <SectionTitle title="case studies"/>
+          <SectionTitle title="case studies" />
           <div className="flex flex-col gap-8 md:gap-12">
             {posts
               .filter((p) => p.properties.published)
@@ -44,7 +44,7 @@ export default function FourOhFour({
               })}
           </div>
         </SectionsWrapper>
-      </motion.main>
+      </MainWrapper>
     </>
   );
 }
