@@ -17,8 +17,33 @@
   }
 
   body {
-    @apply scroll-smooth bg-bg font-muli text-text;
+    @apply scroll-smooth font-muli;
   }
+}
+
+:root {
+  --bg-color: #06060B;
+  --text-color: #F4F6FF;
+}
+
+[data-theme="dark"] {
+  --bg-color: #06060B;
+  --text-color: #F4F6FF;
+}
+
+[data-theme="light"] {
+  --bg-color: #F4F6FF;
+  --text-color: #06060B;
+}
+
+[data-theme="dim"] {
+  --bg-color: #1A1B1F;
+  --text-color: #F4F6FF;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .with-prose {
