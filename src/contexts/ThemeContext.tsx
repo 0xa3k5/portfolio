@@ -24,15 +24,38 @@ type ThemeContextProviderProps = {
 export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [themeClasses, setThemeClasses] = useState<ThemeClasses>(darkTheme);
 
+  const themes: Record<Theme, ThemeClasses> = {
+    dark: darkTheme,
+    light: lightTheme,
+    dim: dimTheme,
+  };
+
   useEffect(() => {
-    const themes: Record<Theme, ThemeClasses> = {
-      dark: darkTheme,
-      light: lightTheme,
-      dim: dimTheme,
-    };
+    const prefersDarkTheme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    const prefersLightTheme = window.matchMedia(
+      "(prefers-color-scheme: light)"
+    ).matches;
+
+    if (prefersDarkTheme) {
+      setTheme("dark");
+      setThemeClasses(darkTheme);
+    } else if (prefersLightTheme) {
+      setTheme("light");
+      setThemeClasses(lightTheme);
+    } else {
+      setTheme("dim");
+      setThemeClasses(dimTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
 
     setThemeClasses(themes[theme]);
   }, [theme]);
