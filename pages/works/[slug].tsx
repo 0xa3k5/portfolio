@@ -14,9 +14,10 @@ import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
 import { useTheme } from "../../src/contexts/ThemeContext";
+import { MdStringObject } from "notion-to-md/build/types";
 
 interface DetailProps {
-  markdown: string;
+  markdown: MdStringObject;
   post: NotionPost;
   morePosts: NotionPost[];
   feedbacks: Feedback[];
@@ -70,9 +71,11 @@ export default function Detail({
             <article
               className={`${
                 theme === "light" ? "prose" : "prose-invert"
-              } prose-a:${themeClasses.textHighlight} prose-xl prose prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
+              } prose-a:${
+                themeClasses.textHighlight
+              } prose-xl prose prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
             >
-              <ReactMarkdown>{markdown}</ReactMarkdown>
+              <ReactMarkdown>{markdown["parent"]}</ReactMarkdown>
             </article>
             {postFeedbacks.length > 0 && (
               <FeedbackCard.Grouped
