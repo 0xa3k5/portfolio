@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Button from "../Button";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import ThemeSwitcher from "../ThemeSwitcher";
 
