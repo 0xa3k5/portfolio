@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
 
   const page = (await notionService.getStaticPage()).find(
-    (data) => data.name === "Side Projects"
+    (data) => data.name === "Works"
   );
 
   const works = await notionService.getCaseStudies();
