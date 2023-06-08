@@ -12,7 +12,13 @@ export default function SectionsWrapper({
   row = false,
 }: PropsWithChildren<SectionsWrapperProps>): JSX.Element {
   return (
-    <section className={cx("flex w-full px-4 md:px-12", row ? 'lg:flex-row gap-24' : '', 'flex-col gap-12', className)}>
+    <section
+      className={cx(
+        "flex w-full flex-col gap-12 px-4 md:px-12",
+        row ? "gap-24 lg:flex-row" : "",
+        className
+      )}
+    >
       {children}
     </section>
   );

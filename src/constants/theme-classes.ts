@@ -5,6 +5,7 @@ export type ThemeClasses = {
     border: string;
     textHighlight: string;
     textHover: string;
+    outline: string;
   };
   
   export const darkTheme: ThemeClasses = {
@@ -12,6 +13,7 @@ export type ThemeClasses = {
     bgHover: 'hover:bg-foam',
     color: "text-foam",
     border: "border-foam",
+    outline: "outline-foam",
     textHighlight: 'text-daisy',
     textHover: 'hover:text-midnight'
   };
@@ -21,6 +23,7 @@ export type ThemeClasses = {
     bgHover: 'hover:bg-midnight',
     color: "text-midnight",
     border: "border-midnight",
+    outline: "outline-midnight",
     textHighlight: 'text-daisy',
     textHover: 'hover:text-foam'
   };
@@ -30,6 +33,7 @@ export type ThemeClasses = {
     bgHover: 'hover:bg-white',
     color: "text-white",
     border: "border-white",
+    outline: "outline-white",
     textHighlight: 'text-daisy',
     textHover: 'hover:text-shark'
   };

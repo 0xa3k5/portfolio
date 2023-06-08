@@ -13,11 +13,10 @@ export default function Footer(): JSX.Element {
         built by{" "}
         <Link
           href="/"
-          className="text-opacity-40 duration-150 hover:text-opacity-100"
+          className={`${themeClasses.color} text-opacity-40 duration-150 hover:text-opacity-100`}
         >
           ak
-        </Link>{" "}
-        with ❤️
+        </Link>
       </span>
     </div>
   );

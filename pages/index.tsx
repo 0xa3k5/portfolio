@@ -39,7 +39,7 @@ export default function Home({
       <MainWrapper>
         <Hero.Page page={page} />
         <SectionsWrapper>
-          <SectionTitle title="case studies" href="/works" />
+          <SectionTitle title="selected work" href="/works" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
               .filter((work) => work.properties.published === true)

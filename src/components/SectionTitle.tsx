@@ -18,7 +18,13 @@ export default function SectionTitle({
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
   return (
-    <div className={cx(className, "flex flex-row items-baseline gap-8")}>
+    <div
+      className={cx(
+        className,
+        "flex flex-row items-baseline gap-8",
+        row ? "w-full lg:w-1/6" : ""
+      )}
+    >
       <h2
         className={`whitespace-nowrap text-2xl lowercase ${
           row ? "lg:whitespace-normal" : ""

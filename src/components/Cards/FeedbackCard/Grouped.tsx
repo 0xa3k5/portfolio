@@ -2,7 +2,8 @@ import cx from "classnames";
 import { Feedback } from "../../../types";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "../../../contexts/ThemeContext";
 
 interface GroupedProps {
   classname?: string;
@@ -14,12 +15,26 @@ export default function Grouped({
   feedback,
 }: GroupedProps): JSX.Element {
   const [selected, setSelected] = useState<Feedback>(feedback[0]);
+  const [bgColor, setBgColor] = useState("");
+  const { theme, getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setBgColor("bg-white");
+    } else if (theme === "light") {
+      setBgColor("bg-shark");
+    } else if (theme === "dim") {
+      setBgColor("bg-white");
+    }
+  }, [theme]);
 
   return (
     <div
       className={cx(
         classname,
-        "container flex max-w-3xl flex-col items-center gap-12 overflow-hidden rounded-2xl bg-white/5 px-4 py-12 md:p-16"
+        bgColor,
+        "container flex max-w-3xl flex-col items-center gap-12 overflow-hidden rounded-2xl bg-opacity-5 px-4 py-12 md:p-16"
       )}
     >
       <div className="flex h-16 items-center gap-8">
@@ -29,7 +44,7 @@ export default function Grouped({
               className={cx(
                 "relative overflow-hidden rounded-full duration-150",
                 selected === f
-                  ? "h-16 w-16 opacity-100 outline outline-2 outline-offset-4 outline-white"
+                  ? `h-16 w-16 opacity-100 outline outline-2 outline-offset-4 ${themeClasses.outline}`
                   : "h-12 w-12 opacity-40"
               )}
               key={f.id}

@@ -12,6 +12,21 @@ import MainWrapper from "../src/components/MainWrapper";
 import { useTheme } from "../src/contexts/ThemeContext";
 import Button from "../src/components/Button";
 import { PaperPlaneIcon } from "../src/icons";
+import cx from "classnames";
+
+const skills: string[] = [
+  "product design",
+  "ux research",
+  "user testing",
+  "javascript/typescript",
+  "reactjs/nextjs",
+  "prototyping",
+  "html/css",
+  "design systems",
+  "design audits",
+  "brain storming",
+  "design mentorship",
+];
 
 interface AboutProps {
   page: StaticPage;
@@ -70,6 +85,24 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
                 return <WorkExperience job={w} key={`about-${w.id}`} />;
               })}
           </div>
+        </SectionsWrapper>
+        <SectionsWrapper row>
+          <SectionTitle row title="skills" />
+          <ul className="grid grid-cols-3 gap-x-16 gap-y-8">
+            {skills.map((s) => {
+              return (
+                <li
+                  key={s}
+                  className={cx(
+                    "col-span-1 whitespace-nowrap font-muli text-xl font-normal text-opacity-60",
+                    themeClasses.color
+                  )}
+                >
+                  – {s}
+                </li>
+              );
+            })}
+          </ul>
         </SectionsWrapper>
         <SectionsWrapper row>
           <SectionTitle row title="feedbacks & testimonials" />
