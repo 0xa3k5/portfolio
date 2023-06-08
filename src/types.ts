@@ -1,3 +1,5 @@
+import { MdStringObject } from "notion-to-md/build/types";
+
 export type SideProject = {
   id: string;
   title: string;
@@ -65,7 +67,7 @@ export type WorkExp = {
 };
 
 export type NotionPageDetail = {
-  markdown: string;
+  markdown: MdStringObject;
   post?: NotionPost;
 };
 
