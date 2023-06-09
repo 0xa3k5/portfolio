@@ -137,6 +137,7 @@ export default class NotionService {
       heroTitle: page.properties.HeroTitle.rich_text[0]?.plain_text || "",
       id: page.id,
       slug: page.properties.Slug.formula.string,
+      extra: page.properties.Extra?.rich_text[0]?.plain_text ?? null
     };
   }
 

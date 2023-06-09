@@ -42,7 +42,7 @@ export default function Grouped({
           return (
             <div
               className={cx(
-                "relative overflow-hidden rounded-full duration-150",
+                "relative overflow-clip rounded-full duration-150",
                 selected === f
                   ? `h-16 w-16 opacity-100 outline outline-2 outline-offset-4 ${themeClasses.outline}`
                   : "h-12 w-12 opacity-40"
