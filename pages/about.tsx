@@ -14,20 +14,6 @@ import Button from "../src/components/Button";
 import { PaperPlaneIcon } from "../src/icons";
 import cx from "classnames";
 
-const skills: string[] = [
-  "product design",
-  "ux research",
-  "user testing",
-  "javascript/typescript",
-  "reactjs/nextjs",
-  "prototyping",
-  "html/css",
-  "design systems",
-  "design audits",
-  "brain storming",
-  "design mentorship",
-];
-
 interface AboutProps {
   page: StaticPage;
   feedbacks: Feedback[];
@@ -78,7 +64,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
         </div>
         <SectionsWrapper row>
           <SectionTitle row title="Work Experiences" />
-          <div className="flex w-full flex-col gap-12">
+          <div className="flex w-full flex-col gap-8 md:gap-12">
             {workExp
               .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
               .map((w: WorkExp) => {
@@ -88,8 +74,8 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
         </SectionsWrapper>
         <SectionsWrapper row>
           <SectionTitle row title="skills" />
-          <ul className="grid grid-cols-3 gap-x-16 gap-y-8">
-            {skills.map((s) => {
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 md:grid-cols-3 md:gap-x-16">
+            {page.extra.split(",").map((s) => {
               return (
                 <li
                   key={s}
