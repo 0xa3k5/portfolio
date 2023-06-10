@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import { useTheme } from "../contexts/ThemeContext";
 import { Navbar } from "./Navbar";
+import CTA from "./CTA";
+import Footer from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +24,8 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
         <div className="flex-1">
           <Navbar />
           <div className="">{children}</div>
+          <CTA />
+          <Footer />
         </div>
       </div>
     </div>

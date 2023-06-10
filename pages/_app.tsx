@@ -1,7 +1,5 @@
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
-import Footer from "../src/components/Footer";
-import CTA from "../src/components/CTA";
 import { SessionProvider } from "next-auth/react";
 import "../src/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -25,8 +23,6 @@ function MyApp({
           <Layout>
             <Component {...pageProps} canonical={url} key={url} />
             <Analytics />
-            <CTA />
-            <Footer />
           </Layout>
         </AnimatePresence>
       </ThemeContextProvider>
