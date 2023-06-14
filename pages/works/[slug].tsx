@@ -66,7 +66,7 @@ export default function Detail({
           className="flex flex-col items-center"
         >
           <Hero.Post post={post} className="w-full" />
-          <div className="flex w-full max-w-4xl flex-col items-center gap-24 py-24 px-4 2xl:max-w-6xl">
+          <div className="flex w-full max-w-5xl flex-col items-center gap-24 py-24 px-4 2xl:max-w-6xl">
             <OverviewCard post={post} />
             <article
               className={`${
