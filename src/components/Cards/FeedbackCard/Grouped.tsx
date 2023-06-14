@@ -31,7 +31,7 @@ export default function Grouped({
     <div
       className={cx(
         classname,
-        "grid grid-cols-2 gap-4 overflow-hidden rounded-2xl"
+        "grid md:grid-cols-2 gap-4 overflow-hidden rounded-2xl"
       )}
     >
       {feedback.map((f) => {
