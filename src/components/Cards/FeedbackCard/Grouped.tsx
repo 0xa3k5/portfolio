@@ -1,6 +1,5 @@
 import cx from "classnames";
 import { Feedback } from "../../../types";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTheme } from "../../../contexts/ThemeContext";
@@ -14,7 +13,6 @@ export default function Grouped({
   classname,
   feedback,
 }: GroupedProps): JSX.Element {
-  const [selected, setSelected] = useState<Feedback>(feedback[0]);
   const [bgColor, setBgColor] = useState("");
   const { theme, getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
@@ -33,62 +31,52 @@ export default function Grouped({
     <div
       className={cx(
         classname,
-        bgColor,
-        "container flex max-w-3xl flex-col items-center gap-12 overflow-hidden rounded-2xl bg-opacity-5 px-4 py-12 md:p-16"
+        "grid grid-cols-2 gap-4 overflow-hidden rounded-2xl"
       )}
     >
-      <div className="flex h-16 items-center gap-8">
-        {feedback.map((f) => {
-          return (
+      {feedback.map((f) => {
+        return (
+          <div
+            key={f.id}
+            className={cx(
+              bgColor,
+              "col-span-1 flex h-fit flex-col items-start gap-6 rounded-2xl bg-opacity-5 p-8"
+            )}
+          >
             <div
-              className={cx(
-                "relative overflow-clip rounded-full duration-150",
-                selected === f
-                  ? `h-16 w-16 opacity-100 outline outline-2 outline-offset-4 ${themeClasses.outline}`
-                  : "h-12 w-12 opacity-40"
-              )}
-              key={f.id}
-              onClick={() => setSelected(f)}
+              className={`${themeClasses.border} flex w-full items-center gap-4 border-b border-opacity-20 pb-8`}
             >
-              <Image
-                src={f.img}
-                alt={f.name}
-                fill
-                style={{
-                  objectFit: "cover",
-                  maxWidth: "100%",
-                }}
-                sizes="(max-width: 768px) 100vw,
+              <div
+                className={cx(
+                  "relative h-12 w-12 shrink-0 overflow-clip rounded-full"
+                )}
+              >
+                <Image
+                  src={f.img}
+                  alt={f.name}
+                  fill
+                  style={{
+                    objectFit: "cover",
+                    maxWidth: "100%",
+                  }}
+                  sizes="(max-width: 768px) 100vw,
                   (max-width: 1200px) 50vw,
                   33vw"
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex">
-        {feedback.map((f) => {
-          return (
-            <div
-              className={cx(
-                selected === f ? "visible" : "hidden",
-                "flex h-full flex-col items-center gap-8 text-center duration-150"
-              )}
-              key={f.id}
-            >
-              <span className="text-lg font-extralight leading-normal tracking-wide">
-                {f.feedback}
-              </span>
-              <div className="flex flex-col gap-2 border-t border-t-white border-opacity-20 pt-8">
-                <span className="text-xl">{f.name}</span>
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg">{f.name}</span>
                 <span className="opacity-40">
                   {f.role} @ {f.orgName}
                 </span>
               </div>
             </div>
-          );
-        })}
-      </div>
+            <span className="text-lg font-light leading-normal tracking-wide">
+              {f.feedback}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }
