@@ -1,21 +1,30 @@
+export type SideProject = {
+  id: string;
+  title: string;
+  description: string;
+  date: number;
+  website: string | null;
+  logo: string | null;
+  thumbnail: string | null;
+};
+
 export type NotionPost = {
-  org?: {
+  org: {
     logo: string;
-    website: string;
+    website: string | null;
     orgName: string;
   };
-  properties?: {
+  properties: {
     id: string;
     number: number;
     slug: string;
     published: boolean;
-    vertical?: boolean;
     password: boolean;
     bgColor: string;
     color: string;
     tag: string;
   };
-  details?: {
+  details: {
     img: string;
     title: string;
     type: string;
@@ -25,7 +34,7 @@ export type NotionPost = {
     contributions: string;
     overviewImg: string;
   };
-  feedbacks?: {
+  feedbacks: {
     id: string;
     relationIds: string[];
   };
@@ -67,7 +76,8 @@ export type StaticPage = {
   heroTitle: string;
   heroText: string;
   id: string;
-  slug?: string;
+  slug: string;
+  extra: string | null
 };
 
 export type Exploration = {

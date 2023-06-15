@@ -7,15 +7,15 @@ import { getMorePosts } from "../../src/utils/getMorePosts";
 import MorePosts from "../../src/components/MorePosts";
 import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
-import { motion, useScroll } from "framer-motion";
-import { motionVariants } from "../../src/utils/motionVariants";
-import { useState, useEffect, useRef } from "react";
-import ContentReadIndicator from "../../src/components/ContentReadIndicator/index";
+import { motion } from "framer-motion";
+import { motionVariants } from "../../src/constants/motionVariants";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
-import { useAppContext } from "../../hooks/useAppContext";
+import { useTheme } from "../../src/contexts/ThemeContext";
+import Layout from "../../src/components/Layout";
+
 
 interface DetailProps {
   markdown: string;
@@ -33,53 +33,16 @@ export default function Detail({
 }: DetailProps) {
   const { status } = useSession();
   const router = useRouter();
-  const ref = useRef(null);
-  const mdRef = useRef();
-  const { scrollYProgress } = useScroll({ target: mdRef });
-  const [scrollPos, setScrollPos] = useState(0);
-  const [contentInView, setContentInView] = useState(false);
 
-  const appContext = useAppContext();
+  const { theme, getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
 
-  function updatePos() {
-    setScrollPos(window.scrollY);
-  }
-
-  useEffect(() => {
-    function watchScroll() {
-      window.addEventListener("scroll", updatePos, { passive: true });
-    }
-
-    watchScroll();
-
-    function handleContentInView() {
-      setContentInView(scrollPos > ref.current?.clientHeight);
-
-      if (contentInView || status !== "authenticated") {
-        appContext.setTheme({
-          color: "ffffff",
-          bgColor: "000000",
-        });
-      } else {
-        appContext.setTheme({
-          color: post.properties.color,
-          bgColor: appContext.theme.bgColor,
-        });
-      }
-    }
-
-    window.addEventListener("scroll", updatePos, { passive: true });
-    updatePos();
-    handleContentInView();
-    return () => window.removeEventListener("scroll", updatePos);
-  }, [post.properties.color, scrollPos, status]);
-
   return (
-    <>
+    <Layout>
       <Head>
         <title>{post.details.title}</title>
         <meta
@@ -101,29 +64,20 @@ export default function Detail({
           animate="enter"
           exit="exit"
           transition={{ type: "linear" }}
+          className="flex flex-col items-center"
         >
-          <div className="" ref={ref}>
-            <Hero.Post post={post} />
-          </div>
-          <div
-            className="container flex flex-col items-center gap-24 py-24 px-6 md:px-24"
-            ref={mdRef}
-          >
+          <Hero.Post post={post} className="w-full" />
+          <div className="flex w-full max-w-5xl flex-col items-center gap-24 py-24 px-4 2xl:max-w-6xl">
             <OverviewCard post={post} />
-            <div className="mx-auto">
-              <div className="flex items-center justify-center">
-                {contentInView && (
-                  <ContentReadIndicator
-                    contentRef={mdRef}
-                    post={post}
-                    scrollYProgress={scrollYProgress}
-                  />
-                )}
-                <article className="with-prose">
-                  <ReactMarkdown>{markdown}</ReactMarkdown>
-                </article>
-              </div>
-            </div>
+            <article
+              className={`${
+                theme === "light" ? "prose" : "prose-invert"
+              } prose-a:${
+                themeClasses.textHighlight
+              } prose-xl prose prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
+            >
+              <ReactMarkdown>{markdown}</ReactMarkdown>
+            </article>
             {postFeedbacks.length > 0 && (
               <FeedbackCard.Grouped
                 classname="w-full md:w-11/12"
@@ -136,7 +90,7 @@ export default function Detail({
       ) : (
         <Login redirectPath={router.asPath} />
       )}
-    </>
+    </Layout>
   );
 }
 

@@ -1,4 +1,4 @@
-import cx from "classnames";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Feedback } from "../../../types";
 import Image from "next/image";
 
@@ -7,15 +7,17 @@ interface SingleProps {
   feedback: Feedback;
 }
 
-export default function Single({
-  classname,
-  feedback,
-}: SingleProps): JSX.Element {
+export default function Single({ feedback }: SingleProps): JSX.Element {
+  const { getThemeClasses } = useTheme();
+  const themeClasses = getThemeClasses();
+
   return (
-    <div className={cx(classname, "flex flex-col gap-8 py-12 md:flex-row")}>
-      <div className="flex h-fit w-full flex-col gap-4 md:w-2/6 md:flex-row md:items-center">
+    <div
+      className={`flex flex-col gap-4 border-b border-opacity-10 pb-12 ${themeClasses.border} last-of-type:border-none`}
+    >
+      <div className="flex w-full flex-col gap-4 md:flex-row">
         <div
-          className={cx("relative h-16 w-16 overflow-hidden rounded-full")}
+          className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full"
           key={feedback.id}
         >
           <Image
@@ -32,16 +34,16 @@ export default function Single({
                   33vw"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-xl">{feedback.name}</span>
+        <div className="flex flex-col">
+          <span className="text-lg">{feedback.name}</span>
           <span className="opacity-40">{feedback.role}</span>
         </div>
       </div>
-      <div className={cx("flex w-full flex-col gap-8 md:w-4/6")}>
-        <span className="text-xl font-light leading-normal tracking-wide opacity-90">
-          {feedback.feedback}
-        </span>
-      </div>
+      <span
+        className={`${themeClasses.color} text-opacity-80 text-lg font-light leading-normal tracking-wide`}
+      >
+        {feedback.feedback}
+      </span>
     </div>
   );
 }

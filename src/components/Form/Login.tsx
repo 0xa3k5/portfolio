@@ -32,7 +32,7 @@ export default function Login({ redirectPath }: LoginProps) {
           <p className="text-center text-xl opacity-80 md:px-8">
             I can not make this case study public. Please enter the password or{" "}
             <a
-              className="cursor-pointer text-daisy duration-200 hover:underline"
+              className="cursor-pointer text-daisy duration-150 hover:underline"
               href="mailto:hey@akml.io"
               target="_blank"
               rel="noreferrer"
@@ -47,7 +47,7 @@ export default function Login({ redirectPath }: LoginProps) {
           />
           <button
             type="submit"
-            className="rounded w-full max-w-sm rounded-full bg-white bg-opacity-10 p-4 text-sm uppercase tracking-widest duration-200 hover:bg-daisy hover:text-black"
+            className="rounded w-full max-w-sm rounded-full bg-white bg-opacity-10 p-4 text-sm uppercase tracking-widest duration-150 hover:bg-daisy hover:text-black"
           >
             Enter
           </button>

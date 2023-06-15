@@ -1,6 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  output: "standalone",
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -31,6 +30,10 @@ module.exports = {
       {
         protocol: "https",
         hostname: "**.dropboxusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
       },
     ],
   },

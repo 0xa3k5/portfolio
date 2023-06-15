@@ -7,6 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
+        "3xl": ["1.75rem", "2rem"],
+        "5xl": ["3.5rem", "4rem"],
         "6xl": ["64px", "80px"],
         "7xl": ["72px", "96px"],
         "8xl": ["96px", "128px"],
@@ -14,6 +16,10 @@ module.exports = {
       fontFamily: {
         vollkorn: ["Vollkorn", "serif"],
         muli: ["Muli", "sans-serif"],
+      },
+      colors: {
+        "bg": "var(--bg-color)",
+        "text": "var(--text-color)",
       },
     },
     container: {
@@ -26,10 +32,12 @@ module.exports = {
       },
     },
     colors: {
-      black: "#000",
-      white: "#ffffff",
+      black: "#000000",
+      white: "#FFFFFF",
       daisy: "#FFEF60",
+      shark: "#1A1B1F",
       midnight: "#06060B",
+      foam: '#F4F6FF'
     },
     borderRadius: {
       none: "0",
