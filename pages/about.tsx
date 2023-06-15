@@ -32,7 +32,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
         <div className="flex w-full flex-col gap-4 px-4 md:flex-row md:gap-12 md:px-12">
           <div className="relative flex aspect-square h-fit w-full items-center justify-center md:w-1/5">
             <Image
-              src={"/ak.png"}
+              src={"/ak.jpg"}
               alt="Ali Kemal Akcay – Product Designer"
               width={512}
               height={512}
