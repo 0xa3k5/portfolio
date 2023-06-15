@@ -13,6 +13,7 @@ import { useTheme } from "../src/contexts/ThemeContext";
 import Button from "../src/components/Button";
 import { PaperPlaneIcon } from "../src/icons";
 import cx from "classnames";
+import Layout from "../src/components/Layout";
 
 interface AboutProps {
   page: StaticPage;
@@ -25,7 +26,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
   const themeClasses = getThemeClasses();
 
   return (
-    <>
+    <Layout>
       <PageHead page={page} />
       <MainWrapper>
         <div className="flex w-full flex-col gap-4 px-4 md:flex-row md:gap-12 md:px-12">
@@ -99,7 +100,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
           </div>
         </SectionsWrapper>
       </MainWrapper>
-    </>
+    </Layout>
   );
 }
 

@@ -6,6 +6,7 @@ import SectionTitle from "../../src/components/SectionTitle";
 import SectionsWrapper from "../../src/components/SectionsWrapper";
 import NotionService from "../api/notion";
 import MainWrapper from "../../src/components/MainWrapper";
+import Layout from "../../src/components/Layout";
 
 interface WorksProps {
   page: StaticPage;
@@ -14,7 +15,7 @@ interface WorksProps {
 
 export default function Works({ page, works }: WorksProps): JSX.Element {
   return (
-    <>
+    <Layout>
       <PageHead page={page} />
       <MainWrapper>
         <div className="flex flex-col items-center">
@@ -33,7 +34,7 @@ export default function Works({ page, works }: WorksProps): JSX.Element {
           </SectionsWrapper>
         </div>
       </MainWrapper>
-    </>
+    </Layout>
   );
 }
 
