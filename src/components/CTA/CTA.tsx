@@ -32,10 +32,7 @@ export default function CTA({
           onMouseLeave={() => setHovered(false)}
           className="mt-2"
         >
-          <Button.NewTab
-            hovered={hovered}
-            href="https://calendly.com/akmlio/discovery"
-          />
+          <Button.LinkBtn href="https://calendly.com/akmlio/discovery" />
         </div>
       </div>
     </div>
