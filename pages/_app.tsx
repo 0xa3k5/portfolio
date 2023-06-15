@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import "../src/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Layout from "../src/components/Layout";
 import { ThemeContextProvider } from "../src/contexts/ThemeContext";
 
 function MyApp({
@@ -20,10 +19,8 @@ function MyApp({
           initial={false}
           onExitComplete={() => window.scrollTo(0, 0)}
         >
-          <Layout>
-            <Component {...pageProps} canonical={url} key={url} />
-            <Analytics />
-          </Layout>
+          <Component {...pageProps} canonical={url} key={url} />
+          <Analytics />
         </AnimatePresence>
       </ThemeContextProvider>
     </SessionProvider>

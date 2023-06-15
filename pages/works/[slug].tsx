@@ -14,6 +14,7 @@ import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
 import { useTheme } from "../../src/contexts/ThemeContext";
+import Layout from "../../src/components/Layout";
 
 
 interface DetailProps {
@@ -41,7 +42,7 @@ export default function Detail({
   );
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>{post.details.title}</title>
         <meta
@@ -89,7 +90,7 @@ export default function Detail({
       ) : (
         <Login redirectPath={router.asPath} />
       )}
-    </>
+    </Layout>
   );
 }
 

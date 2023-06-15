@@ -14,9 +14,9 @@ export default function Sidebar(): JSX.Element {
     >
       <Link
         href="/"
-        className="ml-4 w-fit shrink-0 overflow-clip rounded-full duration-150 hover:scale-105 md:ml-0"
+        className="ml-4 w-fit aspect-square shrink-0 overflow-clip rounded-full duration-150 hover:scale-105 md:ml-0"
       >
-        <Image src="/ak.png" alt="" width={48} height={48} />
+        <Image src="/ak.jpg" alt="" width={48} height={48} />
       </Link>
       <nav className="flex flex-col gap-8">
         <Button.Navigation href="/" name="Home" />

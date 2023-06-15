@@ -2,12 +2,13 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Logout from "../src/components/Form/Logout";
 import Login from "../src/components/Form/Login";
+import Layout from "../src/components/Layout";
 
 const LoginPage = (): JSX.Element => {
   const { status } = useSession();
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>To log in or not to log in</title>
         <meta
@@ -21,7 +22,7 @@ const LoginPage = (): JSX.Element => {
       ) : (
         <Logout onClick={() => signOut()} />
       )}
-  </>
+    </Layout>
   );
 };
 
