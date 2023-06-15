@@ -17,7 +17,7 @@ export default function PasswordInput({
       type="password"
       className={cx(
         className,
-        "w-full rounded-full bg-white py-4 px-6 tracking-widest text-black duration-200 placeholder:tracking-normal focus:outline-none"
+        "w-full rounded-full bg-white py-4 px-6 tracking-widest text-black duration-150 placeholder:tracking-normal focus:outline-none"
       )}
       placeholder="Password"
       value={value}

@@ -26,7 +26,7 @@ export default function Video({ src }: VideoProps): JSX.Element {
   return (
     <div className="relative h-full w-full" onClick={() => handleClick()}>
       <div
-        className={`absolute top-0 left-0 z-10 h-full w-full bg-midnight duration-200 ${
+        className={`absolute top-0 left-0 z-10 h-full w-full bg-midnight duration-150 ${
           isPaused ? "bg-opacity-40 opacity-100" : "bg-opacity-0 opacity-0"
         }`}
       >

@@ -17,7 +17,7 @@ export default function Logout({ onClick }: LogoutProps) {
           </p>
           <button
             type="submit"
-            className="rounded w-full max-w-sm rounded-full bg-white bg-opacity-10 p-4 text-sm uppercase tracking-widest duration-200 hover:bg-daisy hover:text-black"
+            className="rounded w-full max-w-sm rounded-full bg-white bg-opacity-10 p-4 text-sm uppercase tracking-widest duration-150 hover:bg-daisy hover:text-black"
             onClick={onClick}
           >
             Logout
