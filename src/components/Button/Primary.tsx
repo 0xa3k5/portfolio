@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { motion, MotionConfig, Variants } from "framer-motion";
 import { useTheme } from "../../contexts/ThemeContext";
+import useInverseColors from "../../hooks/useInverseColors";
 
 interface PrimaryProps {
   className?: string;
@@ -19,9 +20,9 @@ export default function Primary({
   href,
 }: PrimaryProps): JSX.Element {
   const [hover, setHover] = useState(false);
-  const [textRgb, setTextRgb] = useState("");
-  const { theme, getThemeClasses } = useTheme();
+  const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
+  const { background } = useInverseColors();
 
   const buttonIcon: Variants = {
     idle: {
@@ -64,7 +65,9 @@ export default function Primary({
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           style={{
-            backgroundColor: hover ? `rgba(${textRgb})` : `rgba(${textRgb},.1)`,
+            backgroundColor: hover
+              ? `rgba(${background})`
+              : `rgba(${background},.1)`,
           }}
           className={cx(
             "duration-50 group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl py-4 px-6 sm:w-fit",
