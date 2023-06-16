@@ -50,7 +50,7 @@ export default function Navigation({
   return (
     <Link
       href={href.toString()}
-      target={href === "/ak-resume.pdf" && "_blank"}
+      target={href === "/ak-resume.pdf" ? "_blank" : '_self'}
       className={cx(
         "group relative flex flex-col items-center gap-2 rounded-xl py-2 px-4 duration-150",
         isIconFilled ? "text-opacity-100" : "text-opacity-40",

@@ -3,7 +3,7 @@ import NotionService from "../api/notion";
 import ReactMarkdown from "react-markdown";
 import { config } from "../../config";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
-import { getMorePosts } from "../../src/utils/getMorePosts";
+import { getMorePosts } from "../../src/utils/get-more-posts";
 import MorePosts from "../../src/components/MorePosts";
 import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
@@ -15,7 +15,6 @@ import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
 import { useTheme } from "../../src/contexts/ThemeContext";
 import Layout from "../../src/components/Layout";
-
 
 interface DetailProps {
   markdown: string;
@@ -74,7 +73,7 @@ export default function Detail({
                 theme === "light" ? "prose" : "prose-invert"
               } prose-a:${
                 themeClasses.textHighlight
-              } prose-xl prose prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
+              } prose prose-xl prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
             >
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </article>
@@ -103,7 +102,7 @@ export async function getStaticProps(context) {
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
-    config.notion().caseStudies,
+    config.NOTION_DATABASE_CASE_STUDIES,
     "post"
   );
 
