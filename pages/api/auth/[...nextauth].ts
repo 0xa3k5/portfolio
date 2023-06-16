@@ -14,7 +14,7 @@ const authOptions: NextAuthOptions = {
         const { password } = credentials as {
           password: string;
         };
-        if (password !== config.pagePass) {
+        if (password !== config.PAGE_PASSWORD) {
           throw new Error("invalid credentials");
         }
 
