@@ -1,11 +1,10 @@
 import cx from "classnames";
-import Link from "next/link";
 import { useState } from "react";
-import { NotionPost } from "../../../types";
+import Link from "next/link";
 import Image from "next/image";
-
+import { NotionPost } from "../../../types";
 import { LockIcon, RightArrowIcon, SoonIcon } from "../../../icons";
-import { hexToRGB } from "../../../utils/hexToRGB";
+import { hexToRGB } from "../../../utils";
 
 interface ContentCardProps {
   className?: string;

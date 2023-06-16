@@ -23,7 +23,7 @@ export default function SideProjectsCard({
       >
         <Image
           alt={post.title}
-          src={post.thumbnail && post.thumbnail}
+          src={post.thumbnail ?? ''}
           fill
           priority
           style={{
