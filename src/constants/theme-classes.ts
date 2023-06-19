@@ -6,10 +6,12 @@ export type ThemeClasses = {
     textHighlight: string;
     textHover: string;
     outline: string;
+    beforeBg: string;
   };
   
   export const darkTheme: ThemeClasses = {
     bg: "bg-midnight",
+    beforeBg: "before:bg-midnight",
     bgHover: 'hover:bg-foam',
     color: "text-foam",
     border: "border-foam",
@@ -20,6 +22,7 @@ export type ThemeClasses = {
   
   export const lightTheme: ThemeClasses = {
     bg: "bg-foam",
+    beforeBg: "before:bg-foam",
     bgHover: 'hover:bg-midnight',
     color: "text-midnight",
     border: "border-midnight",
@@ -30,6 +33,7 @@ export type ThemeClasses = {
   
   export const dimTheme: ThemeClasses = {
     bg: "bg-shark",
+    beforeBg: "before:bg-shark",
     bgHover: 'hover:bg-white',
     color: "text-white",
     border: "border-white",

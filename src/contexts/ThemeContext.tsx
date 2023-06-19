@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import {
   ThemeClasses,
   darkTheme,
@@ -27,11 +27,13 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   const [theme, setTheme] = useState<Theme>("light");
   const [themeClasses, setThemeClasses] = useState<ThemeClasses>(darkTheme);
 
-  const themes: Record<Theme, ThemeClasses> = {
-    dark: darkTheme,
-    light: lightTheme,
-    dim: dimTheme,
-  };
+  const themes: Record<Theme, ThemeClasses> = useMemo(() => {
+    return {
+      dark: darkTheme,
+      light: lightTheme,
+      dim: dimTheme,
+    };
+  }, []);
 
   useEffect(() => {
     const prefersDarkTheme = window.matchMedia(
@@ -58,7 +60,7 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
     document.body.setAttribute("data-theme", theme);
 
     setThemeClasses(themes[theme]);
-  }, [theme]);
+  }, [theme, themes]);
 
   const getThemeClasses = (): ThemeClasses => {
     const themeClasses: Record<Theme, ThemeClasses> = {
