@@ -1,8 +1,10 @@
+import cx from "classnames";
 import Link from "next/link";
 import { SideProject } from "../../../types";
 import Image from "next/image";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { RightArrowIcon } from "../../../icons";
+import Button from "../../Button";
 
 interface SideProjectsCardProps {
   className?: string;
@@ -11,50 +13,59 @@ interface SideProjectsCardProps {
 
 export default function SideProjectsCard({
   post,
+  className,
 }: SideProjectsCardProps): JSX.Element {
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
   return (
-    <div
-      className={`${themeClasses.color} flex w-full flex-col gap-12 overflow-clip duration-150 md:flex-row md:items-center`}
+    <Link
+      href={post.website ?? ""}
+      target="_blank"
+      className={cx(
+        "group flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 p-8 duration-150 hover:bg-opacity-5",
+        themeClasses.color,
+        themeClasses.border,
+        themeClasses.bgHover,
+        post.website ?? "pointer-events-none",
+        className
+      )}
     >
-      <div
-        className={`relative flex h-56 w-full shrink-0 items-center justify-center overflow-clip rounded-xl border border-opacity-10 md:w-56 ${themeClasses.border}`}
-      >
+      <div className="flex w-full items-start justify-between">
+        <div className="flex flex-col">
+          <div
+            className={`flex rounded-full ${themeClasses.border} mb-2 w-fit border border-opacity-10 bg-opacity-10 px-2 py-1`}
+          >
+            <span className="text-sm opacity-60">{post.date}</span>
+          </div>
+          <h6 className="text-2xl">{post.title}</h6>
+          <span className="opacity-60">{post.description}</span>
+        </div>
+        {post.website && (
+          <Button.Icon
+            href={post.website}
+            className={cx(
+              "-translate-x-4 translate-y-4 rounded-full bg-white/5 opacity-0 duration-150 hover:bg-opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100",
+              themeClasses.bgHover
+            )}
+            icon={<RightArrowIcon className="h-5 w-5 -rotate-45" />}
+          />
+        )}
+      </div>
+      <div className={`relative flex w-full shrink-0 overflow-clip rounded-xl`}>
         <Image
           alt={post.title}
-          src={post.thumbnail ?? ''}
-          fill
+          src={post.thumbnail ?? ""}
+          width={512}
+          height={512}
           priority
           style={{
-            objectFit: "cover",
+            objectFit: "contain",
           }}
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
         />
       </div>
-      <div className="flex flex-col gap-4 py-4">
-        <div
-          className={`flex rounded-full ${themeClasses.border} w-fit border border-opacity-10  bg-opacity-10 px-2 py-1`}
-        >
-          <span className="text-sm opacity-60">{post.date}</span>
-        </div>
-        <div className="flex flex-col gap-1">
-          <h6 className="text-2xl">{post.title}</h6>
-          <span className="opacity-60">{post.description}</span>
-        </div>
-        {post.website && (
-          <Link
-            href={post.website}
-            target="_blank"
-            className="text-md group flex items-center gap-1 py-2"
-          >
-            Visit
-            <RightArrowIcon className="h-5 w-5 -rotate-45 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1" />
-          </Link>
-        )}
-      </div>
-    </div>
+    </Link>
   );
 }

@@ -77,7 +77,7 @@ export type StaticPage = {
   heroText: string;
   id: string;
   slug: string;
-  extra: string | null
+  extra: string | null;
 };
 
 export type Exploration = {
