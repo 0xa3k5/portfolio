@@ -40,7 +40,7 @@ export default function Home({
       <MainWrapper>
         <Hero.Page page={page} />
         <SectionsWrapper>
-          <SectionTitle title="selected work" href="/works" />
+          <SectionTitle title="selected work" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
               .filter((work) => work.properties.published === true)
@@ -55,11 +55,17 @@ export default function Home({
         </SectionsWrapper>
         <SectionsWrapper>
           <SectionTitle title="on the side" />
-          <div className="flex flex-col gap-12">
+          <div className="grid grid-cols-2 gap-8">
             {sideProjects
               .sort((a: SideProject, b: SideProject) => b.date - a.date)
               .map((p: SideProject) => {
-                return <SideProjectsCard post={p} key={p.id} />;
+                return (
+                  <SideProjectsCard
+                    className="col-span-1"
+                    post={p}
+                    key={p.id}
+                  />
+                );
               })}
           </div>
         </SectionsWrapper>
