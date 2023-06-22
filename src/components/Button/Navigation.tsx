@@ -3,17 +3,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import cx from "classnames";
 import { useTheme } from "../../contexts/ThemeContext";
-import Tooltip from "../Tooltip";
 import { AboutIcon, CVIcon, HomeIcon, FlashIcon, PenIcon } from "../../icons";
 
 interface NavigationProps {
-  href: "/" | "/about" | "/works" | "/explorations" | "/ak-resume.pdf";
+  href: string;
   name: string;
+  className?: string;
 }
 
 export default function Navigation({
   href,
-  name,
+  className,
 }: NavigationProps): JSX.Element {
   const router = useRouter();
   const isActive =
@@ -21,7 +21,6 @@ export default function Navigation({
   const [isHovered, setIsHovered] = useState(false);
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
-
   const isIconFilled = isHovered || isActive;
 
   const handleMouseEnter = () => {
@@ -50,20 +49,17 @@ export default function Navigation({
   return (
     <Link
       href={href.toString()}
-      target={href === "/ak-resume.pdf" ? "_blank" : '_self'}
+      target={href === "/ak-resume.pdf" ? "_blank" : "_self"}
       className={cx(
-        "group relative flex flex-col items-center gap-2 rounded-xl py-2 px-4 duration-150",
+        "group relative flex flex-col items-center gap-2 rounded-xl duration-150",
         isIconFilled ? "text-opacity-100" : "text-opacity-40",
-        themeClasses.color
+        themeClasses.color,
+        className
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {getIcon()}
-      <span className={`block whitespace-nowrap text-xs md:hidden`}>
-        {name}
-      </span>
-      {isHovered && <Tooltip className="hidden md:block" text={name} />}
     </Link>
   );
 }

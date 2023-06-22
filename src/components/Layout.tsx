@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Sidebar from "./Sidebar/Sidebar";
 import { useTheme } from "../contexts/ThemeContext";
 import { Navbar } from "./Navbar";
 import CTA from "./CTA";
@@ -19,19 +18,12 @@ export default function Layout({
 
   return (
     <div
-      className={`${themeClasses.bg} ${themeClasses.color} flex w-full flex-col`}
+      className={`${themeClasses.bg} ${themeClasses.color} flex w-full flex-col items-center`}
     >
-      <div className="flex">
-        <div className="absolute inset-0 z-40 hidden h-screen md:sticky md:block">
-          <Sidebar />
-        </div>
-        <div className="flex-1">
-          <Navbar />
-          <div className="">{children}</div>
-          {isCTAVisible && <CTA />}
-          <Footer />
-        </div>
-      </div>
+      <Navbar />
+      {children}
+      {isCTAVisible && <CTA />}
+      <Footer />
     </div>
   );
 }

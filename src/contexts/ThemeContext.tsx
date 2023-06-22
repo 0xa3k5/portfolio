@@ -10,6 +10,8 @@ import { useContext } from "react";
 export type Theme = "dark" | "light" | "dim";
 
 type ThemeContextType = {
+  volume: boolean;
+  setVolume: React.Dispatch<React.SetStateAction<boolean>>;
   theme: Theme;
   setTheme: (theme: Theme) => void;
   getThemeClasses: () => ThemeClasses;
@@ -26,6 +28,7 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
 }) => {
   const [theme, setTheme] = useState<Theme>("light");
   const [themeClasses, setThemeClasses] = useState<ThemeClasses>(darkTheme);
+  const [volume, setVolume] = useState(true);
 
   const themes: Record<Theme, ThemeClasses> = useMemo(() => {
     return {
@@ -76,9 +79,11 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   };
 
   const contextValue: ThemeContextType = {
+    volume,
     theme,
     setTheme: handleSetTheme,
     getThemeClasses,
+    setVolume,
   };
 
   return (
