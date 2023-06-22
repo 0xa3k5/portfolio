@@ -4,7 +4,6 @@ import { SideProject } from "../../../types";
 import Image from "next/image";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { RightArrowIcon } from "../../../icons";
-import Button from "../../Button";
 
 interface SideProjectsCardProps {
   className?: string;
@@ -41,14 +40,16 @@ export default function SideProjectsCard({
           <span className="opacity-60">{post.description}</span>
         </div>
         {post.website && (
-          <Button.Icon
-            href={post.website}
+          <Link
             className={cx(
-              "-translate-x-4 translate-y-4 rounded-full bg-white/5 opacity-0 duration-150 hover:bg-opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100",
+              "flex -translate-x-4 translate-y-4 rounded-full bg-white/5 p-2 opacity-0 duration-150 hover:bg-opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100",
               themeClasses.bgHover
             )}
-            icon={<RightArrowIcon className="h-5 w-5 -rotate-45" />}
-          />
+            href={post.website}
+            target="_blank"
+          >
+            <RightArrowIcon className="h-5 w-5 -rotate-45" />
+          </Link>
         )}
       </div>
       <div className={`relative flex w-full shrink-0 overflow-clip rounded-xl`}>
