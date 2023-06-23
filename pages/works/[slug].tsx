@@ -8,7 +8,7 @@ import MorePosts from "../../src/components/MorePosts";
 import { NotionPost, Feedback } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
 import { motion } from "framer-motion";
-import { motionVariants } from "../../src/constants/motionVariants";
+import { motionVariants } from "../../src/constants/motion-variants";
 import { useRouter } from "next/router";
 import Login from "../../src/components/Form/Login";
 import { useSession } from "next-auth/react";
@@ -63,7 +63,7 @@ export default function Detail({
           animate="enter"
           exit="exit"
           transition={{ type: "linear" }}
-          className="flex flex-col items-center"
+          className="flex flex-col w-full items-center"
         >
           <Hero.Post post={post} className="w-full" />
           <div className="flex w-full max-w-5xl flex-col items-center gap-24 py-24 px-4 2xl:max-w-6xl">
