@@ -40,7 +40,7 @@ export default function HireButton(): JSX.Element {
 
   return (
     <div className="group flex w-full rounded-full justify-center md:w-fit">
-      <Link href="/hire-me" ref={buttonRef}>
+      <Link className="" href="/hire-me" ref={buttonRef}>
         <motion.div
           className="hire-me-button relative flex h-16 w-56 items-center justify-center rounded-full"
           style={{
@@ -54,7 +54,7 @@ export default function HireButton(): JSX.Element {
             }}
           >
             <motion.div
-              className={`hire-me-button-content group-hover:after:animate-none group-hover:after:opacity-0 ${themeClasses.beforeBg}`}
+              className={`hire-me-button-content group-hover:after:opacity-60 duration-200 ${themeClasses.beforeBg}`}
             />
 
             <span>Why Hire Me</span>
