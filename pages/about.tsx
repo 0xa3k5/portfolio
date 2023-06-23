@@ -14,6 +14,7 @@ import Button from "../src/components/Button";
 import { PaperPlaneIcon } from "../src/icons";
 import cx from "classnames";
 import Layout from "../src/components/Layout";
+import { SOCIAL_LINKS } from "../src/constants/social-links";
 
 interface AboutProps {
   page: StaticPage;
@@ -53,12 +54,12 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
                 text="hey@akml.io"
                 icon={<PaperPlaneIcon className="h-5 w-5" />}
               />
-              <div className="flex justify-between gap-4">
-                <Button.Social type="figma" />
-                <Button.Social type="github" />
-                <Button.Social type="linkedin" />
-                <Button.Social type="twitter" />
-                <Button.Social type="dribbble" />
+              <div
+                className={`${themeClasses.color} flex w-full justify-between sm:justify-end`}
+              >
+                {SOCIAL_LINKS.map((s) => {
+                  return <Button.Icon key={s.id}>{s.icon}</Button.Icon>;
+                })}
               </div>
             </div>
           </div>
