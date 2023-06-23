@@ -22,8 +22,9 @@ export default function Icon({
 
   return (
     <button
+      type="button"
       className={cx(
-        "p-4 relative flex flex-col items-center gap-2 rounded-xl duration-150",
+        "relative flex flex-col items-center gap-2 rounded-xl p-4 duration-150",
         isActive || isHover ? "text-opacity-100" : "text-opacity-40",
         "hover:scale-95 active:scale-[.8]",
         themeClasses.color,
