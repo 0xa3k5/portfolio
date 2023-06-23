@@ -15,9 +15,10 @@ import { useSession } from "next-auth/react";
 import Hero from "../../src/components/Hero";
 import { useTheme } from "../../src/contexts/ThemeContext";
 import Layout from "../../src/components/Layout";
+import { MdStringObject } from "notion-to-md/build/types";
 
 interface DetailProps {
-  markdown: string;
+  markdown: MdStringObject;
   post: NotionPost;
   morePosts: NotionPost[];
   feedbacks: Feedback[];
@@ -39,6 +40,9 @@ export default function Detail({
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
+  {
+    console.log(markdown);
+  }
 
   return (
     <Layout>
@@ -63,7 +67,7 @@ export default function Detail({
           animate="enter"
           exit="exit"
           transition={{ type: "linear" }}
-          className="flex flex-col w-full items-center"
+          className="flex w-full flex-col items-center"
         >
           <Hero.Post post={post} className="w-full" />
           <div className="flex w-full max-w-5xl flex-col items-center gap-24 py-24 px-4 2xl:max-w-6xl">
@@ -75,7 +79,7 @@ export default function Detail({
                 themeClasses.textHighlight
               } prose prose-xl prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug prose-p:tracking-wide   prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl 2xl:prose-2xl`}
             >
-              <ReactMarkdown>{markdown}</ReactMarkdown>
+              <ReactMarkdown>{markdown["parent"]}</ReactMarkdown>
             </article>
             {postFeedbacks.length > 0 && (
               <FeedbackCard.Grouped

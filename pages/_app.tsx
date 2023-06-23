@@ -12,8 +12,8 @@ function MyApp({
 }: AppProps) {
   const url = `https://akml.io${router.route}`;
   return (
-    <SessionProvider session={session}>
-      <ThemeContextProvider>
+    <ThemeContextProvider>
+      <SessionProvider session={session}>
         <AnimatePresence
           mode="wait"
           initial={false}
@@ -21,9 +21,9 @@ function MyApp({
         >
           <Component {...pageProps} canonical={url} key={url} />
         </AnimatePresence>
-      </ThemeContextProvider>
-      <Analytics />
-    </SessionProvider>
+        <Analytics />
+      </SessionProvider>
+    </ThemeContextProvider>
   );
 }
 
