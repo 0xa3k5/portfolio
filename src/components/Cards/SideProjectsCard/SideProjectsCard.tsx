@@ -40,16 +40,14 @@ export default function SideProjectsCard({
           <span className="opacity-60">{post.description}</span>
         </div>
         {post.website && (
-          <Link
+          <div
             className={cx(
               "flex -translate-x-4 translate-y-4 rounded-full bg-white/5 p-2 opacity-0 duration-150 hover:bg-opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100",
               themeClasses.bgHover
             )}
-            href={post.website}
-            target="_blank"
           >
             <RightArrowIcon className="h-5 w-5 -rotate-45" />
-          </Link>
+          </div>
         )}
       </div>
       <div className={`relative flex w-full shrink-0 overflow-clip rounded-xl`}>
