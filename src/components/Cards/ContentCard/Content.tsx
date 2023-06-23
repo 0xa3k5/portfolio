@@ -51,7 +51,11 @@ export default function ContentCard({
               src={post.org.logo}
               alt={`${post.org.orgName} Logo`}
               fill
-              style={{ objectFit: "contain", objectPosition: "left" }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{
+                objectFit: "contain",
+                objectPosition: "left",
+              }}
             />
           </div>
         )}
