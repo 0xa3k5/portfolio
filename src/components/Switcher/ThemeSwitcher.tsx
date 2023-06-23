@@ -1,34 +1,27 @@
-import cx from "classnames";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MoonIcon, SunIcon } from "../../icons";
 import useSound from "use-sound";
+import Button from "../Button";
 
-interface ThemeSwitcherProps {
-  className?: string;
-}
-
-export default function ThemeSwitcher({ className }: ThemeSwitcherProps) {
-  const { theme, setTheme, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+export default function ThemeSwitcher() {
+  const { volume, theme, setTheme } = useTheme();
   const [play] = useSound(
-    theme === "dark" ? "/sounds/switch-on.mp3" : "/sounds/switch-off.mp3"
+    theme === "dark" ? "/sounds/switch-on.mp3" : "/sounds/switch-off.mp3",
+    { volume: 0.5 }
   );
 
   const handleThemeSwitch = () => {
-    play();
     setTheme(theme === "dark" ? "light" : "dark");
+    volume && play();
   };
 
   return (
-    <button
-      className={cx(
-        "group relative flex flex-col items-center gap-2 rounded-xl duration-150",
-        themeClasses.color,
-        className
+    <Button.Icon isActive onClick={handleThemeSwitch}>
+      {theme === "dark" ? (
+        <MoonIcon filled className="h-6 w-6" />
+      ) : (
+        <SunIcon filled className="h-6 w-6" />
       )}
-      onClick={handleThemeSwitch}
-    >
-      {theme === "dark" ? <MoonIcon filled /> : <SunIcon filled />}
-    </button>
+    </Button.Icon>
   );
 }
