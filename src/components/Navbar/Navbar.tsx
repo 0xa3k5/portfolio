@@ -4,46 +4,16 @@ import { useTheme } from "../../contexts/ThemeContext";
 import ThemeSwitcher from "../Switcher/ThemeSwitcher";
 import useThemeRGBColors from "../../hooks/useThemeRGBColors";
 import VolumeSwitcher from "../Switcher/VolumeSwitcher";
-
-type Route = {
-  id: number;
-  href: string;
-  name: string;
-  tx: string;
-};
-
-const routes: Route[] = [
-  {
-    id: 0,
-    href: "/",
-    name: "Home",
-    tx: "translate-x-0",
-  },
-  {
-    id: 1,
-    href: "/about",
-    name: "About",
-    tx: "translate-x-16",
-  },
-  {
-    id: 2,
-    href: "/works",
-    name: "Works",
-    tx: "translate-x-32",
-  },
-  {
-    id: 3,
-    href: "/ak-resume.pdf",
-    name: "Resume",
-    tx: "translate-x-48",
-  },
-];
+import Link from "next/link";
+import { HomeIcon, AboutIcon, PenIcon, CVIcon, TestIcon } from "../../icons";
+import { useRouter } from "next/router";
+import { Route, ROUTES } from "../../constants/routes";
 
 export default function Navbar(): JSX.Element {
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
   const { inversedRGBColors } = useThemeRGBColors();
-
+  const router = useRouter();
   return (
     <div
       className={cx(
@@ -52,31 +22,51 @@ export default function Navbar(): JSX.Element {
     >
       <nav
         className={cx(
-          "flex h-fit w-full items-center justify-between overflow-hidden border border-opacity-10 bg-opacity-80 px-12 py-6 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl sm:px-8",
+          "flex h-fit w-full items-center justify-between overflow-hidden border border-opacity-10 bg-opacity-80 px-4 py-2 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl",
           themeClasses.border,
           themeClasses.bg
         )}
       >
-        {routes.map((r, i) => {
+        {ROUTES.map((r, i) => {
+          const isActive =
+            router.pathname === r.href ||
+            router.pathname.startsWith(r.href + "/");
           return (
-            <Button.Navigation
-              className="px-4"
-              key={i}
+            <Link
               href={r.href}
-              name={r.name}
-            />
+              key={i}
+              target={r.href === "/ak-resume.pdf" ? "_blank" : "_self"}
+            >
+              <Button.Icon isActive={isActive}>
+                {getRouteIcon(r.href, isActive)}
+              </Button.Icon>
+            </Link>
           );
         })}
-
         <div
           className="relative mx-3 h-8 w-[1px] rounded-full"
           style={{
             backgroundColor: `rgba(${inversedRGBColors.background},.2)`,
           }}
         />
-        <ThemeSwitcher className="px-4" />
-        <VolumeSwitcher className="px-4" />
+        <ThemeSwitcher />
+        <VolumeSwitcher />
       </nav>
     </div>
   );
 }
+
+const getRouteIcon = (href: Route["href"], isActive: boolean) => {
+  switch (href) {
+    case "/":
+      return <HomeIcon filled={isActive} className="h-6 w-6" />;
+    case "/about":
+      return <AboutIcon filled={isActive} className="h-6 w-6" />;
+    case "/works":
+      return <PenIcon filled={isActive} className="h-6 w-6" />;
+    case "/ak-resume.pdf":
+      return <CVIcon filled={isActive} className="h-6 w-6" />;
+    default:
+      return <TestIcon filled={isActive} className="h-6 w-6" />;
+  }
+};

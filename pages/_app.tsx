@@ -20,9 +20,9 @@ function MyApp({
           onExitComplete={() => window.scrollTo(0, 0)}
         >
           <Component {...pageProps} canonical={url} key={url} />
-          <Analytics />
         </AnimatePresence>
       </ThemeContextProvider>
+      <Analytics />
     </SessionProvider>
   );
 }

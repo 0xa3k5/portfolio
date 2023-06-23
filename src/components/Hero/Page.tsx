@@ -1,8 +1,7 @@
 import { StaticPage } from "../../types";
 import Button from "../Button";
-
-// import { PaperPlaneIcon } from "../../icons";
 import { useTheme } from "../../contexts/ThemeContext";
+import { SOCIAL_LINKS } from "../../constants/social-links";
 interface PageProps {
   page: StaticPage;
 }
@@ -19,16 +18,14 @@ export default function Page({ page }: PageProps): JSX.Element {
         </h1>
         <p className="text-xl font-light opacity-70">{page.heroText}</p>
       </div>
-      <div className="flex mt-4 flex-col items-center justify-between gap-4 sm:flex-row">
+      <div className="mt-4 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <Button.HireButton />
         <div
-          className={`${themeClasses.color} flex w-full justify-between gap-4 sm:justify-end`}
+          className={`${themeClasses.color} flex w-full justify-between sm:justify-end`}
         >
-          <Button.Social type="figma" />
-          <Button.Social type="github" />
-          <Button.Social type="linkedin" />
-          <Button.Social type="twitter" />
-          <Button.Social type="dribbble" />
+          {SOCIAL_LINKS.map((s) => {
+            return <Button.Icon key={s.id}>{s.icon}</Button.Icon>;
+          })}
         </div>
       </div>
     </div>
