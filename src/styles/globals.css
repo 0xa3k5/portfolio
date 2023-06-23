@@ -22,8 +22,8 @@
 }
 
 :root {
-  --bg-color: #06060B;
-  --text-color: #F4F6FF;
+  --bg-color: #06060b;
+  --text-color: #f4f6ff;
   --mouse-x: 0;
   --mouse-y: 0;
 }
@@ -33,18 +33,18 @@ body {
   color: var(--text-color);
 }
 [data-theme="dark"] {
-  --bg-color: #06060B;
-  --text-color: #F4F6FF;
+  --bg-color: #06060b;
+  --text-color: #f4f6ff;
 }
 
 [data-theme="light"] {
-  --bg-color: #F4F6FF;
-  --text-color: #06060B;
+  --bg-color: #f4f6ff;
+  --text-color: #06060b;
 }
 
 [data-theme="dim"] {
-  --bg-color: #1A1B1F;
-  --text-color: #F4F6FF;
+  --bg-color: #1a1b1f;
+  --text-color: #f4f6ff;
 }
 
 @property --rotate {
@@ -53,25 +53,24 @@ body {
   inherits: false;
 }
 
-
 .with-prose {
-  @apply prose-xl
-    prose
+  @apply prose
+    prose-xl
     prose-invert
     prose-headings:font-vollkorn
     prose-headings:font-semibold
     prose-h1:text-3xl
-    md:prose-h1:text-5xl
     prose-h3:font-normal
     prose-p:font-light
     prose-p:leading-snug
     prose-p:tracking-wide
     prose-a:text-daisy
-    prose-a:duration-150 
-    prose-ul:font-light
+    prose-a:duration-150
+    prose-ul:font-light 
     prose-ul:tracking-wider
     prose-img:rounded-xl
-    2xl:prose-2xl
+    md:prose-h1:text-5xl
+    2xl:prose-2xl;
 }
 
 @layer utilities {
@@ -85,24 +84,23 @@ body {
     left: 0px;
     top: 0px;
   }
-  
-  
+
   .hire-me-button::before {
     background: radial-gradient(
-      90px circle at var(--mouse-x) var(--mouse-y), 
+      90px circle at var(--mouse-x) var(--mouse-y),
       rgba(255, 0, 195, 0.2),
       transparent 100%
     );
     border-radius: inherit;
     content: "";
     position: absolute;
-    
+
     z-index: 3;
   }
-  
+
   .hire-me-button::after {
     background-image: radial-gradient(
-      40px circle at var(--mouse-x) var(--mouse-y), 
+      40px circle at var(--mouse-x) var(--mouse-y),
       rgba(255, 0, 195),
       transparent 100%
     );
@@ -111,7 +109,7 @@ body {
 
   .hire-me-button-content::before,
   .hire-me-button-content::after {
-    content: '';
+    content: "";
     position: absolute;
     border-radius: 99999999px;
   }
@@ -125,18 +123,16 @@ body {
   }
 
   .hire-me-button-content::after {
-    top: -1%;
-    left: -1%;
-    width: 102%;
-    height: 102%;
-    background-image: linear-gradient(
-    var(--rotate),
-    var(--bg-color) 0 60%, #ff00e1 50% 10%, var(--bg-color) 90% 100%);
+    top: 20%;
+    left: 0%;
+    height: 60%;
+    width: 100%;
+    filter: blur(30px);
+    background-image: linear-gradient(var(--rotate), #ff00e1, #eb7f0ca0, #6600ff);
     animation: spin 3s linear infinite;
     z-index: -11;
     transition: all 0.2s;
   }
-
 }
 
 @keyframes spin {
@@ -147,3 +143,4 @@ body {
     --rotate: 360deg;
   }
 }
+
