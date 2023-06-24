@@ -9,7 +9,6 @@ export default function HireButton(): JSX.Element {
   const { themeRGBColors, inversedRGBColors } = useThemeRGBColors();
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
-
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -39,7 +38,7 @@ export default function HireButton(): JSX.Element {
   }, [buttonRef, mousePosition]);
 
   return (
-    <div className="group flex w-full rounded-full justify-center md:w-fit">
+    <div className="group flex w-full justify-center rounded-full md:w-fit">
       <Link className="" href="/hire-me" ref={buttonRef}>
         <motion.div
           className="hire-me-button relative flex h-16 w-56 items-center justify-center rounded-full"
@@ -54,7 +53,7 @@ export default function HireButton(): JSX.Element {
             }}
           >
             <motion.div
-              className={`hire-me-button-content group-hover:after:opacity-60 duration-200 ${themeClasses.beforeBg}`}
+              className={`hire-me-button-content duration-200 group-hover:after:opacity-60 ${themeClasses.beforeBg}`}
             />
 
             <span>Why Hire Me</span>
