@@ -5,6 +5,8 @@ import Image from "next/image";
 import { NotionPost } from "../../../types";
 import { LockIcon, RightArrowIcon, SoonIcon } from "../../../icons";
 import { hexToRGB } from "../../../utils";
+import useSound from "use-sound";
+import { useButtonHoverSound } from "../../../hooks/useButtonHoverSound";
 
 interface ContentCardProps {
   className?: string;
@@ -29,6 +31,18 @@ export default function ContentCard({
   className,
 }: ContentCardProps): JSX.Element {
   const [hover, setHover] = useState(false);
+  const { playSound } = useButtonHoverSound();
+
+  const handleBtnMouseEnter = () => {
+    () => setHover(true);
+    if (!post.properties.password) {
+      playSound();
+    }
+  };
+
+  const handleBtnMouseLeave = () => {
+    () => setHover(false);
+  };
 
   return (
     <div
@@ -67,8 +81,8 @@ export default function ContentCard({
         </div>
         <Link
           href={`/works/${post.properties.slug}`}
-          onMouseEnter={() => setHover(!hover)}
-          onMouseLeave={() => setHover(!hover)}
+          onMouseEnter={handleBtnMouseEnter}
+          onMouseLeave={handleBtnMouseLeave}
           className={`group flex w-fit items-center gap-2 rounded-xl py-4 pl-4 pr-6 duration-150 ${
             post.properties.published ? null : "pointer-events-none"
           }`}

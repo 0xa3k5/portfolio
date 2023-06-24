@@ -2,6 +2,7 @@ import cx from "classnames";
 import { useTheme } from "../../contexts/ThemeContext";
 import { PropsWithChildren, useState } from "react";
 import useThemeRGBColors from "../../hooks/useThemeRGBColors";
+import { useButtonHoverSound } from "../../hooks/useButtonHoverSound";
 
 interface IconProps {
   isActive?: boolean;
@@ -20,6 +21,17 @@ export default function Icon({
   const { inversedRGBColors } = useThemeRGBColors();
   const [isHover, setIsHover] = useState(false);
 
+  const { playSound } = useButtonHoverSound();
+
+  const handleBtnMouseEnter = () => {
+    setIsHover(true);
+    playSound();
+  };
+
+  const handleBtnMouseLeave = () => {
+    setIsHover(false);
+  };
+
   return (
     <button
       type="button"
@@ -36,8 +48,8 @@ export default function Icon({
           ? `rgba(${inversedRGBColors.background},0.1)`
           : `rgba(${inversedRGBColors.background},0)`,
       }}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      onMouseEnter={handleBtnMouseEnter}
+      onMouseLeave={handleBtnMouseLeave}
       onClick={onClick}
     >
       {children}
