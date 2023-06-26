@@ -1,7 +1,7 @@
+import "../src/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
-import "../src/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeContextProvider } from "../src/contexts/ThemeContext";
 

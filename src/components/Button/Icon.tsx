@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { useTheme } from "../../contexts/ThemeContext";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import useThemeRGBColors from "../../hooks/useThemeRGBColors";
 import { useButtonHoverSound } from "../../hooks/useButtonHoverSound";
 
@@ -8,6 +8,7 @@ interface IconProps {
   isActive?: boolean;
   className?: string;
   onClick?: () => void;
+  circle?: boolean;
 }
 
 export default function Icon({
@@ -15,6 +16,7 @@ export default function Icon({
   className,
   children,
   onClick,
+  circle,
 }: PropsWithChildren<IconProps>): JSX.Element {
   const { getThemeClasses } = useTheme();
   const themeClasses = getThemeClasses();
@@ -23,24 +25,19 @@ export default function Icon({
 
   const { playSound } = useButtonHoverSound();
 
-  const handleBtnMouseEnter = () => {
-    setIsHover(true);
-    playSound();
-  };
-
-  const handleBtnMouseLeave = () => {
-    setIsHover(false);
-  };
+  useEffect(() => {
+    isHover && playSound();
+  }, [isHover]);
 
   return (
     <button
       type="button"
       className={cx(
-        "relative flex flex-col items-center gap-2 rounded-xl p-4 duration-150",
+        "group relative flex flex-col items-center gap-2 p-4 duration-150",
         isActive || isHover ? "text-opacity-100" : "text-opacity-40",
         "hover:scale-95 active:scale-[.8]",
         themeClasses.color,
-        "",
+        circle ? "rounded-full" : "rounded-xl",
         className
       )}
       style={{
@@ -48,8 +45,8 @@ export default function Icon({
           ? `rgba(${inversedRGBColors.background},0.1)`
           : `rgba(${inversedRGBColors.background},0)`,
       }}
-      onMouseEnter={handleBtnMouseEnter}
-      onMouseLeave={handleBtnMouseLeave}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
       onClick={onClick}
     >
       {children}
