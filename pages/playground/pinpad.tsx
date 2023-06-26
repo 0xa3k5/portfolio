@@ -23,16 +23,26 @@ export default function Pinpad(): JSX.Element {
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]
   );
 
+  const inputSequence = inputValue.split("").map(Number);
+
   const [play] = useSound("/sounds/pinpad/pinpad.mp3", {
     sprite: PINPAD_CONSTANTS.SPRITE_DEFINITIONS,
     ...PINPAD_CONSTANTS.SOUND_OPTIONS,
   });
+  const [playSuccess] = useSound(
+    "/sounds/pinpad/harp-flourish.mp3",
+    PINPAD_CONSTANTS.SOUND_OPTIONS
+  );
+  const [playError] = useSound(
+    "/sounds/pinpad/car-exploded.mp3",
+    PINPAD_CONSTANTS.SOUND_OPTIONS
+  );
 
   const playSequence = useCallback(
-    (sequence: number[], speed?: number) => {
+    (sequence: number[], speed?: number, pinSubmitted?: boolean) => {
       sequence.forEach((soundIndex, i) => {
         setTimeout(() => {
-          PINPAD_CONSTANTS.GAME_CONFIG[currentLevel].canCue &&
+          (PINPAD_CONSTANTS.GAME_CONFIG[currentLevel].canCue || pinSubmitted) &&
             brieflyHighlightAKey(String(soundIndex));
           volume && play({ id: String(soundIndex) });
         }, i * (speed ?? PINPAD_CONSTANTS.DELAY_BETWEEN_SOUNDS));
@@ -99,14 +109,23 @@ export default function Pinpad(): JSX.Element {
 
       const handleEnter = () => {
         brieflyHighlightAKey("↲");
-        !isPinpadKeyDisabled("↲") &&
-          playSequence(inputValue.split("").map(Number), 200);
+
+        const handlePinSubmit = (sound: () => void) => {
+          playSequence(inputSequence, 200, true);
+          setTimeout(sound, inputValue.length * 200);
+        };
+
+        if (!isPinpadKeyDisabled("↲")) {
+          const isSuccess = inputSequence.every(
+            (digit, index) => digit === sequence[index]
+          );
+          handlePinSubmit(isSuccess ? playSuccess : playError);
+        }
       };
 
       const handlePinEnter = (key: string) => {
         if (/^[0-9]$/.test(key) && !isPinpadKeyDisabled(key)) {
           volume && play({ id: key });
-          console.log(`${key} is TRUE`);
           if (inputValue.length < PINPAD_CONSTANTS.MAX_INPUT_LENGTH) {
             setInputValue((prevValue) => prevValue + key);
           }
@@ -125,14 +144,21 @@ export default function Pinpad(): JSX.Element {
           break;
         default:
           handlePinEnter(key);
-          setHoveredBtn(key);
-          setTimeout(() => {
-            setHoveredBtn(null);
-          }, 150);
+          brieflyHighlightAKey(key);
           break;
       }
     },
-    [play, inputValue, volume, playSequence, isPinpadKeyDisabled]
+    [
+      play,
+      inputValue,
+      volume,
+      playSequence,
+      isPinpadKeyDisabled,
+      sequence,
+      inputSequence,
+      playSuccess,
+      playError,
+    ]
   );
 
   useEffect(() => {
@@ -147,7 +173,7 @@ export default function Pinpad(): JSX.Element {
 
   const handleInputListen = () => {
     if (gameConfig.canListen) {
-      playSequence(inputValue.split("").map(Number));
+      playSequence(inputSequence);
     }
   };
 
