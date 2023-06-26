@@ -21,6 +21,18 @@
   }
 }
 
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+  }
+}
+
 :root {
   --bg-color: #06060b;
   --text-color: #f4f6ff;
