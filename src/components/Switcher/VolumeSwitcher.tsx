@@ -16,7 +16,7 @@ export default function VolumeSwitcher() {
   };
 
   return (
-    <Button.Icon isActive onClick={handleVolumeSwitch}>
+    <Button.Icon key={"volumeBtn"} isActive onClick={handleVolumeSwitch}>
       {volume ? <VolumeOn filled /> : <VolumeOff filled />}
     </Button.Icon>
   );

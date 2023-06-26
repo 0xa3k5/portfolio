@@ -4,6 +4,7 @@ import { SideProject } from "../../../types";
 import Image from "next/image";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { RightArrowIcon } from "../../../icons";
+import Button from "../../Button";
 
 interface SideProjectsCardProps {
   className?: string;
@@ -21,7 +22,7 @@ export default function SideProjectsCard({
       href={post.website ?? ""}
       target="_blank"
       className={cx(
-        "group flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 p-8 duration-150 hover:bg-opacity-5",
+        "flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 p-8 duration-150 hover:bg-opacity-5",
         themeClasses.color,
         themeClasses.border,
         themeClasses.bgHover,
@@ -40,14 +41,9 @@ export default function SideProjectsCard({
           <span className="opacity-60">{post.description}</span>
         </div>
         {post.website && (
-          <div
-            className={cx(
-              "flex -translate-x-4 translate-y-4 rounded-full bg-white/5 p-2 opacity-0 duration-150 hover:bg-opacity-10 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100",
-              themeClasses.bgHover
-            )}
-          >
-            <RightArrowIcon className="h-5 w-5 -rotate-45" />
-          </div>
+          <Button.Icon circle>
+            <RightArrowIcon className="h-6 w-6 -rotate-45 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1" />
+          </Button.Icon>
         )}
       </div>
       <div className={`relative flex w-full shrink-0 overflow-clip rounded-xl`}>

@@ -40,9 +40,6 @@ export default function Detail({
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
   );
-  {
-    console.log(markdown);
-  }
 
   return (
     <Layout>
