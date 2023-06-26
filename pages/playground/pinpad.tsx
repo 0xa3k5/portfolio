@@ -68,12 +68,12 @@ export default function Pinpad(): JSX.Element {
       switch (value) {
         case "X":
           return inputValue.length === 0;
-        case "↲":
+        case "Enter":
           return inputValue.length !== PINPAD_CONSTANTS.MAX_INPUT_LENGTH;
         default:
           return (
             value !== "X" &&
-            value !== "↲" &&
+            value !== "Enter" &&
             inputValue.length === PINPAD_CONSTANTS.MAX_INPUT_LENGTH
           );
       }
@@ -108,14 +108,14 @@ export default function Pinpad(): JSX.Element {
       };
 
       const handleEnter = () => {
-        brieflyHighlightAKey("↲");
+        brieflyHighlightAKey("Enter");
 
         const handlePinSubmit = (sound: () => void) => {
-          playSequence(inputSequence, 200, true);
+          playSequence(inputSequence, { speed: 200, forceHighlight: true });
           setTimeout(sound, inputValue.length * 200);
         };
 
-        if (!isPinpadKeyDisabled("↲")) {
+        if (!isPinpadKeyDisabled("Enter")) {
           const isSuccess = inputSequence.every(
             (digit, index) => digit === sequence[index]
           );
@@ -138,7 +138,6 @@ export default function Pinpad(): JSX.Element {
         case "Delete":
           handleDelete();
           break;
-        case "↲":
         case "Enter":
           handleEnter();
           break;

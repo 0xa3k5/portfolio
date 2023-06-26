@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { CrossRect } from "../../../icons";
+import { CrossRect, EnterRect } from "../../../icons";
 import { useTheme } from "../../../contexts/ThemeContext";
 import PINPAD_CONSTANTS from "../../../constants/playground/pinpad-constants";
 
@@ -26,7 +26,7 @@ const PinpadButton: React.FC<PinpadButtonProps> = ({
   const { theme } = useTheme();
   const keyMappings: { [key: string]: string | React.ReactNode } = {
     X: <CrossRect />,
-    Enter: "↲",
+    Enter: <EnterRect />,
   };
 
   const child = keyMappings[value] || value;
