@@ -16,7 +16,7 @@ export default function Pinpad(): JSX.Element {
   const themeClasses = getThemeClasses();
 
   const [inputValue, setInputValue] = useState("");
-  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("hard");
+  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>('normal');
   const [hoveredBtn, setHoveredBtn] = useState("");
   const [gameConfig, setGameConfig] = useState(
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]

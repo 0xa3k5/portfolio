@@ -60,7 +60,7 @@ export default function PinpadLevelSelector({
   }, [setCurrentLevel, volume, play]);
 
   return (
-    <div className="flex overflow-x-scroll no-scrollbar w-full items-start gap-4 divide-x font-mono">
+    <div className="flex overflow-x-scroll justify-center no-scrollbar w-full items-start gap-4 divide-x font-mono">
       {PINPAD_CONSTANTS.GAME_LEVELS.map((lvl, i) => {
         const isCurrentLevel = lvl === currentLevel;
         const isHoveredLevel = hoveredLevel === lvl;
