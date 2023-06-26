@@ -7,7 +7,7 @@ export default function ThemeSwitcher() {
   const { volume, theme, setTheme } = useTheme();
   const [play] = useSound(
     theme === "dark" ? "/sounds/switch-on.mp3" : "/sounds/switch-off.mp3",
-    { volume: 0.5 }
+    { volume: 0.2 }
   );
 
   const handleThemeSwitch = () => {

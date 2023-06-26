@@ -60,7 +60,7 @@ const GAME_CONFIG: {
     canHoverPlay: true,
     canListen: true,
     canReplay: true,
-    canCue: true,
+    canCue: false,
   },
   hard: {
     canHoverPlay: true,

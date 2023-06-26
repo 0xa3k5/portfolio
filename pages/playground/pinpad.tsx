@@ -16,11 +16,16 @@ export default function Pinpad(): JSX.Element {
   const themeClasses = getThemeClasses();
 
   const [inputValue, setInputValue] = useState("");
-  const [sequence, setSequence] = useState<number[]>([]);
   const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("hard");
   const [hoveredBtn, setHoveredBtn] = useState("");
   const [gameConfig, setGameConfig] = useState(
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]
+  );
+  const [isListenButtonDisabled, setIsListenButtonDisabled] = useState(false);
+  const [sequence, setSequence] = useState(
+    Array.from({ length: PINPAD_CONSTANTS.MAX_INPUT_LENGTH }, () =>
+      Math.floor(Math.random() * 10)
+    )
   );
 
   const inputSequence = inputValue.split("").map(Number);
@@ -39,16 +44,23 @@ export default function Pinpad(): JSX.Element {
   );
 
   const playSequence = useCallback(
-    (sequence: number[], speed?: number, pinSubmitted?: boolean) => {
+    (
+      sequence: number[],
+      options?: {
+        speed?: number;
+        forceHighlight?: boolean;
+      }
+    ) => {
       sequence.forEach((soundIndex, i) => {
         setTimeout(() => {
-          (PINPAD_CONSTANTS.GAME_CONFIG[currentLevel].canCue || pinSubmitted) &&
+          (PINPAD_CONSTANTS.GAME_CONFIG[currentLevel].canCue ||
+            options?.forceHighlight) &&
             brieflyHighlightAKey(String(soundIndex));
           volume && play({ id: String(soundIndex) });
-        }, i * (speed ?? PINPAD_CONSTANTS.DELAY_BETWEEN_SOUNDS));
+        }, i * (options?.speed ?? PINPAD_CONSTANTS.DELAY_BETWEEN_SOUNDS));
       });
     },
-    [play, currentLevel, volume]
+    [currentLevel, volume, play]
   );
 
   const isPinpadKeyDisabled = useCallback(
@@ -70,25 +82,13 @@ export default function Pinpad(): JSX.Element {
   );
 
   const handleReplay = () => {
-    setGameConfig({ canReplay: false, ...gameConfig });
     playSequence(sequence);
-    setTimeout(() => {
-      setGameConfig({ canReplay: true, ...gameConfig });
-    }, PINPAD_CONSTANTS.SPRITE_TOTAL_DURATION);
+    setIsListenButtonDisabled(!gameConfig.canReplay);
   };
 
   useEffect(() => {
     setGameConfig(PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]);
   }, [currentLevel]);
-
-  useEffect(() => {
-    setSequence(
-      Array.from({ length: PINPAD_CONSTANTS.MAX_INPUT_LENGTH }, () =>
-        Math.floor(Math.random() * 10)
-      )
-    );
-    playSequence(sequence);
-  }, []);
 
   const handlePinpadMouseEnter = (key: string) => {
     setHoveredBtn(key);
@@ -173,7 +173,7 @@ export default function Pinpad(): JSX.Element {
 
   const handleInputListen = () => {
     if (gameConfig.canListen) {
-      playSequence(inputSequence);
+      playSequence(inputSequence, { forceHighlight: true });
     }
   };
 
@@ -195,7 +195,7 @@ export default function Pinpad(): JSX.Element {
           </h6>
           <PinpadListenButton
             onClick={handleReplay}
-            canReplay={gameConfig.canReplay}
+            disabled={isListenButtonDisabled}
           />
           <PinpadInput
             onClick={handleInputListen}
@@ -221,6 +221,10 @@ export default function Pinpad(): JSX.Element {
             </div>
           ))}
         </div>
+        <span className="max-w-sm font-mono text-sm opacity-40">
+          I implement stupid little ideas like this. Sometimes to learn stuff,
+          mostly to have fun.
+        </span>
       </div>
     </Layout>
   );

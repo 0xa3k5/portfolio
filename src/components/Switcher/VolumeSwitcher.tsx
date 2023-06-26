@@ -7,7 +7,7 @@ export default function VolumeSwitcher() {
   const { volume, setVolume } = useTheme();
   const [play] = useSound(
     volume ? "/sounds/dial-down.mp3" : "/sounds/dial-up.mp3",
-    { volume: 0.5 }
+    { volume: 0.2 }
   );
 
   const handleVolumeSwitch = () => {
