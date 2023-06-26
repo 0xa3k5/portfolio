@@ -178,14 +178,14 @@ export default function Pinpad(): JSX.Element {
 
   return (
     <Layout hideCTA>
-      <div className="container flex min-h-screen flex-col items-center gap-16 pt-24 font-monomaniac md:max-w-5xl 2xl:max-w-6xl">
+      <div className="container overflow-hidden flex min-h-screen flex-col items-center gap-8 md:gap-16 pt-24 font-monomaniac md:max-w-5xl 2xl:max-w-6xl">
         <PinpadLevelSelector
           currentLevel={currentLevel}
           setCurrentLevel={setCurrentLevel}
         />
         <div
           className={cx(
-            "flex flex-col gap-4 rounded-xl border border-opacity-10 px-16 py-12",
+            "flex flex-col gap-4 rounded-xl border-0 md:border md:border-opacity-10 md:px-16 p-4 md:py-12",
             themeClasses.border
           )}
         >
@@ -220,7 +220,7 @@ export default function Pinpad(): JSX.Element {
             </div>
           ))}
         </div>
-        <span className="max-w-sm font-mono text-sm opacity-40">
+        <span className="max-w-sm px-4 font-mono text-sm opacity-40">
           I implement stupid little ideas like this. Sometimes to learn stuff,
           mostly to have fun.
         </span>
