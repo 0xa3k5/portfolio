@@ -618,9 +618,9 @@ export const Replay: React.FC<IconProps> = ({ ...props }) => {
     >
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
         d="M7 6.99988V16.9999m-5-6v2M12 2.99988V20.9999m5-14.00002V16.9999m5-6v2"
       />
     </svg>
