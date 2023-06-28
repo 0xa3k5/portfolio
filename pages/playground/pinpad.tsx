@@ -10,20 +10,11 @@ import PinpadLevelSelector from "../../src/components/playground/Pinpad/PinpadLe
 import PINPAD_CONSTANTS, {
   TPinpadGameLevels,
 } from "../../src/constants/playground/pinpad-constants";
-import { GetStaticProps } from "next";
-import NotionService from "../api/notion";
-import { Playground } from "../../src/types";
-import { MdStringObject } from "notion-to-md/build/types";
 import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
 import PlaygroundTitle from "../../src/components/PlaygroundTitle";
 import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
 
-interface Page {
-  page: Playground;
-  markdown: MdStringObject;
-}
-
-export default function Pinpad({ page, markdown }: Page): JSX.Element {
+export default function Pinpad(): JSX.Element {
   const { getThemeClasses, volume } = useTheme();
   const themeClasses = getThemeClasses();
 
@@ -191,7 +182,7 @@ export default function Pinpad({ page, markdown }: Page): JSX.Element {
   return (
     <Layout hideCTA>
       <PlaygroundMainWrapper>
-        <PlaygroundTitle title={page.title} date={page.date} />
+        <PlaygroundTitle title="Pinpad" date="June 2023" />
         <PlaygroundWrapper>
           <PinpadLevelSelector
             currentLevel={currentLevel}
@@ -243,20 +234,3 @@ export default function Pinpad({ page, markdown }: Page): JSX.Element {
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const notionService = new NotionService();
-
-  const { posts, md } = await notionService.getPlayground();
-
-  const page = posts.find((p) => p.slug.toLowerCase() === "pinpad");
-
-  const markdown = md[page?.slug].markdown;
-
-  return {
-    props: {
-      page,
-      markdown: markdown ?? null,
-    },
-  };
-};
