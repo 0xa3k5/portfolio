@@ -11,8 +11,7 @@ interface WorkExperienceProps {
 export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div

@@ -11,8 +11,7 @@ export default function PinpadListenButton({
   onClick,
   disabled,
 }: PinpadListenButtonProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <button

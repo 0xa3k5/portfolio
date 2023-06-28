@@ -20,8 +20,7 @@ export default function Primary({
   href,
 }: PrimaryProps): JSX.Element {
   const [hover, setHover] = useState(false);
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
   const { inversedRGBColors } = useThemeRGBColors();
 
   const buttonIcon: Variants = {
@@ -70,7 +69,7 @@ export default function Primary({
               : `rgba(${inversedRGBColors.background},.1)`,
           }}
           className={cx(
-            "duration-50 group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl py-4 px-6 sm:w-fit",
+            "duration-50 group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl px-6 py-4 sm:w-fit",
             themeClasses.color,
             themeClasses.textHover,
             className

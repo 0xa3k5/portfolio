@@ -13,8 +13,7 @@ export default function PinpadInput({
   canListen,
   onClick,
 }: PinpadInputProps): JSX.Element {
-  const { getThemeClasses, theme } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses, theme } = useTheme();
 
   return (
     <button

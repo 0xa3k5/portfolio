@@ -10,8 +10,7 @@ import { useRouter } from "next/router";
 import { Route, ROUTES } from "../../constants/routes";
 
 export default function Navbar(): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
   const { inversedRGBColors } = useThemeRGBColors();
   const router = useRouter();
   return (

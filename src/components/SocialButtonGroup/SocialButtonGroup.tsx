@@ -11,8 +11,7 @@ interface SocialButtonGroupProps {
 export default function SocialButtonGroup({
   className,
 }: SocialButtonGroupProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div

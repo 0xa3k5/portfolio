@@ -10,13 +10,12 @@ export default function PlaygroundWrapper({
   className,
   children,
 }: PropsWithChildren<PlaygroundWrapperProps>): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div
       className={cx(
-        "flex w-full flex-col items-center justify-center gap-12 rounded-xl bg-opacity-5 p-24",
+        "relative flex w-full flex-col items-center justify-center gap-12 rounded-xl bg-opacity-5 p-24",
         themeClasses.bgInverse,
         className
       )}

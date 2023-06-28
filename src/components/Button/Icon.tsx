@@ -18,8 +18,7 @@ export default function Icon({
   onClick,
   circle,
 }: PropsWithChildren<IconProps>): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
   const { inversedRGBColors } = useThemeRGBColors();
   const [isHover, setIsHover] = useState(false);
 

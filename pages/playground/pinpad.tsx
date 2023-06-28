@@ -13,10 +13,10 @@ import PINPAD_CONSTANTS, {
 import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
 import PlaygroundTitle from "../../src/components/PlaygroundTitle";
 import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
+import PlaygroundFooter from "../../src/components/playground/PlaygroundFooter";
 
 export default function Pinpad(): JSX.Element {
-  const { getThemeClasses, volume } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses, volume } = useTheme()
 
   const [inputValue, setInputValue] = useState("");
   const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("normal");
@@ -226,10 +226,7 @@ export default function Pinpad(): JSX.Element {
             ))}
           </div>
         </PlaygroundWrapper>
-        <span className="max-w-sm px-4 font-mono text-sm opacity-40">
-          I implement stupid little ideas like this. Sometimes to learn stuff,
-          mostly to have fun.
-        </span>
+        <PlaygroundFooter />
       </PlaygroundMainWrapper>
     </Layout>
   );

@@ -12,8 +12,7 @@ export default function LinkBtn({
   className,
   href,
 }: LinkBtnProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <Link href={href} target="_blank" rel="noreferrer">

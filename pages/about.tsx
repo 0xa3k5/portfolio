@@ -23,9 +23,7 @@ interface AboutProps {
 }
 
 export default function About({ page, workExp, feedbacks }: AboutProps) {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
-
+  const { themeClasses } = useTheme();
   return (
     <Layout>
       <PageHead page={page} />

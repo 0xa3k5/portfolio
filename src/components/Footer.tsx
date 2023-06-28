@@ -2,8 +2,7 @@ import Link from "next/link";
 import { useTheme } from "../contexts/ThemeContext";
 
 export default function Footer(): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div className="container flex justify-center py-12">

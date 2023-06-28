@@ -14,8 +14,7 @@ export default function Grouped({
   feedback,
 }: GroupedProps): JSX.Element {
   const [bgColor, setBgColor] = useState("");
-  const { theme, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { theme, themeClasses } = useTheme();
 
   useEffect(() => {
     if (theme === "dark") {
