@@ -5,7 +5,7 @@ import PageHead from "../src/components/PageHead";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
-import MainWrapper from "../src/components/MainWrapper";
+import MainWrapper from "../src/components/Wrappers/MainWrapper";
 import Layout from "../src/components/Layout";
 
 interface FourOhFourProps {
@@ -18,7 +18,7 @@ export default function FourOhFour({
   posts,
 }: FourOhFourProps): JSX.Element {
   return (
-  <Layout>
+    <Layout>
       <PageHead page={page} />
       <MainWrapper>
         <div className="flex w-full flex-col gap-8 sm:mt-0">

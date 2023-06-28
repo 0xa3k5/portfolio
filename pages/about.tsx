@@ -8,7 +8,7 @@ import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
 import WorkExperience from "../src/components/WorkExperience";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
-import MainWrapper from "../src/components/MainWrapper";
+import MainWrapper from "../src/components/Wrappers/MainWrapper";
 import { useTheme } from "../src/contexts/ThemeContext";
 import Button from "../src/components/Button";
 import { PaperPlaneIcon } from "../src/icons";
