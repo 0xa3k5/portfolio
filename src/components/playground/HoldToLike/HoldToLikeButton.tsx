@@ -1,4 +1,3 @@
-import cx from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "../../../contexts/ThemeContext";
@@ -56,7 +55,7 @@ export default function HoldToLikeButton({
 
   return (
     <motion.button
-      className="relative w-fit flex gap-4 overflow-clip rounded-lg p-4"
+      className="relative flex w-fit gap-4 overflow-clip rounded-lg p-4"
       style={{
         backgroundColor: isLiked
           ? `rgba(${CONSTANTS.ACCENT_COLOR.rgb}, 0.1)`
