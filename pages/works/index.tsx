@@ -5,7 +5,7 @@ import ContentCard from "../../src/components/Cards/ContentCard";
 import SectionTitle from "../../src/components/SectionTitle";
 import SectionsWrapper from "../../src/components/SectionsWrapper";
 import NotionService from "../api/notion";
-import MainWrapper from "../../src/components/MainWrapper";
+import MainWrapper from "../../src/components/Wrappers/MainWrapper";
 import Layout from "../../src/components/Layout";
 
 interface WorksProps {

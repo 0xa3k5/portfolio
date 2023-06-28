@@ -8,7 +8,7 @@ interface SectionTitleProps {
 }
 
 export default function SectionTitle({
-  title,
+title,
   className,
   row = false,
 }: SectionTitleProps): JSX.Element {

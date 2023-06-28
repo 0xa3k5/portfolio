@@ -14,8 +14,10 @@ import { GetStaticProps } from "next";
 import NotionService from "../api/notion";
 import { Playground } from "../../src/types";
 import { MdStringObject } from "notion-to-md/build/types";
+import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
+import PlaygroundTitle from "../../src/components/PlaygroundTitle";
+import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
 
-export default function Pinpad(): JSX.Element {
 interface Page {
   page: Playground;
   markdown: MdStringObject;
@@ -188,54 +190,56 @@ export default function Pinpad({ page, markdown }: Page): JSX.Element {
 
   return (
     <Layout hideCTA>
-      <div className="container overflow-hidden flex min-h-screen flex-col items-center gap-8 md:gap-16 pt-24 font-monomaniac md:max-w-5xl 2xl:max-w-6xl">
-        <PinpadLevelSelector
-          currentLevel={currentLevel}
-          setCurrentLevel={setCurrentLevel}
-        />
-        <div
-          className={cx(
-            "flex flex-col gap-4 rounded-xl border-0 md:border md:border-opacity-10 md:px-16 p-4 md:py-12",
-            themeClasses.border
-          )}
-        >
-          <h6 className="w-full text-center text-3xl">
-            Enter the Sound to Enter
-          </h6>
-          <PinpadListenButton
-            onClick={handleReplay}
-            disabled={isListenButtonDisabled}
+      <PlaygroundMainWrapper>
         <PlaygroundTitle title={page.title} date={page.date} />
+        <PlaygroundWrapper>
+          <PinpadLevelSelector
+            currentLevel={currentLevel}
+            setCurrentLevel={setCurrentLevel}
           />
-          <PinpadInput
-            onClick={handleInputListen}
-            canListen={gameConfig.canListen}
-            inputValue={inputValue}
-          />
-          {PINPAD_CONSTANTS.KEYPAD_VALUES.map((row, rowIndex) => (
-            <div
-              key={rowIndex}
-              className="col-span-3 grid grid-cols-3 gap-x-4 gap-y-2"
-            >
-              {row.map((value, colIndex) => (
-                <PinpadButton
-                  key={colIndex}
-                  onClick={() => handlePin(value)}
-                  onMouseEnter={() => handlePinpadMouseEnter(value)}
-                  onMouseLeave={() => setHoveredBtn("")}
-                  isHover={hoveredBtn === value}
-                  value={value}
-                  disabled={isPinpadKeyDisabled(value)}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
+          <div
+            className={cx(
+              "flex max-w-lg flex-col gap-4 rounded-xl border-0 p-4 md:border md:border-opacity-10 md:px-16 md:py-12",
+              themeClasses.border
+            )}
+          >
+            <h6 className="w-full text-center text-3xl">
+              Enter the Sound to Enter
+            </h6>
+            <PinpadListenButton
+              onClick={handleReplay}
+              disabled={isListenButtonDisabled}
+            />
+            <PinpadInput
+              onClick={handleInputListen}
+              canListen={gameConfig.canListen}
+              inputValue={inputValue}
+            />
+            {PINPAD_CONSTANTS.KEYPAD_VALUES.map((row, rowIndex) => (
+              <div
+                key={rowIndex}
+                className="col-span-3 grid grid-cols-3 gap-x-4 gap-y-2"
+              >
+                {row.map((value, colIndex) => (
+                  <PinpadButton
+                    key={colIndex}
+                    onClick={() => handlePin(value)}
+                    onMouseEnter={() => handlePinpadMouseEnter(value)}
+                    onMouseLeave={() => setHoveredBtn("")}
+                    isHover={hoveredBtn === value}
+                    value={value}
+                    disabled={isPinpadKeyDisabled(value)}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </PlaygroundWrapper>
         <span className="max-w-sm px-4 font-mono text-sm opacity-40">
           I implement stupid little ideas like this. Sometimes to learn stuff,
           mostly to have fun.
         </span>
-      </div>
+      </PlaygroundMainWrapper>
     </Layout>
   );
 }

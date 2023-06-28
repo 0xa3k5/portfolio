@@ -1,6 +1,5 @@
 import cx from "classnames";
 import Layout from "../../src/components/Layout";
-import MainWrapper from "../../src/components/MainWrapper";
 import { useTheme } from "../../src/contexts/ThemeContext";
 import HoldToLikeButton from "../../src/components/playground/HoldToLike/HoldToLikeButton";
 import { GetStaticProps } from "next";
@@ -8,6 +7,8 @@ import NotionService from "../api/notion";
 import { Playground } from "../../src/types";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { MdStringObject } from "notion-to-md/build/types";
+import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
+import PlaygroundTitle from "../../src/components/PlaygroundTitle";
 import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
 
 interface Props {
@@ -16,26 +17,16 @@ interface Props {
 }
 
 export default function HoldToLike({ page, markdown }: Props) {
-  const { theme, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { theme } = useTheme();
 
   return (
-      <MainWrapper>
     <Layout hideCTA>
-        <div className={cx("flex w-full flex-col gap-2", themeClasses.color)}>
-          <h1 className="text-3xl font-bold">{page.title}</h1>
-          <p className="text-xl font-light opacity-60">{page.date}</p>
-        </div>
-        <div
-          className={cx(
-            "flex w-full flex-col justify-center gap-12 rounded-xl bg-opacity-5 p-24 md:flex-row",
-            themeClasses.bgInverse
-          )}
-        >
+      <PlaygroundMainWrapper>
+        <PlaygroundTitle title={page.title} date={page.date} />
+        <PlaygroundWrapper>
           <HoldToLikeButton />
           <HoldToLikeButton hasText />
-        </div>
-      </MainWrapper>
+        </PlaygroundWrapper>
         <article
           className={cx(
             "prose prose-lg w-full prose-headings:font-vollkorn prose-headings:font-semibold prose-h1:text-3xl prose-h2:text-3xl prose-h3:font-normal prose-p:font-light prose-p:leading-snug   prose-p:tracking-wide prose-a:duration-150 prose-a:hover:text-white prose-ul:font-light prose-ul:tracking-wider prose-img:rounded-xl md:prose-h1:text-5xl",
@@ -44,6 +35,7 @@ export default function HoldToLike({ page, markdown }: Props) {
         >
           <ReactMarkdown>{markdown["parent"]}</ReactMarkdown>
         </article>
+      </PlaygroundMainWrapper>
     </Layout>
   );
 }
@@ -55,7 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const page = posts.find((p) => p.slug.toLowerCase() === "hold-to-like");
 
-  const markdown = md[page.slug].markdown;
+  const markdown = md[page?.slug].markdown;
 
   return {
     props: {

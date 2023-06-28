@@ -16,7 +16,7 @@ import SectionsWrapper from "../src/components/SectionsWrapper";
 import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import ExplorationsCard from "../src/components/Cards/ExplorationsCard/ExplorationsCard";
-import MainWrapper from "../src/components/MainWrapper";
+import MainWrapper from "../src/components/Wrappers/MainWrapper";
 import Layout from "../src/components/Layout";
 
 interface HomeProps {
@@ -55,7 +55,7 @@ export default function Home({
         </SectionsWrapper>
         <SectionsWrapper>
           <SectionTitle title="on the side" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {sideProjects
               .sort((a: SideProject, b: SideProject) => b.date - a.date)
               .map((p: SideProject) => {
