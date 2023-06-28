@@ -13,6 +13,8 @@ export default function HoldToLikeButton({
 }: HoldToLikeButtonProps): JSX.Element {
   const [isLiked, setIsLiked] = useState(false);
   const { theme } = useTheme();
+  const [counter, setCounter] = useState(0);
+  const intervalRef = useRef(null);
 
   const cherryPickPositions = () => {
     const positions = [-20, -40, -4, -16, -10, -55, 20, 40, 50, 12, 8];
@@ -27,16 +29,6 @@ export default function HoldToLikeButton({
     })
   );
 
-  const [counter, setCounter] = useState(0);
-  const intervalRef = useRef(null);
-
-  const stopCounter = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  };
-
   const startCounter = () => {
     if (intervalRef.current) return;
     if (isLiked) setIsLiked(false);
@@ -44,6 +36,13 @@ export default function HoldToLikeButton({
       intervalRef.current = setInterval(() => {
         setCounter((prevCounter) => prevCounter + 1);
       }, CONSTANTS.INTERVAL_MS);
+    }
+  };
+
+  const stopCounter = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
   };
 
@@ -57,10 +56,7 @@ export default function HoldToLikeButton({
 
   return (
     <motion.button
-      className={cx(
-        "relative flex gap-4 overflow-clip rounded-lg p-4",
-        hasText ? "min-w-[8rem]" : null
-      )}
+      className="relative w-fit flex gap-4 overflow-clip rounded-lg p-4"
       style={{
         backgroundColor: isLiked
           ? `rgba(${CONSTANTS.ACCENT_COLOR.rgb}, 0.1)`
@@ -71,6 +67,8 @@ export default function HoldToLikeButton({
       }}
       onMouseDown={startCounter}
       onMouseUp={stopCounter}
+      onTouchStart={startCounter}
+      onTouchEnd={stopCounter}
       onMouseLeave={stopCounter}
       whileHover={{ scale: 0.95 }}
       whileTap={{ scale: !isLiked ? 0.9 : 1.05 }}

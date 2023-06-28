@@ -7,9 +7,11 @@ import {
   Feedback,
   StaticPage,
   SideProject,
+  Playground,
 } from "../../src/types";
 import { config } from "../../config";
 import { Exploration } from "../../src/types";
+import { MdStringObject } from "notion-to-md/build/types";
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
@@ -91,6 +93,44 @@ export default class NotionService {
     });
 
     return transformedPosts;
+  }
+
+  async getPlayground(): Promise<{
+    posts: Playground[];
+    md: any;
+  }> {
+    const response = await this.client.databases.query({
+      database_id: config.NOTION_PLAYGROUND,
+    });
+
+    const transformedPosts = response.results.map((res) => {
+      return NotionService.playgroundTransformer(res);
+    });
+
+    const mdArr: {
+      [key: string]: {
+        markdown: MdStringObject;
+      };
+    } = {};
+
+    const getMd = async (res) => {
+      const mdBlocks = await this.n2m.pageToMarkdown(res.id);
+      const markdown = this.n2m.toMarkdownString(mdBlocks);
+      return { markdown };
+    };
+
+    const mdPromises = response.results.map((res) => getMd(res));
+    const mdResults = await Promise.all(mdPromises);
+
+    mdResults.forEach((result, index) => {
+      const res = response.results[index];
+      const post = transformedPosts.find((p) => p.id === res.id);
+      if (post) {
+        mdArr[post.slug] = { markdown: result.markdown };
+      }
+    });
+
+    return { posts: transformedPosts, md: mdArr };
   }
 
   async getNotionPageDetail(
@@ -241,6 +281,14 @@ export default class NotionService {
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Date.number,
       thumbnail: page.properties.Thumbnail?.files[0]?.external.url ?? null,
+    };
+  }
+  private static playgroundTransformer(page): Playground {
+    return {
+      id: page.id,
+      slug: page.properties.Slug?.formula.string || "",
+      title: page.properties.Name.title[0].plain_text,
+      date: page.properties.Date.rich_text[0].plain_text,
     };
   }
 }

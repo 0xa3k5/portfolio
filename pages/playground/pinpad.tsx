@@ -10,13 +10,23 @@ import PinpadLevelSelector from "../../src/components/playground/Pinpad/PinpadLe
 import PINPAD_CONSTANTS, {
   TPinpadGameLevels,
 } from "../../src/constants/playground/pinpad-constants";
+import { GetStaticProps } from "next";
+import NotionService from "../api/notion";
+import { Playground } from "../../src/types";
+import { MdStringObject } from "notion-to-md/build/types";
 
 export default function Pinpad(): JSX.Element {
+interface Page {
+  page: Playground;
+  markdown: MdStringObject;
+}
+
+export default function Pinpad({ page, markdown }: Page): JSX.Element {
   const { getThemeClasses, volume } = useTheme();
   const themeClasses = getThemeClasses();
 
   const [inputValue, setInputValue] = useState("");
-  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>('normal');
+  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("normal");
   const [hoveredBtn, setHoveredBtn] = useState("");
   const [gameConfig, setGameConfig] = useState(
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]
@@ -195,6 +205,7 @@ export default function Pinpad(): JSX.Element {
           <PinpadListenButton
             onClick={handleReplay}
             disabled={isListenButtonDisabled}
+        <PlaygroundTitle title={page.title} date={page.date} />
           />
           <PinpadInput
             onClick={handleInputListen}
@@ -228,3 +239,20 @@ export default function Pinpad(): JSX.Element {
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const notionService = new NotionService();
+
+  const { posts, md } = await notionService.getPlayground();
+
+  const page = posts.find((p) => p.slug.toLowerCase() === "pinpad");
+
+  const markdown = md[page?.slug].markdown;
+
+  return {
+    props: {
+      page,
+      markdown: markdown ?? null,
+    },
+  };
+};
