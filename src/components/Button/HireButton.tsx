@@ -7,8 +7,7 @@ import { motion } from "framer-motion";
 export default function HireButton(): JSX.Element {
   const buttonRef = useRef();
   const { themeRGBColors, inversedRGBColors } = useThemeRGBColors();
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,

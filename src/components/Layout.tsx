@@ -13,8 +13,7 @@ export default function Layout({
   children,
   hideCTA = false,
 }: LayoutProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div

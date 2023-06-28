@@ -15,14 +15,14 @@ export default function SideProjectsCard({
   post,
   className,
 }: SideProjectsCardProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
+  
   return (
     <Link
       href={post.website ?? ""}
       target="_blank"
       className={cx(
-        "flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 px-4 py-6 md:p-8 duration-150 hover:bg-opacity-5",
+        "flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 px-4 py-6 duration-150 hover:bg-opacity-5 md:p-8",
         themeClasses.color,
         themeClasses.border,
         themeClasses.bgHover,

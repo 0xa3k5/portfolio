@@ -24,8 +24,7 @@ export default function PinpadLevelSelector({
   currentLevel,
   setCurrentLevel,
 }: PinpadLevelSelectorProps): JSX.Element {
-  const { theme, volume, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { theme, volume, themeClasses } = useTheme();
   const [hoveredLevel, setHoveredLevel] = useState<TPinpadGameLevels>(null);
   const [play] = useSound(
     "/sounds/switch-on.mp3",

@@ -2,13 +2,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "../../../contexts/ThemeContext";
 import CONSTANTS from "../../../constants/playground/hold-to-like-constants";
+import cx from "classnames";
 
 interface HoldToLikeButtonProps {
   hasText?: boolean;
+  overflowClip: boolean;
 }
 
 export default function HoldToLikeButton({
   hasText = false,
+  overflowClip,
 }: HoldToLikeButtonProps): JSX.Element {
   const [isLiked, setIsLiked] = useState(false);
   const { theme } = useTheme();
@@ -55,7 +58,10 @@ export default function HoldToLikeButton({
 
   return (
     <motion.button
-      className="relative flex w-fit gap-4 overflow-clip rounded-lg p-4"
+      className={cx(
+        "relative flex w-fit gap-4 rounded-lg p-4",
+        overflowClip ? "overflow-clip" : "overflow-visible"
+      )}
       style={{
         backgroundColor: isLiked
           ? `rgba(${CONSTANTS.ACCENT_COLOR.rgb}, 0.1)`

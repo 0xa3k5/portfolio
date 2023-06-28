@@ -13,8 +13,8 @@ type ThemeContextType = {
   volume: boolean;
   setVolume: React.Dispatch<React.SetStateAction<boolean>>;
   theme: Theme;
+  themeClasses: ThemeClasses;
   setTheme: (theme: Theme) => void;
-  getThemeClasses: () => ThemeClasses;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -65,15 +65,6 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
     setThemeClasses(themes[theme]);
   }, [theme, themes]);
 
-  const getThemeClasses = (): ThemeClasses => {
-    const themeClasses: Record<Theme, ThemeClasses> = {
-      dark: darkTheme,
-      light: lightTheme,
-      dim: dimTheme,
-    };
-    return themeClasses[theme];
-  };
-
   const handleSetTheme = (newTheme: Theme) => {
     setTheme(newTheme);
   };
@@ -82,7 +73,7 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
     volume,
     theme,
     setTheme: handleSetTheme,
-    getThemeClasses,
+    themeClasses,
     setVolume,
   };
 

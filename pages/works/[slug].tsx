@@ -34,8 +34,7 @@ export default function Detail({
   const { status } = useSession();
   const router = useRouter();
 
-  const { theme, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { theme, themeClasses } = useTheme();
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)

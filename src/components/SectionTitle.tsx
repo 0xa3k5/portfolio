@@ -8,12 +8,12 @@ interface SectionTitleProps {
 }
 
 export default function SectionTitle({
-title,
+  title,
   className,
   row = false,
 }: SectionTitleProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
+
   return (
     <div
       className={cx(

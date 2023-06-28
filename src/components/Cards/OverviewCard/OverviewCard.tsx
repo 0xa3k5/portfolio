@@ -6,8 +6,7 @@ interface OverviewCardProps {
 }
 
 export default function OverviewCard({ post }: OverviewCardProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div

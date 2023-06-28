@@ -10,8 +10,7 @@ export default function PlaygroundTitle({
   title,
   date,
 }: PlaygroundTitleProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div className={cx("flex w-full flex-col gap-2", themeClasses.color)}>
