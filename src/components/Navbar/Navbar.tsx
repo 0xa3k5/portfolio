@@ -22,7 +22,7 @@ export default function Navbar(): JSX.Element {
     >
       <nav
         className={cx(
-          "flex h-fit w-full items-center justify-between overflow-hidden border border-opacity-10 bg-opacity-80 px-4 py-2 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl",
+          "flex h-fit w-full items-center overflow-x-scroll no-scrollbar justify-between overflow-hidden border border-opacity-10 bg-opacity-80 px-4 py-2 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl",
           themeClasses.border,
           themeClasses.bg
         )}

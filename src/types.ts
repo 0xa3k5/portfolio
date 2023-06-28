@@ -88,3 +88,11 @@ export type Exploration = {
   name: string;
   img: string;
 };
+
+export type Playground = {
+  id: string;
+  slug: string;
+  title: string;
+  tags?: string[];
+  date: string;
+};
