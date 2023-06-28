@@ -22,7 +22,7 @@ export default function SideProjectsCard({
       href={post.website ?? ""}
       target="_blank"
       className={cx(
-        "flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 p-8 duration-150 hover:bg-opacity-5",
+        "flex h-full w-full flex-col justify-between gap-8 rounded-2xl border border-opacity-5 px-4 py-6 md:p-8 duration-150 hover:bg-opacity-5",
         themeClasses.color,
         themeClasses.border,
         themeClasses.bgHover,

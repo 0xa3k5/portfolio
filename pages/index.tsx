@@ -55,7 +55,7 @@ export default function Home({
         </SectionsWrapper>
         <SectionsWrapper>
           <SectionTitle title="on the side" />
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sideProjects
               .sort((a: SideProject, b: SideProject) => b.date - a.date)
               .map((p: SideProject) => {
