@@ -6,6 +6,12 @@ import {
   lightTheme,
 } from "../constants/theme-classes";
 import { useContext } from "react";
+import {
+  ThemeColors,
+  darkColors,
+  lightColors,
+  dimColors,
+} from "../constants/theme-colors";
 
 export type Theme = "dark" | "light" | "dim";
 
@@ -14,6 +20,7 @@ type ThemeContextType = {
   setVolume: React.Dispatch<React.SetStateAction<boolean>>;
   theme: Theme;
   themeClasses: ThemeClasses;
+  themeColors: ThemeColors;
   setTheme: (theme: Theme) => void;
 };
 
@@ -28,13 +35,21 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
 }) => {
   const [theme, setTheme] = useState<Theme>("light");
   const [themeClasses, setThemeClasses] = useState<ThemeClasses>(darkTheme);
+  const [themeColors, setThemeColors] = useState<ThemeColors>(darkColors);
   const [volume, setVolume] = useState(true);
 
-  const themes: Record<Theme, ThemeClasses> = useMemo(() => {
+  const _themeClasses: Record<Theme, ThemeClasses> = useMemo(() => {
     return {
       dark: darkTheme,
       light: lightTheme,
       dim: dimTheme,
+    };
+  }, []);
+  const _themeColors: Record<Theme, ThemeColors> = useMemo(() => {
+    return {
+      dark: darkColors,
+      light: lightColors,
+      dim: dimColors,
     };
   }, []);
 
@@ -50,20 +65,24 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
     if (prefersDarkTheme) {
       setTheme("dark");
       setThemeClasses(darkTheme);
+      setThemeColors(darkColors);
     } else if (prefersLightTheme) {
       setTheme("light");
       setThemeClasses(lightTheme);
+      setThemeColors(lightColors);
     } else {
       setTheme("dim");
       setThemeClasses(dimTheme);
+      setThemeColors(dimColors);
     }
   }, []);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
 
-    setThemeClasses(themes[theme]);
-  }, [theme, themes]);
+    setThemeClasses(_themeClasses[theme]);
+    setThemeColors(_themeColors[theme]);
+  }, [theme, _themeClasses, _themeColors]);
 
   const handleSetTheme = (newTheme: Theme) => {
     setTheme(newTheme);
@@ -74,6 +93,7 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
     theme,
     setTheme: handleSetTheme,
     themeClasses,
+    themeColors,
     setVolume,
   };
 
