@@ -38,7 +38,7 @@ export default function Home({
     <Layout>
       <PageHead page={page} />
       <MainWrapper>
-        <Hero.Page page={page} />
+        <Hero.Home />
         <SectionsWrapper>
           <SectionTitle title="selected work" />
           <div className="flex flex-col gap-8 md:gap-12">
