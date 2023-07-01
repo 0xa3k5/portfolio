@@ -16,7 +16,7 @@ export default function SocialButtonGroup({
   return (
     <div
       className={cx(
-        "flex w-full justify-between sm:justify-end",
+        "flex w-full justify-between sm:justify-start",
         className,
         themeClasses.color
       )}
