@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface PlaygroundTitleProps {
   title: string;

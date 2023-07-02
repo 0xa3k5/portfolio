@@ -16,7 +16,7 @@ import SectionsWrapper from "../src/components/SectionsWrapper";
 import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import ExplorationsCard from "../src/components/Cards/ExplorationsCard/ExplorationsCard";
-import MainWrapper from "../src/components/Wrappers/MainWrapper";
+import MainWrapper from "../src/components/MainWrapper";
 import Layout from "../src/components/Layout";
 
 interface HomeProps {

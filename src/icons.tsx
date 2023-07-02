@@ -647,9 +647,22 @@ export const EnterRect: React.FC<IconProps> = ({ ...props }) => {
 };
 export const ChevronLeftIcon: React.FC<IconProps> = ({ ...props }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 24" width='24' height='24' {...props}>
-  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="m11 6-6 6 6 6"/>
-</svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 16 24"
+      width="24"
+      height="24"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.5"
+        d="m11 6-6 6 6 6"
+      />
+    </svg>
   );
 };
 
@@ -710,6 +723,7 @@ const Twitter: React.FC<IconProps> = ({ filled, ...props }) => {
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
+      viewBox="0 0 24 24"
       fill="none"
       {...props}
     >
