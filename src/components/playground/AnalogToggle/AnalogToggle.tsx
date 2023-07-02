@@ -97,7 +97,6 @@ export default function AnalogToggle({
             animate={isChecked ? "checked" : "unchecked"}
             transition={{
               type: "spring",
-              ease: "easeInOut",
               duration: 0.3,
             }}
             style={{
@@ -127,7 +126,6 @@ export default function AnalogToggle({
             animate={isChecked ? "checked" : "unchecked"}
             transition={{
               type: "spring ",
-              ease: "easeInOut",
               duration: 0.3,
             }}
           />
