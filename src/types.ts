@@ -1,3 +1,5 @@
+import { MdStringObject } from "notion-to-md/build/types";
+
 export type SideProject = {
   id: string;
   title: string;
@@ -65,7 +67,7 @@ export type WorkExp = {
 };
 
 export type NotionPageDetail = {
-  markdown: string;
+  markdown: MdStringObject;
   post?: NotionPost;
 };
 
@@ -77,7 +79,7 @@ export type StaticPage = {
   heroText: string;
   id: string;
   slug: string;
-  extra: string | null
+  extra: string | null;
 };
 
 export type Exploration = {
@@ -85,4 +87,12 @@ export type Exploration = {
   type: "video" | "image";
   name: string;
   img: string;
+};
+
+export type Playground = {
+  id: string;
+  slug: string;
+  title: string;
+  tags?: string[];
+  date: string;
 };

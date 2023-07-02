@@ -12,8 +12,7 @@ export default function Tooltip({
   text,
   position = "left",
 }: TooltipProps) {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div

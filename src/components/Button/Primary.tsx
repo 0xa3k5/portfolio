@@ -1,10 +1,10 @@
 import cx from "classnames";
-import { ReactNode, useEffect, useState } from "react";
-import { hexToRGB } from "../../utils/hexToRGB";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 
 import { motion, MotionConfig, Variants } from "framer-motion";
 import { useTheme } from "../../contexts/ThemeContext";
+import useThemeRGBColors from "../../hooks/useThemeRGBColors";
 
 interface PrimaryProps {
   className?: string;
@@ -20,19 +20,8 @@ export default function Primary({
   href,
 }: PrimaryProps): JSX.Element {
   const [hover, setHover] = useState(false);
-  const [textRgb, setTextRgb] = useState("");
-  const { theme, getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
-
-  useEffect(() => {
-    if (theme === "dark") {
-      setTextRgb(hexToRGB("ffffff"));
-    } else if (theme === "light") {
-      setTextRgb(hexToRGB("06060B"));
-    } else if (theme === "dim") {
-      setTextRgb(hexToRGB("ffffff"));
-    }
-  }, [theme]);
+  const { themeClasses } = useTheme();
+  const { inversedRGBColors } = useThemeRGBColors();
 
   const buttonIcon: Variants = {
     idle: {
@@ -75,10 +64,12 @@ export default function Primary({
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           style={{
-            backgroundColor: hover ? `rgba(${textRgb})` : `rgba(${textRgb},.1)`,
+            backgroundColor: hover
+              ? `rgba(${inversedRGBColors.background})`
+              : `rgba(${inversedRGBColors.background},.1)`,
           }}
           className={cx(
-            "group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl py-4 px-6 duration-50 sm:w-fit",
+            "duration-50 group flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl px-6 py-4 sm:w-fit",
             themeClasses.color,
             themeClasses.textHover,
             className
