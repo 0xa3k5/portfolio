@@ -11,8 +11,7 @@ interface WorkExperienceProps {
 export default function WorkExperience({
   job,
 }: WorkExperienceProps): JSX.Element {
-  const { getThemeClasses } = useTheme();
-  const themeClasses = getThemeClasses();
+  const { themeClasses } = useTheme();
 
   return (
     <div
@@ -43,7 +42,7 @@ export default function WorkExperience({
             33vw"
             />
           </div>
-          <div className="flex w-full flex-col duration-150 group-hover:text-daisy">
+          <div className="flex w-full flex-col duration-150">
             <span className="text-lg">{job.company}</span>
             <span className="opacity-40">{job.tagline}</span>
           </div>

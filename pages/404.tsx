@@ -18,7 +18,7 @@ export default function FourOhFour({
   posts,
 }: FourOhFourProps): JSX.Element {
   return (
-  <Layout>
+    <Layout>
       <PageHead page={page} />
       <MainWrapper>
         <div className="flex w-full flex-col gap-8 sm:mt-0">
