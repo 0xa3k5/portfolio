@@ -5,7 +5,7 @@ import PageHead from "../src/components/PageHead";
 import ContentCard from "../src/components/Cards/ContentCard";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
-import MainWrapper from "../src/components/Wrappers/MainWrapper";
+import MainWrapper from "../src/components/MainWrapper";
 import Layout from "../src/components/Layout";
 
 interface FourOhFourProps {

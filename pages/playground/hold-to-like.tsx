@@ -1,8 +1,7 @@
 import Layout from "../../src/components/Layout";
 import HoldToLikeButton from "../../src/components/playground/HoldToLike/HoldToLikeButton";
-import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
-import PlaygroundTitle from "../../src/components/PlaygroundTitle";
-import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
+import { useState } from "react";
+import { PlaygroundMainWrapper, PlaygroundTitle, PlaygroundWrapper, PlaygroundFooter } from "../../src/components/playground";
 
 export default function HoldToLike() {
   return (
@@ -15,6 +14,7 @@ export default function HoldToLike() {
             <HoldToLikeButton hasText />
           </div>
         </PlaygroundWrapper>
+        <PlaygroundFooter />
       </PlaygroundMainWrapper>
     </Layout>
   );

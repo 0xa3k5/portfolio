@@ -10,13 +10,10 @@ import PinpadLevelSelector from "../../src/components/playground/Pinpad/PinpadLe
 import PINPAD_CONSTANTS, {
   TPinpadGameLevels,
 } from "../../src/constants/playground/pinpad-constants";
-import PlaygroundMainWrapper from "../../src/components/Wrappers/PlaygroundMainWrapper";
-import PlaygroundTitle from "../../src/components/PlaygroundTitle";
-import PlaygroundWrapper from "../../src/components/Wrappers/PlaygroundWrapper";
-import PlaygroundFooter from "../../src/components/playground/PlaygroundFooter";
+import { PlaygroundMainWrapper, PlaygroundTitle, PlaygroundWrapper, PlaygroundFooter } from "../../src/components/playground";
 
 export default function Pinpad(): JSX.Element {
-  const { themeClasses, volume } = useTheme()
+  const { themeClasses, volume } = useTheme();
 
   const [inputValue, setInputValue] = useState("");
   const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("normal");
