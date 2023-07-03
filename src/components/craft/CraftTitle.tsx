@@ -1,15 +1,15 @@
 import cx from "classnames";
 import { useTheme } from "../../contexts/ThemeContext";
 
-interface PlaygroundTitleProps {
+interface CraftTitleProps {
   title: string;
   date: string;
 }
 
-export default function PlaygroundTitle({
+export default function CraftTitle({
   title,
   date,
-}: PlaygroundTitleProps): JSX.Element {
+}: CraftTitleProps): JSX.Element {
   const { themeClasses } = useTheme();
 
   return (

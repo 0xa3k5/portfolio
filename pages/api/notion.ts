@@ -7,7 +7,7 @@ import {
   Feedback,
   StaticPage,
   SideProject,
-  Playground,
+  Craft,
 } from "../../src/types";
 import { config } from "../../config";
 import { Exploration } from "../../src/types";
@@ -95,8 +95,8 @@ export default class NotionService {
     return transformedPosts;
   }
 
-  async getPlayground(): Promise<{
-    posts: Playground[];
+  async getCraft(): Promise<{
+    posts: Craft[];
     md: any;
   }> {
     const response = await this.client.databases.query({
@@ -104,7 +104,7 @@ export default class NotionService {
     });
 
     const transformedPosts = response.results.map((res) => {
-      return NotionService.playgroundTransformer(res);
+      return NotionService.craftTransformer(res);
     });
 
     const mdArr: {
@@ -283,7 +283,7 @@ export default class NotionService {
       thumbnail: page.properties.Thumbnail?.files[0]?.external.url ?? null,
     };
   }
-  private static playgroundTransformer(page): Playground {
+  private static craftTransformer(page): Craft {
     return {
       id: page.id,
       slug: page.properties.Slug?.formula.string || "",

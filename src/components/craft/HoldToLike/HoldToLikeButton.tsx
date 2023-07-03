@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "../../../contexts/ThemeContext";
-import CONSTANTS from "../../../constants/playground/hold-to-like-constants";
+import CONSTANTS from "../../../constants/craft/hold-to-like-constants";
 import cx from "classnames";
 
 interface HoldToLikeButtonProps {
