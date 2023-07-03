@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import useSound from "use-sound";
 import PINPAD_CONSTANTS, {
   TPinpadGameLevels,
-} from "../../../constants/playground/pinpad-constants";
+} from "../../../constants/craft/pinpad-constants";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { RightArrowIcon } from "../../../icons";
 
@@ -59,7 +59,7 @@ export default function PinpadLevelSelector({
   }, [setCurrentLevel, volume, play]);
 
   return (
-    <div className="flex overflow-x-scroll justify-center no-scrollbar w-full items-start gap-4 divide-x font-mono">
+    <div className="no-scrollbar flex w-full items-start justify-center gap-4 divide-x overflow-x-scroll font-mono">
       {PINPAD_CONSTANTS.GAME_LEVELS.map((lvl, i) => {
         const isCurrentLevel = lvl === currentLevel;
         const isHoveredLevel = hoveredLevel === lvl;

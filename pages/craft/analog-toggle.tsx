@@ -2,13 +2,13 @@ import Layout from "../../src/components/Layout";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { AnalogToggle } from "../../src/components/playground/AnalogToggle";
+import { AnalogToggle } from "../../src/components/craft/AnalogToggle";
 import {
-  PlaygroundMainWrapper,
-  PlaygroundTitle,
-  PlaygroundWrapper,
-  PlaygroundFooter,
-} from "../../src/components/playground";
+  CraftMainWrapper,
+  CraftTitle,
+  CraftWrapper,
+  CraftFooter,
+} from "../../src/components/craft";
 import { useTheme } from "../../src/contexts/ThemeContext";
 import { SOCIAL_LINKS } from "../../src/constants/social-links";
 
@@ -32,9 +32,9 @@ export default function AnalogTogglePage() {
 
   return (
     <Layout hideCTA>
-      <PlaygroundMainWrapper>
-        <PlaygroundTitle title="Analog Toggle" date="July 2023" />
-        <PlaygroundWrapper>
+      <CraftMainWrapper>
+        <CraftTitle title="Analog Toggle" date="July 2023" />
+        <CraftWrapper>
           <AnalogToggle isChecked={isChecked} handleOnChange={handleOnChange} />
           <AnimatePresence>
             {theme === "light" && (
@@ -67,9 +67,9 @@ export default function AnalogTogglePage() {
               </motion.div>
             )}
           </AnimatePresence>
-        </PlaygroundWrapper>
-        <PlaygroundFooter />
-      </PlaygroundMainWrapper>
+        </CraftWrapper>
+        <CraftFooter />
+      </CraftMainWrapper>
     </Layout>
   );
 }

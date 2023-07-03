@@ -18,14 +18,14 @@ const pageVariants: Variants = {
   },
 };
 
-interface PlaygroundWrapperProps {
+interface CraftWrapperProps {
   className?: string;
 }
 
-export default function PlaygroundMainWrapper({
+export default function CraftMainWrapper({
   className,
   children,
-}: PropsWithChildren<PlaygroundWrapperProps>): JSX.Element {
+}: PropsWithChildren<CraftWrapperProps>): JSX.Element {
   return (
     <motion.main
       className={cx(

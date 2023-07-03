@@ -1,22 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
-import Layout from "../../src/components/Layout";
-import { useTheme } from "../../src/contexts/ThemeContext";
-import cx from "classnames";
-import PinpadButton from "../../src/components/playground/Pinpad/PinpadButton";
-import useSound from "use-sound";
-import PinpadListenButton from "../../src/components/playground/Pinpad/PinpadListenButton";
-import PinpadInput from "../../src/components/playground/Pinpad/PinpadInput";
-import PinpadLevelSelector from "../../src/components/playground/Pinpad/PinpadLevelSelector";
 import PINPAD_CONSTANTS, {
   TPinpadGameLevels,
-} from "../../src/constants/playground/pinpad-constants";
-import { PlaygroundMainWrapper, PlaygroundTitle, PlaygroundWrapper, PlaygroundFooter } from "../../src/components/playground";
+} from "../../../constants/craft/pinpad-constants";
+import PinpadButton from "./PinpadButton";
+import PinpadInput from "./PinpadInput";
+import PinpadListenButton from "./PinpadListenButton";
+import useSound from "use-sound";
+import { useTheme } from "../../../contexts/ThemeContext";
 
-export default function Pinpad(): JSX.Element {
+interface Props {
+  className?: string;
+  currentLevel: TPinpadGameLevels;
+}
+
+export default function Pinpad({
+  className,
+  currentLevel,
+}: Props): JSX.Element {
   const { themeClasses, volume } = useTheme();
-
   const [inputValue, setInputValue] = useState("");
-  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("normal");
+
   const [hoveredBtn, setHoveredBtn] = useState("");
   const [gameConfig, setGameConfig] = useState(
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]
@@ -177,54 +180,35 @@ export default function Pinpad(): JSX.Element {
   };
 
   return (
-    <Layout hideCTA>
-      <PlaygroundMainWrapper>
-        <PlaygroundTitle title="Pinpad" date="June 2023" />
-        <PlaygroundWrapper>
-          <PinpadLevelSelector
-            currentLevel={currentLevel}
-            setCurrentLevel={setCurrentLevel}
-          />
-          <div
-            className={cx(
-              "flex max-w-lg flex-col gap-4 rounded-xl border-0 p-4 md:border md:border-opacity-10 md:px-16 md:py-12",
-              themeClasses.border
-            )}
-          >
-            <h6 className="w-full text-center text-3xl">
-              Enter the Sound to Enter
-            </h6>
-            <PinpadListenButton
-              onClick={handleReplay}
-              disabled={isListenButtonDisabled}
+    <>
+      <h6 className="w-full text-center text-3xl">Enter the Sound to Enter</h6>
+      <PinpadListenButton
+        onClick={handleReplay}
+        disabled={isListenButtonDisabled}
+      />
+      <PinpadInput
+        onClick={handleInputListen}
+        canListen={gameConfig.canListen}
+        inputValue={inputValue}
+      />
+      {PINPAD_CONSTANTS.KEYPAD_VALUES.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className="col-span-3 grid grid-cols-3 gap-x-4 gap-y-2"
+        >
+          {row.map((value, colIndex) => (
+            <PinpadButton
+              key={colIndex}
+              onClick={() => handlePin(value)}
+              onMouseEnter={() => handlePinpadMouseEnter(value)}
+              onMouseLeave={() => setHoveredBtn("")}
+              isHover={hoveredBtn === value}
+              value={value}
+              disabled={isPinpadKeyDisabled(value)}
             />
-            <PinpadInput
-              onClick={handleInputListen}
-              canListen={gameConfig.canListen}
-              inputValue={inputValue}
-            />
-            {PINPAD_CONSTANTS.KEYPAD_VALUES.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className="col-span-3 grid grid-cols-3 gap-x-4 gap-y-2"
-              >
-                {row.map((value, colIndex) => (
-                  <PinpadButton
-                    key={colIndex}
-                    onClick={() => handlePin(value)}
-                    onMouseEnter={() => handlePinpadMouseEnter(value)}
-                    onMouseLeave={() => setHoveredBtn("")}
-                    isHover={hoveredBtn === value}
-                    value={value}
-                    disabled={isPinpadKeyDisabled(value)}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        </PlaygroundWrapper>
-        <PlaygroundFooter />
-      </PlaygroundMainWrapper>
-    </Layout>
+          ))}
+        </div>
+      ))}
+    </>
   );
 }
