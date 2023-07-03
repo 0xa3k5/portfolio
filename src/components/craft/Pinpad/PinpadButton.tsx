@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { CrossRect, EnterRect } from "../../../icons";
 import { useTheme } from "../../../contexts/ThemeContext";
-import PINPAD_CONSTANTS from "../../../constants/playground/pinpad-constants";
+import PINPAD_CONSTANTS from "../../../constants/craft/pinpad-constants";
 
 interface PinpadButtonProps {
   onClick: () => void;

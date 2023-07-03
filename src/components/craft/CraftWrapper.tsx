@@ -2,20 +2,20 @@ import cx from "classnames";
 import { PropsWithChildren } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 
-interface PlaygroundWrapperProps {
+interface CraftWrapperProps {
   className?: string;
 }
 
-export default function PlaygroundWrapper({
+export default function CraftWrapper({
   className,
   children,
-}: PropsWithChildren<PlaygroundWrapperProps>): JSX.Element {
+}: PropsWithChildren<CraftWrapperProps>): JSX.Element {
   const { themeClasses } = useTheme();
 
   return (
     <div
       className={cx(
-        "relative flex w-full flex-col items-center justify-center gap-12 rounded-xl bg-opacity-5 p-24",
+        "relative flex w-full flex-col items-center justify-center rounded-xl bg-opacity-5 p-8 md:p-24",
         themeClasses.bgInverse,
         className
       )}

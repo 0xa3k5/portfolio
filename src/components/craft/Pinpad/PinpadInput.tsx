@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { useTheme } from "../../../contexts/ThemeContext";
-import PINPAD_CONSTANTS from "../../../constants/playground/pinpad-constants";
+import PINPAD_CONSTANTS from "../../../constants/craft/pinpad-constants";
 
 interface PinpadInputProps {
   inputValue: string;
