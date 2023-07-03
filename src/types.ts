@@ -89,7 +89,7 @@ export type Exploration = {
   img: string;
 };
 
-export type Playground = {
+export type Craft = {
   id: string;
   slug: string;
   title: string;

@@ -22,6 +22,11 @@ export const ROUTES: Route[] = [
   },
   {
     id: 3,
+    href: "/craft",
+    name: "Craft",
+  },
+  {
+    id: 4,
     href: "/ak-resume.pdf",
     name: "Resume",
   },

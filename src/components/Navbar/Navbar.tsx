@@ -5,7 +5,14 @@ import ThemeSwitcher from "../Switcher/ThemeSwitcher";
 import useThemeRGBColors from "../../hooks/useThemeRGBColors";
 import VolumeSwitcher from "../Switcher/VolumeSwitcher";
 import Link from "next/link";
-import { HomeIcon, AboutIcon, PenIcon, CVIcon, TestIcon } from "../../icons";
+import {
+  HomeIcon,
+  AboutIcon,
+  PenIcon,
+  CVIcon,
+  TestIcon,
+  CraftIcon,
+} from "../../icons";
 import { useRouter } from "next/router";
 import { Route, ROUTES } from "../../constants/routes";
 
@@ -21,7 +28,7 @@ export default function Navbar(): JSX.Element {
     >
       <nav
         className={cx(
-          "flex h-fit w-full items-center overflow-x-scroll no-scrollbar justify-between overflow-hidden border border-opacity-10 bg-opacity-80 px-4 py-2 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl",
+          "no-scrollbar flex h-fit w-full items-center justify-between overflow-hidden overflow-x-scroll border border-opacity-10 bg-opacity-80 px-4 py-2 backdrop-blur-xl duration-200 hover:bg-opacity-90 sm:w-fit sm:rounded-2xl",
           themeClasses.border,
           themeClasses.bg
         )}
@@ -63,6 +70,8 @@ const getRouteIcon = (href: Route["href"], isActive: boolean) => {
       return <AboutIcon filled={isActive} className="h-6 w-6" />;
     case "/works":
       return <PenIcon filled={isActive} className="h-6 w-6" />;
+    case "/craft":
+      return <CraftIcon filled={isActive} className="h-6 w-6" />;
     case "/ak-resume.pdf":
       return <CVIcon filled={isActive} className="h-6 w-6" />;
     default:
