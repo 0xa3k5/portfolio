@@ -102,7 +102,7 @@ export async function getStaticProps(context) {
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
-    config.NOTION_DATABASE_CASE_STUDIES,
+    config.NOTION_CASE_STUDIES,
     "post"
   );
 

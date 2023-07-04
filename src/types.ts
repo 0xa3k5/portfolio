@@ -59,10 +59,8 @@ export type WorkExp = {
   published: boolean;
   logo: string;
   website: string;
-  role: string;
   company: string;
   tagline: string;
-  description: string;
   period: string;
 };
 
@@ -95,4 +93,13 @@ export type Craft = {
   title: string;
   tags?: string[];
   date: string;
+};
+
+export type Bookmarks = {
+  isTool: boolean;
+  name: string;
+  url: string;
+  tags: string[];
+  createdAt: string;
+  favicon?: string;
 };

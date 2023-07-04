@@ -5,12 +5,14 @@ interface SectionTitleProps {
   title: string;
   className?: string;
   row?: boolean;
+  subtext?: string;
 }
 
 export default function SectionTitle({
   title,
   className,
   row = false,
+  subtext,
 }: SectionTitleProps): JSX.Element {
   const { themeClasses } = useTheme();
 
@@ -18,27 +20,24 @@ export default function SectionTitle({
     <div
       className={cx(
         className,
-        "flex flex-row items-baseline gap-16",
-        row ? "w-full lg:w-1/6" : ""
+        "flex flex-row items-baseline gap-16 lowercase",
+        row ? "sticky top-0 h-fit w-full lg:w-1/6" : null
       )}
     >
-      {!row && (
-        <hr className={`w-full ${themeClasses.color} text-opacity-10`} />
-      )}
-      <div className="relative flex flex-col">
+      <div className={cx("flex flex-col gap-4")}>
         <h2
-          className={`whitespace-nowrap ${
-            row ? "text-3xl" : "text-4xl"
-          } lowercase ${row ? "lg:whitespace-normal" : ""}`}
+          className={cx(
+            "text-3xl",
+            row ? "lg:whitespace-normal" : "whitespace-nowrap"
+          )}
         >
           {title}
         </h2>
+        {subtext && <p className="font-mono text-sm opacity-60">{subtext}</p>}
       </div>
-      <hr
-        className={`w-full ${row ? "hidden" : "block"} ${
-          themeClasses.color
-        } text-opacity-10`}
-      />
+      {!row && (
+        <hr className={cx("w-full text-opacity-10", themeClasses.color)} />
+      )}
     </div>
   );
 }

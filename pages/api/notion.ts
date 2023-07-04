@@ -1,5 +1,8 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
+import { config } from "../../config";
+import { inspect } from "util";
+
 import {
   NotionPost,
   WorkExp,
@@ -8,89 +11,112 @@ import {
   StaticPage,
   SideProject,
   Craft,
+  Exploration,
+  Bookmarks,
 } from "../../src/types";
-import { config } from "../../config";
-import { Exploration } from "../../src/types";
 import { MdStringObject } from "notion-to-md/build/types";
+
 export default class NotionService {
+  static NOTION_DATABASES = {
+    staticPage: config.NOTION_PAGES,
+    workExp: config.NOTION_WORK_EXPERIENCES,
+    caseStudies: config.NOTION_CASE_STUDIES,
+    sideProjects: config.NOTION_SIDE_PROJECTS,
+    explorations: config.NOTION_EXPLORATIONS,
+    feedbacks: config.NOTION_FEEDBACKS,
+    bookmarks: config.NOTION_BOOKMARKS,
+  };
+
   client: Client;
   n2m: NotionToMarkdown;
 
   constructor() {
     this.client = new Client({ auth: config.NOTION_API_KEY });
-    this.n2m = new NotionToMarkdown({ notionClient: this.client });
+    this.n2m = new NotionToMarkdown({
+      notionClient: this.client,
+    });
+  }
+
+  async queryDatabase(databaseId) {
+    const response = await this.client.databases.query({
+      database_id: databaseId,
+    });
+
+    return response.results;
+  }
+
+  transformData<T, R>(data: T[], transformer: (item: T) => R): R[] {
+    return data.map((res) => transformer(res));
   }
 
   async getStaticPage(): Promise<StaticPage[]> {
-    const response = await this.client.databases.query({
-      database_id: config.NOTION_DATABASE_PAGES,
-    });
-
-    const transformedPages = response.results.map((res) => {
-      return NotionService.staticPageTransformer(res);
-    });
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.staticPage
+    );
+    const transformedPages = this.transformData(
+      response,
+      NotionService.staticPageTransformer
+    );
 
     return transformedPages;
   }
 
   async getWorkExp(): Promise<WorkExp[]> {
-    const response = await this.client.databases.query({
-      database_id: config.NOTION_DATABASE_WORK_EXPERIENCES,
-    });
-
-    const transformedPosts = response.results
-      .map((res) => {
-        return NotionService.workExpTransformer(res);
-      })
-      .filter((p) => p.published);
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.workExp
+    );
+    const transformedPosts = this.transformData(
+      response,
+      NotionService.workExpTransformer
+    ).filter((p) => p.published);
 
     return transformedPosts;
   }
 
   async getCaseStudies(): Promise<NotionPost[]> {
-    const response = await this.client.databases.query({
-      database_id: config.NOTION_DATABASE_CASE_STUDIES,
-    });
-
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.postTransformer(res);
-    });
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.caseStudies
+    );
+    const transformedPosts = this.transformData(
+      response,
+      NotionService.postTransformer
+    );
 
     return transformedPosts;
   }
 
   async getSideProjects(): Promise<SideProject[]> {
-    const response = await this.client.databases.query({
-      database_id: config.NOTION_DATABASE_SIDE_PROJECTS,
-    });
-
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.sideProjectsTransformer(res);
-    });
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.sideProjects
+    );
+    const transformedPosts = this.transformData(
+      response,
+      NotionService.sideProjectsTransformer
+    );
 
     return transformedPosts;
   }
 
   async getExplorations(): Promise<Exploration[]> {
-    const resp = await this.client.databases.query({
-      database_id: config.NOTION_EXPLORATIONS,
-    });
-
-    const transformed = resp.results.map((res) => {
-      return NotionService.explorationsTransformer(res);
-    });
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.explorations
+    );
+    const transformed = this.transformData(
+      response,
+      NotionService.explorationsTransformer
+    );
 
     return transformed;
   }
 
   async getFeedbacks(): Promise<Feedback[]> {
-    const response = await this.client.databases.query({
-      database_id: config.NOTION_FEEDBACKS,
-    });
-
-    const transformedPosts = response.results.map((res) => {
-      return NotionService.feedbackTransformer(res);
-    });
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.feedbacks
+    );
+    const transformedPosts = this.transformData(
+      response,
+      NotionService.feedbackTransformer
+    );
 
     return transformedPosts;
   }
@@ -134,12 +160,12 @@ export default class NotionService {
   }
 
   async getNotionPageDetail(
-    slug: string,
-    database_id: string,
-    pageType: "post" | "page"
+    slug,
+    databaseId,
+    pageType
   ): Promise<NotionPageDetail> {
     const response = await this.client.databases.query({
-      database_id: database_id,
+      database_id: databaseId,
       filter: {
         property: "Slug",
         formula: {
@@ -163,6 +189,18 @@ export default class NotionService {
     return {
       markdown,
     };
+  }
+
+  async getBookmarks(): Promise<Bookmarks[]> {
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.bookmarks
+    );
+    const transformedPosts = this.transformData(
+      response,
+      NotionService.bookmarksTransformer
+    );
+
+    return transformedPosts;
   }
 
   private static staticPageTransformer(page): StaticPage {
@@ -262,10 +300,8 @@ export default class NotionService {
       company: page.properties.Company.title[0].plain_text,
       tagline: page.properties.Tagline.rich_text[0].plain_text,
       period: page.properties.Period.rich_text[0].plain_text,
-      role: page.properties.Role.rich_text[0].plain_text,
       logo: page.properties.Logo.files[0].external.url,
       website: page.properties.Website.rich_text[0].plain_text,
-      description: page.properties.Description.rich_text[0].plain_text,
     };
   }
 
@@ -289,6 +325,16 @@ export default class NotionService {
       slug: page.properties.Slug?.formula.string || "",
       title: page.properties.Name.title[0].plain_text,
       date: page.properties.Date.rich_text[0].plain_text,
+    };
+  }
+
+  private static bookmarksTransformer(page): Bookmarks {
+    return {
+      name: page.properties.Name.title[0].plain_text,
+      url: page.properties.URL.url,
+      isTool: page.properties.isTool.checkbox,
+      createdAt: page.created_time,
+      tags: page.properties.Tags.multi_select.map((tag) => tag.name),
     };
   }
 }
