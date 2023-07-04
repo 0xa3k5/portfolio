@@ -27,7 +27,7 @@ export const ROUTES: Route[] = [
   },
   {
     id: 5,
-    href: "/ak-resume.pdf",
+    href: "https://www.dropbox.com/s/txnaczb8pu73tv9/akresume.pdf?dl=0",
     name: "Resume",
   },
 ];

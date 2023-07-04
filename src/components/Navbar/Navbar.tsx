@@ -45,7 +45,7 @@ export default function Navbar(): JSX.Element {
               target={r.href === "/ak-resume.pdf" ? "_blank" : "_self"}
             >
               <Button.Icon isActive={isActive}>
-                {getRouteIcon(r.href, isActive)}
+                {getRouteIcon(r.name, isActive)}
               </Button.Icon>
             </Link>
           );
@@ -63,19 +63,19 @@ export default function Navbar(): JSX.Element {
   );
 }
 
-const getRouteIcon = (href: Route["href"], isActive: boolean) => {
-  switch (href) {
-    case "/":
+const getRouteIcon = (name: Route["name"], isActive: boolean) => {
+  switch (name) {
+    case "Home":
       return <HomeIcon filled={isActive} className="h-6 w-6" />;
-    case "/about":
+    case "About":
       return <AboutIcon filled={isActive} className="h-6 w-6" />;
-    case "/works":
+    case "Works":
       return <PenIcon filled={isActive} className="h-6 w-6" />;
-    case "/craft":
+    case "Craft":
       return <CraftIcon filled={isActive} className="h-6 w-6" />;
-    case "/bookmarks":
+    case "Bookmarks":
       return <BookmarkIcon filled={isActive} className="h-6 w-6" />;
-    case "/ak-resume.pdf":
+    case "Resume":
       return <CVIcon filled={isActive} className="h-6 w-6" />;
     default:
       return <TestIcon filled={isActive} className="h-6 w-6" />;
