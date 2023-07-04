@@ -1,5 +1,5 @@
 import { Variants, motion, AnimatePresence } from "framer-motion";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { ThemeColors } from "../../../../constants/theme-colors";
 
 interface Props {
