@@ -95,7 +95,9 @@ export default function HoldToLikeButton({
           d="M1.25 9.00042c0-3.95391 3.37678-6.74978 6.75-6.74978 1.37536 0 2.86.39613 3.9984 1.55941 1.1299-1.16535 2.5997-1.57977 4.0125-1.55933 3.355.04854 6.7391 2.78704 6.7391 6.7497 0 6.01898-5.7695 10.34798-10.75 12.83808C7.01949 19.3484 1.25 15.0194 1.25 9.00042Z"
         />
       </motion.svg>
-      {hasText && (isLiked ? "liked" : "like me")}
+      {hasText && (
+        <span className="select-none">{isLiked ? "liked" : "like me"}</span>
+      )}
       <motion.div
         className="absolute bottom-0 left-0 -z-10 h-full"
         style={{

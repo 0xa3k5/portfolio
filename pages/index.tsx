@@ -1,11 +1,5 @@
 import { GetStaticProps } from "next";
-import {
-  NotionPost,
-  SideProject,
-  StaticPage,
-  Feedback,
-  Exploration,
-} from "../src/types";
+import { NotionPost, SideProject, StaticPage, Feedback } from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
@@ -15,7 +9,6 @@ import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
 import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
-import ExplorationsCard from "../src/components/Cards/ExplorationsCard/ExplorationsCard";
 import MainWrapper from "../src/components/MainWrapper";
 import Layout from "../src/components/Layout";
 
@@ -24,7 +17,6 @@ interface HomeProps {
   works: NotionPost[];
   sideProjects: SideProject[];
   feedbacks: Feedback[];
-  explorations: Exploration[];
 }
 
 export default function Home({
@@ -32,7 +24,6 @@ export default function Home({
   works,
   sideProjects,
   feedbacks,
-  explorations,
 }: HomeProps) {
   return (
     <Layout>
@@ -43,7 +34,6 @@ export default function Home({
           <SectionTitle title="selected work" />
           <div className="flex flex-col gap-8 md:gap-12">
             {works
-              .filter((work) => work.properties.published === true)
               .sort(
                 (a: NotionPost, b: NotionPost) =>
                   a.properties.number - b.properties.number
@@ -72,14 +62,6 @@ export default function Home({
         <SectionsWrapper>
           <SectionTitle title="feedbacks & testimonials" />
           <FeedbackCard.Grouped feedback={feedbacks} />
-        </SectionsWrapper>
-        <SectionsWrapper>
-          <SectionTitle title="explorations" />
-          <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
-            {explorations.map((p: Exploration) => {
-              return <ExplorationsCard exploration={p} key={p.id} />;
-            })}
-          </div>
         </SectionsWrapper>
       </MainWrapper>
     </Layout>

@@ -40,7 +40,7 @@ export default function About({ page, workExp, feedbacks }: AboutProps) {
             />
           </div>
           <div className="flex flex-1 flex-col gap-4">
-            <h1 className="text-4xl font-semibold md:text-5xl" key="hero_title">
+            <h1 className="text-3xl font-semibold md:text-4xl" key="hero_title">
               {page.heroTitle}
             </h1>
             <p className="text-xl font-light opacity-70">{page.heroText}</p>

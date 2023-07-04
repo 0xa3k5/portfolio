@@ -14,8 +14,8 @@ export default function SectionsWrapper({
   return (
     <section
       className={cx(
-        "flex w-full flex-col gap-12 px-4 md:px-12",
-        row ? "gap-24 lg:flex-row" : "",
+        "flex w-full flex-col px-4 md:px-12",
+        row ? "gap-8 md:gap-16 lg:flex-row" : "gap-8",
         className
       )}
     >

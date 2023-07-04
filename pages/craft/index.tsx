@@ -9,6 +9,8 @@ import { RightArrowIcon } from "../../src/icons";
 import Link from "next/link";
 import Pinpad from "../../src/components/craft/Pinpad";
 import { ReactNode, useState } from "react";
+import SectionsWrapper from "../../src/components/SectionsWrapper";
+import SectionTitle from "../../src/components/SectionTitle";
 
 export default function Craft(): JSX.Element {
   const [isAnalogToggleOn, setIsAnalogToggleOn] = useState(false);
@@ -58,34 +60,38 @@ export default function Craft(): JSX.Element {
   return (
     <Layout hideCTA>
       <MainWrapper>
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-          {CRAFTS.sort((a, b) => a.id - b.id).map((craft) => {
-            return (
-              <div
-                className={cx(
-                  "flex flex-col gap-4",
-                  craft.slug === "pinpad"
-                    ? "col-span-1 md:col-span-2"
-                    : "col-span-1"
-                )}
-                key={craft.slug}
-              >
-                <CraftWrapper className="relative">
-                  {craft.component}
-                </CraftWrapper>
-                <Link href={`/craft/${craft.slug}`} className="group">
-                  <span className="flex items-center justify-between gap-4">
-                    <span className="flex flex-col">
-                      <h6 className={cx("text-2xl")}>{craft.title}</h6>
-                      <span className="opacity-60">{craft.date}</span>
+        <SectionsWrapper>
+          <SectionTitle title="experimental" />
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+            {CRAFTS.sort((a, b) => a.id - b.id).map((craft) => {
+              return (
+                <div
+                  className={cx(
+                    "flex flex-col gap-4",
+                    craft.slug === "pinpad"
+                      ? "col-span-1 md:col-span-2"
+                      : "col-span-1"
+                  )}
+                  key={craft.slug}
+                >
+                  <CraftWrapper className="relative">
+                    {craft.component}
+                  </CraftWrapper>
+                  <Link href={`/craft/${craft.slug}`} className="group">
+                    <span className="flex items-center justify-between gap-4">
+                      <span className="flex flex-col">
+                        <h6 className={cx("text-2xl")}>{craft.title}</h6>
+                        <span className="opacity-60">{craft.date}</span>
+                      </span>
+                      <RightArrowIcon className="h-6 w-6 -rotate-45 opacity-40 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" />
                     </span>
-                    <RightArrowIcon className="h-6 w-6 -rotate-45 opacity-40 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" />
-                  </span>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </SectionsWrapper>
+
         <CraftFooter />
       </MainWrapper>
     </Layout>

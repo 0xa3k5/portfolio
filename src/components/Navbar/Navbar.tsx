@@ -12,6 +12,7 @@ import {
   CVIcon,
   TestIcon,
   CraftIcon,
+  BookmarkIcon,
 } from "../../icons";
 import { useRouter } from "next/router";
 import { Route, ROUTES } from "../../constants/routes";
@@ -72,6 +73,8 @@ const getRouteIcon = (href: Route["href"], isActive: boolean) => {
       return <PenIcon filled={isActive} className="h-6 w-6" />;
     case "/craft":
       return <CraftIcon filled={isActive} className="h-6 w-6" />;
+    case "/bookmarks":
+      return <BookmarkIcon filled={isActive} className="h-6 w-6" />;
     case "/ak-resume.pdf":
       return <CVIcon filled={isActive} className="h-6 w-6" />;
     default:

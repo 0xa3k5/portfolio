@@ -16,17 +16,17 @@ export const ROUTES: Route[] = [
     name: "About",
   },
   {
-    id: 2,
-    href: "/works",
-    name: "Works",
-  },
-  {
     id: 3,
     href: "/craft",
     name: "Craft",
   },
   {
     id: 4,
+    href: "/bookmarks",
+    name: "Bookmarks",
+  },
+  {
+    id: 5,
     href: "/ak-resume.pdf",
     name: "Resume",
   },

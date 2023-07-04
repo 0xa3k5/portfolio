@@ -20,7 +20,9 @@ export const useButtonHoverSound = () => {
   const [sprite, setSprite] = useState(2);
 
   const playSound = () => {
-    if (volume) play({ id: sprite.toString() }), setSprite(getRandomInt());
+    if (volume) {
+      play({ id: sprite.toString() }), setSprite(getRandomInt());
+    }
   };
 
   return { playSound, pause, stop };

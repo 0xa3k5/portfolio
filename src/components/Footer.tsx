@@ -9,7 +9,7 @@ export default function Footer(): JSX.Element {
       <span
         className={`font-mono text-lg ${themeClasses.color} text-opacity-40`}
       >
-        built by{" "}
+        crafted by{" "}
         <Link
           href="/"
           className={`${themeClasses.color} text-opacity-40 duration-150 hover:text-opacity-100`}

@@ -1,5 +1,5 @@
 import { Variants, motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { ThemeColors } from "../../../../constants/theme-colors";
 
 interface Props {
@@ -21,16 +21,14 @@ const letterVar: Variants = {
   },
 };
 
+const cherryPickGibberish = () => {
+  const gibberishLetters = ["&", "*", "?", ";", "!", "$", "#"];
+  const randomIndex = Math.floor(Math.random() * gibberishLetters.length);
+  return gibberishLetters[randomIndex];
+};
+
 export default function SideProjects({ themeColors }: Props) {
   const [isGibberish, setIsGibberish] = useState(true);
-  const [text, setText] = useState("");
-
-  const cherryPickGibberish = () => {
-    const gibberishLetters = ["&", "*", "?", ";", "!", "$", "#"];
-    const randomIndex = Math.floor(Math.random() * gibberishLetters.length);
-    return gibberishLetters[randomIndex];
-  };
-
   const gibberish = "side projects"
     .split("")
     .slice(0, 8)
@@ -39,11 +37,13 @@ export default function SideProjects({ themeColors }: Props) {
     })
     .join("");
 
+  const [text, setText] = useState("#??##*!&");
+
   const handleOnClick = () => {
     setIsGibberish(!isGibberish);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isGibberish) {
       setText(gibberish);
     } else {
@@ -55,7 +55,7 @@ export default function SideProjects({ themeColors }: Props) {
     <>
       <motion.button onClick={handleOnClick} className="relative inline-block">
         <span className="flex items-center whitespace-nowrap">
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="popLayout" initial={false}>
             {text.split("").map((letter, i) => {
               return (
                 <motion.span

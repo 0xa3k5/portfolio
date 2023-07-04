@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./@types", "next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./@types", "next.config.js", "pages/api/favicon.ts"],
   "exclude": ["node_modules"]
 }
