@@ -1,5 +1,5 @@
 import { Variants, motion, AnimatePresence } from "framer-motion";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeColors } from "../../../../constants/theme-colors";
 
 interface Props {
@@ -43,7 +43,7 @@ export default function SideProjects({ themeColors }: Props) {
     setIsGibberish(!isGibberish);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isGibberish) {
       setText(gibberish);
     } else {

@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeContextProvider } from "../src/contexts/ThemeContext";
+import GAScript from "./ga";
 
 function MyApp({
   Component,
@@ -14,6 +15,7 @@ function MyApp({
   return (
     <ThemeContextProvider>
       <SessionProvider session={session}>
+        <GAScript />
         <AnimatePresence
           mode="wait"
           initial={false}
