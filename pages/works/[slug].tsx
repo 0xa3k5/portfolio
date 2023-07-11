@@ -5,7 +5,7 @@ import { config } from "../../config";
 import OverviewCard from "../../src/components/Cards/OverviewCard";
 import { getMorePosts } from "../../src/utils/get-more-posts";
 import MorePosts from "../../src/components/MorePosts";
-import { NotionPost, Feedback } from "../../src/types";
+import { NotionPost, Feedback, Collaborator } from "../../src/types";
 import FeedbackCard from "../../src/components/Cards/FeedbackCard";
 import { motion } from "framer-motion";
 import { motionVariants } from "../../src/constants/motion-variants";
@@ -23,6 +23,7 @@ interface DetailProps {
   morePosts: NotionPost[];
   feedbacks: Feedback[];
   hasReadPermission?: boolean;
+  collaborators: Collaborator[];
 }
 
 export default function Detail({
@@ -30,6 +31,7 @@ export default function Detail({
   post,
   morePosts,
   feedbacks,
+  collaborators,
 }: DetailProps) {
   const { status } = useSession();
   const router = useRouter();
@@ -38,6 +40,10 @@ export default function Detail({
 
   const postFeedbacks = feedbacks.filter((f) =>
     post.feedbacks.relationIds.includes(f.id)
+  );
+
+  const postCollaborators = collaborators.filter((c) =>
+    post.collaborators.relationIds.includes(c.id)
   );
 
   return (
@@ -67,7 +73,7 @@ export default function Detail({
         >
           <Hero.Post post={post} className="w-full" />
           <div className="flex w-full max-w-5xl flex-col items-center gap-24 px-4 py-24 2xl:max-w-6xl">
-            <OverviewCard post={post} />
+            <OverviewCard post={post} collaborators={postCollaborators} />
             <article
               className={`${
                 theme === "light" ? "prose" : "prose-invert"
@@ -99,6 +105,7 @@ export async function getStaticProps(context) {
   const notionService = new NotionService();
 
   const feedbacks = await notionService.getFeedbacks();
+  const collaborators = await notionService.getCollaborators();
 
   const p = await notionService.getNotionPageDetail(
     context.params?.slug as string,
@@ -112,6 +119,7 @@ export async function getStaticProps(context) {
       post: p.post,
       morePosts: pages.morePosts,
       feedbacks: feedbacks,
+      collaborators,
     },
   };
 }

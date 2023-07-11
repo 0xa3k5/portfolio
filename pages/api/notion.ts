@@ -13,6 +13,7 @@ import {
   Craft,
   Exploration,
   Bookmarks,
+  Collaborator,
 } from "../../src/types";
 import { MdStringObject } from "notion-to-md/build/types";
 
@@ -25,6 +26,7 @@ export default class NotionService {
     explorations: config.NOTION_EXPLORATIONS,
     feedbacks: config.NOTION_FEEDBACKS,
     bookmarks: config.NOTION_BOOKMARKS,
+    collaborators: config.NOTION_COLLABORATORS,
   };
 
   client: Client;
@@ -195,12 +197,15 @@ export default class NotionService {
     const response = await this.queryDatabase(
       NotionService.NOTION_DATABASES.bookmarks
     );
-    const transformedPosts = this.transformData(
-      response,
-      NotionService.bookmarksTransformer
+    return this.transformData(response, NotionService.bookmarksTransformer);
+  }
+
+  async getCollaborators(): Promise<Collaborator[]> {
+    const response = await this.queryDatabase(
+      NotionService.NOTION_DATABASES.collaborators
     );
 
-    return transformedPosts;
+    return this.transformData(response, NotionService.collaboratorTransformer);
   }
 
   private static staticPageTransformer(page): StaticPage {
@@ -275,7 +280,13 @@ export default class NotionService {
         relationIds:
           page.properties.Feedbacks.relation.map((obj) => obj.id) || null,
       },
+      collaborators: {
+        id: page.properties.Collaborators.id,
+        relationIds:
+          page.properties.Collaborators.relation.map((obj) => obj.id) || null,
+      },
     };
+    
     return transformedPost;
   }
 
@@ -335,6 +346,16 @@ export default class NotionService {
       isTool: page.properties.isTool.checkbox,
       createdAt: page.created_time,
       tags: page.properties.Tags.multi_select.map((tag) => tag.name),
+    };
+  }
+
+  private static collaboratorTransformer(page): Collaborator {
+    return {
+      id: page.id,
+      name: page.properties.Name.title[0].plain_text,
+      url: page.properties.URL.url,
+      role: page.properties.Role.rich_text[0].plain_text,
+      image: page.properties.Image.files[0].external.url,
     };
   }
 }

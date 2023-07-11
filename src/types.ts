@@ -40,6 +40,10 @@ export type NotionPost = {
     id: string;
     relationIds: string[];
   };
+  collaborators: {
+    id: string;
+    relationIds: string[];
+  };
 };
 
 export type Feedback = {
@@ -102,4 +106,12 @@ export type Bookmarks = {
   tags: string[];
   createdAt: string;
   favicon?: string;
+};
+
+export type Collaborator = {
+  id: string;
+  image: string;
+  name: string;
+  role: string;
+  url: string;
 };

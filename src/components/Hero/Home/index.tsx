@@ -10,13 +10,14 @@ export default function Hero(): JSX.Element {
 
   return (
     <div className="flex w-full flex-col gap-8 px-4 py-16 md:px-12">
-      <div className="relative aspect-square w-1/6 overflow-clip rounded-full sm:w-1/12">
+      <div className="relative flex aspect-square shrink-0 w-1/6 overflow-clip rounded-full sm:w-1/12">
         <Image
           src={"/ak.jpg"}
           alt="Ali Kemal Akcay – Product Designer"
           width={512}
           height={512}
           priority
+          className="object-cover"
         />
       </div>
       <motion.h1
