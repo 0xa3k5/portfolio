@@ -19,7 +19,7 @@ export const darkTheme: ThemeClasses = {
   border: "border-foam",
   outline: "outline-foam",
   textHighlight: "text-daisy",
-  textHover: "hover:text-midnight",
+  textHover: "hover:text-daisy",
 };
 
 export const lightTheme: ThemeClasses = {

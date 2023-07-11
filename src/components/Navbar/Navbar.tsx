@@ -16,11 +16,15 @@ import {
 } from "../../icons";
 import { useRouter } from "next/router";
 import { Route, ROUTES } from "../../constants/routes";
+import Tooltip from "../Tooltip";
+import { useState } from "react";
 
 export default function Navbar(): JSX.Element {
   const { themeClasses } = useTheme();
   const { inversedRGBColors } = useThemeRGBColors();
   const router = useRouter();
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div
       className={cx(
@@ -43,10 +47,14 @@ export default function Navbar(): JSX.Element {
               href={r.href}
               key={i}
               target={r.href === "/ak-resume.pdf" ? "_blank" : "_self"}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="relative"
             >
               <Button.Icon isActive={isActive}>
                 {getRouteIcon(r.name, isActive)}
               </Button.Icon>
+              {isHovered && <Tooltip text={r.name} position="top" />}
             </Link>
           );
         })}

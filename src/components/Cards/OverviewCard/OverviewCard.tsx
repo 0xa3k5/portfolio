@@ -1,34 +1,48 @@
+import Link from "next/link";
 import { useTheme } from "../../../contexts/ThemeContext";
-import { NotionPost } from "../../../types";
+import { Collaborator, NotionPost } from "../../../types";
+import Image from "next/image";
+import cx from "classnames";
+import CollaboratorItem from "./CollaboratorItem";
 
 interface OverviewCardProps {
   post: NotionPost;
+  collaborators: Collaborator[];
 }
 
-export default function OverviewCard({ post }: OverviewCardProps): JSX.Element {
+export default function OverviewCard({
+  post,
+  collaborators,
+}: OverviewCardProps): JSX.Element {
   const { themeClasses } = useTheme();
+  console.log(collaborators)
 
   return (
     <div
-      className={`grid grid-cols-2 justify-center gap-12 border-b border-opacity-10 pb-12 sm:grid-cols-12 ${themeClasses.border}`}
+      className={`flex w-full justify-between border-b border-opacity-10 pb-12 ${themeClasses.border}`}
     >
-      <div className="col-span-1 flex flex-col gap-1 sm:col-span-2 sm:col-start-2">
+      <div className="flex flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">ORG</p>
-        <p className="text-lg md:text-base">{post.org.orgName}</p>
+        <Link
+          href={post.org.website}
+          target="_blank"
+          className={cx(
+            "text-lg duration-150 md:text-base",
+            themeClasses.textHover
+          )}
+        >
+          {post.org.orgName}
+        </Link>
       </div>
-      <div className="col-span-1 flex flex-col gap-1 sm:col-span-2">
-        <p className="text-xs uppercase tracking-widest opacity-60">Type</p>
-        <p className="text-lg md:text-base">{post.details.type}</p>
-      </div>
-      <div className="col-span-1 flex flex-col gap-1 sm:col-span-2">
+      <div className="flex flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">Year</p>
         <p className="text-lg md:text-base">{post.details.period}</p>
       </div>
-      <div className="col-span-1 flex flex-col gap-1 sm:col-span-2">
+      <div className="flex flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">Position</p>
         <p className="text-lg md:text-base">{post.details.position}</p>
       </div>
-      <div className="col-span-1 flex flex-col gap-1 sm:col-span-3">
+      <div className="flex flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">
           Contributions
         </p>
@@ -41,6 +55,16 @@ export default function OverviewCard({ post }: OverviewCardProps): JSX.Element {
             );
           })}
         </ul>
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="text-xs uppercase tracking-widest opacity-60">
+          Collaborators
+        </p>
+        <div className="flex gap-2">
+          {collaborators.map((collab, i) => {
+            return <CollaboratorItem collaborator={collab} key={i}  />;
+          })}
+        </div>
       </div>
     </div>
   );
