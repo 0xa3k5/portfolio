@@ -35,6 +35,10 @@ module.exports = {
         protocol: "https",
         hostname: "**.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "media.licdn.com",
+      },
     ],
   },
 };

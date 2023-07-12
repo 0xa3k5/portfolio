@@ -15,13 +15,13 @@ export default function OverviewCard({
   collaborators,
 }: OverviewCardProps): JSX.Element {
   const { themeClasses } = useTheme();
-  console.log(collaborators)
+  console.log(collaborators);
 
   return (
     <div
-      className={`flex w-full justify-between border-b border-opacity-10 pb-12 ${themeClasses.border}`}
+      className={`flex w-full justify-between gap-8 overflow-scroll border-b border-opacity-10 pb-12 ${themeClasses.border}`}
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-min shrink-0 flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">ORG</p>
         <Link
           href={post.org.website}
@@ -34,15 +34,15 @@ export default function OverviewCard({
           {post.org.orgName}
         </Link>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-min shrink-0 flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">Year</p>
         <p className="text-lg md:text-base">{post.details.period}</p>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-min shrink-0 flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">Position</p>
         <p className="text-lg md:text-base">{post.details.position}</p>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-min shrink-0 flex-col gap-1">
         <p className="text-xs uppercase tracking-widest opacity-60">
           Contributions
         </p>
@@ -56,15 +56,21 @@ export default function OverviewCard({
           })}
         </ul>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-min shrink-0 flex-col gap-2">
         <p className="text-xs uppercase tracking-widest opacity-60">
           Collaborators
         </p>
-        <div className="flex gap-2">
+        <ul className="grid grid-cols-4 gap-2">
           {collaborators.map((collab, i) => {
-            return <CollaboratorItem collaborator={collab} key={i}  />;
+            return (
+              <CollaboratorItem
+                className="col-span-1"
+                collaborator={collab}
+                key={i}
+              />
+            );
           })}
-        </div>
+        </ul>
       </div>
     </div>
   );

@@ -24,13 +24,13 @@ export default function Tooltip({
       positionClass = "-top-8 left-1/2 -translate-x-1/2";
       break;
     case "bottom":
-      positionClass = "-bottom-8 left-1/2 -translate-x-1/2";
+      positionClass = "-bottom-10 left-1/2 -translate-x-1/2";
   }
 
   return (
     <div
       className={cx(
-        "absolute z-20 flex items-center justify-center whitespace-nowrap rounded-full border border-opacity-20 px-4 py-2 text-sm",
+        "absolute z-20 flex items-center justify-center whitespace-nowrap rounded-full border border-opacity-20 px-4 py-2 text-xs",
         positionClass,
         themeClasses.color,
         themeClasses.bg,

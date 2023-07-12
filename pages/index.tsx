@@ -1,5 +1,12 @@
 import { GetStaticProps } from "next";
-import { NotionPost, SideProject, StaticPage, Feedback } from "../src/types";
+import {
+  NotionPost,
+  SideProject,
+  StaticPage,
+  Feedback,
+  WorkExp,
+  Collaborator,
+} from "../src/types";
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
@@ -11,12 +18,15 @@ import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
 import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import MainWrapper from "../src/components/MainWrapper";
 import Layout from "../src/components/Layout";
+import WorkExperience from "../src/components/WorkExperience";
 
 interface HomeProps {
   page: StaticPage;
   works: NotionPost[];
   sideProjects: SideProject[];
   feedbacks: Feedback[];
+  collaborators: Collaborator[];
+  workExp: WorkExp[];
 }
 
 export default function Home({
@@ -24,12 +34,32 @@ export default function Home({
   works,
   sideProjects,
   feedbacks,
+  collaborators,
+  workExp,
 }: HomeProps) {
   return (
     <Layout>
       <PageHead page={page} />
       <MainWrapper>
         <Hero.Home />
+        <SectionsWrapper>
+          <SectionTitle title="Work Experiences" />
+          <div className="flex w-full flex-col">
+            {workExp
+              .sort((a: WorkExp, b: WorkExp) => b.num - a.num)
+              .map((w: WorkExp) => {
+                return (
+                  <WorkExperience
+                    collaborators={collaborators.filter((collab) =>
+                      w.collaborators.relationIds.includes(collab.id)
+                    )}
+                    job={w}
+                    key={`about-${w.id}`}
+                  />
+                );
+              })}
+          </div>
+        </SectionsWrapper>
         <SectionsWrapper>
           <SectionTitle title="selected work" />
           <div className="flex flex-col gap-8 md:gap-12">
@@ -78,6 +108,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const sideProjects = await notionService.getSideProjects();
   const feedbacks = await notionService.getFeedbacks();
   const explorations = await notionService.getExplorations();
+  const collaborators = await notionService.getCollaborators();
+  const workExp = await notionService.getWorkExp();
 
   const works = posts.filter((p) => p.properties.tag !== "Side Project");
 
@@ -88,6 +120,8 @@ export const getStaticProps: GetStaticProps = async () => {
       sideProjects,
       feedbacks,
       explorations,
+      collaborators,
+      workExp,
     },
   };
 };
