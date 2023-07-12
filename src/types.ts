@@ -66,6 +66,10 @@ export type WorkExp = {
   company: string;
   tagline: string;
   period: string;
+  collaborators: {
+    id: string;
+    relationIds: string[];
+  };
 };
 
 export type NotionPageDetail = {

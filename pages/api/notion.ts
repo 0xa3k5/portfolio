@@ -313,6 +313,11 @@ export default class NotionService {
       period: page.properties.Period.rich_text[0].plain_text,
       logo: page.properties.Logo.files[0].external.url,
       website: page.properties.Website.rich_text[0].plain_text,
+      collaborators: {
+        id: page.properties.Teammates.id,
+        relationIds:
+          page.properties.Teammates.relation.map((obj) => obj.id) || null,
+      },
     };
   }
 

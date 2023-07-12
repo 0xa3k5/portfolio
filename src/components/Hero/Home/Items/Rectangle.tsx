@@ -1,6 +1,7 @@
 import { Variants, AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { ThemeColors } from "../../../../constants/theme-colors";
+import cx from 'classnames';
 
 interface Props {
   themeColors: ThemeColors;
@@ -51,7 +52,10 @@ export default function Rectangle({ themeColors }: Props) {
           duration: 0.3,
           type: "ease",
         }}
-        className="relative inline-flex min-w-[2rem] pb-2"
+        className={cx(
+          "relative inline-flex min-w-[2rem] pb-2",
+          isExpanded ? "animate-none" : "animate-pulse"
+        )}
       >
         <motion.span className="absolute left-0 top-0 h-full w-full">
           <span
