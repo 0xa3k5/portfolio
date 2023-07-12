@@ -7,7 +7,7 @@ export type SideProject = {
   date: number;
   website: string | null;
   logo: string | null;
-  thumbnail: string | null;
+  thumbnail: string[] | null;
 };
 
 export type NotionPost = {

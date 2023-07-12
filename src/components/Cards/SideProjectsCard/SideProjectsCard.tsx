@@ -16,7 +16,7 @@ export default function SideProjectsCard({
   className,
 }: SideProjectsCardProps): JSX.Element {
   const { themeClasses } = useTheme();
-  
+
   return (
     <Link
       href={post.website ?? ""}
@@ -30,37 +30,48 @@ export default function SideProjectsCard({
         className
       )}
     >
-      <div className="flex w-full items-start justify-between">
-        <div className="flex flex-col">
-          <div
+      <span className="flex w-full items-start justify-between">
+        <span className="flex flex-col">
+          <span
             className={`flex rounded-full ${themeClasses.border} mb-2 w-fit border border-opacity-10 bg-opacity-10 px-2 py-1`}
           >
             <span className="text-sm opacity-60">{post.date}</span>
-          </div>
+          </span>
           <h6 className="text-2xl">{post.title}</h6>
           <span className="opacity-60">{post.description}</span>
-        </div>
+        </span>
         {post.website && (
           <Button.Icon circle>
             <RightArrowIcon className="h-6 w-6 -rotate-45 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1" />
           </Button.Icon>
         )}
-      </div>
-      <div className={`relative flex w-full shrink-0 overflow-clip rounded-xl`}>
-        <Image
-          alt={post.title}
-          src={post.thumbnail ?? ""}
-          width={512}
-          height={512}
-          priority
-          style={{
-            objectFit: "contain",
-          }}
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-        />
-      </div>
+      </span>
+      <span className="flex w-full gap-2">
+        {post.thumbnail.length
+          ? post.thumbnail.map((thumbnail, i) => {
+              return (
+                <span
+                  key={i}
+                  className="relative flex h-32 w-32 overflow-clip rounded-xl"
+                >
+                  <Image
+                    alt={post.title}
+                    src={thumbnail}
+                    width={512}
+                    height={512}
+                    priority
+                    style={{
+                      objectFit: "cover",
+                    }}
+                    sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+                  />
+                </span>
+              );
+            })
+          : null}
+      </span>
     </Link>
   );
 }

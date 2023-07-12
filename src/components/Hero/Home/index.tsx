@@ -9,9 +9,9 @@ export default function Hero(): JSX.Element {
   const { themeClasses, themeColors } = useTheme();
 
   return (
-    <div className="flex w-full flex-col gap-8 px-4 py-16 md:px-12">
+    <div className="flex w-full flex-col gap-8 px-4 py-8 md:px-12 md:py-16">
       <div className="flex items-center gap-4">
-        <div className="relative flex aspect-square w-1/6 shrink-0 overflow-clip rounded-xl sm:w-16">
+        <div className="relative flex aspect-square w-14 shrink-0 overflow-clip rounded-xl">
           <Image
             src={"/ak.jpg"}
             alt="Ali Kemal Akcay – Product Designer"
@@ -21,9 +21,9 @@ export default function Hero(): JSX.Element {
             className="object-cover"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-xl">Ali Kemal Akcay</span>
-          <span className="opacity-60">Product Designer</span>
+        <div className="flex flex-col">
+          <span className="text-lg">Ali Kemal Akçay</span>
+          <span className="opacity-60">Generalist Product Designer</span>
         </div>
       </div>
       <motion.h1

@@ -332,7 +332,7 @@ export default class NotionService {
       website: page.properties.Website.rich_text[0]?.plain_text ?? null,
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Date.number,
-      thumbnail: page.properties.Thumbnail?.files[0]?.external.url ?? null,
+      thumbnail: page.properties.Thumbnails?.files.map((thumbnail) => thumbnail.external.url) ?? null,
     };
   }
   private static craftTransformer(page): Craft {
