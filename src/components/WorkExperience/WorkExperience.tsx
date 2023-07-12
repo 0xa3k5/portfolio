@@ -18,7 +18,7 @@ export default function WorkExperience({
 
   return (
     <div
-      className={`flex ${themeClasses.border} flex-col-reverse py-8 items-center justify-between gap-4 border-b border-opacity-10 last-of-type:border-none sm:flex-row`}
+      className={`flex ${themeClasses.border} flex-col-reverse items-center justify-between gap-4 border-b border-opacity-10 py-8 last-of-type:border-none sm:flex-row`}
     >
       <div className="flex flex-col gap-4">
         <span className={`${themeClasses.color} text-opacity-40`}>
