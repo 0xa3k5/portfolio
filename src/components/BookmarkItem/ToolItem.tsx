@@ -42,10 +42,10 @@ export default function ToolItem({ bookmark, className }: Props) {
         </span>
         <span className="flex flex-col gap-1">
           <span>{bookmark.name}</span>
-          <span className={cx("text-sm opacity-40")}>
+          <span className="text-sm opacity-40">
             {bookmark.url.replace(/^(https?:\/\/)?(www\.)?/i, "")}
           </span>
-          <span className={cx("mt-2 opacity-40 text-sm")}>
+          <span className={cx("mt-2 text-sm opacity-40")}>
             {bookmark.tags.join(", ")}
           </span>
         </span>
