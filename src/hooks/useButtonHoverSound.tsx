@@ -16,6 +16,7 @@ export const useButtonHoverSound = () => {
       3: [2000, 160],
     },
     volume: 0.05,
+    interrupt: true,
   });
   const [sprite, setSprite] = useState(2);
 

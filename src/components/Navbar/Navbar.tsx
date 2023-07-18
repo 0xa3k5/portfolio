@@ -12,6 +12,7 @@ import {
   TestIcon,
   CraftIcon,
   BookmarkIcon,
+  BulbIcon,
 } from "../../icons";
 import { useRouter } from "next/router";
 import { Route, ROUTES } from "../../constants/routes";
@@ -72,6 +73,8 @@ const getRouteIcon = (name: Route["name"], isActive: boolean) => {
       return <PenIcon filled={isActive} className="h-6 w-6" />;
     case "Craft":
       return <CraftIcon filled={isActive} className="h-6 w-6" />;
+    case "Ideas":
+      return <BulbIcon filled={isActive} className="h-6 w-6" />;
     case "Bookmarks":
       return <BookmarkIcon filled={isActive} className="h-6 w-6" />;
     case "Resume":

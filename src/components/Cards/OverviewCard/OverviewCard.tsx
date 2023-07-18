@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { Collaborator, NotionPost } from "../../../types";
-import Image from "next/image";
 import cx from "classnames";
 import CollaboratorItem from "./CollaboratorItem";
 
@@ -15,7 +14,6 @@ export default function OverviewCard({
   collaborators,
 }: OverviewCardProps): JSX.Element {
   const { themeClasses } = useTheme();
-  console.log(collaborators);
 
   return (
     <div

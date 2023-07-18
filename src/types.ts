@@ -119,3 +119,14 @@ export type Collaborator = {
   role: string;
   url: string;
 };
+
+export type Idea = {
+  id: string;
+  slug: string;
+  private: boolean;
+  name: string;
+  date: string;
+  tags: string[];
+  killedBy: string | null;
+  killedByLink: string | null;
+};
