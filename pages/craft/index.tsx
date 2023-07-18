@@ -11,8 +11,16 @@ import Pinpad from "../../src/components/craft/Pinpad";
 import { ReactNode, useState } from "react";
 import SectionsWrapper from "../../src/components/SectionsWrapper";
 import SectionTitle from "../../src/components/SectionTitle";
+import NotionService from "../api/notion";
+import { GetStaticProps } from "next";
+import { StaticPage } from "../../src/types";
+import PageHead from "../../src/components/PageHead";
 
-export default function Craft(): JSX.Element {
+interface Props {
+  page: StaticPage;
+}
+
+export default function Craft({ page }: Props): JSX.Element {
   const [isAnalogToggleOn, setIsAnalogToggleOn] = useState(false);
 
   const CRAFTS: {
@@ -59,6 +67,7 @@ export default function Craft(): JSX.Element {
 
   return (
     <Layout hideCTA>
+      <PageHead page={page} />
       <MainWrapper>
         <SectionsWrapper>
           <SectionTitle title="experimental" />
@@ -97,3 +106,17 @@ export default function Craft(): JSX.Element {
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const notionService = new NotionService();
+
+  const page = (await notionService.getStaticPage()).find(
+    (data) => data.name === "Craft"
+  );
+
+  return {
+    props: {
+      page,
+    },
+  };
+};

@@ -17,11 +17,16 @@ export const ROUTES: Route[] = [
   },
   {
     id: 2,
+    href: "/ideas",
+    name: "Ideas",
+  },
+  {
+    id: 3,
     href: "/bookmarks",
     name: "Bookmarks",
   },
   {
-    id: 3,
+    id: 4,
     href: "https://www.dropbox.com/s/txnaczb8pu73tv9/akresume.pdf?dl=0",
     name: "Resume",
   },

@@ -1,7 +1,6 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import { config } from "../../config";
-import { inspect } from "util";
 
 import {
   NotionPost,
@@ -14,6 +13,7 @@ import {
   Exploration,
   Bookmarks,
   Collaborator,
+  Idea,
 } from "../../src/types";
 import { MdStringObject } from "notion-to-md/build/types";
 
@@ -27,6 +27,7 @@ export default class NotionService {
     feedbacks: config.NOTION_FEEDBACKS,
     bookmarks: config.NOTION_BOOKMARKS,
     collaborators: config.NOTION_COLLABORATORS,
+    ideas: config.NOTION_IDEAS,
   };
 
   client: Client;
@@ -208,6 +209,44 @@ export default class NotionService {
     return this.transformData(response, NotionService.collaboratorTransformer);
   }
 
+  async getIdeas(): Promise<{
+    posts: Idea[];
+    md: any;
+  }> {
+    const response = await this.client.databases.query({
+      database_id: config.NOTION_IDEAS,
+    });
+
+    const transformedPosts = response.results.map((res) => {
+      return NotionService.ideaTransformer(res);
+    });
+
+    const mdArr: {
+      [key: string]: {
+        markdown: MdStringObject;
+      };
+    } = {};
+
+    const getMd = async (res) => {
+      const mdBlocks = await this.n2m.pageToMarkdown(res.id);
+      const markdown = this.n2m.toMarkdownString(mdBlocks);
+      return { markdown };
+    };
+
+    const mdPromises = response.results.map((res) => getMd(res));
+    const mdResults = await Promise.all(mdPromises);
+
+    mdResults.forEach((result, index) => {
+      const res = response.results[index];
+      const post = transformedPosts.find((p) => p.id === res.id);
+      if (post) {
+        mdArr[post.slug] = { markdown: result.markdown };
+      }
+    });
+
+    return { posts: transformedPosts, md: mdArr };
+  }
+
   private static staticPageTransformer(page): StaticPage {
     return {
       name: page.properties.Name.rich_text[0].plain_text,
@@ -286,7 +325,7 @@ export default class NotionService {
           page.properties.Collaborators.relation.map((obj) => obj.id) || null,
       },
     };
-    
+
     return transformedPost;
   }
 
@@ -332,7 +371,10 @@ export default class NotionService {
       website: page.properties.Website.rich_text[0]?.plain_text ?? null,
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Date.number,
-      thumbnail: page.properties.Thumbnails?.files.map((thumbnail) => thumbnail.external.url) ?? null,
+      thumbnail:
+        page.properties.Thumbnails?.files.map(
+          (thumbnail) => thumbnail.external.url
+        ) ?? null,
     };
   }
   private static craftTransformer(page): Craft {
@@ -361,6 +403,19 @@ export default class NotionService {
       url: page.properties.URL.url,
       role: page.properties.Role.rich_text[0].plain_text,
       image: page.properties.Image.files[0].external.url,
+    };
+  }
+
+  private static ideaTransformer(page): Idea {
+    return {
+      id: page.id,
+      slug: page.properties.Slug.formula.string,
+      private: page.properties.Private.checkbox,
+      name: page.properties.Name.title[0].plain_text,
+      date: page.properties.Date.date.start,
+      killedBy: page.properties.KilledBy?.rich_text[0]?.plain_text ?? null,
+      killedByLink: page.properties.KilledByLink?.url ?? null,
+      tags: page.properties.Tags.multi_select.map((tag) => tag.name),
     };
   }
 }
