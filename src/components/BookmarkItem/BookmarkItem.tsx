@@ -40,8 +40,8 @@ export default function BookmarkItem({ bookmark, className }: Props) {
         )}
 
         <span className="flex flex-col">
-          <span>{bookmark.name}</span>
-          <span className="text-sm opacity-40">
+          <span className="w-64 truncate">{bookmark.name}</span>
+          <span className="w-64 truncate text-sm opacity-40">
             {bookmark.url.replace(/^(https?:\/\/)?(www\.)?/i, "")}
           </span>
         </span>
