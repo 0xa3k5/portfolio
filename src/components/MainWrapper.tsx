@@ -30,7 +30,7 @@ export default function MainWrapper({
     <motion.main
       className={cx(
         className,
-        "container flex min-h-[100dvh] flex-col items-center gap-24 overflow-x-hidden py-32 md:max-w-5xl md:gap-48 2xl:max-w-6xl"
+        "flex min-h-[100dvh] w-screen flex-col items-center gap-24 overflow-x-hidden py-32 md:gap-48"
       )}
       variants={pageVariants}
       initial="hidden"

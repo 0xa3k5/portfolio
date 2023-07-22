@@ -17,7 +17,7 @@ export default function Layout({
 
   return (
     <div
-      className={`${themeClasses.bg} ${themeClasses.color} min-h-[100dvh] flex w-full flex-col items-center`}
+      className={`${themeClasses.bg} ${themeClasses.color} min-h-[100dvh] flex w-screen flex-col items-center`}
     >
       <Navbar />
       {children}

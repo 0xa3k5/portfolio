@@ -35,12 +35,13 @@ export type NotionPost = {
     position: string;
     contributions: string;
     overviewImg: string;
+    categories: string[];
+    collaborators: {
+      id: string;
+      relationIds: string[];
+    };
   };
   feedbacks: {
-    id: string;
-    relationIds: string[];
-  };
-  collaborators: {
     id: string;
     relationIds: string[];
   };

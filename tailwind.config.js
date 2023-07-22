@@ -15,11 +15,6 @@ export const theme = {
   container: {
     center: true,
     padding: "0.5rem",
-    screens: {
-      lg: "1124px",
-      xl: "1124px",
-      "2xl": "1440px",
-    },
   },
   borderRadius: {
     none: "0",
