@@ -16,7 +16,7 @@ export default function WorkExperience({
 
   return (
     <div
-      className={`flex ${themeClasses.border} flex-col-reverse items-center justify-between gap-4 border-b border-opacity-10 py-8 last-of-type:border-none sm:flex-row`}
+      className={`flex ${themeClasses.border} flex-col sm:items-center justify-between gap-4 border-b border-opacity-10 py-8 last-of-type:border-none sm:flex-row`}
     >
       <div className="flex w-1/2 flex-col  gap-4">
         <span className={`${themeClasses.color} text-opacity-40`}>
@@ -31,7 +31,7 @@ export default function WorkExperience({
           <h6 className="text-2xl">{job.company}</h6>
         </Link>
       </div>
-      <ul className="grid grid-cols-6 gap-2">
+      <ul className="grid sm:grid-cols-6 grid-cols-12 gap-2">
         {collaborators.map((collab, i) => {
           return (
             <CollaboratorItem
