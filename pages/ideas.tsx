@@ -1,13 +1,13 @@
 import { GetStaticProps } from "next";
-import NotionService from "../api/notion";
-import { Idea, StaticPage } from "../../src/types";
-import Layout from "../../src/components/Layout";
-import MainWrapper from "../../src/components/MainWrapper";
-import SectionsWrapper from "../../src/components/SectionsWrapper";
+import NotionService from "./api/notion";
+import { Idea, StaticPage } from "../src/types";
+import Layout from "../src/components/Layout";
+import MainWrapper from "../src/components/MainWrapper";
+import SectionsWrapper from "../src/components/SectionsWrapper";
 import { MdStringObject } from "notion-to-md/build/types";
-import { IdeaCard } from "../../src/components/Cards/IdeaCard";
-import SectionTitle from "../../src/components/SectionTitle";
-import PageHead from "../../src/components/PageHead";
+import { IdeaCard } from "../src/components/Cards/IdeaCard";
+import SectionTitle from "../src/components/SectionTitle";
+import PageHead from "../src/components/PageHead";
 
 interface Props {
   page: StaticPage;
