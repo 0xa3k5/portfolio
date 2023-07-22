@@ -45,7 +45,7 @@ export default function PortfolioCard({ className, post }: Props): JSX.Element {
   return (
     <div
       className={cx(
-        "relative flex min-h-screen w-screen items-center",
+        "relative flex min-h-[60dvh] w-screen items-center md:min-h-screen",
         className
       )}
       style={{
@@ -53,11 +53,13 @@ export default function PortfolioCard({ className, post }: Props): JSX.Element {
         color: `#${post.properties.color}`,
       }}
     >
-      <div className="container flex max-w-5xl flex-col items-center space-y-12 py-24">
+      <div className="container flex max-w-5xl flex-col items-center space-y-12 py-8 sm:py-24">
         <div className="flex w-full justify-between gap-20">
           <div className="space-y-4">
-            <h2 className="text-4xl max-w-2xl">{post.details.title}</h2>
-            <p className="text-lg opacity-60 max-w-2xl">{post.details.description}</p>
+            <h2 className="max-w-2xl text-4xl">{post.details.title}</h2>
+            <p className="hidden max-w-2xl text-lg opacity-60 sm:block">
+              {post.details.description}
+            </p>
             <div className="flex gap-2">
               {post.details.categories.length > 0
                 ? post.details.categories.map((c, i) => {
@@ -80,7 +82,7 @@ export default function PortfolioCard({ className, post }: Props): JSX.Element {
             href={`/works/${post.properties.slug}`}
             onMouseEnter={handleBtnMouseEnter}
             onMouseLeave={handleBtnMouseLeave}
-            className={`group relative flex h-fit w-fit items-center gap-2 whitespace-nowrap rounded-xl px-4 py-4 duration-100 ${
+            className={`group flex-wrap relative flex h-fit w-fit items-center gap-2 whitespace-nowrap rounded-xl px-4 py-4 duration-100 ${
               post.properties.published ? null : "pointer-events-none"
             }`}
             style={{
@@ -92,7 +94,9 @@ export default function PortfolioCard({ className, post }: Props): JSX.Element {
                 : `rgba(${hexToRGB(post.properties.color)},0.1)`,
             }}
           >
-            {isButtonHover && !post.properties.password && <Tooltip text="Read Case Study" position="bottom" />}
+            {isButtonHover && !post.properties.password && (
+              <Tooltip text="Read Case Study" position="bottom" />
+            )}
             {getIconByProp(post.properties)}
           </Link>
         </div>
