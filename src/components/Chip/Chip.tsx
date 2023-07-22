@@ -1,13 +1,17 @@
 import cx from "classnames";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface Props {
   className?: string;
   text: string;
+  muted?: boolean;
 }
 
 const chipColors: { [tag: string]: string } = {};
 
-export default function Chip({ className, text }: Props): JSX.Element {
+export default function Chip({ className, text, muted }: Props): JSX.Element {
+  const { themeClasses, themeColors } = useTheme();
+
   const cherryPickColor = (tag: string) => {
     if (chipColors[tag]) {
       return chipColors[tag];
@@ -25,11 +29,12 @@ export default function Chip({ className, text }: Props): JSX.Element {
   return (
     <div
       className={cx(
-        "flex w-fit rounded-full px-3 py-1 text-sm text-black",
+        "flex w-fit rounded-full px-3 py-1 text-sm",
+        muted ? themeClasses.color : "text-black",
         className
       )}
       style={{
-        backgroundColor: chipColor,
+        backgroundColor: muted ? themeColors.hex.background : chipColor,
       }}
     >
       {text}

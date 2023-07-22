@@ -308,6 +308,14 @@ export default class NotionService {
         position: page.properties.Position.rich_text[0]?.plain_text || null,
         overviewImg:
           page.properties.OverviewImg.files[0]?.external?.url || cover,
+        collaborators: {
+          id: page.properties.Collaborators.id,
+          relationIds:
+            page.properties.Collaborators.relation.map((obj) => obj.id) || null,
+        },
+        categories: page.properties.Categories.multi_select.map(
+          (cat) => cat.name
+        ),
       },
       org: {
         logo: page.properties.Logo.files[0]?.external?.url,
@@ -318,11 +326,6 @@ export default class NotionService {
         id: page.properties.Feedbacks.id,
         relationIds:
           page.properties.Feedbacks.relation.map((obj) => obj.id) || null,
-      },
-      collaborators: {
-        id: page.properties.Collaborators.id,
-        relationIds:
-          page.properties.Collaborators.relation.map((obj) => obj.id) || null,
       },
     };
 

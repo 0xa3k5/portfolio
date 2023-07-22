@@ -43,7 +43,7 @@ export default function Detail({
   );
 
   const postCollaborators = collaborators.filter((c) =>
-    post.collaborators.relationIds.includes(c.id)
+    post.details.collaborators.relationIds.includes(c.id)
   );
 
   return (

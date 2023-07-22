@@ -10,8 +10,6 @@ import {
 import NotionService from "./api/notion";
 import Hero from "../src/components/Hero";
 import PageHead from "../src/components/PageHead";
-
-import ContentCard from "../src/components/Cards/ContentCard/Content";
 import SectionTitle from "../src/components/SectionTitle";
 import SectionsWrapper from "../src/components/SectionsWrapper";
 import SideProjectsCard from "../src/components/Cards/SideProjectsCard";
@@ -19,6 +17,7 @@ import FeedbackCard from "../src/components/Cards/FeedbackCard";
 import MainWrapper from "../src/components/MainWrapper";
 import Layout from "../src/components/Layout";
 import WorkExperience from "../src/components/WorkExperience";
+import PortfolioCard from "../src/components/Cards/PortfolioCard/PortfolioCard";
 
 interface HomeProps {
   page: StaticPage;
@@ -60,19 +59,16 @@ export default function Home({
               })}
           </div>
         </SectionsWrapper>
-        <SectionsWrapper>
-          <SectionTitle title="selected work" />
-          <div className="flex flex-col gap-8 md:gap-12">
-            {works
-              .sort(
-                (a: NotionPost, b: NotionPost) =>
-                  a.properties.number - b.properties.number
-              )
-              .map((p: NotionPost) => {
-                return <ContentCard post={p} key={p.properties.id} />;
-              })}
-          </div>
-        </SectionsWrapper>
+        <div className="flex flex-col">
+          {works
+            .sort(
+              (a: NotionPost, b: NotionPost) =>
+                a.properties.number - b.properties.number
+            )
+            .map((p: NotionPost) => {
+              return <PortfolioCard post={p} key={p.properties.id} />;
+            })}
+        </div>
         <SectionsWrapper>
           <SectionTitle title="on the side" />
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
