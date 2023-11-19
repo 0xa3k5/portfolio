@@ -1,6 +1,5 @@
 import cx from "classnames";
 import Button from "../Button";
-import { useState } from "react";
 
 interface CTAProps {
   className?: string;
@@ -13,8 +12,6 @@ export default function CTA({
   title = "Book a free discovery call",
   desc = "I help startups with product design, design critics, QA testing and design advisory.",
 }: CTAProps): JSX.Element {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <div
       className={cx(
@@ -27,11 +24,7 @@ export default function CTA({
           {title}
         </h4>
         <p className="max-w-sm text-xl font-normal opacity-80">{desc}</p>
-        <div
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          className="mt-2"
-        >
+        <div className="mt-2">
           <Button.LinkBtn href="https://calendly.com/akmlio/discovery" />
         </div>
       </div>

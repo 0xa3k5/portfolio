@@ -13,11 +13,8 @@ interface Props {
   currentLevel: TPinpadGameLevels;
 }
 
-export default function Pinpad({
-  className,
-  currentLevel,
-}: Props): JSX.Element {
-  const { themeClasses, volume } = useTheme();
+export default function Pinpad({ currentLevel }: Props): JSX.Element {
+  const { volume } = useTheme();
   const [inputValue, setInputValue] = useState("");
 
   const [hoveredBtn, setHoveredBtn] = useState("");
@@ -25,10 +22,9 @@ export default function Pinpad({
     PINPAD_CONSTANTS.GAME_CONFIG[currentLevel]
   );
   const [isListenButtonDisabled, setIsListenButtonDisabled] = useState(false);
-  const [sequence, setSequence] = useState(
-    Array.from({ length: PINPAD_CONSTANTS.MAX_INPUT_LENGTH }, () =>
-      Math.floor(Math.random() * 10)
-    )
+  const sequence = Array.from(
+    { length: PINPAD_CONSTANTS.MAX_INPUT_LENGTH },
+    () => Math.floor(Math.random() * 10)
   );
 
   const inputSequence = inputValue.split("").map(Number);

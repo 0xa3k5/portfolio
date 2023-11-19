@@ -13,8 +13,8 @@ export default function Hero(): JSX.Element {
       <div className="flex items-center gap-4">
         <div className="relative flex aspect-square w-14 shrink-0 overflow-clip rounded-xl">
           <Image
-            src={"/ak.jpg"}
-            alt="Ali Kemal Akcay – Product Designer"
+            src={"/ak.png"}
+            alt="AK – Product Designer"
             width={512}
             height={512}
             priority
@@ -22,8 +22,8 @@ export default function Hero(): JSX.Element {
           />
         </div>
         <div className="flex flex-col">
-          <span className="text-lg">Ali Kemal Akçay</span>
-          <span className="opacity-60">Generalist Product Designer</span>
+          <span className="text-lg">AK</span>
+          <span className="opacity-60">Product Designer</span>
         </div>
       </div>
 

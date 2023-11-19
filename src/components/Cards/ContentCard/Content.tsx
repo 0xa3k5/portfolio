@@ -5,7 +5,6 @@ import Image from "next/image";
 import { NotionPost } from "../../../types";
 import { LockIcon, RightArrowIcon, SoonIcon } from "../../../icons";
 import { hexToRGB } from "../../../utils";
-import useSound from "use-sound";
 import { useButtonHoverSound } from "../../../hooks/useButtonHoverSound";
 
 interface ContentCardProps {
