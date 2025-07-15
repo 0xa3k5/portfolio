@@ -26,19 +26,43 @@ export default function PinpadLevelSelector({
 }: PinpadLevelSelectorProps): JSX.Element {
   const { theme, volume, themeClasses } = useTheme();
   const [hoveredLevel, setHoveredLevel] = useState<TPinpadGameLevels>(null);
-  const [play] = useSound(
-    "/sounds/switch-on.mp3",
-    PINPAD_CONSTANTS.SOUND_OPTIONS
-  );
+  const [isClient, setIsClient] = useState(false);
+
+  const [play] = useSound("/sounds/switch-on.mp3", {
+    ...PINPAD_CONSTANTS.SOUND_OPTIONS,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load level selector sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play level selector sound:", error);
+    },
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleHover = (lvl: TPinpadGameLevels) => {
     setHoveredLevel(lvl);
-    volume && play();
+    if (volume && isClient && play) {
+      try {
+        play();
+      } catch (error) {
+        console.warn("Failed to play level selector hover sound:", error);
+      }
+    }
   };
 
   const handleClick = (lvl: TPinpadGameLevels) => {
     setCurrentLevel(lvl);
-    volume && play();
+    if (volume && isClient && play) {
+      try {
+        play();
+      } catch (error) {
+        console.warn("Failed to play level selector click sound:", error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -47,7 +71,16 @@ export default function PinpadLevelSelector({
         const level = levelShortcuts[event.code];
         if (level) {
           setCurrentLevel(level);
-          volume && play();
+          if (volume && isClient && play) {
+            try {
+              play();
+            } catch (error) {
+              console.warn(
+                "Failed to play level selector keyboard sound:",
+                error
+              );
+            }
+          }
         }
       }
     };
@@ -56,7 +89,7 @@ export default function PinpadLevelSelector({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [setCurrentLevel, volume, play]);
+  }, [setCurrentLevel, volume, isClient, play]);
 
   return (
     <div className="no-scrollbar flex w-full items-start justify-center gap-4 divide-x overflow-x-scroll font-mono">

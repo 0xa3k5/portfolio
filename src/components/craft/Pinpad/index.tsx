@@ -16,6 +16,7 @@ interface Props {
 export default function Pinpad({ currentLevel }: Props): JSX.Element {
   const { volume } = useTheme();
   const [inputValue, setInputValue] = useState("");
+  const [isClient, setIsClient] = useState(false);
 
   const [hoveredBtn, setHoveredBtn] = useState("");
   const [gameConfig, setGameConfig] = useState(
@@ -29,18 +30,41 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
 
   const inputSequence = inputValue.split("").map(Number);
 
+  // Simplified useSound without sprites for now
   const [play] = useSound("/sounds/pinpad/pinpad.mp3", {
-    sprite: PINPAD_CONSTANTS.SPRITE_DEFINITIONS,
     ...PINPAD_CONSTANTS.SOUND_OPTIONS,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load pinpad sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play pinpad sound:", error);
+    },
   });
-  const [playSuccess] = useSound(
-    "/sounds/pinpad/harp-flourish.mp3",
-    PINPAD_CONSTANTS.SOUND_OPTIONS
-  );
-  const [playError] = useSound(
-    "/sounds/pinpad/car-exploded.mp3",
-    PINPAD_CONSTANTS.SOUND_OPTIONS
-  );
+  const [playSuccess] = useSound("/sounds/pinpad/harp-flourish.mp3", {
+    ...PINPAD_CONSTANTS.SOUND_OPTIONS,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load success sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play success sound:", error);
+    },
+  });
+  const [playError] = useSound("/sounds/pinpad/car-exploded.mp3", {
+    ...PINPAD_CONSTANTS.SOUND_OPTIONS,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load error sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play error sound:", error);
+    },
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const playSequence = useCallback(
     (
@@ -55,11 +79,17 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
           (PINPAD_CONSTANTS.GAME_CONFIG[currentLevel].canCue ||
             options?.forceHighlight) &&
             brieflyHighlightAKey(String(soundIndex));
-          volume && play({ id: String(soundIndex) });
+          if (volume && isClient && play) {
+            try {
+              play();
+            } catch (error) {
+              console.warn("Failed to play pinpad sound:", error);
+            }
+          }
         }, i * (options?.speed ?? PINPAD_CONSTANTS.DELAY_BETWEEN_SOUNDS));
       });
     },
-    [currentLevel, volume, play]
+    [currentLevel, volume, isClient, play]
   );
 
   const isPinpadKeyDisabled = useCallback(
@@ -91,7 +121,13 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
 
   const handlePinpadMouseEnter = (key: string) => {
     setHoveredBtn(key);
-    gameConfig.canHoverPlay && volume && play({ id: key });
+    if (gameConfig.canHoverPlay && volume && isClient && play) {
+      try {
+        play();
+      } catch (error) {
+        console.warn("Failed to play pinpad hover sound:", error);
+      }
+    }
   };
 
   const brieflyHighlightAKey = (key: string) => {
@@ -111,7 +147,15 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
 
         const handlePinSubmit = (sound: () => void) => {
           playSequence(inputSequence, { speed: 200, forceHighlight: true });
-          setTimeout(sound, inputValue.length * 200);
+          setTimeout(() => {
+            if (isClient && sound) {
+              try {
+                sound();
+              } catch (error) {
+                console.warn("Failed to play pinpad result sound:", error);
+              }
+            }
+          }, inputValue.length * 200);
         };
 
         if (!isPinpadKeyDisabled("Enter")) {
@@ -124,7 +168,13 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
 
       const handlePinEnter = (key: string) => {
         if (/^[0-9]$/.test(key) && !isPinpadKeyDisabled(key)) {
-          volume && play({ id: key });
+          if (volume && isClient && play) {
+            try {
+              play();
+            } catch (error) {
+              console.warn("Failed to play pinpad key sound:", error);
+            }
+          }
           if (inputValue.length < PINPAD_CONSTANTS.MAX_INPUT_LENGTH) {
             setInputValue((prevValue) => prevValue + key);
           }
@@ -156,6 +206,7 @@ export default function Pinpad({ currentLevel }: Props): JSX.Element {
       inputSequence,
       playSuccess,
       playError,
+      isClient,
     ]
   );
 

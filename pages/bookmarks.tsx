@@ -36,7 +36,7 @@ export default function BookmarksPage({ page, _bookmarks }: BookmarksProps) {
     };
 
     fetchFavicons();
-  }, []);
+  }, [_bookmarks]);
 
   const fetchFavicon = async (url: string) => {
     try {

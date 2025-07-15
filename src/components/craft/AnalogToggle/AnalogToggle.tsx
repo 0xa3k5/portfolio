@@ -2,6 +2,7 @@ import cx from "classnames";
 import { Variants, motion } from "framer-motion";
 import { useTheme } from "../../../contexts/ThemeContext";
 import useSound from "use-sound";
+import { useState, useEffect } from "react";
 
 interface Props {
   isChecked: boolean;
@@ -17,9 +18,22 @@ export default function AnalogToggle({
   scale = 1,
 }: Props): JSX.Element {
   const { volume, theme } = useTheme();
+  const [isClient, setIsClient] = useState(false);
+
   const [play] = useSound("/sounds/analog-toggle/analog-toggle.mp3", {
     volume: 0.2,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load analog toggle sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play analog toggle sound:", error);
+    },
   });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const zeroVar: Variants = {
     unchecked: {
@@ -68,7 +82,13 @@ export default function AnalogToggle({
         <motion.input
           checked={isChecked}
           onChange={() => {
-            volume && play();
+            if (volume && isClient && play) {
+              try {
+                play();
+              } catch (error) {
+                console.warn("Failed to play analog toggle sound:", error);
+              }
+            }
             handleOnChange();
           }}
           type="checkbox"

@@ -26,7 +26,7 @@ export default function Icon({
 
   useEffect(() => {
     isHover && playSound();
-  }, [isHover]);
+  }, [isHover, playSound]);
 
   return (
     <button

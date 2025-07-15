@@ -54,31 +54,35 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   }, []);
 
   useEffect(() => {
-    const prefersDarkTheme = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
+    if (typeof window !== 'undefined') {
+      const prefersDarkTheme = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
 
-    const prefersLightTheme = window.matchMedia(
-      "(prefers-color-scheme: light)"
-    ).matches;
+      const prefersLightTheme = window.matchMedia(
+        "(prefers-color-scheme: light)"
+      ).matches;
 
-    if (prefersDarkTheme) {
-      setTheme("dark");
-      setThemeClasses(darkTheme);
-      setThemeColors(darkColors);
-    } else if (prefersLightTheme) {
-      setTheme("light");
-      setThemeClasses(lightTheme);
-      setThemeColors(lightColors);
-    } else {
-      setTheme("dim");
-      setThemeClasses(dimTheme);
-      setThemeColors(dimColors);
+      if (prefersDarkTheme) {
+        setTheme("dark");
+        setThemeClasses(darkTheme);
+        setThemeColors(darkColors);
+      } else if (prefersLightTheme) {
+        setTheme("light");
+        setThemeClasses(lightTheme);
+        setThemeColors(lightColors);
+      } else {
+        setTheme("dim");
+        setThemeClasses(dimTheme);
+        setThemeColors(dimColors);
+      }
     }
   }, []);
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
+    if (typeof document !== 'undefined') {
+      document.body.setAttribute("data-theme", theme);
+    }
 
     setThemeClasses(_themeClasses[theme]);
     setThemeColors(_themeColors[theme]);

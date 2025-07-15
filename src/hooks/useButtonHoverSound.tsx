@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSound from "use-sound";
 import { useTheme } from "../contexts/ThemeContext";
 
@@ -8,21 +8,34 @@ const getRandomInt = () => {
 
 export const useButtonHoverSound = () => {
   const { volume } = useTheme();
-  const [play, { pause, stop }] = useSound("/sounds/pop.mp3", {
-    sprite: {
-      0: [90, 80],
-      1: [700, 200],
-      2: [1460, 210],
-      3: [2000, 160],
-    },
-    volume: 0.05,
-    interrupt: true,
-  });
+  const [isClient, setIsClient] = useState(false);
   const [sprite, setSprite] = useState(2);
 
+  // Initialize useSound with proper error handling - simplified without sprites first
+  const [play, { pause, stop }] = useSound("/sounds/pop.mp3", {
+    volume: 0.05,
+    interrupt: true,
+    soundEnabled: isClient,
+    onloaderror: (error) => {
+      console.warn("Failed to load sound:", error);
+    },
+    onplayerror: (error) => {
+      console.warn("Failed to play sound:", error);
+    },
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const playSound = () => {
-    if (volume) {
-      play({ id: sprite.toString() }), setSprite(getRandomInt());
+    if (volume && isClient && play) {
+      try {
+        play();
+        setSprite(getRandomInt());
+      } catch (error) {
+        console.warn("Failed to play sound:", error);
+      }
     }
   };
 
