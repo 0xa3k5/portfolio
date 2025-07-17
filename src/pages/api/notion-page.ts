@@ -15,16 +15,10 @@ export default async function handler(
     return res.status(400).json({ message: "Slug is required" });
   }
 
-  console.log("API called with slug:", slug);
-
   try {
     const notionService = new NotionService();
 
-    // You can determine the database ID based on the slug pattern or pass it as a query param
-    // For now, I'll assume it's a case study (you can modify this logic)
     const databaseId = NotionService.NOTION_DATABASES.caseStudies;
-
-    console.log("Using database ID:", databaseId);
 
     const pageDetail = await notionService.getNotionPageDetail(
       slug,
@@ -32,7 +26,6 @@ export default async function handler(
       "post"
     );
 
-    console.log("Page detail fetched successfully");
     res.status(200).json(pageDetail);
   } catch (error) {
     console.error("Error fetching Notion page:", error);

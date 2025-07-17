@@ -27,6 +27,7 @@ export default function VideoPlayer360({
   const [duration, setDuration] = useState(0);
   const [useFallback, setUseFallback] = useState(false);
   const [zoom, setZoom] = useState(0.75); // Zoom level (1 = normal, 0.5 = zoomed in, 2 = zoomed out)
+  const [showMobileHint, setShowMobileHint] = useState(false);
 
   const { activeVideoId, playVideo, pauseVideo } = useVideoContext();
 
@@ -76,6 +77,12 @@ export default function VideoPlayer360({
         }
         createThreeJSScene();
         video.play().catch(() => {});
+
+        // Show mobile hint on mobile devices
+        if ("ontouchstart" in window) {
+          setShowMobileHint(true);
+          setTimeout(() => setShowMobileHint(false), 3000); // Hide after 3 seconds
+        }
       } catch (error) {
         console.warn("WebGL not supported, using fallback video player");
         setUseFallback(true);
@@ -153,10 +160,62 @@ export default function VideoPlayer360({
       const handleMouseUp = () => {
         isMouseDown = false;
       };
+
+      // Touch controls for mobile
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isTouching = false;
+
+      const handleTouchStart = (event: TouchEvent) => {
+        event.preventDefault();
+        isTouching = true;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+        setShowMobileHint(false); // Hide hint when user starts interacting
+      };
+
+      const handleTouchMove = (event: TouchEvent) => {
+        event.preventDefault();
+        if (!isTouching) return;
+
+        const touchX = event.touches[0].clientX;
+        const touchY = event.touches[0].clientY;
+
+        const deltaX = touchX - touchStartX;
+        const deltaY = touchY - touchStartY;
+
+        targetRotationY += deltaX * 0.02; // Slightly more sensitive for touch
+        targetRotationX += deltaY * 0.02;
+        targetRotationX = Math.max(
+          -Math.PI / 2,
+          Math.min(Math.PI / 2, targetRotationX)
+        );
+
+        touchStartX = touchX;
+        touchStartY = touchY;
+      };
+
+      const handleTouchEnd = (event: TouchEvent) => {
+        event.preventDefault();
+        isTouching = false;
+      };
+
+      // Add event listeners
       renderer.domElement.addEventListener("mousedown", handleMouseDown);
       renderer.domElement.addEventListener("mousemove", handleMouseMove);
       renderer.domElement.addEventListener("mouseup", handleMouseUp);
       renderer.domElement.addEventListener("mouseleave", handleMouseUp);
+
+      // Touch events
+      renderer.domElement.addEventListener("touchstart", handleTouchStart, {
+        passive: false,
+      });
+      renderer.domElement.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+      renderer.domElement.addEventListener("touchend", handleTouchEnd, {
+        passive: false,
+      });
 
       // Add wheel event for zoom
       const handleWheel = (event: WheelEvent) => {
@@ -206,9 +265,12 @@ export default function VideoPlayer360({
       };
       window.addEventListener("resize", handleResize);
 
-      // Cleanup wheel event listener
+      // Cleanup event listeners
       return () => {
         renderer.domElement.removeEventListener("wheel", handleWheel);
+        renderer.domElement.removeEventListener("touchstart", handleTouchStart);
+        renderer.domElement.removeEventListener("touchmove", handleTouchMove);
+        renderer.domElement.removeEventListener("touchend", handleTouchEnd);
       };
     };
 
@@ -337,8 +399,15 @@ export default function VideoPlayer360({
           />
           <div
             ref={containerRef}
-            className="size-full relative cursor-grab active:cursor-grabbing"
+            className="size-full relative cursor-grab active:cursor-grabbing touch-none"
           />
+          {showMobileHint && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 pointer-events-none">
+              <div className="bg-black/80 text-white px-4 py-2 rounded-lg text-sm">
+                👆 Touch and drag to rotate view
+              </div>
+            </div>
+          )}
         </>
       )}
       <PlayerControls

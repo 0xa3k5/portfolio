@@ -170,7 +170,6 @@ export default class NotionService {
       const response = await this.client.databases.query({
         database_id: NotionService.NOTION_DATABASES.bike,
       });
-      console.log(response);
 
       return response.results.map(NotionService.bikeVideoTransformer);
     } catch (error) {

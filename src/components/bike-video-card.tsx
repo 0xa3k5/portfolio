@@ -38,8 +38,8 @@ export default function BikeVideoCard({ video }: { video: BikeVideo }) {
   const { icon, title: displayTitle } = parseVideoTitle(video.title);
 
   return (
-    <div className="flex flex-col gap-6 p-6 border border-foam/10 rounded-xl bg-foam/5">
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+    <div className="flex flex-col gap-6 p-4 md:p-6 border border-foam/10 rounded-xl bg-foam/5">
+      <div className="relative aspect-video w-full overflow-hidden rounded-lg min-h-[300px] md:min-h-[400px]">
         <VideoPlayer360
           src={video.videoUrl}
           videoId={video.id}
