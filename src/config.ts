@@ -10,5 +10,8 @@ export const config = {
   NOTION_WORK_EXPERIENCES: process.env.NOTION_WORK_EXPERIENCES as string,
   NOTION_COLLABORATORS: process.env.NOTION_COLLABORATORS as string,
   NOTION_IDEAS: process.env.NOTION_IDEAS as string,
+  NOTION_BIKE: process.env.NOTION_BIKE as string,
+  YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY as string,
+  BIKE_PASSWORD: process.env.BIKE_PASSWORD as string,
   PAGE_PASSWORD: process.env.PAGE_PASSWORD as string,
 };

@@ -16,17 +16,17 @@ const ROUTES = [
     name: "Craft",
   },
   {
-    id: 2,
+    id: 3,
     href: "/ideas",
     name: "Ideas",
   },
   {
-    id: 3,
+    id: 4,
     href: "/bookmarks",
     name: "Bookmarks",
   },
   {
-    id: 4,
+    id: 5,
     href: "https://www.dropbox.com/s/txnaczb8pu73tv9/akresume.pdf?dl=0",
     name: "Resume",
   },
@@ -82,14 +82,16 @@ export const Navbar = () => {
 const getRouteIcon = (name: string, isActive: boolean) => {
   switch (name) {
     case "Home":
-      return <HomeIcon filled={isActive} className="size-6" />;
+      return <HomeIcon className="size-6" />;
     case "Craft":
-      return <CraftIcon filled={isActive} className="size-6" />;
+      return <CraftIcon className="size-6" />;
     case "Ideas":
-      return <BulbIcon filled={isActive} className="size-6" />;
+      return <BulbIcon className="size-6" />;
     case "Bookmarks":
-      return <BookmarkIcon filled={isActive} className="size-6" />;
+      return <BookmarkIcon className="size-6" />;
     case "Resume":
-      return <CvIcon filled={isActive} className="size-6" />;
+      return <CvIcon className="size-6" />;
+    default:
+      return null;
   }
 };

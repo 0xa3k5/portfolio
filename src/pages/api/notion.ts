@@ -16,6 +16,7 @@ import {
   Bookmarks,
   Collaborator,
   Idea,
+  BikeVideo,
 } from "@/src/types";
 
 export default class NotionService {
@@ -29,6 +30,7 @@ export default class NotionService {
     bookmarks: config.NOTION_BOOKMARKS,
     collaborators: config.NOTION_COLLABORATORS,
     ideas: config.NOTION_IDEAS,
+    bike: config.NOTION_BIKE,
   };
 
   client: Client;
@@ -161,6 +163,20 @@ export default class NotionService {
     });
 
     return { posts: transformedPosts, md: mdArr };
+  }
+
+  async getBikeVideos(): Promise<BikeVideo[]> {
+    try {
+      const response = await this.client.databases.query({
+        database_id: NotionService.NOTION_DATABASES.bike,
+      });
+      console.log(response);
+
+      return response.results.map(NotionService.bikeVideoTransformer);
+    } catch (error) {
+      console.error("Error fetching bike videos:", error);
+      return [];
+    }
   }
 
   async getNotionPageDetail(
@@ -425,6 +441,25 @@ export default class NotionService {
       killedBy: page.properties.KilledBy?.rich_text[0]?.plain_text ?? null,
       killedByLink: page.properties.KilledByLink?.url ?? null,
       tags: page.properties.Tags.multi_select.map((tag: any) => tag.name),
+    };
+  }
+
+  private static bikeVideoTransformer(page: any): BikeVideo {
+    const videoUrl = page.properties.video_url.url || "";
+    const isYouTube =
+      videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
+
+    return {
+      id: page.id,
+      title: page.properties.name.title[0]?.plain_text || "",
+      description: page.properties.description.rich_text[0]?.plain_text || "",
+      videoUrl: videoUrl,
+      videoType: isYouTube ? "youtube" : "dropbox",
+      thumbnail: page.properties.thumbnail?.files[0]?.external?.url || "",
+      date: page.properties.date.date?.start || "",
+      tags:
+        page.properties.tags?.multi_select?.map((tag: any) => tag.name) || [],
+      duration: page.properties.duration?.number || 0,
     };
   }
 }

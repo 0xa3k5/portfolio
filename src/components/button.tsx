@@ -8,17 +8,18 @@ interface BaseProps {
   href?: string;
   className?: string;
   onClick?: () => void;
+  iconOnly?: boolean;
 }
 
 interface ButtonProps
   extends BaseProps,
-    Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type" | "onClick"> {
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   href?: never;
 }
 
 interface LinkProps
   extends BaseProps,
-    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "type" | "onClick"> {
+    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick"> {
   href: string;
 }
 
@@ -30,6 +31,7 @@ export default function Button({
   variant,
   href,
   onClick,
+  iconOnly,
   ...props
 }: Props) {
   const commonProps = {
@@ -44,6 +46,9 @@ export default function Button({
         data-[variant=primary]:hover:text-midnight
         data-[variant=secondary]:bg-transparent
         data-[variant=secondary]:hover:bg-foam/10
+        data-[icon-only]:p-0
+        data-[icon-only]:size-10
+        data-[icon-only]:rounded-lg
         `,
       className
     ),
@@ -54,6 +59,7 @@ export default function Button({
       <Link
         href={href}
         data-variant={variant}
+        data-icon-only={iconOnly}
         onClick={onClick}
         {...commonProps}
         {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
@@ -67,8 +73,8 @@ export default function Button({
 
   return (
     <button
-      type="button"
       data-variant={variant}
+      data-icon-only={iconOnly}
       onClick={onClick}
       {...commonProps}
       {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}

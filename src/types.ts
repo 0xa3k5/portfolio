@@ -132,4 +132,14 @@ export type Idea = {
   killedByLink: string | null;
 };
 
-
+export type BikeVideo = {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  videoType: "dropbox" | "youtube";
+  thumbnail?: string;
+  date: string;
+  tags: string[];
+  duration?: number;
+};

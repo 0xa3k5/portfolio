@@ -12,12 +12,14 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@notionhq/client": "^4.0.1",
+    "@types/three": "^0.178.1",
     "motion": "^12.23.6",
     "next": "15.4.1",
     "notion-to-md": "^3.1.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

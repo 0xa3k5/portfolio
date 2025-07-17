@@ -12,3 +12,4 @@ export { SoonIcon } from "./soon";
 export { CrossRect } from "./cross-rect";
 export { EnterRect } from "./enter-rect";
 export { ReplayIcon } from "./replay";
+export { BikeIcon } from "./bike";
