@@ -21,7 +21,7 @@ export const PortfolioCard = ({ post }: { post: NotionPost }) => {
       }}
     >
       <div
-        className="flex flex-col gap-6 px-12 hover:cursor-pointer lg:pl-16 lg:pr-0"
+        className="flex flex-col gap-6 px-12 hover:cursor-pointer lg:px-16"
         style={{ color: `#${post.properties.color}` }}
       >
         {post.org.logo && (

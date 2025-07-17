@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-midnight text-foam">
-        <main className="flex min-h-[100dvh] mx-auto w-screen flex-col items-center gap-24 overflow-x-hidden md:gap-48">
+        <main className="flex min-h-[100dvh] mx-auto w-screen flex-col items-center gap-24 overflow-x-hidden md:gap-48 px-4 md:px-0">
           <Navbar />
           {children}
         </main>

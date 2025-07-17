@@ -40,9 +40,11 @@ export const Navbar = () => {
       <nav
         className={cx(
           `
+          px-8 sm:px-4
+          w-full sm:w-fit 
           no-scrollbar flex items-center justify-between overflow-hidden overflow-x-scroll 
-          border px-4 py-2 backdrop-blur-xl duration-200 sm:rounded-2xl
-          border-foam/10
+          py-2 backdrop-blur-xl duration-200 sm:rounded-2xl
+          border border-foam/10
           bg-midnight/80 hover:bg-midnight/90
           `
         )}

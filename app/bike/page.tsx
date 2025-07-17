@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { VideoProvider } from "@/src/hooks/use-video-context";
-import NotionService from "@/src/pages/api/notion";
 import BikeVideoCard from "@/src/components/bike-video-card";
 import { SectionTitle } from "@/src/components/section-title";
 import PasswordWall from "@/src/components/password-wall";
@@ -68,7 +67,7 @@ export default function BikePage() {
           orientation="vertical"
         />
 
-        <div className="flex flex-col gap-12 w-6xl mx-auto px-4">
+        <div className="flex flex-col gap-12 w-full sm:max-w-6xl mx-auto px-4">
           {videos.map((video) => (
             <BikeVideoCard key={video.id} video={video} />
           ))}

@@ -212,7 +212,7 @@ const Portfolio = ({ posts }: { posts: NotionPost[] }) => {
     .map((post) => (
       <div
         key={post.properties.id}
-        className="relative flex min-h-[60dvh] w-screen items-center md:min-h-screen justify-center"
+        className="relative flex min-h-[60dvh] w-screen items-center md:min-h-screen justify-center px-8"
         style={{
           backgroundColor: `#${post.properties.bgColor}`,
           color: `#${post.properties.color}`,
