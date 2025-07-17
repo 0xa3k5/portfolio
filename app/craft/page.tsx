@@ -1,43 +1,20 @@
 "use client";
+import {
+  AnalogToggle,
+  CraftWrapper,
+  CraftFooter,
+} from "@/src/components/craft-components";
+import { HoldToLikeButton } from "@/src/components/craft-components/hold-to-like";
+import { Pinpad } from "@/src/components/craft-components/pinpad/pinpad";
+import { RightArrowIcon } from "@/src/components/icons";
+import { SectionTitle } from "@/src/components/section-title";
 
-import { useState, ReactNode, useEffect } from "react";
-import { StaticPage } from "@/types/types";
-import NotionService from "../../pages/api/notion";
-import Layout from "@/components/Layout";
-import PageHead from "@/components/PageHead";
-import MainWrapper from "@/components/MainWrapper";
-import SectionTitle from "@/components/SectionTitle";
-import SectionsWrapper from "@/components/SectionsWrapper";
-import CraftWrapper from "@/components/craft/CraftWrapper";
-import CraftFooter from "@/components/craft/CraftFooter";
+import { cx } from "@/src/utils/cx";
 import Link from "next/link";
-import cx from "classnames";
-import { RightArrowIcon } from "@/lib/icons";
-import { AnalogToggle } from "@/components/craft/AnalogToggle";
-import HoldToLikeButton from "@/components/craft/HoldToLike/HoldToLikeButton";
-import Pinpad from "@/components/craft/Pinpad";
+import { ReactNode, useState } from "react";
 
-export default function Craft(): JSX.Element {
+export default function Craft() {
   const [isAnalogToggleOn, setIsAnalogToggleOn] = useState(false);
-  const [page, setPage] = useState<StaticPage | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const notionService = new NotionService();
-      const fetchedPage = (await notionService.getStaticPage()).find(
-        (data) => data.name === "Craft"
-      );
-      setPage(fetchedPage || null);
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  if (isLoading || !page) {
-    return <div>Loading...</div>;
-  }
 
   const CRAFTS: {
     id: number;
@@ -82,55 +59,38 @@ export default function Craft(): JSX.Element {
   ];
 
   return (
-    <Layout hideCTA>
-      <PageHead page={page} />
-      <MainWrapper>
-        <SectionsWrapper>
-          <SectionTitle title="experimental" />
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-            {CRAFTS.sort((a, b) => a.id - b.id).map((craft) => {
-              return (
-                <div
-                  className={cx(
-                    "flex flex-col gap-4",
-                    craft.slug === "pinpad"
-                      ? "col-span-1 md:col-span-2"
-                      : "col-span-1"
-                  )}
-                  key={craft.slug}
-                >
-                  <CraftWrapper className="relative">
-                    {craft.component}
-                  </CraftWrapper>
-                  <Link href={`/craft/${craft.slug}`} className="group">
-                    <span className="flex items-center justify-between gap-4">
-                      <span className="flex flex-col">
-                        <h6 className={cx("text-2xl")}>{craft.title}</h6>
-                        <span className="opacity-60">{craft.date}</span>
-                      </span>
-                      <RightArrowIcon className="h-6 w-6 -rotate-45 opacity-40 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" />
-                    </span>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </SectionsWrapper>
+    <div className="flex flex-col gap-8 my-40">
+      <SectionTitle title="experimental" orientation="vertical" />
+      <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+        {CRAFTS.sort((a, b) => a.id - b.id).map((craft) => {
+          return (
+            <div
+              className={cx(
+                "flex flex-col gap-4",
+                craft.slug === "pinpad"
+                  ? "col-span-1 md:col-span-2"
+                  : "col-span-1"
+              )}
+              key={craft.slug}
+            >
+              <CraftWrapper className="relative">
+                {craft.component}
+              </CraftWrapper>
+              <Link href={`/craft/${craft.slug}`} className="group">
+                <span className="flex items-center justify-between gap-4">
+                  <span className="flex flex-col">
+                    <h6 className={cx("text-2xl")}>{craft.title}</h6>
+                    <span className="opacity-60">{craft.date}</span>
+                  </span>
+                  <RightArrowIcon className="h-6 w-6 -rotate-45 opacity-40 duration-150 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" />
+                </span>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
 
-        <CraftFooter />
-      </MainWrapper>
-    </Layout>
+      <CraftFooter />
+    </div>
   );
-}
-
-export async function generateMetadata() {
-  const notionService = new NotionService();
-  const page = (await notionService.getStaticPage()).find(
-    (data) => data.name === "Craft"
-  );
-
-  return {
-    title: page?.title || "Craft",
-    description: page?.description || "Experimental projects",
-  };
 }

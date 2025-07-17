@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-daisy: #ffef60;
+  --color-shark: #1a1b1f;
+  --color-midnight: #06060b;
+  --color-foam: #f4f6ff;
+}
+
+@theme {
+  --font-sans: var(--font-muli);
+  --font-mono: var(--font-monomaniac);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --color-daisy: var(--color-daisy);
+  --color-shark: var(--color-shark);
+  --color-midnight: var(--color-midnight);
+  --color-foam: var(--color-foam);
+  
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: 2rem;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 3rem;
+  --text-5xl: 3.5rem;
+  --text-5xl--line-height: 4rem;
+  --text-6xl: 64px;
+  --text-6xl--line-height: 80px;
+  --text-7xl: 72px;
+  --text-7xl--line-height: 96px;
+  --text-8xl: 96px;
+  --text-8xl--line-height: 128px;
+
+  --font-vollkorn: 'Vollkorn', serif;
+  --font-muli: 'Mulish', sans-serif;
+  --font-monomaniac: 'Monomaniac One', mono;
+
+  --drop-shadow-glow:
+    0 0px 20px rgba(0, 255, 26, 0.5), 0 0px 65px rgba(0, 255, 26, 0.3);
+
+  /* Prose configuration */
+  --prose-headings-font-family: var(--font-vollkorn);
+  --prose-headings-font-weight: 600;
+  --prose-h1-font-size: var(--text-3xl);
+  --prose-h1-line-height: var(--text-3xl--line-height);
+  --prose-h3-font-weight: 400;
+  --prose-p-font-weight: 300;
+  --prose-p-line-height: 1.4;
+  --prose-p-letter-spacing: 0.025em;
+  --prose-a-color: var(--color-daisy);
+  --prose-a-transition: color 0.15s ease;
+  --prose-ul-font-weight: 300;
+  --prose-ul-letter-spacing: 0.05em;
+  --prose-img-border-radius: var(--radius-xl);
+
+  /* Responsive prose sizes */
+  --prose-xl-max-width: 65ch;
+  --prose-2xl-max-width: 75ch;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-vollkorn);
+  font-weight: 600;
+}
+

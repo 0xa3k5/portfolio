@@ -1,28 +1,39 @@
-import Layout from "@/components/Layout";
-import MainWrapper from "@/components/MainWrapper";
-import CraftMainWrapper from "@/components/craft/CraftMainWrapper";
-import CraftTitle from "@/components/craft/CraftTitle";
-import { HoldToLikeButton } from "@/components/craft/HoldToLike";
+"use client";
+import { HoldToLikeButton } from "@/src/components/craft-components/hold-to-like";
+import { useState } from "react";
+import { AnalogToggle } from "@/src/components/craft-components/analog-toggle";
+import {
+  CraftMainWrapper,
+  CraftTitle,
+  CraftWrapper,
+  CraftFooter,
+} from "@/src/components/craft-components";
 
-export const metadata = {
-  title: "Hold to Like",
-  description: "A hold-to-like button component",
-};
+export default function HoldToLike() {
+  const [overflowCip, setOverflowClip] = useState(false);
 
-export default function HoldToLikePage() {
+  const handleOverflowToggle = () => {
+    setOverflowClip(!overflowCip);
+  };
+
   return (
-    <Layout hideCTA>
-      <MainWrapper>
-        <CraftMainWrapper>
-          <CraftTitle
-            title="Hold to Like"
-            description="Hold the button to like something"
+    <CraftMainWrapper>
+      <CraftTitle title="Hold to Like" date="June 2023" />
+      <CraftWrapper>
+        <div className="absolute right-2 top-4 flex items-center">
+          <span className="font-md opacity-60">overflow-clip</span>
+          <AnalogToggle
+            scale={0.6}
+            isChecked={overflowCip}
+            handleOnChange={handleOverflowToggle}
           />
-          <div className="flex items-center justify-center">
-            <HoldToLikeButton overflowClip={true} />
-          </div>
-        </CraftMainWrapper>
-      </MainWrapper>
-    </Layout>
+        </div>
+        <div className="flex flex-col items-center gap-12 md:flex-row">
+          <HoldToLikeButton overflowClip={overflowCip} />
+          <HoldToLikeButton overflowClip={overflowCip} hasText />
+        </div>
+      </CraftWrapper>
+      <CraftFooter />
+    </CraftMainWrapper>
   );
 }

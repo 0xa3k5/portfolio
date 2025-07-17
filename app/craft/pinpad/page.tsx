@@ -1,33 +1,35 @@
-import { useState } from "react";
-import Layout from "@/components/Layout";
-import MainWrapper from "@/components/MainWrapper";
-import CraftMainWrapper from "@/components/craft/CraftMainWrapper";
-import CraftTitle from "@/components/craft/CraftTitle";
-import { Pinpad } from "@/components/craft/Pinpad";
+"use client";
+import { JSX, useState } from "react";
 
-export const metadata = {
-  title: "Sound Pin",
-  description: "A sound pin component",
-};
+import { Pinpad } from "@/src/components/craft-components/pinpad/pinpad";
 
-export default function PinpadPage() {
-  const [currentLevel, setCurrentLevel] = useState<"normal" | "loud" | "quiet">(
-    "normal"
-  );
+// import { useTheme } from "@/src/contexts/ThemeContext";
+
+import { TPinpadGameLevels } from "@/src/components/craft-components/pinpad/pinpad-constants";
+import { PinpadLevelSelector } from "@/src/components/craft-components/pinpad/pinpad-level-selector";
+import {
+  CraftMainWrapper,
+  CraftTitle,
+  CraftWrapper,
+  CraftFooter,
+} from "@/src/components/craft-components";
+
+export default function PinpadPage(): JSX.Element {
+  const [currentLevel, setCurrentLevel] = useState<TPinpadGameLevels>("normal");
 
   return (
-    <Layout hideCTA>
-      <MainWrapper>
-        <CraftMainWrapper>
-          <CraftTitle
-            title="Sound Pin"
-            description="A pinpad with sound feedback"
-          />
-          <div className="flex items-center justify-center">
-            <Pinpad currentLevel={currentLevel} />
-          </div>
-        </CraftMainWrapper>
-      </MainWrapper>
-    </Layout>
+    <CraftMainWrapper>
+      <CraftTitle title="Pinpad" date="June 2023" />
+      <CraftWrapper>
+        <PinpadLevelSelector
+          currentLevel={currentLevel}
+          setCurrentLevel={setCurrentLevel}
+        />
+        <div className="flex max-w-lg flex-col gap-4 rounded-xl border-0 p-4 md:border md:px-16 md:py-12 border-foam/10">
+          <Pinpad currentLevel={currentLevel} />
+        </div>
+      </CraftWrapper>
+      <CraftFooter />
+    </CraftMainWrapper>
   );
 }

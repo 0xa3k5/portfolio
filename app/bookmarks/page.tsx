@@ -1,110 +1,146 @@
+import { Bookmarks } from "@/src/types";
+import NotionService from "@/src/pages/api/notion";
+import { SectionTitle } from "@/src/components/section-title";
+import Link from "next/link";
+import Image from "next/image";
 
-import { StaticPage, Bookmarks } from "@/types/types";
-import NotionService from "../../pages/api/notion";
-import Layout from "@/components/Layout";
-import PageHead from "@/components/PageHead";
-import MainWrapper from "@/components/MainWrapper";
-import SectionTitle from "@/components/SectionTitle";
-import { BookmarkItem, ToolItem } from "@/components/BookmarkItem";
-import { useEffect, useState } from "react";
-import SectionsWrapper from "@/components/SectionsWrapper";
+export default async function BookmarksPage() {
+  const notionService = new NotionService();
+  const bookmarks = await notionService.getBookmarks();
 
-export default function BookmarksPage() {
-  const [content, setContent] = useState<Bookmarks[]>([]);
-  const [page, setPage] = useState<StaticPage | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const bookmarksWithFavicons = await Promise.all(
+    bookmarks.map(async (bookmark) => {
+      const favicon = await fetchFavicon(bookmark.url);
+      return { ...bookmark, favicon };
+    })
+  );
 
-  const tools = content.filter((c) => c.isTool === true);
-  const bookmarks = content.filter((c) => c.isTool === false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const notionService = new NotionService();
-      const fetchedPage = (await notionService.getStaticPage()).find(
-        (data) => data.name === "Bookmarks"
-      );
-      const fetchedBookmarks = await notionService.getBookmarks();
-
-      setPage(fetchedPage || null);
-      setContent(fetchedBookmarks);
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchFavicons = async () => {
-      try {
-        const updatedBookmarks = await Promise.all(
-          content.map(async (bookmark) => {
-            const favicon = await fetchFavicon(bookmark.url);
-            return { ...bookmark, favicon };
-          })
-        );
-        setContent(updatedBookmarks);
-      } catch (error) {
-        console.error("Error fetching favicons:", error);
-      }
-    };
-
-    if (content.length > 0) {
-      fetchFavicons();
-    }
-  }, [content]);
-
-  if (isLoading || !page) {
-    return <div>Loading...</div>;
-  }
-
-  const fetchFavicon = async (url: string) => {
-    try {
-      const response = await fetch(`/api/favicon?url=${url}`);
-      const data = await response.json();
-      return data.favicon;
-    } catch (error) {
-      console.error("Error fetching favicon:", error);
-      return "";
-    }
-  };
+  const tools = bookmarksWithFavicons.filter((c) => c.isTool === true);
+  const regularBookmarks = bookmarksWithFavicons.filter(
+    (c) => c.isTool === false
+  );
 
   return (
-    <Layout hideCTA>
-      <PageHead page={page} />
-      <MainWrapper>
-        <SectionsWrapper row className="relative">
-          <SectionTitle
-            row
-            title="bookmarks"
-            subtext="websites that I like or people that inspire me."
+    <div className="flex flex-col gap-24 pt-8 my-40">
+      <div
+        data-orientation="horizontal"
+        className="flex gap-4 w-full max-w-5xl px-8 mx-auto flex-row relative"
+      >
+        <SectionTitle
+          title="bookmarks"
+          subtext="websites that I like or people that inspire me."
+          orientation="horizontal"
+        />
+        <div className="grid w-full grid-cols-1 gap-x-12 sm:grid-cols-2">
+          {regularBookmarks.map((bookmark, i) => (
+            <BookmarkItem key={i} bookmark={bookmark} />
+          ))}
+        </div>
+      </div>
+      <div
+        data-orientation="horizontal"
+        className="flex gap-4 w-full max-w-5xl px-8 mx-auto flex-row relative"
+      >
+        <SectionTitle title="stack" orientation="horizontal" />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+          {tools.map((tool, i) => (
+            <ToolItem key={i} bookmark={tool} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+async function fetchFavicon(url: string): Promise<string> {
+  try {
+    const domain = new URL(url).hostname;
+    const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+
+    const response = await fetch(faviconUrl);
+    if (response.ok) {
+      return faviconUrl;
+    }
+    return "";
+  } catch (error) {
+    console.error("Error fetching favicon:", error);
+    return "";
+  }
+}
+
+const BookmarkItem = ({ bookmark }: { bookmark: Bookmarks }) => {
+  return (
+    <Link
+      href={bookmark.url}
+      className={`
+        flex items-center justify-between gap-8 px-4 py-6 duration-150
+        border-b border-foam/10 bg-foam/0 hover:bg-foam/5
+        `}
+    >
+      <span className="flex items-center gap-4">
+        {bookmark.favicon ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={bookmark.favicon}
+            alt={`${bookmark.name} Website Favicon`}
+            className="h-8 w-8"
           />
-          <div className="grid w-full grid-cols-1 gap-x-12 sm:grid-cols-2">
-            {bookmarks.map((bookmark, i) => (
-              <BookmarkItem key={i} bookmark={bookmark} />
-            ))}
-          </div>
-        </SectionsWrapper>
-        <SectionsWrapper row>
-          <SectionTitle row title="stack" />
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
-            {tools.map((tool, i) => (
-              <ToolItem key={i} bookmark={tool} />
-            ))}
-          </div>
-        </SectionsWrapper>
-      </MainWrapper>
-    </Layout>
-  );
-}
+        ) : (
+          <span
+            className={`
+                flex h-8 w-8 items-center justify-center rounded-lg bg-opacity-10 text-xl
+                bg-foam/10
+                `}
+          >
+            {bookmark.name.slice(0, 1)}
+          </span>
+        )}
 
-export async function generateMetadata() {
-  const notionService = new NotionService();
-  const page = (await notionService.getStaticPage()).find(
-    (data) => data.name === "Bookmarks"
+        <span className="flex flex-col">
+          <span className="w-64 truncate">{bookmark.name}</span>
+          <span className="w-64 truncate text-sm opacity-40">
+            {bookmark.url.replace(/^(https?:\/\/)?(www\.)?/i, "")}
+          </span>
+        </span>
+      </span>
+    </Link>
   );
+};
 
-  return {
-    title: page?.title || "Bookmarks",
-    description: page?.description || "Bookmarks and tools",
-  };
-}
+const ToolItem = ({ bookmark }: { bookmark: Bookmarks }) => {
+  return (
+    <Link
+      href={bookmark.url}
+      className={`
+        flex items-center justify-between gap-8 px-4 py-6 duration-150
+        border-b border-foam/10 bg-foam/0 hover:bg-foam/5
+        `}
+    >
+      <span className="flex items-start gap-6 md:flex-col">
+        <span className="flex items-center gap-4">
+          {bookmark.favicon ? (
+            <Image
+              src={bookmark.favicon}
+              alt={`${bookmark.name} Website Favicon`}
+              width={24}
+              height={24}
+            />
+          ) : (
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg text-xl bg-foam/10">
+              {bookmark.name.slice(0, 1)}
+            </span>
+          )}
+        </span>
+        <span className="flex flex-col gap-1">
+          <span>{bookmark.name}</span>
+          <span className="text-sm opacity-40">
+            {bookmark.url.replace(/^(https?:\/\/)?(www\.)?/i, "")}
+          </span>
+          <span className="mt-2 text-sm opacity-40">
+            {bookmark.tags.join(", ")}
+          </span>
+        </span>
+      </span>
+    </Link>
+  );
+};
